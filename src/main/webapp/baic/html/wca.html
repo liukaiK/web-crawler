@@ -1,0 +1,212 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>无障碍通道</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="无障碍通道，无障碍辅助工具,亿时代工具条,亿时代">
+<link type="text/css" href="" rel="stylesheet">
+<script type="text/javascript" src="toolbar/toolbar.js" id="ESDWebAppToolbar"></script>
+<link id="toolbarCss" rel="stylesheet" type="text/css" href="toolbar/css/toolbar.css" />
+<link id="toolbarMainCss" rel="stylesheet" type="text/css" href="toolbar/css/toolbarmain.css" />
+<script type="text/javascript" src="toolbar/jquery.js" charset="utf-8"></script>
+<script type="text/javascript" src="toolbar/config.js" charset="utf-8"></script>
+<script type="text/javascript" src="toolbar/pageRebuild.js" charset="utf-8"></script>
+<script type="text/javascript" src="toolbar/base64.js" charset="utf-8"></script>
+<script type="text/javascript" src="toolbar/pinyin.js" charset="utf-8"></script>
+<script type="text/javascript" src="toolbar/soundmanager2.js" charset="utf-8"></script>
+<script type="text/javascript" src="toolbar/storage.js" charset="utf-8"></script>
+<script type="text/javascript" src="toolbar/highContrast.js" charset="utf-8"></script>
+<script type="text/javascript" src="toolbar/changeFont.js" charset="utf-8"></script>
+<script type="text/javascript" src="toolbar/pageZoom.js" charset="utf-8"></script>
+<script type="text/javascript" src="toolbar/textMode.js" charset="utf-8"></script>
+<script type="text/javascript" src="toolbar/speak.js" charset="utf-8"></script>
+<script type="text/javascript" src="toolbar/magnifier.js" charset="utf-8"></script>
+<script type="text/javascript" src="toolbar/guides.js" charset="utf-8"></script>
+<script type="text/javascript" src="toolbar/translate.js" charset="utf-8"></script>
+<script type="text/javascript" src="toolbar/keybinding.js" charset="utf-8"></script>
+<script type="text/javascript" src="toolbar/dropdown.js" charset="utf-8"></script>
+<script type="text/javascript" src="toolbar/changeFontShape.js" charset="utf-8"></script>
+<script type="text/javascript" src="toolbar/handwriting.js" charset="utf-8"></script>
+<script type="text/javascript" src="toolbar/cursor.js" charset="utf-8"></script>
+<script type="text/javascript" src="toolbar/init.js" charset="utf-8"></script>
+<!-- <script type="text/javascript" src="toolbar/readPageAgain.js" charset="utf-8"></script> 只有被包含的页面需要处理异步请求数据时才需要引入这个js  -->
+</head>
+<body style="overflow-x: hidden; overflow-y: hidden;">
+	<div id="toolbar" class="clearfix">
+		<div id="canyou_toolbar_div">
+			<div class="cy_toolbar_bg_table">
+				<ul>
+					<li id="cy_index" class="li_1">
+						<a href="javascript:void(0);" id="toolbar_home" class="ul_li_a_1" title="首页">
+							<img class="ESDAssetsTextCon" src="toolbar/img/home1.png" alt="首页" title="首页" /> 
+						</a> 
+						<span class="a_p ul_li_a_1" href="javascript:void(0);" title="首页">首页</span>
+					</li>
+					<li id="cy_help" class="li_1">
+						<a href="javascript:void(0);" id="toolbar_help" class="ul_li_a_1" title="帮助">
+							<img class="ESDAssetsTextCon" src="toolbar/img/help1.png" alt="帮助" title="帮助" /> 
+						</a> 
+						<span class="a_p ul_li_a_1" href="javascript:void(0);" title="帮助">帮助</span>
+					</li>
+					<li id="cy_close" class="li_1">
+						<a href="javascript:void(0);" id="toolbar_exit" class="ul_li_a_1" title="退出">
+							<img class="ESDAssetsTextCon" src="toolbar/img/exit1.png" alt="退出" title="退出" /> 
+						</a> 
+						<span class="a_p ul_li_a_1" href="javascript:void(0);" title="退出">退出</span>
+					</li>
+					<li id="cy_back" class="li_1">
+						<a href="javascript:void(0);" id="toolbar_retreat" class="ul_li_a_1" title="后退">
+							<img class="ESDAssetsTextCon" src="toolbar/img/back1.png" alt="后退" title="后退" /> 
+						</a> 
+						<span class="a_p ul_li_a_1" href="javascript:void(0);" title="后退">后退</span>
+					</li>
+					<li id="cy_go" class="li_1">
+						<a href="javascript:void(0);" id="toolbar_ahead" class="ul_li_a_1" title="前进">
+							<img class="ESDAssetsTextCon" src="toolbar/img/forward1.png" title="前进" alt="前进" /> 
+						</a> 
+						<span class="a_p ul_li_a_1" href="javascript:void(0);" title="前进">前进</span>
+					</li>
+					<li id="cy_refrash" class="li_2">
+						<a href="javascript:void(0);" id="toolbar_refresh" class="ul_li_a_1" title="箭头" onclick="hide('cy_arrow_dl')"> 
+							<img src="toolbar/img/reflash1.png" title="箭头" alt="箭头"> 
+						</a> 
+						<span class="a_p ul_li_a_1" href="javascript:void(0);" title="箭头">箭头</span>
+						<dl id="cy_arrow_dl" class="yin_1" onmouseover="hideover('cy_arrow_dl')" onmouseout="hideremove()">
+							<dt>
+								<a href="javascript:void(0);" id="arrow_1" class="arrow_1"> <img src="toolbar/img/choose.png"> </a>
+							</dt>
+							<dd>
+								<a href="javascript:void(0);" class="arrow_1"><img src="toolbar/img/shubiao_bai.png" /> </a>
+							</dd>
+							<dt>
+								<a href="javascript:void(0);" id="arrow_2" class="arrow_2"> <img src="toolbar/img/choose.png"> </a>
+							</dt>
+							<dd>
+								<a href="javascript:void(0);" class="arrow_2"><img src="toolbar/img/shubiao_lan.png" /> </a>
+							</dd>
+							<dt>
+								<a href="javascript:void(0);" id="arrow_3" class="arrow_3"> <img src="toolbar/img/choose.png"> </a>
+							</dt>
+							<dd>
+								<a href="javascript:void(0);" class="arrow_3"><img src="toolbar/img/shubiao_huang.png" /> </a>
+							</dd>
+							<dt>
+								<a href="javascript:void(0);" id="arrow_4" class="arrow_4"> <img src="toolbar/img/choose.png"> </a>
+							</dt>
+							<dd>
+								<a href="javascript:void(0);" class="arrow_4"><img src="toolbar/img/shubiao_lu.png" /> </a>
+							</dd>
+							<dt>
+								<a href="javascript:void(0);" id="arrow_5" class="arrow_5"> <img src="toolbar/img/choose.png" style="display: block;"> </a>
+							</dt>
+							<dd>
+								<a href="javascript:void(0);" class="arrow_5"><img src="toolbar/img/shubiao_ys.png" /> </a>
+							</dd>
+						</dl>
+					</li>
+					<li id="cy_ruler" class="li_1"><a href="javascript:void(0);" id="toolbar_guides" class="ul_li_a_1" title="光标"><img
+							class="ESDAssetsTextCon" src="toolbar/img/cursor1.png" title="光标" alt="光标" /> </a> <span class="a_p ul_li_a_1" href="javascript:void(0);"
+						title="光标">光标</span></li>
+					<li id="cy_text" class="li_2"><a href="javascript:void(0);" id="toolbar_textMode" class="ul_li_a_1" title="纯文本"><img
+							class="ESDAssetsTextCon" src="toolbar/img/text1.png" alt="纯文本" title="纯文本" /> </a> <span class="a_p_1 ul_li_a_1" href="javascript:void(0);"
+						title="纯文本">纯文本</span></li>
+					<li id="cy_bigword" class="li_1"><a href="javascript:void(0);" id="toolbar_text_bigger" class="ul_li_a_1" title="文字放大"><img
+							class="ESDAssetsTextCon" src="toolbar/img/bigword1.png" alt="文字放大" title="文字放大" /> </a> <span class="a_p ul_li_a_1" href="javascript:void(0);"
+						title="文字放大">大字</span></li>
+					<li id="cy_smallword" class="li_1"><a href="javascript:void(0);" id="toolbar_text_smaller" class="ul_li_a_1" title="文字缩小"><img
+							class="ESDAssetsTextCon" src="toolbar/img/smallword1.png" title="文字缩小" alt="文字缩小" /> </a> <span class="a_p ul_li_a_1" href="javascript:void(0);"
+						title="文字缩小">小字</span></li>
+					<li id="cy_color" class="li_2"><a href="javascript:void(0);" class="ul_li_a_1" title="配色" onclick="hide('cy_color_dl')"><img
+							class="ESDAssetsTextCon" src="toolbar/img/color1.png" title="配色" alt="配色" /> </a> <span class="a_p ul_li_a_1" href="javascript:void(0);"
+						title="配色">配色</span>
+						<dl id="cy_color_dl" class="yin_1" onmouseover="hideover('cy_color_dl')" onmouseout="hideremove()">
+							<dt>
+								<a href="javascript:void(0);" id="toolbar_highContrastWhiteBlack" class="toolbar_highContrastWhiteBlack" title="白底黑字"><img
+									src="toolbar/img/choose.png"> </a>
+							</dt>
+							<dd style="background-color:#fff;">
+								<a href="javascript:void(0);" class="ESDAssetsTextCon toolbar_highContrastWhiteBlack" style="color:#000;" title="白底黑字">白底黑字</a>
+							</dd>
+							<dt>
+								<a href="javascript:void(0);" id="toolbar_highContrastBlueYellow" class="toolbar_highContrastBlueYellow" title="蓝底黄字"><img
+									src="toolbar/img/choose.png"> </a>
+							</dt>
+							<dd style="background-color:#0000ff;">
+								<a href="javascript:void(0);" class="ESDAssetsTextCon toolbar_highContrastBlueYellow" style="color:#ffff00;" title="蓝底黄字">蓝底黄字</a>
+							</dd>
+							<dt>
+								<a href="javascript:void(0);" id="toolbar_highContrastYellowBlack" class="toolbar_highContrastYellowBlack" title="黄底黑字"><img
+									src="toolbar/img/choose.png"> </a>
+							</dt>
+							<dd style="background-color:#fefecc;">
+								<a href="javascript:void(0);" class="ESDAssetsTextCon toolbar_highContrastYellowBlack" style="color:#000;" title="黄底黑字">黄底黑字</a>
+							</dd>
+							<dt>
+								<a href="javascript:void(0);" id="toolbar_highContrastYellow" class="toolbar_highContrastYellow" title="黑底黄字"><img
+									src="toolbar/img/choose.png"> </a>
+							</dt>
+							<dd style="background-color:#000;">
+								<a href="javascript:void(0);" class="ESDAssetsTextCon toolbar_highContrastYellow" style="color:#ffff00;" title="黑底黄字">黑底黄字</a>
+							</dd>
+							<dt>
+								<a href="javascript:void(0);" id="toolbar_highContrastDefalt" class="toolbar_highContrastDefalt" title="原始配色"><img
+									src="toolbar/img/choose.png" style="display: block;"> </a>
+							</dt>
+							<dd style="background-color:#000;">
+								<a href="javascript:void(0);" class="ESDAssetsTextCon toolbar_highContrastDefalt" style="color:#fff;" title="原始配色">原始配色</a>
+							</dd>
+						</dl></li>
+					<li id="cy_zoomAdd" class="li_3"><a href="javascript:void(0);" id="toolbar_pageZoomIc" class="ul_li_a_1" title="页面放大"><img
+							class="ESDAssetsTextCon" src="toolbar/img/enlarge1.png" title="页面放大" alt="页面放大" /> </a> <a href="javascript:void(0);" id="toolbar_pageZoomDc"
+						class="ul_li_a_1" title="页面缩小"><img class="ESDAssetsTextCon" src="toolbar/img/small1.png" title="页面缩小" alt="页面缩小" /> </a> <span
+						id="toolbar_percent" class="a_p_2 ul_li_a_1" href="javascript:void(0);" title="页面百分比">页面100%</span></li>
+					<li id="cy_playSpeech" class="li_2"><a href="javascript:void(0);" id="toolbar_speakOnOff" class="ul_li_a_1" title="语音开关"><img
+							class="ESDAssetsTextCon" src="toolbar/img/sound3.png" title="语音开关" alt="语音开关" /> </a> <a href="javascript:void(0);" id="toolbar_playSpeech"
+						class="ul_li_a_1" title="语音调节"><img src="toolbar/img/soundClick1.png" class="ESDAssetsTextCon" title="语音调节" alt="语音调节"> </a> <span
+						class="a_p_3 ul_li_a_1" href="javascript:void(0);" title="语音">语音</span>
+						<dl id="cy_playSpeech_dl" class="yin_1" onmouseover="hideover('cy_playSpeech_dl')" onmouseout="hideremove()">
+							<dd>
+								<a class="ESDAssetsTextCon" href="javascript:speak.speed(-1);" title="减缓语速">一</a> &nbsp;&nbsp;<a class="toolbar_speakSpeed">语速调节</a>&nbsp;&nbsp;
+								<a class="ESDAssetsTextCon" href="javascript:speak.speed(1);" title="加快语速">十</a>
+							</dd>
+						</dl></li>
+					<li id="cy_pointerRead" class="li_1"><a href="javascript:void(0);" id="toolbar_Pointread" class="ul_li_a_1" title="指读"><img
+							class="ESDAssetsTextCon" src="toolbar/img/point2.png" alt="指读" title="指读" /> </a> <span class="a_p ul_li_a_1" href="javascript:void(0);"
+						title="指读">指读</span></li>
+					<li id="cy_continueRead" class="li_1"><a href="javascript:void(0);" id="toolbar_batchRead" class="ul_li_a_1" title="连读"><img
+							class="ESDAssetsTextCon" src="toolbar/img/continuous1.png" title="连读" alt="连读" /> </a> <span class="a_p ul_li_a_1" href="javascript:void(0);"
+						title="连读">连读</span></li>
+					<li id="cy_displayScreen" class="li_2"><a href="javascript:void(0);" id="toolbar_magnifier" class="ul_li_a_1" title="显示屏"><img
+							class="ESDAssetsTextCon" src="toolbar/img/screen1.png" alt="显示屏" title="显示屏" /> </a> <span class="a_p_2 ul_li_a_1" href="javascript:void(0);"
+						title="显示屏">显示屏</span></li>
+					<li id="cy_full_screen" class="li_1"><a href="javascript:void(0);" id="toolbar_fullScreen" class="ul_li_a_1" title="全屏"><img
+							class="ESDAssetsTextCon" src="toolbar/img/full_screen1.png" alt="全屏" title="全屏" /> </a> <span class="a_p ul_li_a_1" href="javascript:void(0);"
+						title="全屏">全屏</span></li>
+					<li id="botn" style="clear:both;"></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="overlay"></div>
+<!-- 	<div id="AjaxLoading" class="showbox"> -->
+<!-- 		<div class="loadingWord"> -->
+<!-- 			<img src="toolbar/img/waiting.gif">加载中，请稍候... -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+	<div id="toolbar_prompt" style="display: none;">
+		<span>请按F11切换全屏模式</span>
+	</div>
+	<div id="zwlj_prompt" style="display: none;">
+		<span>该链接属站外链接，会导致无障碍工具条失效！</span> <br/> 
+		<span>是否继续访问？</span><br/> 
+		<input id="zwlj_bt1" type="button" value="是" style="font-size: 25px;color:#FFFFFF;background: #184f87;width:50px;height:30px;line-height:18px;border:0;" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		<input id="zwlj_bt2" type="button" value="否" style="font-size: 25px;color:#FFFFFF;background: #184f87;width:50px;height:30px;line-height:18px;border:0;" />
+	</div>
+	<iframe id="iframe" name="iframe" src="26538019f71eafadfc2f1408e997d2e9.html" frameborder="0" scrolling="auto" height="100%" width="100%"></iframe>
+	<pre id="log"></pre>
+</body>
+</html>

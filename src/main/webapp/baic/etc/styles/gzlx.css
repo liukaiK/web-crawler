@@ -1,0 +1,28 @@
+.bgs {
+	width: 100%;
+	height: 422px;
+	border: 0;
+	background-color: #FFFFFF;
+}
+
+#certicode {
+	width: 90px;
+}
+
+#verifyImage {
+	width: 100px;
+	height: 20px;
+}
+
+#content {
+	margin-left: -26px;
+}
+
+.erji01bg {
+	width: 1000px;
+}
+
+.txt14l24{
+	width: 90%;
+	margin-top: 26px;
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv="keywords" content="福田区政府无障碍网站,福田区政府无障碍,福田无障碍" />
+<meta http-equiv="description" content="深圳福田区无障碍网站" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="../etc/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../etc/js/public.js"></script>
+<link rel="stylesheet" type="text/css" href="../etc/styles/public.css" />
+<link rel="stylesheet" type="text/css" href="../etc/styles/content.css" />
+<style type="text/css">
+body {
+	font-family: Microsoft YaHei;
+	background: #DCDCDC;
+	text-align: center;
+	background-image: url(../etc/image/f_hbg.jpg);
+}
+
+.search-page {
+	width: 600px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.input_btn {
+	height: 260px;
+	position: relative;
+	clear: both;
+}
+
+#serCon {
+	width: 500px;
+	height: 30px;
+	line-height: 30px;
+	text-align: left;
+	float: left;
+}
+
+#search-btn {
+	font-family: Microsoft YaHei;
+	font-size: 16px;
+	color: #B80808;
+	width: 80px;
+	height: 34px;
+	float: left;
+}
+
+h1 {
+	font-size: 30px;
+	margin-top: 50px;
+	margin-bottom: 10px;
+}
+</style>
+</head>
+
+<body>
+	<include src="header.html" />
+	<div class="main">
+		<div id="NewsShowConter_txt">
+			<div class="search-page">
+				<h1>福田搜索</h1>
+				<div class="input_btn">
+					<form action="/iac/search" method="post" id="search" name="search" role="form" class="form-signin">
+						<input type="text" id="serCon" name="serCon" autofocus required placeholder="填入搜索信息" class="form-control" />
+						<input type="hidden" name="currentPage" value="1" />
+						<button id="search-btn" type="button" class="btn btn-primary">搜索</button>
+					</form>
+				</div>
+			</div>
+			<div class="content"></div>
+			<div style="clear: both;"></div>
+			<script type="text/javascript">
+				$(document).ready(function() {
+					$("button[id=search-btn]").click(function() {
+						var formName = $("#search");
+						var serCon = $("#serCon").val();
+						if (serCon.length == 0) {
+							alert("请填写要查询的信息!");
+						} else {
+							formName.submit();
+
+						}
+					});
+				});
+			</script>
+
+		</div>
+	</div>
+	<include src="footer.html" />
+</body>
+</html>

@@ -1,0 +1,76 @@
+.myzj div {
+	text-align: left;
+}
+
+#NewsShowConter_txt div {
+	text-align: left;
+}
+
+.myzj {
+	background-color: #FFF;
+	margin: 0 auto;
+	clear: both;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.myzj table {
+	margin: 0 auto;
+	width: 940px;
+}
+
+.myzj table td {
+	line-height: 30px;
+}
+
+.myzj textarea {
+	width: 938px;
+	height: 100px;
+	vertical-align: middle;
+}
+
+.myzj #username {
+	width: 80px;
+}
+
+.myzj #telephone {
+	width: 100px;
+}
+
+.myzj #idcard {
+	width: 150px;
+}
+
+.myzj #code {
+	width: 80px;
+}
+
+.myzj input {
+	font-size: 14px;
+	color: #535353;
+}
+
+.myzj img {
+	vertical-align: middle;
+	margin-bottom: 2px;
+	margin-left: 3px;
+}
+
+#audio {
+	width: 18px;
+	border: #000 1px solid;
+	margin-left: 3px;
+	margin-right: 3px;
+}
+
+#NewsShowConter_txt table {
+	width: 940px;
+}
+
+#NewsShowConter_txt table tr {
+	
+}
+
+#NewsShowConter_txt table td {
+	
+}

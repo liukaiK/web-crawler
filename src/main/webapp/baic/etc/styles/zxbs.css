@@ -1,0 +1,334 @@
+.zxbs_bg1 {
+	overflow: hidden;
+	width: 982px;
+	height: 474px;
+	background: url(http://www.baic.gov.cn/images/zxbs_bg1.jpg) left top no-repeat;
+	margin: 10px auto;
+}
+
+.zxbs_fl1 {
+	width: 318px;
+	float: left;
+	margin: 10px;
+}
+
+.zxbs_fl2 {
+	width: 318px;
+	float: left;
+}
+
+.zxbs_fl3 {
+	width: 318px;
+	float: left;
+}
+/***********************************登记注册*****************************************************/
+.zxbs_mk1 div {
+	width: 154px;
+	height: 141px;
+	float: left;
+	background: url(http://www.baic.gov.cn/images/zxbs_lm1.png) left top
+		no-repeat;
+}
+
+.zxbs_mk1 div h1 {
+	margin-bottom: 10px;
+	text-align: left;
+	margin-left: 30px;
+}
+
+.zxbs_mk1 div h1 span {
+	font-family: "微软雅黑";
+	font-size: 17px;
+	font-weight: bold;
+	color: #fff;
+	line-height: 28px;
+	margin-top: 4px;
+	margin-bottom: 7px;
+}
+
+.zxbs_mk1 div ul li {
+	text-align: left;
+	margin-left: 10px;
+}
+
+.zxbs_mk1 div ul li a {
+	color: #fff;
+}
+
+/***********************************报告公示*****************************************************/
+.zxbs_mk2 div {
+	width: 154px;
+	height: 141px;
+	float: left;
+	margin-left: 10px;
+	background: url(http://www.baic.gov.cn/images/zxbs_lm2.png) left top
+		no-repeat;
+}
+
+.zxbs_mk2 div h1 {
+	margin-bottom: 10px;
+	text-align: left;
+	margin-left: 30px;
+}
+
+.zxbs_mk2 div h1 span {
+	font-family: "微软雅黑";
+	font-size: 17px;
+	font-weight: bold;
+	color: #fff;
+	line-height: 28px;
+	margin-top: 4px;
+	margin-bottom: 7px;
+}
+
+.zxbs_mk2 div ul li {
+	text-align: left;
+	margin-left: 10px;
+}
+
+.zxbs_mk2 div ul li a {
+	color: #fff;
+}
+/***********************************广告许可*****************************************************/
+.zxbs_mk3 div {
+	width: 154px;
+	height: 141px;
+	float: left;
+	margin-top: 10px;
+	background: url(http://www.baic.gov.cn/images/zxbs_lm5.png) left top
+		no-repeat;
+}
+
+.zxbs_mk3 div h1 {
+	margin-bottom: 10px;
+	text-align: left;
+	margin-left: 30px;
+}
+
+.zxbs_mk3 div h1 span {
+	font-family: "微软雅黑";
+	font-size: 17px;
+	font-weight: bold;
+	color: #fff;
+	line-height: 28px;
+	margin-top: 4px;
+	margin-bottom: 7px;
+}
+
+.zxbs_mk3 div ul li {
+	text-align: left;
+	margin-left: 10px;
+}
+
+.zxbs_mk3 div ul li a {
+	color: #fff;
+}
+/***********************************动产抵押登记*****************************************************/
+.zxbs_mk4 div {
+	width: 154px;
+	height: 141px;
+	float: left;
+	margin-left: 10px;
+	margin-top: 10px;
+	background: url(http://www.baic.gov.cn/images/zxbs_lm6.png) left top
+		no-repeat;
+	margin-top: 10px;
+}
+
+.zxbs_mk4 div h1 {
+	margin-bottom: 10px;
+	text-align: left;
+	margin-left: 30px;
+}
+
+.zxbs_mk4 div h1 span {
+	font-family: "微软雅黑";
+	font-size: 17px;
+	font-weight: bold;
+	color: #fff;
+	line-height: 28px;
+	margin-top: 4px;
+	margin-bottom: 7px;
+}
+
+.zxbs_mk4 div ul li {
+	text-align: left;
+	margin-left: 10px;
+}
+
+.zxbs_mk4 div ul li a {
+	color: #fff;
+}
+/***********************************代表机构年报*****************************************************/
+.zxbs_mk5a div {
+	width: 154px;
+	height: 141px;
+	float: left;
+	margin-top: 10px;
+	background: url(http://www.baic.gov.cn/images/zxbs_lm1a.png) left top
+		no-repeat;
+}
+
+.zxbs_mk5a div h1 {
+	margin-bottom: 10px;
+	text-align: left;
+	margin-left: 30px;
+}
+
+.zxbs_mk5a div h1 span {
+	font-family: "微软雅黑";
+	font-size: 17px;
+	font-weight: bold;
+	color: #fff;
+	line-height: 28px;
+	margin-top: 4px;
+	margin-bottom: 7px;
+}
+
+.zxbs_mk5a div ul li {
+	text-align: left;
+	margin-left: 10px;
+}
+
+.zxbs_mk5a div ul li a {
+	color: #fff;
+}
+
+/***********************************合同示范文本************************************************/
+.zxbs_mk7 {
+	width: 154px;
+	height: 141px;
+	float: left;
+	background: url(http://www.baic.gov.cn/images/zxbs_lm4.png) left top
+		no-repeat;
+	margin-top: 10px;
+}
+
+.zxbs_mk7 div h1 {
+	margin-bottom: 10px;
+	text-align: left;
+	margin-left: 30px;
+}
+
+.zxbs_mk7 div h1 span {
+	font-family: "微软雅黑";
+	font-size: 17px;
+	font-weight: bold;
+	color: #fff;
+	line-height: 28px;
+	margin-top: 4px;
+	margin-bottom: 7px;
+}
+
+.zxbs_mk7 div ul li {
+	text-align: left;
+	margin-left: 10px;
+}
+
+.zxbs_mk7 div ul li a {
+	color: #fff;
+}
+/***********************************电动自行车备案************************************************/
+.zxbs_mk8 {
+	width: 318px;
+	height: 141px;
+	float: left;
+	background: url(http://www.baic.gov.cn/images/zxbs_lm8.png) left top
+		no-repeat;
+	margin-top: 10px;
+}
+
+.zxbs_mk8 div h1 {
+	margin-bottom: 10px;
+	text-align: left;
+	margin-left: 30px;
+}
+
+.zxbs_mk8 div h1 span {
+	font-family: "微软雅黑";
+	font-size: 17px;
+	font-weight: bold;
+	color: #fff;
+	line-height: 28px;
+	margin-top: 4px;
+	margin-bottom: 7px;
+	margin-top: 4px;
+}
+
+.zxbs_mk8 div ul li {
+	text-align: left;
+	margin-left: 10px;
+}
+
+.zxbs_mk8 div ul li a {
+	color: #fff;
+}
+
+/***********************************拍卖活动备案************************************************/
+.zxbs_mk9 {
+	width: 318px;
+	height: 141px;
+	float: left;
+	background: url(http://www.baic.gov.cn/images/zxbs_lm9.png) left top
+		no-repeat;
+	margin-top: 10px;
+}
+
+.zxbs_mk9 div h1 {
+	margin-bottom: 10px;
+	text-align: left;
+	margin-left: 30px;
+}
+
+.zxbs_mk9 div h1 span {
+	font-family: "微软雅黑";
+	font-size: 17px;
+	font-weight: bold;
+	color: #fff;
+	line-height: 28px;
+	margin-top: 4px;
+	margin-bottom: 7px;
+}
+
+.zxbs_mk9 div ul li {
+	text-align: left;
+	margin-left: 10px;
+}
+
+.zxbs_mk9 div ul li a {
+	color: #fff;
+}
+/***********************************其他业务************************************************/
+.zxbs_mk10 {
+	width: 318px;
+	height: 141px;
+	float: left;
+	background: url(http://www.baic.gov.cn/images/zxbs_lm10.png) left top
+		no-repeat;
+	margin-top: 10px;
+}
+
+.zxbs_mk10 div h1 {
+	margin-bottom: 10px;
+	text-align: left;
+	margin-left: 30px;
+}
+
+.zxbs_mk10 div h1 span {
+	font-family: "微软雅黑";
+	font-size: 17px;
+	font-weight: bold;
+	color: #fff;
+	line-height: 28px;
+	margin-top: 4px;
+	margin-bottom: 7px;
+}
+
+.zxbs_mk10 div ul li {
+	text-align: left;
+	margin-left: 10px;
+}
+
+.zxbs_mk10 div ul li a {
+	color: #fff;
+}

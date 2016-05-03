@@ -1,0 +1,495 @@
+@CHARSET "UTF-8";
+
+.main {
+	overflow: hidden;
+}
+
+.col {
+	border: #CCC 1px solid;
+	width: 998px;
+}
+
+ul {
+	list-style-type: none;
+}
+
+ul li span {
+	color: #4b4b4b;
+}
+
+h1 span { /*float:right;*/
+	
+}
+
+h2 p {
+	float: left;
+	margin: 10px;
+}
+
+.block1 ul li span {
+	float: right;
+}
+
+.block2 {
+	width: 998px;
+	clear: both;
+	background-color: #FFF;
+}
+
+.block2 .title {
+	font-size: 16px;
+	font-weight: 400;
+	height: 58px;
+	border-bottom: 1px solid #ddd;
+	background-color: #f8f9fa;
+}
+
+.block2 .title h1 span {
+	float: right;
+	line-height: 50px;
+}
+
+.block2 .txt {
+	background-color: #FFF;
+	line-height: 30px;
+}
+/*************************************************
+ * 主题列表页面, 标题样式
+ *************************************************/
+.block2 .title p,.block2 .title span,.block2 .title h3 {
+	float: left;
+	font-size: 16px;
+	color: #4b4b4b;
+	text-decoration: none;
+	margin: 18px 15px 0 21px;
+	line-height: 24px;
+	font-weight: 700;
+	padding-right: 15px;
+	border-right: 1px dashed #ddd;
+}
+
+.block2 .title h3 span,.block2 .title h3 a {
+	float: left;
+	font-size: 16px;
+	color: #4b4b4b;
+	text-decoration: none;
+	margin: 0px 0px 0 10px;
+	line-height: 24px;
+	font-weight: 700;
+	padding-right: 15px;
+	border-right: none;
+}
+
+.block2 ul {
+	margin: 20px;
+}
+
+.block2 ul li {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	overflow: hidden;
+	line-height: 30px;
+	height: 30px;
+}
+
+.block2 ul li span {
+	float: right;
+}
+/*************************************************
+ * 信息公开页面, 政府信息公开 div中详细列表h2的样式
+ *************************************************/
+.block2 #zfxx h2 {
+	font-weight: normal;
+	margin-left: 20px;
+}
+/*************************************************
+ * 信息公开页面, 区部门信息公开 详细列表样式
+ *************************************************/
+.block2 #bmxxgk h2 ul {
+	margin: 5px auto 0px auto;
+	display: inline-block;
+	width: 650px;
+}
+
+.block2 #bmxxgk h2 ul li {
+	float: left;
+	margin: 5px;
+	font-weight: normal;
+}
+
+.block2 #bmxxgk h2 p {
+	color: #4b4b4b;
+}
+/*************************************************
+ * 重点领域
+ *************************************************/
+.block2 #zdly_txt h2 ul {
+	margin: 5px auto 0px auto;
+	display: inline-block;
+	width: 850px;
+}
+
+.block2 #zdly_txt h2 ul li {
+	float: left;
+	margin: 5px;
+	font-weight: normal;
+}
+
+.block2 #zdly_txt h2 p {
+	color: #4b4b4b;
+}
+/*************************************************
+ * 民生服务页面, 主题服务 详细列表样式
+ *************************************************/
+.block2 #ztff li {
+	width: 800px;
+	display: inline-block;
+	margin: 10px auto auto 20px;
+}
+
+.block2 #ztff li div {
+	float: left;
+	margin-right: 10px;
+}
+/*************************************************
+ * 民生服务页面, 服务机构 详细列表样式
+ *************************************************/
+.block2 #fwjg {
+	min-height: 120px;
+	display: flex;
+}
+
+.block2 #fwjg ul {
+	float: left;
+}
+/*************************************************
+ * 民生服务页面, 重点业务服务 详细列表样式
+ *************************************************/
+.block2 #zdywfw ul li {
+	display: inline-block;
+	height: 120px;
+	margin-left: 20px;
+}
+
+.block2 #zdywfw ul li p {
+	height: 50px;
+	display: table-header-group;
+}
+
+.block2 #zdywfw ul li p img {
+	height: 41px;
+	width: 47px;
+}
+/*************************************************
+ * 民生服务页面, 场景服务 详细列表样式
+ *************************************************/
+.block2 #cjfw ul li {
+	display: inline-block;
+	height: 120px;
+	width: 110px;
+	margin-left: 20px;
+}
+
+.block2 #cjfw ul li p {
+	
+}
+/*************************************************
+ * 民生服务页面, 便民服务 详细列表样式
+ *************************************************/
+.block2 #bmfw {
+	display: inline-block;
+}
+
+.block2 #bmfw ul li {
+	float: left;
+	margin-right: 10px;
+}
+/*************************************************
+ * 重点业务页面, 保障性住房, 救助资助  流程图片样式
+ *************************************************/
+.block2 #jhsy,.block2 #sqlc,.block2 #jzzz {
+	text-align: center;
+}
+
+.block2 #jhsy img,.block2 #sqlc img,.block2 #jzzz img {
+	margin: 20px;
+	border: 2px solid rgb(140, 140, 255);
+	padding: 10px;
+	border-radius: 20px;
+}
+/*************************************************
+ * 救助资助  标题样式
+ *************************************************/
+.block2 #jzzz_title {
+	text-align: center;
+}
+
+.block2 #jzzz_title li {
+	list-style: none;
+}
+
+.block2 #jzzz_title li span {
+	border-right: none;
+	margin-right: -20px;
+	padding-right: 0px;
+}
+
+.block2 #jzzz_title li br {
+	display: none;
+}
+/*************************************************
+ * 民生信息  页面样式
+ *************************************************/
+.block2 #ssxxgk ul {
+	display: inline-block;
+}
+
+.block2 #ssxxgk ul li {
+	height: 135px;
+	float: left;
+	margin: 10px;
+}
+
+.block2 #shierxiang img {
+	margin: 20px;
+	width: 954px;
+}
+/*************************************************
+ * 民生之窗  页面样式
+ *************************************************/
+.block2 #allitem div h1 {
+	display: none;
+}
+
+.block2 #allitem div h2 {
+	margin: 20px auto 0px 20px;
+	margin-left: 40px;
+}
+
+.block2 #allitem div ul {
+	border-bottom: 1px dashed rgb(152, 152, 152);
+	padding-left: 40px;
+	margin-left: 40px;
+}
+
+.block2 #allitem div ul li {
+	
+}
+
+.block2 #allitem div ul li strong {
+	font-weight: normal;
+}
+
+.block2 #allitem div ul li span {
+	float: left;
+}
+
+.block2 #allitem table {
+	display: none;
+}
+
+/*************************************************
+ * 区部门信息公开  后10个页面样式
+ *************************************************/
+.block2 #tengzdt_title h2 a,.block2 #tentzgg_title h2 a,.block2 #tenbszn_title h2 a,.block2 #tenzxxd_title h2 a,.block2 #tencjwt_title h2 a,.block2 #tenywbg_title h2 a,.block2 #tenmyzj_title h2 a,.block2 #tenzfjdxx_title h2 a,.block2 #tenxxgknb_title h2 a,.block2 #tensqxxgk_title h2 a,.block2 #tensqxxgk_title h2 a
+	{
+	float: right;
+	font-size: 16px;
+	margin: 18px 15px 0 21px;
+	line-height: 24px;
+	font-weight: 700;
+}
+
+.block2 #tengzdt ul li {
+	height: auto;
+}
+
+.block2 #tengzdt ul li a img {
+	width: 500px;
+	margin-left: 277px;
+}
+
+.block2 #tengzdt ul li p {
+	text-align: center;
+}
+/*************************************************
+ * 信息公开-重点领域  页面样式
+ *************************************************/
+.block2 #xxgkzdly div {
+	margin: 0px 20px;
+}
+
+.block2 #xxgkzdly div table tbody {
+	padding-left: 20px;
+}
+
+.block3 {
+	clear: none;
+	width: 658px;
+	float: left;
+	height: 427px;
+}
+
+.block3 div ul li span,.block3 div ul li a {
+	font-size: 12px;
+}
+
+.block3 div ul li a {
+	width: 200px;
+	overflow: hidden;
+	float: left;
+	text-align: left;
+	text-overflow: ellipsis;
+}
+
+.block4 div ul li a {
+	width: 280px;
+}
+
+#ywzsk {
+	background-color: #f8f9fa;
+	width: 992px;
+	height: 40px;
+	margin-left: 4px;
+}
+
+#ywzsk h1 {
+	height: 42px;
+}
+
+#ywzsk h1 span a {
+	float: right;
+}
+
+#ywzsk h1 p {
+	float: left;
+	font-size: 17px;
+	margin-left: 11px;
+}
+
+#ywzsk h1 p,#ywzsk h1 span a {
+	margin-top: 9px;
+}
+
+#NewsShowConter_nav {
+	position: relative;
+	width: 980px;
+	margin: 0 auto;
+	text-align: left;
+	background-color: #fafafa;
+	padding: 10px;
+	font-size: 1em;
+	z-index: 1;
+	border-bottom: 1px solid #CCC;
+}
+
+#NewsShowConter_nav a {
+	color: #666;
+}
+
+.txt div table {
+	width: 100%;
+}
+
+#bmdt div table {
+	margin-left: 0px;
+}
+
+#ldhd div table {
+	margin-left: 0px;
+}
+
+#ldhd div table tbody tr td a {
+	width: 250px;
+	display: block;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	text-align: left;
+	margin-left: 5px;
+}
+
+#zfgzbg div table {
+	margin-left: 0px;
+}
+
+#ghsj div table {
+	margin-left: 0px;
+}
+
+#xzgl ul li {
+	width: 300px;
+}
+
+#xzgl ul li a {
+	width: 120px;
+}
+
+#xzgl ul li span a {
+	width: 60px;
+}
+
+#xzgl ul li span {
+	float: left;
+}
+
+.block4 {
+	margin-right: 0px;
+	width: 342px;
+}
+
+.block5 {
+	margin-top: -106px;
+}
+
+.block6 {
+	width: 340px;
+	margin-right: 0px;
+	margin-top: 5px;
+	height: 205px;
+}
+
+.block6 div ul li a {
+	width: 150px;;
+}
+
+.block6 div ul li {
+	float: left;
+}
+
+#ghsj div table tbody tr td a {
+	width: 750px;
+	display: block;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+#zfgzbg div table tbody tr td a {
+	width: 750px;
+	display: block;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+#bmdt div table tbody tr td a {
+	width: 750px;
+	display: block;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+#zfxx div table tbody tr td a {
+	width: 550px;
+	display: block;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	overflow: hidden;
+}

@@ -1,0 +1,293 @@
+@charset "utf-8";
+/* CSS Document */
+* {
+	font-size: 14px;
+	margin: 0;
+	padding: 0;
+	zoom: 1;
+}
+
+div,table,th,td,tr,a,em,span,h1,h2,h3,h4,h5,h6,ul,li,ol,form,caption,img,p
+	{
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+ul li,ol li {
+	list-style-type: none;
+}
+
+body {
+	text-align: center;
+	background: url(../image/f_hbg.jpg) top repeat-x #ffffff;
+	margin: 0 auto;
+	font-family: "Microsoft Yahei";
+}
+
+img,a {
+	border: none;
+	text-decoration: none;
+}
+
+* a { /*color: #fef8ec;*/
+	color: #4b4b4b
+}
+
+* a:hover { /*text-decoration: underline; */
+	/*color: yellow; */
+	/*font-weight: bold;*/
+	/*background-color:black;*/
+	
+}
+
+div { /*opacity: .97;*/
+	/*filter: alpha(opacity = 97);*/
+	
+}
+
+.clearboth {
+	clear: both;
+	height: 0px;
+	font-size: 0px;
+	line-height: 0px;
+	overflow: hidden;
+}
+
+.right {
+	float: right;
+}
+
+.left {
+	float: left;
+}
+
+/***********************标签总体样式表******************************/
+.col {
+	margin: 0 auto;
+	width: 1000px;
+	clear: both;
+	text-align: left;
+	/*border: #CCC 1px solid;*/
+	margin-top: 5px;
+	margin-bottom: 2px;
+}
+
+.col-nav {
+	clear: both;
+	background-color: #2D67B0;
+}
+
+.nav {
+	width: 1000px;
+	height: 3.75em;
+	font-size: 1em;
+	line-height: 3.75em;
+	margin: 0 auto;
+}
+
+.nav a {
+	display: block;
+	float: left;
+	padding: 0 14px;
+	color: #FFECEC;
+	width: 80px;
+	border-left: #ED7461 1px solid;
+	font-size: 16px;
+}
+
+.nav a:hover {
+	text-decoration: underline;
+	color: yellow;
+	background-color: black;
+	font-weight: bold;
+}
+
+/****/
+.main {
+	overflow: hidden;
+	margin: 0 auto;
+	padding: 0px;
+	font-size: 14px;
+	width: 1000px;
+}
+/*****************************列表**************************************************/
+.blockbox {
+	background-color: #FFF;
+	line-height: 30px;
+	min-height: 500px;
+	height: auto !important;
+	height: 500px;
+	clear: both;
+}
+
+.blockbox .title {
+	font-size: 16px;
+	font-weight: bold;
+	height: 58px;
+	border-bottom: 1px solid #ddd;
+	background-color: #f8f9fa;
+	clear: both;
+}
+
+.blockbox .title a {
+	float: left;
+	font-size: 16px;
+	color: #4b4b4b;
+	text-decoration: none;
+	margin: 18px 15px 0 21px;
+	line-height: 24px;
+	font-weight: 700;
+	padding-right: 15px;
+	border-right: 1px dashed #ddd;
+}
+
+.blockbox .txt {
+	background-color: #FFF;
+	line-height: 30px;
+	clear: both;
+	padding: 20px;
+}
+
+.blockbox .txt a {
+	height: 94px;
+	line-height: 94px;
+	color: #4b4b4b;
+	font-size: 14px;
+	font-weight: 700;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	border: #CCC 2px solid;
+	padding: 30px;
+	margin: 10px;
+}
+
+.blockbox .txt a:hover {
+	background-color: #000;
+	color: yellow;
+	border: red 2px solid;
+}
+
+.blockbox .txt ul {
+	float: left;
+}
+
+.blockbox .txt ul li {
+	float: left;
+}
+/*************************总体class样式表******************************************/
+#top-nav {
+	width: 100%;
+}
+
+#top-bg {
+	width: 100%;
+	background-color: rgb(95, 148, 175);
+	opacity: 0.35;
+	filter: alpha(opacity =       35);
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 30px;
+}
+
+#top-bar {
+	width: 1000px;
+	margin: 0 auto;
+	height: 30px;
+	line-height: 30px;
+	text-align: left;
+	position: relative;
+	z-index: 2;
+}
+
+#top-bar a {
+	color: yellow;
+}
+
+#top-bar span {
+	color: yellow;
+}
+
+#logo {
+	width: 1000px;
+	margin: 0 auto;
+	text-align: left;
+	/* border: #CCC 1px solid; */
+	margin-top: 0px;
+	margin-bottom: 5px;
+	height: 80px;
+}
+
+#logo h1 {
+	float: left;
+}
+
+#logo h1 a {
+	float: left;
+	margin: 0px;
+}
+
+#logo a {
+	float: right;
+	margin: 0px;
+}
+
+#logo span img {
+	width: 100px;
+	height: 100px;
+}
+
+#footer {
+	clear: both;
+	height: 80px;
+	color: #FFFFFF;
+	font-size: 14px;
+	text-align: center;
+	background-color: #2D67B0;
+	padding-top: 10px;
+}
+
+#footer a {
+	color: #FFFFFF;
+}
+
+#footer img {
+	width: 65px;
+	height: 65px;
+}
+
+#footer ul {
+	width: 1000px;
+	margin: 0 auto;
+	list-style: none;
+}
+
+#footer ul li p span {
+	color: white;
+}
+
+#footer ul li {
+	display: inline-block;
+	vertical-align: middle;
+	*display: inline;
+	margin-right: 10px;
+}
+
+#footer ul li p {
+	margin-top: 0px;
+}
+
+#footer .showimg {
+	float: right;
+}
+/*************************总体ID样式表******************************************/
+.mouseBoldBlack {
+	cursor: url('../image/shubiao.ico'), auto;
+	cursor: url('../image/shubiao.ico'), auto\9;
+}
+
+.mouseNormal {
+	cursor: default;
+}

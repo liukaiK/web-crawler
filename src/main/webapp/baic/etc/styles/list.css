@@ -1,0 +1,84 @@
+/***********************************目录****************************/
+#Sbmenu {
+	width: 980px;
+	margin: 0 auto;
+	text-align: left;
+	background-color: #fafafa;
+	padding: 10px;
+	font-size: 1em;
+}
+
+#Sbmenu a {
+	color: #666;
+}
+
+#NewsListConter {
+	width: 940px;
+	margin: 0 auto;
+	text-align: center;
+	background-color: #fafafa;
+	padding: 30px;
+	border-bottom: 1px #CCC solid;
+	border-top: 1px #CCC solid;
+	font-size: 1em;
+}
+
+#NewsListConter h1 {
+	margin-top: 10px;
+	text-align: left;
+}
+
+#NewsListConter h1 span {
+	font-size: 16px;
+	line-height: 30px;
+}
+
+#NewsListConter h1 a {
+	float: right;
+	color: #232323;
+}
+
+#NewsListConter ul {
+	text-align: left;
+}
+
+li {
+	list-style-type: none;
+}
+
+#NewsListConter ul li a {
+	display: block;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	overflow: hidden;
+	text-align: left;
+	color: #666;
+}
+
+#NewsListConter li span {
+	float: right;
+}
+
+#NewsListConter table {
+	text-align: left;
+	line-height: 30px;
+	width: 100%;
+}
+
+#NewsListConter div table tbody tr td span {
+	float: left;
+}
+
+#page {
+	width: 980px;
+	margin: 0 auto;
+	text-align: center;
+	background-color: #fafafa;
+	padding: 10px;
+	font-size: 1em;
+}
+
+#page a {
+	color: #666;
+}
