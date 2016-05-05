@@ -10,13 +10,19 @@
 <script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
 
 <script language="javascript">
-	$(function(){
-    $('.loginbox0').css({'position':'absolute','left':($(window).width()-810)/2});
-	$(window).resize(function(){  
-    $('.loginbox0').css({'position':'absolute','left':($(window).width()-810)/2});
-    })  
-});  
-</script> 
+	$(function() {
+		$('.loginbox0').css({
+			'position' : 'absolute',
+			'left' : ($(window).width() - 810) / 2
+		});
+		$(window).resize(function() {
+			$('.loginbox0').css({
+				'position' : 'absolute',
+				'left' : ($(window).width() - 810) / 2
+			});
+		})
+	});
+</script>
 
 </head>
 

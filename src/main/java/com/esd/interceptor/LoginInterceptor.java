@@ -1,9 +1,4 @@
-/*
- * Copyright (c) 2013 哈尔滨亿时代数码科技开发有限公司（www.hrbesd.com）. All rights reserved.
- * 
- * HRBESD PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
-package com.esd.controller.interceptor;
+package com.esd.interceptor;
 
 import java.io.IOException;
 
@@ -15,12 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.esd.config.BaseConfig;
 
-/**
- * 用户登陆过滤器
- * 
- * @author zhangjianzong
- * 
- */
 public class LoginInterceptor implements HandlerInterceptor {
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object arg2, Exception arg3) throws Exception {
 
@@ -34,7 +23,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 			Object obj = request.getSession().getAttribute(BaseConfig.USER);
 			if (obj == null) {
 				try {
-					response.sendRedirect(request.getContextPath() + "/login");
+					response.sendRedirect(request.getContextPath() + "/iac/login");
 					return false;
 				} catch (IOException e) {
 					e.printStackTrace();

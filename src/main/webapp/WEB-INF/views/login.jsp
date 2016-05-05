@@ -7,9 +7,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
-<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
-<link rel="stylesheet" type="text/css" href="../css/login.css"/>
+<script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="/css/login.css"/>
 <title>无障碍云后台管理系统</title>
 <script type="text/javascript">
 	function login() {
@@ -41,7 +41,6 @@
 	<div class="main_box">
 		<div class="login_box">
 			<div class="login_logo">
-<%--				<img src="images/logo.png" >--%>
 				<h3><b>无障碍云后台管理系统</b></h3>
 			</div>
 			<div class="login_form">
@@ -57,12 +56,11 @@
 					<div class="form-group">
 						<label for="j_captcha" class="t">验证码：</label>
 						<input id="code" name="code" type="text" class="form-control x164 in" maxlength="4">
-						<img id="captcha_img" alt="点击更换" title="点击更换" src="./random/code" class="m" onclick="changImg($(this))">
+						<img id="captcha_img" alt="点击更换" title="点击更换" src="${contextPath }/random/code" class="m" onclick="changImg($(this))">
 					</div>
 					<div class="form-group">
 						<label class="t"></label>
 						<label for="j_remember" class="m" id="str" style="color: red;">
-<%--							<input id="j_remember" type="checkbox" value="true">&nbsp;记住登陆账号!--%>
 							${sessionScope.message}
 						</label>
 					</div>

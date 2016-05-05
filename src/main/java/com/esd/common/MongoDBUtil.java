@@ -5,11 +5,11 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
-import com.esd.controller.CollectionPage;
+import com.esd.collection.Downloads;
+import com.esd.collection.History;
+import com.esd.collection.Urls;
+import com.esd.core.CollectionPage;
 import com.esd.dao.MongoDBDao;
-import com.esd.entity.Downloads;
-import com.esd.entity.History;
-import com.esd.entity.Urls;
 import com.esd.util.Md5;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
@@ -20,7 +20,7 @@ public class MongoDBUtil {
 	@Resource
 	private MongoDBDao mongoDBDao;
 
-	private static Logger log = Logger.getLogger(CollectionPage.class);
+	private static Logger logger = Logger.getLogger(CollectionPage.class);
 
 	public Long getDownloadsCount() {
 		return mongoDBDao.count(new BasicDBObject(), Downloads.class);
@@ -51,7 +51,7 @@ public class MongoDBUtil {
 		DBObject arg0 = new BasicDBObject();
 		Downloads obj = mongoDBDao.findAndRemove(arg0, Downloads.class);
 		if (obj == null) {
-			System.out.println("整站采集完成！");
+			logger.debug("-----------整站采集完成！----------------");
 			dropTable();// 采集完成 ，删除所有临时表
 			return null;
 		}

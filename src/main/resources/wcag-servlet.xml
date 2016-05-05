@@ -11,20 +11,15 @@
 	<mvc:annotation-driven />
 	<context:component-scan base-package="com.esd" />
 	<mvc:interceptors>
-		<bean class="com.esd.controller.interceptor.LoginInterceptor" />
+		<bean class="com.esd.interceptor.LoginInterceptor" />
 	</mvc:interceptors>
 
 	<mvc:default-servlet-handler />
 
-
-	<bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-		<property name="supportedMediaTypes" value="application/json" />
-	</bean>
-
-<mvc:annotation-driven>  
-</mvc:annotation-driven>  
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/views" />
-		<property name="suffix" value=".jsp" />
-	</bean>
-</beans>
+	<mvc:annotation-driven>  
+	</mvc:annotation-driven>  
+		<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+			<property name="prefix" value="/WEB-INF/views" />
+			<property name="suffix" value=".jsp" />
+		</bean>
+	</beans>

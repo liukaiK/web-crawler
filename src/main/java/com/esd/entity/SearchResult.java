@@ -3,6 +3,8 @@ package com.esd.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.esd.collection.History;
+
 public class SearchResult {
 	private List<History> history = new ArrayList<History>();
 	private String serCon;// 搜索内容

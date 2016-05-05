@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.esd.collection.History;
 import com.esd.dao.MongoDBDao;
-import com.esd.entity.History;
 import com.esd.entity.SearchResult;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;

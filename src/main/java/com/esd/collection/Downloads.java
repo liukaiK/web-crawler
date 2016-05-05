@@ -1,4 +1,4 @@
-package com.esd.entity;
+package com.esd.collection;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 

@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.esd.config.BaseConfig;
-import com.esd.controller.CollectionPage;
+import com.esd.core.CollectionPage;
 
 /**
  * 定时任务

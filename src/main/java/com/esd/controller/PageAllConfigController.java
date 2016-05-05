@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.esd.common.MongoDBUtil;
+import com.esd.core.CollectionPage;
 
 @Controller
 @RequestMapping("/admin/coreAll")
