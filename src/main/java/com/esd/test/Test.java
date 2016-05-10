@@ -65,7 +65,7 @@ public class Test {
 	@org.junit.Test
 	public void getMd5() {
 		StringBuffer str;
-		str = new StringBuffer("http://www.caacca.org/rdgz/jqrd/201603/t20160318_5942.html");
+		str = new StringBuffer("http://www.caacca.org/");
 		Md5 md5 = new Md5();
 		System.out.println(md5.getMd5(str));
 	}

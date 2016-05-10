@@ -120,6 +120,12 @@ h3 a {
 	border: #e9573e 4px solid;
 }
 
+#zjyj {
+	width: 328px;
+	background-color: #37bd9c;
+	border: #37bd9c 4px solid;
+}
+
 #sqtz {
 	width: 330px;
 	background-color: #f6bb43;
@@ -130,7 +136,6 @@ h3 a {
 	width: 300px;
 	background-color: #22b658;
 	border: #22b658 4px solid;
-	float: right;
 }
 
 #bzzn ul li {
@@ -143,27 +148,10 @@ h3 a {
 	margin-bottom: 3px;
 }
 
-#yfjy ul li a {
-	width: 260px;
-	display: block;
-	margin-bottom: 3px;
-}
-
 #xfwq ul li a {
 	width: 260px;
 	display: block;
 	margin-bottom: 3px;
-}
-
-#yfjy {
-	width: 300px;
-	background-color: #22b658;
-	border: #22b658 4px solid;
-	float: right;
-}
-
-#yfjy ul li {
-	width: 270px;
 }
 
 #tshfxd {
@@ -294,19 +282,6 @@ div#qybs { /*padding-bottom: 9px;*/
 	float: right;
 }
 
-.block10 {
-	background-image: url(../image/service.png);
-	width: 244px;
-	height: 224px;
-	float: left;
-	margin: 3px;
-}
-
-.block10 img {
-	width: 100%;
-	height: 100%;
-}
-
 .block11 {
 	margin: 3px;
 	width: 294px;
@@ -316,22 +291,6 @@ div#qybs { /*padding-bottom: 9px;*/
 
 .block12 {
 	float: left;
-}
-
-#htsfwb ul li {
-	height: 25px;
-	width: 178px;
-	line-height: 25px;
-	color: #292929;
-	font-size: 13px;
-	margin-bottom: 10px;
-	margin-top: 5px;
-	text-align: center;
-	margin-left: 5px;
-}
-
-#htsfwb ul li a {
-	text-align: center;
 }
 
 .block111 {
@@ -415,13 +374,6 @@ div#qybs { /*padding-bottom: 9px;*/
 	margin-top: 5px;
 }
 
-#htsfwb {
-	border: #8dc153 3px solid;
-	background-color: #8dc153;
-	width: 330px;
-	margin-bottom: 0px;
-}
-
 #box_left {
 	width: 345px;
 	float: left;
@@ -444,16 +396,9 @@ div#qybs { /*padding-bottom: 9px;*/
 	margin-bottom: 3px;
 }
 
-#htsfwb h3,#shxfl h3,#nznyl h3,#scjyl h3,#jzgcl h3,#spaql h3{
-	border: 0px;
-	margin: 20px;
-}
 #xfwq_content {
 	margin-top: 20px;
 	margin-bottom: 9px;
-}
-#bzzn_content,#yfjy_content {
-	margin: 20px 0px 17px 0px;
 }
 
 #dlzc,#bggg {
@@ -487,4 +432,19 @@ div#qybs { /*padding-bottom: 9px;*/
 
 #other ul li a {
 	width: 145px;
+}
+
+#sqtz-list a {
+	display: block;
+	padding-bottom: 15px;
+}
+
+#bzzn-list a {
+	display: block;
+	padding-bottom: 15px;
+}
+
+#zjyj-list a {
+	display: block;
+	padding-bottom: 15px;
 }

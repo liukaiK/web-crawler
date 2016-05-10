@@ -4,8 +4,8 @@ $(document).ready(function() {
 	var link = $.md5("http://www.caacca.org" + src.split("&")[1].split("|")[0].substring(7)) + ".html";
 	var text = src.split("&")[2].split("|")[0].substring(6);
 	var html = "<a href=" + link + " title=" + text + "><img src=" + pic + " alt=" + text + " title=" + text + "></a>"
-	$("#slide1").html(html);
 	var titleHtml = "<p>"+text+"</p>";
+	$("#slide1").html(html);
 	$("#slide_title").html(titleHtml);
 	
 	
@@ -18,7 +18,12 @@ $(document).ready(function() {
 	$("#gggs-list li span").remove();
 	
 	
-	
+	$("#sqtz-list span").remove();
+	$("#sqtz-list br").remove();
+	$("#bzzn-list span").remove();
+	$("#bzzn-list br").remove();
+	$("#zjyj-list span").remove();
+	$("#zjyj-list br").remove();	
 	
 	
 	

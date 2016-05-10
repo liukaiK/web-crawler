@@ -10,7 +10,7 @@
 
 var jq_1_7_1 = $.noConflict(true);
 var esd_tool_iframe = null;
-var esd_index_url="wca.html?26538019f71eafadfc2f1408e997d2e9.html";
+var esd_index_url="wca.html?414912d3ea79ba25087138cbef813934.html";
 var iframe_change=0;
 
 jq_1_7_1(document).ready(function(){
