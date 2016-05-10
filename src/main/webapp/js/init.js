@@ -1,6 +1,6 @@
 var projectName = "/iac";
 var root = projectName + "/admin";
-var dirName = "/baic";
+var dirName = "web";
 var template_root = "/template/";
 var css_root = "/etc/styles/";
 var js_root = "/etc/js/";

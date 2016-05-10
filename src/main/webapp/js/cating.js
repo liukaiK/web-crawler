@@ -166,7 +166,7 @@ function view() {
 			if (data.notice == true) {
 				var timestamp = new Date().getTime();
 				$.messager.alert('提示', '预览成功', 'info');
-				window.open("/baic/test/view.html".split("?")[0] + "?" + timestamp);        
+				window.open("/web/test/view.html".split("?")[0] + "?" + timestamp);        
 			} else {
 				$.messager.alert('发生错误', '预览失败！', 'error');
 			}

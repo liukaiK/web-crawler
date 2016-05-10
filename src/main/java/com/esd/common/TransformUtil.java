@@ -12,7 +12,7 @@ import com.esd.config.VoiceConfig;
  */
 public class TransformUtil {
 
-	public static final String VOICEPATH = "baic/voice";
+	public static final String VOICEPATH = "web/voice";
 
 	/**
 	 * 获取填充好的信息通信类

@@ -44,8 +44,8 @@
     
     <ul class="loginlist">
     <li><a href="${contextPath}/admin/manage"><img src="/image/l01.png"  alt="无障碍云后台"/><p>无障碍云后台<br />管理系统</p></a></li>
-    <li><a href="${contextPath}/admin/queryComplaint"><img src="/image/l02.png"  alt="查询投诉登记单" style="width: 135px;height: 135;"/><p>查询投诉登记单<br /></p></a></li>
-    <li><a href="${contextPath}/admin/queryReport"><img src="/image/l03.png"  alt="查询举报登记单" style="width: 135px;height: 135;"/><p>查询举报登记单<br /></p></a></li>
+<%--     <li><a href="${contextPath}/admin/queryComplaint"><img src="/image/l02.png"  alt="查询投诉登记单" style="width: 135px;height: 135;"/><p>查询投诉登记单<br /></p></a></li> --%>
+<%--     <li><a href="${contextPath}/admin/queryReport"><img src="/image/l03.png"  alt="查询举报登记单" style="width: 135px;height: 135;"/><p>查询举报登记单<br /></p></a></li> --%>
     </ul>
     
     

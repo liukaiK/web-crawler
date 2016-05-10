@@ -27,7 +27,7 @@ public class BaseConfig extends HttpServlet {
 
 	public static String TEST_ROOT;
 
-	public static final String INDEX_URL = "http://www.baic.gov.cn";
+	public static final String INDEX_URL = "http://www.caacca.org";
 
 	public static final String MESSAGE = "message";
 
@@ -36,7 +36,7 @@ public class BaseConfig extends HttpServlet {
 	public static String time = "03:00:00";
 
 	public void init() throws ServletException {
-		ROOT = getServletContext().getRealPath("/") + "baic";
+		ROOT = getServletContext().getRealPath("/") + "web";
 		IMAGE_ROOT = ROOT + File.separator + "etc" + File.separator + "image";
 		JS_ROOT = ROOT + File.separator + "etc" + File.separator + "js";
 		CSS_ROOT = ROOT + File.separator + "etc" + File.separator + "styles";

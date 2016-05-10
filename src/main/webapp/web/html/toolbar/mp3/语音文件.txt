@@ -1,4 +1,4 @@
-欢迎进入北京市工商行政管理局网站,按ALT+SHIFT+Z朗读快捷键功能列表
+欢迎进入北京市工商行政管理局网站,按ALT+SHIFT+Z朗读快捷键功能列表    description_toolbar   shift_0  shift_z
 按alt+shift+波浪线跳转首页,
 按alt+shift+问号键跳转帮助,
 按alt+shift+q键退出无障碍辅助工具,
