@@ -107,7 +107,7 @@ public class SZFTFilter extends DefaultFilter {
 			return;
 		}
 		Elements cs = element.select("*");
-		String[] filerAttr = { "alt", "title", "src", "href", "value", "rowspan", "colspan", "http-equiv", "content", "flashvars" };
+		String[] filerAttr = { "alt", "title", "src", "href", "type", "value", "rowspan", "colspan", "http-equiv", "content", "flashvars" };
 		for (Element c : cs) {
 			List<Attribute> list = c.attributes().asList();
 			for (Attribute attribute : list) {

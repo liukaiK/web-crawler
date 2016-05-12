@@ -60,6 +60,7 @@ public class CollectionPage {
 
 	public void init(String domain) {
 		collectStatic = true;
+		ctrl = true;
 		mongoDBUtil.dropTable();
 		mongoDBUtil.downloadsInsert(domain);// 插入主页
 		dao.collectPageConfig();
@@ -110,10 +111,7 @@ public class CollectionPage {
 			return true;
 		}
 		Elements links = htmlSource.select("a[href],area[href]");
-		String title = htmlSource.select(".title21").text().trim();
-		if (title == null || title.isEmpty()) {
-			title = "::::北京市工商局:::::";
-		}
+		String title = htmlSource.select("title").text().trim();
 		for (Element e : links) {
 			String href = e.attr("abs:href").trim();
 			if (href == null) {
