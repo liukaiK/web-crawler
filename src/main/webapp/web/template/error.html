@@ -1,10 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<meta http-equiv="keywords" content="中国民用航空局消费者事务中心网站,中国民用航空局消费者事务中心无障碍" />
+<meta http-equiv="description" content="中国民用航空局消费者事务中心无障碍" />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>错误提示页面</title>
 <link rel="stylesheet" type="text/css" href="../etc/styles/error.css" />
+<script type="text/javascript">
+	function goback() {
+		window.history.back(-1);
+	}
+</script>
 </head>
 <body>
 	<div class="bg">
@@ -14,7 +21,7 @@
 			</div>
 			<h2>您访问的页面可能超出了无障碍服务范围!</h2>
 			<div class="c2">
-				<a href="javascript:window.history.back(-1);" class="home">返回网站</a> 
+				<a href="javascript:void(0);" class="home" onclick="goback()">返回网站</a> 
 				<a target="_blank" id="error" href="#" class="re">继续访问</a> 
 <!-- 				<a href="javascript:window.top.location.href='http://www.szft.gov.cn/was40/'" class="sr">搜索一下页面相关信息</a> -->
 			</div>

@@ -16,14 +16,9 @@ $(document).ready(function() {
 	
 	$("#gggs-list table").remove();
 	$("#gggs-list li span").remove();
-	
-	
 	$("#sqtz-list span").remove();
-	$("#sqtz-list br").remove();
 	$("#bzzn-list span").remove();
-	$("#bzzn-list br").remove();
 	$("#zjyj-list span").remove();
-	$("#zjyj-list br").remove();	
 	
 	
 	

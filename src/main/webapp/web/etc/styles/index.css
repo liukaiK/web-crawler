@@ -187,8 +187,6 @@ h3 a {
 	padding-left: 15px;
 	padding-left: 20px;
 	list-style-type: none;
-
-	/*height: 196px;*/
 }
 
 .block2 ul li {
@@ -221,14 +219,6 @@ h3 a {
 	padding-bottom: 5px;
 }
 
-div#grbs { /*padding-bottom: 47px;*/
-	
-}
-
-div#qybs { /*padding-bottom: 9px;*/
-	
-}
-
 #qybs {
 	border: #8dc153 3px solid;
 	background-color: #8dc153;
@@ -236,8 +226,6 @@ div#qybs { /*padding-bottom: 9px;*/
 
 #wszx_title {
 	position: absolute;
-	/* line-height: 22px; */
-	/* margin-top: 26px; */
 	bottom: 0px;
 	left: 0px;
 	width: 280px;
@@ -434,17 +422,17 @@ div#qybs { /*padding-bottom: 9px;*/
 	width: 145px;
 }
 
-#sqtz-list a {
-	display: block;
-	padding-bottom: 15px;
+#sqtz-list,#bzzn-list,#zjyj-list {
+	line-height: 15px;
 }
 
-#bzzn-list a {
+#sqtz-list a,#bzzn-list a,#zjyj-list a {
 	display: block;
-	padding-bottom: 15px;
-}
-
-#zjyj-list a {
-	display: block;
-	padding-bottom: 15px;
+	line-height: normal;
+	width: 297px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	overflow: hidden;
+	margin-left: 2px;
 }
