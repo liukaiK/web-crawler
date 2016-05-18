@@ -19,6 +19,12 @@ $(document).ready(function() {
 	$("#sqtz-list span").remove();
 	$("#bzzn-list span").remove();
 	$("#zjyj-list span").remove();
+	$("#jqrd-list tr").each(function(){
+		$(this).find("td:eq(0)").remove();
+	})
+	$("#mhdt-list tr").each(function(){
+		$(this).find("td:eq(0)").remove();
+	})
 	
 	
 	

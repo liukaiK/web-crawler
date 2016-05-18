@@ -104,7 +104,6 @@ $(document).ready(function() {
 		if (keycode == 13) {
 			var zhi = $("select").val();
 			if ("转到" != zhi) {
-				alert(zhi);
 				location.href = zhi;
 			}
 		}
