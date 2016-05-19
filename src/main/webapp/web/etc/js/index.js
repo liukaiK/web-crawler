@@ -25,7 +25,12 @@ $(document).ready(function() {
 	$("#mhdt-list tr").each(function(){
 		$(this).find("td:eq(0)").remove();
 	})
-	
+	$("#qyzs-list tr").each(function(){
+		$(this).find("td:eq(0)").remove();
+	})
+	$("#tstb-list tr").each(function(){
+		$(this).find("td:eq(0)").remove();
+	})	
 	
 	
 })

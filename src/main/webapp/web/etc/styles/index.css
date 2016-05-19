@@ -121,7 +121,7 @@ h3 a {
 }
 
 #zjyj {
-	width: 330px;
+	width: 328px;
 	background-color: #37bd9c;
 	border: #37bd9c 4px solid;
 }
@@ -134,6 +134,16 @@ h3 a {
 #mhdt {
 	background-color: #169fa5;
 	border: #169fa5 4px solid;
+}
+
+#tstb {
+	background-color: #22b658;
+	border: #22b658 4px solid;
+}
+
+#qyzs {
+	background-color: #967bdc;
+	border: #967bdc 4px solid;	
 }
 
 #sqtz {
@@ -217,14 +227,6 @@ h3 a {
 	margin-left: 2px;
 }
 
-.block3 {
-	width: 188px;
-	border: #0c92d1 3px solid;
-	float: left;
-	background-color: #0c92d1;
-	margin: 0px 0px 0px 3px;
-}
-
 #zdfw li {
 	padding-bottom: 5px;
 }
@@ -234,11 +236,26 @@ h3 a {
 	background-color: #8dc153;
 }
 
+.block9 ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 20px;
+    padding-bottom: 39px;
+}
+
 #wszx_title {
 	position: absolute;
 	bottom: 0px;
 	left: 0px;
 	width: 280px;
+}
+
+.block9 {
+    width: 330px;
+    border: #0580CD 3px solid;
+    float: left;
+    background-color: #0580CD;
+    margin: 3px;
 }
 
 .wszx_bg {
@@ -280,50 +297,18 @@ h3 a {
 	float: right;
 }
 
-.block11 {
-	margin: 3px;
-	width: 294px;
-	height: 144px;
-	float: left;
-}
-
 .block12 {
 	float: left;
-}
-
-.block111 {
-	height: 222px;
-	width: 302px;
-	float: left;
-	margin: 0px 5px 0px 0px;
-}
-
-.block111 ul {
-	margin-top: 20px;
-}
-
-.block111 ul li {
-	margin-left: 5px;
-	padding-bottom: 21px;
-}
-
-.block111 ul li a {
-	width: 297px;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	-o-text-overflow: ellipsis;
-	overflow: hidden;
-	display: block;
 }
 
 .block4 {
 	width: 486px;
 }
 
-.hlzn {
+#hlzn {
+	width: 330px;
 	border: #0c92d1 3px solid;
 	background-color: #0c92d1;
-	width: 238px;
 }
 
 #nznyl {
@@ -396,7 +381,7 @@ h3 a {
 	margin-left: 2px;
 }
 
-#jqrd-list a,#mhdt-list a {
+#jqrd-list a,#mhdt-list a,#qyzs-list a,#tstb-list a {
 	display: block;
 	line-height: normal;
 	width: 340px;
@@ -407,7 +392,7 @@ h3 a {
 	margin-left: 2px;
 }
 
-#jqrd-list tr,#mhdt-list tr {
+#jqrd-list tr,#mhdt-list tr,#qyzs-list tr,#tstb-list tr {
 	margin-bottom: 10px;
 	display: block;
 }
