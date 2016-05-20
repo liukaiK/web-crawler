@@ -34,7 +34,7 @@ h3 a {
 }
 
 .slide {
-	width: 672px;
+	width: 486px;
 	height: 316px;
 	border: #CCC 4px solid;
 	float: left;
@@ -43,8 +43,12 @@ h3 a {
 	position: relative;
 }
 
+#tqyb h3 {
+	border-bottom: #FFF 2px solid;
+}
+
 .slide img {
-	width: 672px;
+	width: 486px;
 	height: 316px;
 }
 
@@ -66,21 +70,32 @@ h3 a {
 }
 
 .block1 {
-	width: 145px;
-	height: 153px;
+	width: 113px;
+	height: 111px;
 	float: left;
 	margin: 3px;
 }
 
-.block1 a { /* line-height: 60px; */
-	/* margin-left: 30px; */
-	/* line-height: 60px; */
-	
+.block1 h3 {
+	border-bottom: none;
 }
 
 #ftdt {
 	border: #fb6e52 3px solid;
 	background-color: #fb6e52;
+}
+
+#hkystj {
+	width: 330px;
+	border: #ec87c1 3px solid;
+	background-color: #ec87c1;	
+}
+
+#tqyb {
+	width: 488px;
+	height: 194px;
+	border: #0c92d1 3px solid;
+	background-color: #0c92d1;
 }
 
 #bmdt {
@@ -154,8 +169,8 @@ h3 a {
 
 #bzzn {
 	width: 300px;
-	background-color: #22b658;
-	border: #22b658 4px solid;
+	background-color: #5937B2;
+	border: #5937B2 4px solid;
 }
 
 #bzzn ul li {
@@ -210,7 +225,7 @@ h3 a {
 }
 
 .block2 ul li {
-	width: 300px;
+	width: 275px;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	-o-text-overflow: ellipsis;
@@ -306,7 +321,8 @@ h3 a {
 }
 
 #hlzn {
-	width: 330px;
+	width: 332px;
+	min-height: 356px;
 	border: #0c92d1 3px solid;
 	background-color: #0c92d1;
 }
@@ -332,39 +348,12 @@ h3 a {
 	margin-top: 5px;
 }
 
-#spaql {
-	border: #e9573e 3px solid;
-	background-color: #e9573e;
-	width: 330px;
-	margin-top: 5px;
-}
-
-#box_left {
-	width: 345px;
-	float: left;
-	overflow: hidden;
-}
-
-#box_right {
-	width: 655px;
-	float: left;
-	overflow: hidden;
-}
-
-#box_left,#box_right {
-	margin-bottom: 3px;
-}
-
 .block3 h3 a {
 	display: block;
 	margin-top: 2px;
 	margin-bottom: 3px;
 }
 
-#xfwq_content {
-	margin-top: 20px;
-	margin-bottom: 9px;
-}
 
 #sqtz-list,#bzzn-list,#zjyj-list {
 	line-height: 15px;
@@ -373,7 +362,7 @@ h3 a {
 #sqtz-list a,#bzzn-list a,#zjyj-list a {
 	display: block;
 	line-height: normal;
-	width: 297px;
+	width: 270px;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	-o-text-overflow: ellipsis;
@@ -393,6 +382,34 @@ h3 a {
 }
 
 #jqrd-list tr,#mhdt-list tr,#qyzs-list tr,#tstb-list tr {
-	margin-bottom: 10px;
 	display: block;
+}
+
+#yqlj ul {
+	padding-bottom: 2px;
+}
+
+#tqyb-title {
+	text-align: center;
+}
+
+#tqyb p {
+	margin: 10px;
+}
+
+#yqlj {
+	border: #169fa5 3px solid;
+	background-color: #169fa5;
+	width: 302px;
+	min-height: 356px;
+	max-height: 519px;
+}
+
+#yqlj li {
+	padding-bottom: 11px;
+}
+
+.block4 tr {
+	display: block;
+	line-height: 30px;
 }

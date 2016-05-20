@@ -31,6 +31,10 @@ $(document).ready(function() {
 	$("#tstb-list tr").each(function(){
 		$(this).find("td:eq(0)").remove();
 	})	
+	$("#hkystj-list tr").each(function(){
+		$(this).find("td:eq(0)").remove();
+		$(this).find("td:eq(1)").remove();
+	})	
 	
 	
 })

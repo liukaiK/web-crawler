@@ -40,7 +40,7 @@ public class Test {
 
 	@org.junit.Test
 	public void findPageConfigFile() {
-		String url = "http://www.baic.gov.cn/zxbs/qtyw2/cpyzlzs/";
+		String url = "http://www.caacca.org/hlfw/hktqyb/";
 		BaseConfig.PG_ROOT = "E:\\apache-tomcat-iac\\webapps\\iac\\baic" + File.separator + "db";
 		dao.collectPageConfig();
 		PageConfig pageConfig = dao.findPageConfig(url);
@@ -65,7 +65,7 @@ public class Test {
 	@org.junit.Test
 	public void getMd5() {
 		StringBuffer str;
-		str = new StringBuffer("http://www.caacca.org/");
+		str = new StringBuffer("http://www.caac.gov.cn/");
 		Md5 md5 = new Md5();
 		System.out.println(md5.getMd5(str));
 	}
