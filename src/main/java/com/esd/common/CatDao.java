@@ -219,14 +219,13 @@ public class CatDao {
 	 * @return
 	 */
 	private String procUlr(String url) {
-		if (url.startsWith(BaseConfig.INDEX_URL)) {
-			if (url.endsWith("#")) {
-				url = url.substring(0, url.length() - 1);
+		for (String str : BaseConfig.INDEX_URL) {
+			if (url.startsWith(str)) {
+				if (url.endsWith("#")) {
+					url = url.substring(0, url.length() - 1);
+				}
+				url = url.replace("./", "");
 			}
-			url = url.replace("./", "");
-		} else {
-//			 return null;
-//			url = BaseConfig.RETURN_URL;
 		}
 		return url;
 	}

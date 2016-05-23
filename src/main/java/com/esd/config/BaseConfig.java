@@ -27,7 +27,7 @@ public class BaseConfig extends HttpServlet {
 
 	public static String TEST_ROOT;
 
-	public static final String INDEX_URL = "http://www.caacca.org";
+	public static final String[] INDEX_URL = { "http://www.caacca.org", "http://www.caacts.org.cn:8080" };
 
 	public static final String MESSAGE = "message";
 

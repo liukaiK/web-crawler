@@ -26,7 +26,7 @@ public class MonitorTask {
 	@Scheduled(cron = "* * * * * ? ")
 	public void timerTask() {
 		if (new SimpleDateFormat("HH:mm:ss").format(new Date()).equals(BaseConfig.time)) {
-			collectionPage.init(BaseConfig.INDEX_URL);
+			collectionPage.init(BaseConfig.INDEX_URL[0]);
 			collectionPage.start();
 		}
 	}

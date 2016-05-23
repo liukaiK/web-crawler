@@ -31,10 +31,12 @@ public class Util {
 	}
 
 	public static boolean isOutUrl(String url) {
-		if (!url.startsWith(BaseConfig.INDEX_URL))
-			return true;
-		else
-			return false;
+		for (String str : BaseConfig.INDEX_URL) {
+			if (url.startsWith(str)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public static Document downLoadTemple(String templePath) {
