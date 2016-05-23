@@ -791,7 +791,7 @@ jq_1_7_1(document).ready(function(){
 //站外链接提示
 jq_1_7_1(document).ready(function() {
 	jq_1_7_1('#iframe').load(function() {
-		jq_1_7_1(this).contents().find('a').click(function() {
+		jq_1_7_1(this).contents().find('a:not([href^="javascript"])').click(function() {
 			//获取当前网址为http:localhost:18080/toolbarmini/wca.html
 			//获取当前网址按/切割后的数组：http:,,localhost:18080,toolbarmini,
 			var curWwwPathArray=window.document.location.href.split('/');

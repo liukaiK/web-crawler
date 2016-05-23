@@ -36,5 +36,5 @@ $(document).ready(function() {
 		$(this).find("td:eq(1)").remove();
 	})	
 	
-	
+	$("#flash").remove();
 })
