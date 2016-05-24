@@ -4,13 +4,10 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.Reader;
-import java.io.UnsupportedEncodingException;
 import java.text.NumberFormat;
 
 import org.apache.log4j.Logger;
@@ -33,14 +30,25 @@ public class Test {
 
 	@org.junit.Test
 	public void getSource() throws IOException {
-		String url = "http://www.baic.gov.cn/zxbs/qtyw2/cpyzlzs/";
+		String url = "http://www.caacca.org/lksc/hbywcs/";
 		Document htmlSource = Jsoup.connect(url).get();
-		System.out.println(htmlSource);
+		Elements links = htmlSource.select("a[href],area[href],iframe[src]");
+		
+		for (Element e : links) {
+			String href = e.attr("abs:href").trim();
+			if (href.equals("")) {
+				href = e.attr("abs:src").trim();
+				if (href == null) {
+					continue;
+				}
+			}
+			System.out.println(href);
+		}
 	}
 
 	@org.junit.Test
 	public void findPageConfigFile() {
-		String url = "http://www.caacca.org/rdgz/rdgz1/";
+		String url = "http://www.caacca.org/lksc/hklxzn/";
 		BaseConfig.PG_ROOT = "E:\\apache-tomcat-iac\\webapps\\iac\\baic" + File.separator + "db";
 		dao.collectPageConfig();
 		PageConfig pageConfig = dao.findPageConfig(url);

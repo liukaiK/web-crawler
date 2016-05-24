@@ -110,12 +110,15 @@ public class CollectionPage {
 		if (htmlSource == null) {
 			return true;
 		}
-		Elements links = htmlSource.select("a[href],area[href]");
+		Elements links = htmlSource.select("a[href],area[href],iframe[src]");
 		String title = htmlSource.select("title").text().trim();
 		for (Element e : links) {
 			String href = e.attr("abs:href").trim();
-			if (href == null) {
-				continue;
+			if (href.equals("")) {
+				href = e.attr("abs:src").trim();
+				if (href == null) {
+					continue;
+				}
 			}
 			// 过滤
 			String s = dao.filterSuffix(href);
