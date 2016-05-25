@@ -42,7 +42,6 @@ public class Test {
 					continue;
 				}
 			}
-			System.out.println(href);
 		}
 	}
 
