@@ -121,6 +121,11 @@ tbody {
 </style>
 </head>
 <body>
+
+<%
+	String domain = request.getScheme() + "://" + request.getServerName();
+	
+ %>
 	<div class="input_btn">
 		<form action="${contextPath}/search" method="post" id="search" name="search" role="form" class="form-signin">
 			<input type="text" id="serCon" name="serCon" value="${result.serCon}" autofocus required placeholder="填入搜索信息" class="form-control" value="${serCon}">
@@ -138,7 +143,7 @@ tbody {
 			<ul>
 				<c:forEach items="${result.history }" var="res">
 					<li><p>
-							<a class="link" href="http://iac.mangren.com/baic/html/${res.md5 }" target="_blank">${res.title }</a>
+							<a class="link" href="<%=domain %>/web/html/${res.md5 }" target="_blank">${res.title }</a>
 						<p>
 					</li>
 				</c:forEach>
