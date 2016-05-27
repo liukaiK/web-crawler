@@ -63,6 +63,9 @@ public class CollectionPage {
 		ctrl = true;
 		mongoDBUtil.dropTable();
 		mongoDBUtil.downloadsInsert(domain);// 插入主页
+		for (int i = 0; i < BaseConfig.str.length; i++) {
+			mongoDBUtil.downloadsInsert(BaseConfig.str[i]);
+		}
 		dao.collectPageConfig();
 	}
 

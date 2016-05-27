@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.net.MalformedURLException;
 import java.text.NumberFormat;
 
 import org.apache.log4j.Logger;
@@ -21,12 +22,79 @@ import com.esd.common.CatDao;
 import com.esd.config.BaseConfig;
 import com.esd.config.PageConfig;
 import com.esd.util.Md5;
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
+import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import com.gargoylesoftware.htmlunit.html.HtmlInput;
+import com.gargoylesoftware.htmlunit.html.HtmlOption;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlSelect;
+import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
 public class Test {
 
 	private static Logger logger = Logger.getLogger(Test.class);
 
 	private CatDao dao = new CatDao();
+	
+	@org.junit.Test
+	public void moni() throws FailingHttpStatusCodeException, MalformedURLException, IOException {
+		final String URL = "http://www.caacts.org.cn:8080/struts2_spring3_hibernate3_1.0/byTianjia.action";
+		WebClient webClient = new WebClient();
+		webClient.getOptions().setJavaScriptEnabled(true);
+		webClient.getOptions().setCssEnabled(false);
+		webClient.setAjaxController(new NicelyResynchronizingAjaxController());
+		webClient.getOptions().setThrowExceptionOnScriptError(false);
+		
+		HtmlPage page1 = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
+		page1 = webClient.getPage(URL);
+		HtmlSelect provinceSelect = (HtmlSelect) page1.getElementById("province");
+		
+//		provinceSelect.setDefaultValue("机场");
+		provinceSelect.setSelectedAttribute("4", true);
+//		HtmlOption num = provinceSelect.getOptionByValue("其他");
+		
+		HtmlSelect citySelect = (HtmlSelect) page1.getElementById("city");
+		System.out.println(citySelect.getOptions());
+		
+		
+		
+		HtmlSelect city1Select = (HtmlSelect) page1.getElementById("city1");
+		
+		
+		
+		HtmlInput conName = (HtmlInput) page1.getElementsByTagName("input").get(0);
+		conName.setAttribute("value", "刘凯");
+		
+		HtmlInput email = (HtmlInput) page1.getElementsByTagName("input").get(2);
+		email.setAttribute("value", "zhizhufan@foxmail.com");
+		
+		HtmlTextArea conContentTextArea = (HtmlTextArea)page1.getElementsByTagName("textarea").get(0);
+		conContentTextArea.setTextContent("表扬表扬表扬表扬表扬表扬表扬表扬表扬表扬表扬表扬表扬表扬表扬表扬表扬表扬");
+		
+		
+		HtmlAnchor submitBtn = (HtmlAnchor) page1.getElementById("submitBtn");
+		HtmlPage hp = submitBtn.click();
+		if (hp != null) {
+			String pageUrl = hp.getUrl().toString().trim();
+			
+			
+			
+			
+			
+			
+			
+//			String m = pro(pageUrl, hp.asXml());
+		} else {
+		}		
+		
+		
+	}
+	
+	
+	
 
 	@org.junit.Test
 	public void getSource() throws IOException {
@@ -76,6 +144,27 @@ public class Test {
 		Md5 md5 = new Md5();
 		System.out.println(md5.getMd5(str));
 	}
+	
+	@org.junit.Test
+	public void parseHTML() {
+		String html = "<select>"+
+		"<option value=\"其他问题\">其他问题</option>"+
+		"</select>";
+		
+		Document doc = Jsoup.parse(html);
+		Elements options = doc.getElementsByTag("select").get(0).getElementsByTag("option");
+		for (Element option : options) {
+			
+			System.out.println("city1option.add(new Option(\""+option.text()+"\",\""+option.attr("value")+"\"));");
+		}
+		
+		
+		
+		
+		
+		
+	}	
+	
 
 	public static void main(String[] args) throws IOException {
 		// 这里的数后面加“D”是表明它是Double类型，否则相除的话取整，无法正常使用
