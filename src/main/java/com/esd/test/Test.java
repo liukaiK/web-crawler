@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
+import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -51,22 +52,18 @@ public class Test {
 		HtmlPage page1 = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
 		page1 = webClient.getPage(URL);
 		HtmlSelect provinceSelect = (HtmlSelect) page1.getElementById("province");
-		
-//		provinceSelect.setDefaultValue("机场");
-		provinceSelect.setSelectedAttribute("4", true);
-//		HtmlOption num = provinceSelect.getOptionByValue("其他");
+		provinceSelect.setSelectedAttribute("3", true);
+
 		
 		HtmlSelect citySelect = (HtmlSelect) page1.getElementById("city");
-		System.out.println(citySelect.getOptions());
-		
-		
+		citySelect.setSelectedAttribute("行李赔偿限额", true);
 		
 		HtmlSelect city1Select = (HtmlSelect) page1.getElementById("city1");
-		
+		city1Select.setSelectedAttribute("航班取消补偿问题", true);
 		
 		
 		HtmlInput conName = (HtmlInput) page1.getElementsByTagName("input").get(0);
-		conName.setAttribute("value", "刘凯");
+		conName.setAttribute("value", "1231231231");
 		
 		HtmlInput email = (HtmlInput) page1.getElementsByTagName("input").get(2);
 		email.setAttribute("value", "zhizhufan@foxmail.com");
@@ -77,19 +74,13 @@ public class Test {
 		
 		HtmlAnchor submitBtn = (HtmlAnchor) page1.getElementById("submitBtn");
 		HtmlPage hp = submitBtn.click();
+		
+		HtmlButton tijiaoButton = (HtmlButton) page1.getElementsByTagName("button").get(0);
+		hp = tijiaoButton.click();
 		if (hp != null) {
 			String pageUrl = hp.getUrl().toString().trim();
-			
-			
-			
-			
-			
-			
-			
-//			String m = pro(pageUrl, hp.asXml());
-		} else {
-		}		
-		
+			System.out.println(pageUrl);
+		}
 		
 	}
 	

@@ -108,7 +108,7 @@ table input {
 
 table textarea {
 	height: 100%;
-	width: 95%;
+	width: 80%;
 	text-align: left;
 	padding: 0 3px;
 	
@@ -116,4 +116,5 @@ table textarea {
 
 .btn1 {
 	text-align: center;
+	margin-top: 10px;
 }

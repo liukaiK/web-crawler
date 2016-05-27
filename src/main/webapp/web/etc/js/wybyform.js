@@ -1,9 +1,54 @@
 $(document).ready(function() {
-	$("input[type='text'],textarea").attr("onfocus","validate(this)");
-	$("input[type='text'],textarea").attr("onblur","removeValidate(this)");
-	$("#rid").val(CurentTime());;
+	$("input[type='text'],textarea").attr("onfocus", "validate(this)");
+	$("input[type='text'],textarea").attr("onblur", "removeValidate(this)");
+	$("#rid").val(CurentTime());
+
+
+	$("#by_form").validate({
+		rules : {
+			conName : {
+				required : true
+			},
+			email : {
+				required : true,
+				email : true
+			},
+			conContent : {
+				required : true
+			}
+
+		},
+		messages : {
+			conName : {
+				required : "请输入表扬人"
+			},
+			email: "请输入一个正确的邮箱",
+			conContent : {
+				required : "请输入表扬内容"
+			}
+
+		}
+
+	})
+	 
+
 })
 
+
+function tijiao() {
+	if ($("#conName").val() == '请输入表扬人') {
+		$("#conName").val("");
+	}
+	if ($("#email").val() == '请输入邮箱') {
+		$("#email").val("");
+	}	
+	if ($("#conContent").val() == '请输入表扬内容') {
+		$("#conContent").val("");
+	}	
+	
+	
+	$("#by_form").submit();
+}
 
 function validate(obj) {
 	if (obj.value == obj.defaultValue) {
@@ -18,12 +63,6 @@ function removeValidate(obj) {
 		obj.value = obj.defaultValue;
 		obj.style.color = '#999';
 	}
-}
-
-
-
-function tijiao() {
-	alert(444);
 }
 
 function CurentTime() {

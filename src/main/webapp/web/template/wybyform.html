@@ -6,9 +6,10 @@
 <meta http-equiv="description" content="中国民用航空局消费者事务中心无障碍" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <script type="text/javascript" src="../etc/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../etc/jquery-validation-1.15.0/dist/jquery.validate.min.js"></script>
+<script type="text/javascript" src="../etc/jquery-validation-1.15.0/dist/localization/messages_zh.min.js"></script>
 <script type="text/javascript" src="../etc/js/public.js"></script>
 <script type="text/javascript" src="../etc/js/wybyform.js"></script>
-<script type="text/javascript" src="../etc/My97DatePicker/WdatePicker.js"></script>
 <link rel="stylesheet" type="text/css" href="../etc/styles/public.css" />
 <link rel="stylesheet" type="text/css" href="../etc/styles/wybyform.css" />
 </head>
@@ -99,7 +100,7 @@
 						<tbody>
 							<tr>
 								<td class="alt">表扬人：</td>
-								<td><input type="text" name="conName" value="请输入表扬人" title="请输入表扬人s" >
+								<td><input id="conName" type="text" name="conName" value="请输入表扬人" title="请输入表扬人" >
 								</td>
 								<td class="alt">日期：</td>
 								<td><input type="text" id="rid" readonly="readonly" title="日期" disabled="disabled">
@@ -107,22 +108,21 @@
 							</tr>
 							<tr>
 								<td class="alt">邮箱：</td>
-								<td><input type="text" name="email" value="请输入邮箱" title="请输入邮箱">
+								<td><input id="email" type="text" name="email" value="请输入邮箱" title="请输入邮箱">
 								</td>
 								<td colspan="2">
 								</td>
 							</tr>
 							<tr>
 								<td class="alt">表扬内容：</td>
-								<td colspan="3"><textarea name="conContent" rows="5" cols="90" title="请输入表扬内容">请输入表扬内容</textarea></td>
+								<td colspan="3"><textarea id="conContent" name="conContent" rows="5" cols="90" title="请输入表扬内容">请输入表扬内容</textarea></td>
 							</tr>
 						</tbody>
 					</table>
 					<div>
 						<div>
 							<div class="btn1">
-							<input type="submit" value="提交"/>
-<!-- 								<input type="button" value="提交" title="提交" onclick="tijiao();"/> -->
+								<input type="button" value="提交" title="提交" onclick="tijiao();"/>
 								<input type="button" value="返回" title="返回" onclick="window.history.back(-1);"/>
 							</div>
 						</div>
