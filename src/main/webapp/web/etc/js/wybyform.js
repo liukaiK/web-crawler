@@ -27,28 +27,59 @@ $(document).ready(function() {
 				required : "请输入表扬内容"
 			}
 
+		},
+		submitHandler : function() {
+			var conTarget = $("#province").val();
+			
+			var conUnit = $("#city").val();
+			
+			var conType = $("#city1").val();
+			
+			
+			var conName = $("#conName").val();
+			var email = $("#email").val();
+			var conContent = $("#conContent").val();
+			
+//			if (conName == '请输入表扬人') {
+//				$("#conName").val("");
+//			}
+//			if (email == '请输入邮箱') {
+//				$("#email").val("");
+//			}	
+//			if (conContent == '请输入表扬内容') {
+//				$("#conContent").val("");
+//			}	
+//			
+			$.ajax({
+				type : 'post',
+				url : '/iac/addPraise',
+				data : {
+					"conTarget" : conTarget,
+					"conUnit" : conUnit,
+					"conType" : conType,
+					"conName" : conName,
+					"email" : email,
+					"conContent" : conContent
+					},
+				dataType : 'json',
+				success : function(data) {
+					if (data.notice == true) {
+						alert(data.message);
+						window.location.reload();
+					} else {
+						alert(data.message);
+					}
+				}
+			});				
+			
+			
+			
 		}
 
 	})
-	 
+
 
 })
-
-
-function tijiao() {
-	if ($("#conName").val() == '请输入表扬人') {
-		$("#conName").val("");
-	}
-	if ($("#email").val() == '请输入邮箱') {
-		$("#email").val("");
-	}	
-	if ($("#conContent").val() == '请输入表扬内容') {
-		$("#conContent").val("");
-	}	
-	
-	
-	$("#by_form").submit();
-}
 
 function validate(obj) {
 	if (obj.value == obj.defaultValue) {
@@ -95,8 +126,8 @@ function CurentTime() {
 
 function Change_Select() {
 	var cityoption = document.getElementById("city");
-	cityoption.options.length = 0;
 	var city1option = document.getElementById("city1");
+	cityoption.options.length = 0;
 	city1option.options.length = 0;
 	var province = document.getElementById('province').value;
 	if (province == 1) {

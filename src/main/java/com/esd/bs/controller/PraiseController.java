@@ -49,15 +49,17 @@ public class PraiseController {
 
 	@RequestMapping(value = "/addPraise", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> addPraise(Praise praise, HttpServletRequest request) {
+	public Map<String, Object> addPraise(Praise praise, HttpServletRequest request) throws InterruptedException {
 		Map<String, Object> map = new HashMap<String, Object>();
 		HtmlPage page1 = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
 		try {
 			page1 = webClient.getPage(URL);
 			HtmlSelect provinceSelect = (HtmlSelect) page1.getElementById("province");
 			provinceSelect.setSelectedAttribute(praise.getConTarget(), true);
+			Thread.sleep(500);
 			HtmlSelect citySelect = (HtmlSelect) page1.getElementById("city");
 			citySelect.setSelectedAttribute(praise.getConUnit(), true);
+			Thread.sleep(500);
 			HtmlSelect city1Select = (HtmlSelect) page1.getElementById("city1");
 			city1Select.setSelectedAttribute(praise.getConType(), true);
 			HtmlInput conName = (HtmlInput) page1.getElementsByTagName("input").get(0);
