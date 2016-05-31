@@ -89,19 +89,20 @@ public class Test {
 
 	@org.junit.Test
 	public void getSource() throws IOException {
-		String url = "http://www.caacca.org/lksc/hbywcs/";
+		String url = "http://wza.caacca.org/";
 		Document htmlSource = Jsoup.connect(url).get();
-		Elements links = htmlSource.select("a[href],area[href],iframe[src]");
+		System.out.println(htmlSource);
+//		Elements links = htmlSource.select("a[href],area[href],iframe[src]");
 		
-		for (Element e : links) {
-			String href = e.attr("abs:href").trim();
-			if (href.equals("")) {
-				href = e.attr("abs:src").trim();
-				if (href == null) {
-					continue;
-				}
-			}
-		}
+//		for (Element e : links) {
+//			String href = e.attr("abs:href").trim();
+//			if (href.equals("")) {
+//				href = e.attr("abs:src").trim();
+//				if (href == null) {
+//					continue;
+//				}
+//			}
+//		}
 	}
 
 	@org.junit.Test
