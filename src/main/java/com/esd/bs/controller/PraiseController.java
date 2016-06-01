@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 @Controller
 public class PraiseController {
 
-	private static Logger logger = Logger.getLogger(AdviceController.class);
+	private static Logger logger = Logger.getLogger(PraiseController.class);
 
 	private WebClient webClient = null;
 

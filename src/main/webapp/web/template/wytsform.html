@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<title>增加投诉信息</title>
+<meta http-equiv="keywords" content="中国民用航空局消费者事务中心网站,中国民用航空局消费者事务中心无障碍" />
+<meta http-equiv="description" content="中国民用航空局消费者事务中心无障碍" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="../etc/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../etc/jquery-validation-1.15.0/dist/jquery.validate.min.js"></script>
+<script type="text/javascript" src="../etc/jquery-validation-1.15.0/dist/localization/messages_zh.min.js"></script>
+<script type="text/javascript" src="../etc/js/public.js"></script>
+<script type="text/javascript" src="../etc/js/wytsform.js"></script>
+<link rel="stylesheet" type="text/css" href="../etc/styles/public.css" />
+<link rel="stylesheet" type="text/css" href="../etc/styles/wytsform.css" />
+</head>
+
+<body>
+	<include src="header.html" />
+	<div class="main">
+		<div id="NewsShowConter_date">
+			<h3>增加投诉信息</h3>
+		</div>
+		<form id="ts_form" action="" method="post">
+			<div id="NewsShowConter_txt">
+				<div class="tstj_top">
+					<span> 投诉单位： </span> 
+					<select id="province" name="conTarget" onChange="Change_Select()" title="投诉单位">
+						<option value="1">国内航空公司</option>
+						<option value="2">国外及地区航空公司</option>
+						<option value="3">机场</option>
+						<option value="4">地面服务代理人</option>
+					</select> 
+					<select name="conUnit" id="city" title="投诉单位">
+						<option value="BK ">A奥凯航空有限公司</option>
+						<option value="JD ">B北京首都航空有限公司</option>
+						<option value="EU ">C成都航空有限公司</option>
+						<option value="9C ">C春秋航空有限公司</option>
+						<option value="OQ ">C重庆航空有限责任公司</option>
+						<option value="9H ">C长安航空有限责任公司</option>
+						<option value="8C ">D东星航空公司</option>
+						<option value="GY ">D多彩贵州航空有限公司</option>
+						<option value="CN ">D大新华航空有限公司</option>
+						<option value="CD ">D大连航空有限公司</option>
+						<option value="NS ">D河北航空有限公司</option>
+						<option value="FU ">F福州航空有限责任公司</option>
+						<option value="GX ">G广西北部湾航空有限责任公司</option>
+						<option value="G5 ">H华夏航空有限公司</option>
+						<option value="VD ">H河南航空有限公司</option>
+						<option value="HU ">H海南航空股份有限公司</option>
+						<option value="AQ ">J九元航空有限公司</option>
+						<option value="RY ">J江西航空有限公司</option>
+						<option value="KY ">K昆明航空有限公司</option>
+						<option value="XX ">Q其他</option>
+						<option value="QW ">Q青岛航空股份有限公司</option>
+						<option value="DR ">R瑞丽航空有限公司</option>
+						<option value="HO ">S上海吉祥航空有限公司</option>
+						<option value="FM ">S上海航空股份有限公司</option>
+						<option value="DZ ">S东海航空有限公司</option>
+						<option value="3U ">S四川航空股份有限公司</option>
+						<option value="SC ">S山东航空股份有限公司</option>
+						<option value="ZH ">S深圳航空有限责任公司</option>
+						<option value="GS ">T天津航空有限责任公司</option>
+						<option value="UQ ">W乌鲁木齐航空有限责任公司</option>
+						<option value="MF ">X厦门航空有限公司</option>
+						<option value="JR ">X幸福航空有限责任公司</option>
+						<option value="TV ">X西藏航空有限公司</option>
+						<option value="PN ">X西部航空有限责任公司</option>
+						<option value="8L ">Y云南祥鹏航空有限责任公司</option>
+						<option value="YI ">Y云南英安航空有限公司</option>
+						<option value="Y8 ">Y扬子江快运航空有限公司</option>
+						<option value="MU ">Z中国东方航空股份有限公司</option>
+						<option value="CZ ">Z中国南方航空股份有限公司</option>
+						<option value="CA ">Z中国国际航空股份有限公司</option>
+						<option value="KN ">Z中国联合航空有限公司</option>
+						<option value="GJ ">Z浙江长龙航空公司</option>
+					</select> 
+					<span> 投诉的问题:</span> 
+					<select name="conType" id="city1" title="投诉的问题">
+						<option value="A">航班问题</option>
+						<option value="B">超售</option>
+						<option value="C">预定、票务、登机</option>
+						<option value="D">票价</option>
+						<option value="E">退款</option>
+						<option value="F">行李</option>
+						<option value="G">旅客服务</option>
+						<option value="H">吸烟</option>
+						<option value="I">广告</option>
+						<option value="J">信用</option>
+						<option value="K">旅行或包机</option>
+						<option value="L">综合（包括常旅客）</option>
+						<option value="M">残疾</option>
+						<option value="N">动物：丢失、受伤、死亡</option>
+						<option value="O">歧视（残疾人除外）</option>
+						<option value="P">短信欺诈</option>
+					</select>
+				</div>
+				<div class="tstj_content">
+				
+				
+				
+					<div>
+						<div>
+							<div class="btn1">
+								<input type="submit" value="提交" title="提交"/>
+								<input type="button" value="返回" title="返回" onclick="window.history.back(-1);"/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	</div>
+	<include src="footer.html" />
+</body>
+</html>
