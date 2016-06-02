@@ -9,6 +9,7 @@
 <script type="text/javascript" src="../etc/jquery-validation-1.15.0/dist/jquery.validate.min.js"></script>
 <script type="text/javascript" src="../etc/jquery-validation-1.15.0/dist/localization/messages_zh.min.js"></script>
 <script type="text/javascript" src="../etc/js/public.js"></script>
+<script type="text/javascript" src="../etc/tool/Voice.js"></script>
 <script type="text/javascript" src="../etc/js/wybyform.js"></script>
 <link rel="stylesheet" type="text/css" href="../etc/styles/public.css" />
 <link rel="stylesheet" type="text/css" href="../etc/styles/wybyform.css" />
@@ -120,7 +121,7 @@
 							<tr>
 								<td class="alt">验证码: </td>
 								<td colspan="3">
-									<input type="text" name="certicode" id="certicode" value="请输入验证码" title="请输入验证码" onfocus="esdonfocus();"/>
+									<input type="text" name="certicode" id="certicode" value="请输入验证码" title="请输入验证码" onfocus="esdonfocus(this);"/>
 									<img id="verifyImage" title="验证码" alt="验证码" />
 									<input type="hidden" id="voicepath" />
 								</td>
@@ -140,6 +141,7 @@
 		</form>
 	</div>
 	</div>
+	
 	<include src="footer.html" />
 </body>
 </html>

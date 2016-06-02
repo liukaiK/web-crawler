@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	var timestamp = new Date().getTime();
-	$("input[type='text'],textarea").attr("onfocus", "validate(this)");
+	$("input[type='text'],textarea").not("#certicode").attr("onfocus", "validate(this)");
 	$("input[type='text'],textarea").attr("onblur", "removeValidate(this)");
 	$("#rid").val(CurentTime());
 

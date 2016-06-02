@@ -34,7 +34,11 @@ function play(path) {
 	}
 }
 
-function esdonfocus() {
+function esdonfocus(obj) {
+	if (obj.value == obj.defaultValue) {
+		obj.value = '';
+		obj.style.color = '#000';
+	}
 	var value = document.getElementById('voicepath').value;
 	play(value);
 }

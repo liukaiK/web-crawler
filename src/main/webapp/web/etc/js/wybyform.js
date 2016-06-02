@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	var timestamp = new Date().getTime();
-	$("input[type='text'],textarea").attr("onfocus", "validate(this)");
+	$("input[type='text'],textarea").not("#certicode").attr("onfocus", "validate(this)");
 	$("input[type='text'],textarea").attr("onblur", "removeValidate(this)");
 	$("#rid").val(CurentTime());
 
@@ -58,7 +58,6 @@ $(document).ready(function() {
 				required : "请输入表扬内容"
 			},
 			certicode : "请输入数字验证码"
-			}
 
 		},
 		submitHandler : function() {
