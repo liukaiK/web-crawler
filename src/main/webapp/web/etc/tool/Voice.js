@@ -43,6 +43,11 @@ function esdonfocus(obj) {
 	play(value);
 }
 
+function imgonfocus() {
+	var value = document.getElementById('voicepath').value;
+	play(value);
+}
+
 function keyDown(e) {
 	var keycode
 	if (navigator.appName == "Microsoft Internet Explorer") {
