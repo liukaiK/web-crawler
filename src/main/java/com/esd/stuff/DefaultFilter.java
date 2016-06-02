@@ -178,7 +178,7 @@ public class DefaultFilter extends SrcFilter {
 		if (element == null) {
 			return;
 		}
-		Elements links = element.select("img");
+		Elements links = element.select("img,embed");
 		for (Element link : links) {
 			String linkHref = link.attr("abs:src").trim();
 			String alt = link.attr("alt").trim();

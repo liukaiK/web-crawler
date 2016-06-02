@@ -1,6 +1,6 @@
 $(document).ready(function() {
-	$("input[type='text'],textarea").attr("onfocus", "validate(this)");
-	$("input[type='text'],textarea").attr("onblur", "removeValidate(this)");
+	$("input[type='text'],textarea").not("#rid").attr("onfocus", "validate(this)");
+	$("input[type='text'],textarea").not("#rid").attr("onblur", "removeValidate(this)");
 	$("#rid").val(CurentTime());
 
 
@@ -118,15 +118,15 @@ function CurentTime() {
 	if (day < 10)
 		clock += "0";
 	clock += day + " ";
-	if (hh < 10)
-		clock += "0";
-	clock += hh + ":";
-	if (mm < 10)
-		clock += '0';
-	clock += mm + ":";
-	if (ss < 10)
-		clock += '0';
-	clock += ss;
+//	if (hh < 10)
+//		clock += "0";
+//	clock += hh + ":";
+//	if (mm < 10)
+//		clock += '0';
+//	clock += mm + ":";
+//	if (ss < 10)
+//		clock += '0';
+//	clock += ss;
 	return (clock);
 }
 
@@ -200,6 +200,143 @@ function Change_Select() {
 		city1option.add(new Option("短信欺诈", "P"));		
 	}
 	if (province == 2) {
+		cityoption.add(new Option("A埃及航空公司","MS "));
+		cityoption.add(new Option("A埃塞俄比亚航空","ET "));
+		cityoption.add(new Option("A奥地利航空公司","OS "));
+		cityoption.add(new Option("A澳洲航空公司","QF "));
+		cityoption.add(new Option("A澳门航空公司","NX "));
+		cityoption.add(new Option("A阿塞拜疆航空公司","J2 "));
+		cityoption.add(new Option("A阿富汗卡姆航空公司","RQ "));
+		cityoption.add(new Option("A阿富汗萨菲航空公司","4Q "));
+		cityoption.add(new Option("A阿富汗阿里亚纳航空公司","FG "));
+		cityoption.add(new Option("A阿尔及利亚航空公司","AH "));
+		cityoption.add(new Option("A阿斯塔纳航空公司","KC "));
+		cityoption.add(new Option("A阿联酋航空公司","EK "));
+		cityoption.add(new Option("A阿联酋阿提哈德航空公司","EY "));
+		cityoption.add(new Option("B北欧航空公司","SK "));
+		cityoption.add(new Option("B巴基斯坦沙欣航空公司","NL "));
+		cityoption.add(new Option("B巴基斯坦航空公司","PK "));
+		cityoption.add(new Option("B巴拿马航空公司","CM "));
+		cityoption.add(new Option("B波兰航空公司","LO "));
+		cityoption.add(new Option("C朝鲜航空公司","JS "));
+		cityoption.add(new Option("D东亚航空公司","3E "));
+		cityoption.add(new Option("D大陆航空公司","CO "));
+		cityoption.add(new Option("D大韩航空","KE "));
+		cityoption.add(new Option("D德国柏林航空","AB "));
+		cityoption.add(new Option("E俄罗斯乌拉尔航空公司","U6 "));
+		cityoption.add(new Option("E俄罗斯国际航空公司","SU "));
+		cityoption.add(new Option("E俄罗斯洲际航空公司","UN "));
+		cityoption.add(new Option("E俄罗斯联合航空公司","AU "));
+		cityoption.add(new Option("E俄罗斯西伯利亚航空公司","S7 "));
+		cityoption.add(new Option("E俄罗斯远东航空公司","H8 "));
+		cityoption.add(new Option("F发达飞航空公司","7P "));
+		cityoption.add(new Option("F法国航空公司","AF "));
+		cityoption.add(new Option("F符拉迪沃斯托克航空公司","XF "));
+		cityoption.add(new Option("F芬兰航空公司","AY "));
+		cityoption.add(new Option("F菲律宾宿务太平洋航空公司","5J "));
+		cityoption.add(new Option("F菲律宾航空公司","PR "));
+		cityoption.add(new Option("F菲律宾菲亚航","Z2 "));
+		cityoption.add(new Option("F菲律宾飞龙航空","ZZ "));
+		cityoption.add(new Option("G国泰航空公司","CX "));
+		cityoption.add(new Option("G港龙航空","KA "));
+		cityoption.add(new Option("H合众国际航空公司","US "));
+		cityoption.add(new Option("H德国汉莎航空公司","LH "));
+		cityoption.add(new Option("H海湾航空公司","GF "));
+		cityoption.add(new Option("H荷兰皇家航空公司","KL "));
+		cityoption.add(new Option("H赫兹航空公司","HZ "));
+		cityoption.add(new Option("H韩亚航空","OZ "));
+		cityoption.add(new Option("H韩国真航空","LJ "));
+		cityoption.add(new Option("J加拿大航空公司","AC "));
+		cityoption.add(new Option("J吉尔吉克斯坦航空公司","GI "));
+		cityoption.add(new Option("J吉尔吉斯斯坦黄金航空公司","QH "));
+		cityoption.add(new Option("J捷达航空(印度)有限公司","9W "));
+		cityoption.add(new Option("J柬埔寨吴哥航空公司","K6 "));
+		cityoption.add(new Option("J柬埔寨天翼亚洲航空公司","ZA "));
+		cityoption.add(new Option("J津巴布韦航空公司","UM "));
+		cityoption.add(new Option("K克拉斯诺亚尔斯克股份开放式航空公司","7B "));
+		cityoption.add(new Option("K卡塔尔航空公司","QR "));
+		cityoption.add(new Option("K肯尼亚航空公司","KQ "));
+		cityoption.add(new Option("L老挝航空公司","QV "));
+		cityoption.add(new Option("M墨西哥航空公司","AM "));
+		cityoption.add(new Option("M墨西哥航空公司","MX "));
+		cityoption.add(new Option("M曼谷航空公司","PG "));
+		cityoption.add(new Option("M毛里求斯航空公司","MK "));
+		cityoption.add(new Option("M美佳航空","5M "));
+		cityoption.add(new Option("M美国联合航空公司","UA "));
+		cityoption.add(new Option("M美国航空公司","AA "));
+		cityoption.add(new Option("M美国西北航空公司","NW "));
+		cityoption.add(new Option("M美国达美航空公司","DL "));
+		cityoption.add(new Option("M莫杰航空公司","E3 "));
+		cityoption.add(new Option("M蒙古国航空公司","MO "));
+		cityoption.add(new Option("M蒙古航空公司","OM "));
+		cityoption.add(new Option("M马来西亚亚洲航空有限公司","AK "));
+		cityoption.add(new Option("M马来西亚亚洲航空（长途）有限公司","D7 "));
+		cityoption.add(new Option("M马来西亚航空公司","MH "));
+		cityoption.add(new Option("N南非航空公司","SA "));
+		cityoption.add(new Option("N尼泊尔航空公司","RA "));
+		cityoption.add(new Option("P普尔科沃航空公司","FV "));
+		cityoption.add(new Option("Q全日空航空公司","NH "));
+		cityoption.add(new Option("R日本航空公司","JL "));
+		cityoption.add(new Option("R瑞士国际航空公司","LX "));
+		cityoption.add(new Option("S斯卡特航空公司","DV "));
+		cityoption.add(new Option("S斯里兰卡航空公司","UL "));
+		cityoption.add(new Option("T台湾中华航空公司","CI "));
+		cityoption.add(new Option("T台湾华信航空公司","AE "));
+		cityoption.add(new Option("T台湾复兴航空公司","GE "));
+		cityoption.add(new Option("T台湾立荣航空公司","B7 "));
+		cityoption.add(new Option("T台湾长荣航空公司","BR "));
+		cityoption.add(new Option("T土库曼斯坦航空公司","T5 "));
+		cityoption.add(new Option("T土耳其航空公司","TK "));
+		cityoption.add(new Option("T塔吉克斯坦航空公司","7J "));
+		cityoption.add(new Option("T泰国东方航空公司","OX "));
+		cityoption.add(new Option("T泰国亚洲航空公司","FD "));
+		cityoption.add(new Option("T泰国亚洲航空（长途）有限公司","XJ "));
+		cityoption.add(new Option("T泰国国际航空公司","TG "));
+		cityoption.add(new Option("T泰国微笑航空公司","WE "));
+		cityoption.add(new Option("T泰国飞鸟航空","DD "));
+		cityoption.add(new Option("W乌克兰国际航空","PS "));
+		cityoption.add(new Option("W乌克兰空中世界","VV "));
+		cityoption.add(new Option("W乌兹别克斯坦航空公司","HY "));
+		cityoption.add(new Option("W吴哥航空公司","G6 "));
+		cityoption.add(new Option("W文莱王家航空公司","BI "));
+		cityoption.add(new Option("W维珍航空公司","VS "));
+		cityoption.add(new Option("X新加坡捷星亚洲航空私人有限公司","3K "));
+		cityoption.add(new Option("X新加坡胜安航空公司","MI "));
+		cityoption.add(new Option("X新加坡航空公司","SQ "));
+		cityoption.add(new Option("X新加坡酷航","TZ "));
+		cityoption.add(new Option("X新西兰航空公司","NZ "));
+		cityoption.add(new Option("X欣丰虎航空公司","TR "));
+		cityoption.add(new Option("X香港快运航空有限公司","UO "));
+		cityoption.add(new Option("X香港航空公司","HK "));
+		cityoption.add(new Option("Y以色列航空公司","LY "));
+		cityoption.add(new Option("Y伊朗航空公司","IR "));
+		cityoption.add(new Option("Y伊朗马汉航空公司","W5 "));
+		cityoption.add(new Option("Y印度尼西亚亚洲航空有限公司","QZ "));
+		cityoption.add(new Option("Y印度尼西亚鹰航空公司","GA "));
+		cityoption.add(new Option("Y印度航空公司","AI "));
+		cityoption.add(new Option("Y意大利航空公司","AZ "));
+		cityoption.add(new Option("Y英国航空公司","BA "));
+		cityoption.add(new Option("Y越南航空公司","VN "));
+		cityoption.add(new Option("Y雅库茨克航空公司","R3 "));
+	
+		city1option.add(new Option("航班问题", "A"));
+		city1option.add(new Option("超售", "B"));
+		city1option.add(new Option("预定、票务、登机", "C"));
+		city1option.add(new Option("票价", "D"));
+		city1option.add(new Option("退款", "E"));
+		city1option.add(new Option("行李", "F"));
+		city1option.add(new Option("旅客服务", "G"));
+		city1option.add(new Option("吸烟", "H"));
+		city1option.add(new Option("广告", "I"));
+		city1option.add(new Option("信用", "J"));
+		city1option.add(new Option("旅行或包机", "K"));
+		city1option.add(new Option("综合（包括常旅客）", "L"));
+		city1option.add(new Option("残疾", "M"));
+		city1option.add(new Option("动物：丢失、受伤、死亡", "N"));
+		city1option.add(new Option("歧视（残疾人除外）", "O"));
+		city1option.add(new Option("短信欺诈", "P"));	
+	}
+	if (province == 3) {
 		cityoption.add(new Option("AKESU 阿克苏温宿机场","AKU"));
 		cityoption.add(new Option("ALTAY 阿勒泰机场","AAT"));
 		cityoption.add(new Option("ANKANG 安康五里铺机场","AKA"));
@@ -383,38 +520,26 @@ function Change_Select() {
 		cityoption.add(new Option("ZHUHAI 珠海三灶机场","ZUH"));
 		cityoption.add(new Option("ZUNYI 遵义机场","ZYI"));
 	
-		city1option.add(new Option("航班问题", "A"));
-		city1option.add(new Option("超售", "B"));
-		city1option.add(new Option("预定、票务、登机", "C"));
-		city1option.add(new Option("票价", "D"));
-		city1option.add(new Option("退款", "E"));
-		city1option.add(new Option("行李", "F"));
-		city1option.add(new Option("旅客服务", "G"));
-		city1option.add(new Option("吸烟", "H"));
-		city1option.add(new Option("广告", "I"));
-		city1option.add(new Option("信用", "J"));
-		city1option.add(new Option("旅行或包机", "K"));
-		city1option.add(new Option("综合（包括常旅客）", "L"));
-		city1option.add(new Option("残疾", "M"));
-		city1option.add(new Option("动物：丢失、受伤、死亡", "N"));
-		city1option.add(new Option("歧视（残疾人除外）", "O"));
-		city1option.add(new Option("短信欺诈", "P"));	
-	}
-	if (province == 3) {
-		cityoption.add(new Option("特价机票退改签","特价机票退改签"));
-		cityoption.add(new Option("行李赔偿限额","行李赔偿限额"));
-		cityoption.add(new Option("航班取消合理性","航班取消合理性"));
-		cityoption.add(new Option("航班取消补偿","航班取消补偿"));
-	
-		city1option.add(new Option("特价机票退改签问题","特价机票退改签问题"));
-		city1option.add(new Option("行李赔偿限额问题","行李赔偿限额问题"));
-		city1option.add(new Option("航班取消合理性问题","航班取消合理性问题"));
-		city1option.add(new Option("航班取消补偿问题","航班取消补偿问题"));
+		city1option.add(new Option("机场设施","A"));
+		city1option.add(new Option("引导标志","B"));
+		city1option.add(new Option("航班信息","C"));
+		city1option.add(new Option("办理乘机手续","D"));
+		city1option.add(new Option("安检","E"));
+		city1option.add(new Option("行李","F"));
+		city1option.add(new Option("货物","G"));
+		city1option.add(new Option("航班延误时服务","H"));
+		city1option.add(new Option("转机服务","I"));
+		city1option.add(new Option("候机环境与秩序","J"));
+		city1option.add(new Option("其他商户","K"));
+		city1option.add(new Option("地面交通服务","L"));
+		city1option.add(new Option("其他","M"));
+
 	}
 	if (province == 4) {
-		cityoption.add(new Option("其他","其他"));
+		cityoption.add(new Option("BGS","BGS"));
 
-		city1option.add(new Option("其他问题","其他问题"));
+		city1option.add(new Option("BGS问题","BGS问题"));
+
 	}
 
 }

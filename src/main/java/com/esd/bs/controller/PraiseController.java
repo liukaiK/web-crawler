@@ -49,9 +49,15 @@ public class PraiseController {
 
 	@RequestMapping(value = "/addPraise", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> addPraise(Praise praise, HttpServletRequest request) throws InterruptedException {
+	public Map<String, Object> addPraise(Praise praise, String certicode, HttpServletRequest request) throws InterruptedException {
 		Map<String, Object> map = new HashMap<String, Object>();
 		HtmlPage page1 = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
+		String randomCode = (String) request.getSession().getAttribute("randomCode");
+		if (!randomCode.equals(certicode)) {
+			map.put("notice", false);
+			map.put("message", "验证码错误");
+			return map;
+		}
 		try {
 			page1 = webClient.getPage(URL);
 			HtmlSelect provinceSelect = (HtmlSelect) page1.getElementById("province");

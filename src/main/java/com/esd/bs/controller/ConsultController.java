@@ -49,8 +49,14 @@ public class ConsultController {
 
 	@RequestMapping(value = "/addConsult", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> addConsult(Consult consult, HttpServletRequest request) throws InterruptedException {
+	public Map<String, Object> addConsult(Consult consult, String certicode, HttpServletRequest request) throws InterruptedException {
 		Map<String, Object> map = new HashMap<String, Object>();
+		String randomCode = (String) request.getSession().getAttribute("randomCode");
+		if (!randomCode.equals(certicode)) {
+			map.put("notice", false);
+			map.put("message", "验证码错误");
+			return map;
+		}
 		HtmlPage page1 = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
 		try {
 			page1 = webClient.getPage(URL);

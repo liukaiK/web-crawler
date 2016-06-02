@@ -1,9 +1,36 @@
 $(document).ready(function() {
+	var timestamp = new Date().getTime();
 	$("input[type='text'],textarea").attr("onfocus", "validate(this)");
 	$("input[type='text'],textarea").attr("onblur", "removeValidate(this)");
 	$("#rid").val(CurentTime());
 
+	$("#verifyImage").attr("src", "/iac/random/code?" + timestamp);
+	$("#verifyImage").load(function() {
+		var timestamp = new Date().getTime();
+		$.ajax({
+			type : 'get',
+			url : '/iac/random/getCode?' + timestamp,
+			dataType : 'json',
+			success : function(data) {
+				$("#voicepath").val(data.path);
+				// alert(data.path);
+				// return data;
+			}
+		});
+	});
+	
+	$("#verifyImage").click(function() {
+		var timestamp = new Date().getTime();
+		$("#verifyImage").attr("src", "/iac/random/code?" + timestamp);
 
+	});
+	
+	function changeImage() {
+		var timestamp = new Date().getTime();
+		$("#verifyImage").attr("src", "/iac/random/code?" + timestamp);
+	}
+	
+	
 	$("#zx_form").validate({
 		rules : {
 			conName : {
@@ -19,6 +46,10 @@ $(document).ready(function() {
 			phoneNumber : {
 				required : true,
 				digits:true
+			},
+			certicode : {
+				required : true,
+				digits:true
 			}
 
 		},
@@ -30,7 +61,8 @@ $(document).ready(function() {
 			conContent : {
 				required : "请输入咨询内容"
 			},
-			phoneNumber : "请输入正确的电话"
+			phoneNumber : "请输入正确的电话",
+			certicode : "请输入数字验证码"
 
 		},
 		submitHandler : function() {
@@ -45,6 +77,8 @@ $(document).ready(function() {
 			var email = $("#email").val();
 			var conContent = $("#conContent").val();
 			var phoneNumber = $("#phoneNumber").val();
+			var certicode = $("#certicode").val();
+
 			
 //			if (conName == '请输入表扬人') {
 //				$("#conName").val("");
@@ -66,7 +100,8 @@ $(document).ready(function() {
 					"conName" : conName,
 					"email" : email,
 					"phoneNumber":phoneNumber,
-					"conContent" : conContent
+					"conContent" : conContent,
+					"certicode" : certicode
 					},
 				dataType : 'json',
 				success : function(data) {

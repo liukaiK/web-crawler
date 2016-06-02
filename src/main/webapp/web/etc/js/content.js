@@ -19,18 +19,11 @@ $(document).ready(function() {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
 	var title = $("#NewsShowConter_date span").text();
 	$("#digest").text(title);
 	
 	document.getElementById('button1').onclick = function() {
-		CKobject.getObjectById('ckplayer_a1').videoPlay();
+		swfobject.getObjectByTag('ckplayer_a1').Play();
 	}
 	document.getElementById('button2').onclick = function() {
 		CKobject.getObjectById('ckplayer_a1').videoPause();
@@ -41,7 +34,6 @@ $(document).ready(function() {
 	document.getElementById('button4').onclick = function() {
 		CKobject.getObjectById('ckplayer_a1').fastBack();
 	}
-	var url = "http://www.caacca.org/rdgz/jqrd/" + $("embed").attr("src").substring(2);
 
 })
 

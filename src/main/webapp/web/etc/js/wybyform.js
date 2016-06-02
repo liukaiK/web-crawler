@@ -1,8 +1,35 @@
 $(document).ready(function() {
+	var timestamp = new Date().getTime();
 	$("input[type='text'],textarea").attr("onfocus", "validate(this)");
 	$("input[type='text'],textarea").attr("onblur", "removeValidate(this)");
 	$("#rid").val(CurentTime());
 
+	
+	$("#verifyImage").attr("src", "/iac/random/code?" + timestamp);
+	$("#verifyImage").load(function() {
+		var timestamp = new Date().getTime();
+		$.ajax({
+			type : 'get',
+			url : '/iac/random/getCode?' + timestamp,
+			dataType : 'json',
+			success : function(data) {
+				$("#voicepath").val(data.path);
+				// alert(data.path);
+				// return data;
+			}
+		});
+	});
+	
+	$("#verifyImage").click(function() {
+		var timestamp = new Date().getTime();
+		$("#verifyImage").attr("src", "/iac/random/code?" + timestamp);
+
+	});
+	
+	function changeImage() {
+		var timestamp = new Date().getTime();
+		$("#verifyImage").attr("src", "/iac/random/code?" + timestamp);
+	}
 
 	$("#by_form").validate({
 		rules : {
@@ -15,6 +42,10 @@ $(document).ready(function() {
 			},
 			conContent : {
 				required : true
+			},
+			certicode : {
+				required : true,
+				digits:true
 			}
 
 		},
@@ -25,6 +56,8 @@ $(document).ready(function() {
 			email: "请输入一个正确的邮箱",
 			conContent : {
 				required : "请输入表扬内容"
+			},
+			certicode : "请输入数字验证码"
 			}
 
 		},
@@ -35,10 +68,10 @@ $(document).ready(function() {
 			
 			var conType = $("#city1").val();
 			
-			
 			var conName = $("#conName").val();
 			var email = $("#email").val();
 			var conContent = $("#conContent").val();
+			var certicode = $("#certicode").val();
 			
 //			if (conName == '请输入表扬人') {
 //				$("#conName").val("");
@@ -59,7 +92,8 @@ $(document).ready(function() {
 					"conType" : conType,
 					"conName" : conName,
 					"email" : email,
-					"conContent" : conContent
+					"conContent" : conContent,
+					"certicode" : certicode
 					},
 				dataType : 'json',
 				success : function(data) {
