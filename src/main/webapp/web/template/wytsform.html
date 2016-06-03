@@ -11,6 +11,7 @@
 <script type="text/javascript" src="../etc/js/public.js" charset="UTF-8"></script>
 <script type="text/javascript" src="../etc/My97DatePicker/WdatePicker.js" charset="UTF-8"></script>
 <script type="text/javascript" src="../etc/js/wytsform.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../etc/js/ajaxfileupload.js"></script>
 <link rel="stylesheet" type="text/css" href="../etc/styles/public.css" />
 <link rel="stylesheet" type="text/css" href="../etc/styles/wytsform.css" />
 </head>
@@ -21,7 +22,7 @@
 		<div id="NewsShowConter_date">
 			<h3>增加投诉信息</h3>
 		</div>
-		<form id="ts_form" action="" method="post">
+		<form id="ts_form" action="" method="post" enctype="multipart/form-data">
 			<div id="NewsShowConter_txt">
 				<div class="tstj_top">
 					<span> 投诉单位： </span> 
@@ -524,22 +525,24 @@
 							</tr>
 							<tr>
 								<td class="alt">附件三：</td>
-								<td><input type="file" name="uploadFile" value="选择文件" title="请选择文件">
-								</td>
+								<td><input type="file" name="uploadFile" value="选择文件" title="请选择文件"></td>
 								<td class="alt">附件四：</td>
 								<td><input type="file" name="uploadFile" value="选择文件" title="请选择文件">
 								</td>
 							</tr>
 							<tr>
 								<td class="alt">附件五：</td>
-								<td><input type="file" name="uploadFile" value="选择文件" title="请选择文件">
+								<td><input type="file" name="uploadFile" value="选择文件" title="请选择文件"></td>
+								<td class="alt">验证码:</td>
+								<td>
+									<input type="text" name="certicode" id="certicode" value="请输入验证码" title="请输入验证码" onfocus="esdonfocus(this);"/>
+									<img id="verifyImage" title="验证码" alt="验证码" />
+									<a href="static:javascript:imgonfocus();" title="播放验证码"><img id="audio" src="../etc/image/volume2.png" alt="播放验证码" title="播放验证码" /></a>
+									<input type="hidden" id="voicepath" />
 								</td>
-								<td class="alt"></td>
-								<td></td>
 							</tr>
 							<tr>
-								<td colspan="25" class="h">注：附件总大小不能超过&nbsp;20M&nbsp;&nbsp;
-									2016-06-01&nbsp;&nbsp;</td>
+								<td colspan="25" class="h">注：附件总大小不能超过&nbsp;20M&nbsp;&nbsp;2016-06-01&nbsp;&nbsp;</td>
 							</tr>
 						</tbody>
 					</table>
@@ -556,6 +559,7 @@
 		</form>
 	</div>
 	</div>
+	<script type="text/javascript" src="../etc/tool/Voice.js"></script>
 	<include src="footer.html" />
 </body>
 </html>

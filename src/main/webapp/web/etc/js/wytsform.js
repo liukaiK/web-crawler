@@ -1,9 +1,33 @@
 $(document).ready(function() {
-	$("input[type='text'],textarea").not("#rid").attr("onfocus", "validate(this)");
+	var timestamp = new Date().getTime();
+	$("input[type='text'],textarea").not("#rid,#certicode").attr("onfocus", "validate(this)");
 	$("input[type='text'],textarea").not("#rid").attr("onblur", "removeValidate(this)");
 	$("#rid").val(CurentTime());
 
+	$("#verifyImage").attr("src", "/iac/random/code?" + timestamp);
+	$("#verifyImage").load(function() {
+		var timestamp = new Date().getTime();
+		$.ajax({
+			type : 'get',
+			url : '/iac/random/getCode?' + timestamp,
+			dataType : 'json',
+			success : function(data) {
+				$("#voicepath").val(data.path);
+			}
+		});
+	});
+	
+	$("#verifyImage").click(function() {
+		var timestamp = new Date().getTime();
+		$("#verifyImage").attr("src", "/iac/random/code?" + timestamp);
 
+	});
+	
+	function changeImage() {
+		var timestamp = new Date().getTime();
+		$("#verifyImage").attr("src", "/iac/random/code?" + timestamp);
+	}
+	
 	$("#ts_form").validate({
 		rules : {
 			conName : {

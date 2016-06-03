@@ -122,3 +122,14 @@ select {
 	text-align: center;
 	margin-top: 10px;
 }
+
+#verifyImage {
+	width: 100px;
+	height: 26px;
+	vertical-align: middle;
+}
+
+#audio {
+	height: 26px;
+	vertical-align: middle;
+}
