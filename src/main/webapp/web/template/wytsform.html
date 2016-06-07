@@ -6,12 +6,12 @@
 <meta http-equiv="description" content="中国民用航空局消费者事务中心无障碍" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <script type="text/javascript" src="../etc/js/jquery-1.11.1.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../etc/My97DatePicker/WdatePicker.js" charset="UTF-8"></script>
 <script type="text/javascript" src="../etc/jquery-validation-1.15.0/dist/jquery.validate.min.js" charset="UTF-8"></script>
 <script type="text/javascript" src="../etc/jquery-validation-1.15.0/dist/localization/messages_zh.min.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../etc/js/jquery.form.js"></script>
 <script type="text/javascript" src="../etc/js/public.js" charset="UTF-8"></script>
-<script type="text/javascript" src="../etc/My97DatePicker/WdatePicker.js" charset="UTF-8"></script>
 <script type="text/javascript" src="../etc/js/wytsform.js" charset="UTF-8"></script>
-<script type="text/javascript" src="../etc/js/ajaxfileupload.js"></script>
 <link rel="stylesheet" type="text/css" href="../etc/styles/public.css" />
 <link rel="stylesheet" type="text/css" href="../etc/styles/wytsform.css" />
 </head>
@@ -22,7 +22,7 @@
 		<div id="NewsShowConter_date">
 			<h3>增加投诉信息</h3>
 		</div>
-		<form id="ts_form" action="" method="post" enctype="multipart/form-data">
+		<form id="ts_form" action="/iac/addComplain" method="post" enctype="multipart/form-data">
 			<div id="NewsShowConter_txt">
 				<div class="tstj_top">
 					<span> 投诉单位： </span> 
@@ -102,41 +102,41 @@
 							<tr>
 								<td class="alt">投诉人:</td>
 								<td>
-									<select name="cptFile.passengerType" id="cptFile_passengerType" title="投诉人类型">
+									<select name="passengerType" id="passengerType" title="投诉人类型">
 											<option value="1">旅客</option>
 											<option value="2">货主</option>
 									</select> 
-									<input type="text" name="cptFile.passengerName" value="请输入投诉人" title="请输入投诉人">
+									<input type="text" name="passengerName" id="passengerName" value="请输入投诉人" title="请输入投诉人">
 								</td>
 								<td class="alt">证件信息:</td>
 								<td>
-									<select name="cptFile.zhengjianid" title="证件类型">
+									<select name="zhengjianid" id="zhengjianid" title="证件类型">
 										<option value="身份证">身份证</option>
 										<option value="护照">护照</option>
 										<option value="军官证">军官证</option>
 										<option value="港澳通行证">港澳通行证</option>
 									</select> 
-									<input type="text" name="cptFile.shenfenId" value="请输入证件号" title="请输入证件号">
+									<input type="text" name="shenfenId" id="shenfenId" value="请输入证件号" title="请输入证件号">
 								</td>
 							</tr>
 							<tr>
 								<td class="alt">航班号:</td>
-								<td><input type="text" name="cptFile.flightNo" value="请输入航班号" title="请输入航班号"></td>
+								<td><input type="text" name="flightNo" id="flightNo" value="请输入航班号" title="请输入航班号"></td>
 								<td class="alt">乘机日期:</td>
-								<td><input type="text" style="width:170px" name="cptFile.flightTime" id="rid" value="" title="请选择乘机日期" class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" /> 
+								<td><input type="text" style="width:170px" name="flightTime" id="rid" readonly="readonly" title="请选择乘机日期" class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" /> 
 								</td>
 							</tr>
 							<tr>
 								<td class="alt">联系电话:</td>
-								<td><input type="text" name="cptFile.passengerTel" value="请输入联系电话" title="请输入联系电话">
+								<td><input type="text" name="passengerTel" id="passengerTel" value="请输入联系电话" title="请输入联系电话">
 								</td>
 								<td class="alt">电子邮件:</td>
-								<td><input type="text" name="cptFile.Email" value="请输入电子邮件" title="请输入电子邮件" style="width: 170px">
+								<td><input type="text" name="email" id="email" value="请输入电子邮件" title="请输入电子邮件" style="width: 170px">
 								</td>
 							</tr>
 							<tr>
 								<td class="alt">出发航站:</td>
-								<td colspan="3"><select name="cptFile.depPort" title="请选择出发航站" id="cptFile_depPort">
+								<td colspan="3"><select name="depPort" title="请选择出发航站" id="depPort">
 										<option value="AKU">AKESU 阿克苏温宿机场</option>
 										<option value="AAT">ALTAY 阿勒泰机场</option>
 										<option value="AKA">ANKANG 安康五里铺机场</option>
@@ -324,7 +324,7 @@
 							<tr>
 								<td class="alt">到达航站:</td>
 								<td colspan="3">
-									<select name="cptFile.arrPort" title="请选择到达航站" id="cptFile_arrPort">
+									<select name="arrPort" title="请选择到达航站" id="arrPort">
 											<option value="AKU">AKESU 阿克苏温宿机场</option>
 											<option value="AAT">ALTAY 阿勒泰机场</option>
 											<option value="AKA">ANKANG 安康五里铺机场</option>
@@ -512,27 +512,26 @@
 							</tr>
 							<tr>
 								<td class="alt">正文：</td>
-								<td colspan="4"><textarea width="100%" name="cptFile.cptContent" rows="22" cols="90" title="请输入正文内容">请输入正文内容</textarea></td>
+								<td colspan="4"><textarea width="100%" name="cptContent" id="cptContent" rows="22" cols="90" title="请输入正文内容">请输入正文内容</textarea></td>
 							</tr>
 							<tr>
 								<td class="alt">附件一：</td>
-								<td><input type="file" name="uploadFile" value="选择文件" title="请选择文件">
+								<td><input type="file" name="myfiles" id="uploadFile1" value="选择文件" title="请选择文件">
 								</td>
 
 								<td class="alt">附件二：</td>
-								<td><input type="file" name="uploadFile" value="选择文件" title="请选择文件">
+								<td><input type="file" name="myfiles" id="uploadFile2" value="选择文件" title="请选择文件">
 								</td>
 							</tr>
 							<tr>
 								<td class="alt">附件三：</td>
-								<td><input type="file" name="uploadFile" value="选择文件" title="请选择文件"></td>
+								<td><input type="file" name="myfiles" id="uploadFile3" value="选择文件" title="请选择文件"></td>
 								<td class="alt">附件四：</td>
-								<td><input type="file" name="uploadFile" value="选择文件" title="请选择文件">
-								</td>
+								<td><input type="file" name="myfiles" id="uploadFile4" value="选择文件" title="请选择文件"></td>
 							</tr>
 							<tr>
 								<td class="alt">附件五：</td>
-								<td><input type="file" name="uploadFile" value="选择文件" title="请选择文件"></td>
+								<td><input type="file" name="myfiles" id="uploadFile5" value="选择文件" title="请选择文件"></td>
 								<td class="alt">验证码:</td>
 								<td>
 									<input type="text" name="certicode" id="certicode" value="请输入验证码" title="请输入验证码" onfocus="esdonfocus(this);"/>
@@ -542,7 +541,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="25" class="h">注：附件总大小不能超过&nbsp;20M&nbsp;&nbsp;2016-06-01&nbsp;&nbsp;</td>
+								<td colspan="25" class="h"></td>
 							</tr>
 						</tbody>
 					</table>

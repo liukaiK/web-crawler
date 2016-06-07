@@ -24,12 +24,11 @@ import com.esd.config.PageConfig;
 import com.esd.util.Md5;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
+import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
-import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
@@ -41,8 +40,8 @@ public class Test {
 	private CatDao dao = new CatDao();
 	
 	@org.junit.Test
-	public void moni() throws FailingHttpStatusCodeException, MalformedURLException, IOException {
-		final String URL = "http://www.caacts.org.cn:8080/struts2_spring3_hibernate3_1.0/byTianjia.action";
+	public void moni() throws FailingHttpStatusCodeException, MalformedURLException, IOException, InterruptedException {
+		final String URL = "http://www.caacts.org.cn:8080/struts2_spring3_hibernate3_1.0/tsTianjia.action";
 		WebClient webClient = new WebClient();
 		webClient.getOptions().setJavaScriptEnabled(true);
 		webClient.getOptions().setCssEnabled(false);
@@ -52,39 +51,103 @@ public class Test {
 		HtmlPage page1 = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
 		page1 = webClient.getPage(URL);
 		HtmlSelect provinceSelect = (HtmlSelect) page1.getElementById("province");
-		provinceSelect.setSelectedAttribute("3", true);
-
+		provinceSelect.setSelectedAttribute("1", true);
+		Thread.sleep(500);
 		
 		HtmlSelect citySelect = (HtmlSelect) page1.getElementById("city");
-		citySelect.setSelectedAttribute("行李赔偿限额", true);
+		citySelect.setSelectedAttribute("9C ", true);
+		Thread.sleep(500);
 		
 		HtmlSelect city1Select = (HtmlSelect) page1.getElementById("city1");
-		city1Select.setSelectedAttribute("航班取消补偿问题", true);
+		city1Select.setSelectedAttribute("I", true);
+		
+		HtmlSelect cptFile_passengerType = (HtmlSelect) page1.getElementById("cptFile_passengerType");
+		cptFile_passengerType.setSelectedAttribute("1", true);
+		
+		HtmlInput passengerName = (HtmlInput) page1.getElementsByName("cptFile.passengerName").get(0);
+		passengerName.setValueAttribute("刘凯2");
+		
+		HtmlSelect zhengjianid = (HtmlSelect) page1.getElementsByName("cptFile.zhengjianid").get(0);
+		zhengjianid.setSelectedAttribute("身份证", true);
+		
+		HtmlInput shenfenId = (HtmlInput) page1.getElementsByName("cptFile.shenfenId").get(0);
+		shenfenId.setValueAttribute("230921199309083212");
+		
+		HtmlInput flightNo = (HtmlInput)page1.getElementsByName("cptFile.flightNo").get(0);
+		flightNo.setValueAttribute("CA3333");
+		
+		HtmlInput flightTime = (HtmlInput)page1.getElementsByName("cptFile.flightTime").get(0);
+		flightTime.setValueAttribute("2016-06-06");
+		
+		HtmlInput passengerTel = (HtmlInput)page1.getElementsByName("cptFile.passengerTel").get(0);
+		passengerTel.setValueAttribute("13206696177");			
+		
+		HtmlInput email = (HtmlInput)page1.getElementsByName("cptFile.Email").get(0);
+		email.setValueAttribute("123123123@foxmail.com");	
+		
+		HtmlSelect depPort = (HtmlSelect)page1.getElementById("cptFile_depPort");
+		depPort.setSelectedAttribute("NAY", true);
+		
+		HtmlSelect arrPort = (HtmlSelect)page1.getElementById("cptFile_arrPort");
+		arrPort.setSelectedAttribute("BHY", true);			
+		
+		HtmlTextArea cptContent = (HtmlTextArea)page1.getElementsByName("cptFile.cptContent").get(0);
+		cptContent.setTextContent("无障碍无障碍无障碍无障碍");
 		
 		
-		HtmlInput conName = (HtmlInput) page1.getElementsByTagName("input").get(0);
-		conName.setAttribute("value", "1231231231");
 		
-		HtmlInput email = (HtmlInput) page1.getElementsByTagName("input").get(2);
-		email.setAttribute("value", "zhizhufan@foxmail.com");
 		
-		HtmlTextArea conContentTextArea = (HtmlTextArea)page1.getElementsByTagName("textarea").get(0);
-		conContentTextArea.setTextContent("表扬表扬表扬表扬表扬表扬表扬表扬表扬表扬表扬表扬表扬表扬表扬表扬表扬表扬");
 		
+        // 创建文件输入流对象  
+        FileInputStream is = new FileInputStream("D:\\image1.png");  
+        // 设定读取的字节数  
+        int n = 512;  
+        byte[] buffer=new byte[2048]; 
+        // 读取输入流  
+        while ((is.read(buffer, 0, n) != -1) && (n > 0)) {  
+            System.out.print(new String(buffer));  
+        }  
+        System.out.println();  
+        // 关闭输入流  
+        is.close();  
+        
+		
+		HtmlFileInput uploadFile1 = (HtmlFileInput) page1.getElementsByName("uploadFile").get(0);
+//		uploadFile1.setData(buffer);
+		System.out.println(buffer);
+		
+		
+		uploadFile1.setValueAttribute("D:\\image1.png");
+		
+		System.out.println(uploadFile1.getData());
 		
 		HtmlAnchor submitBtn = (HtmlAnchor) page1.getElementById("submitBtn");
 		HtmlPage hp = submitBtn.click();
 		
 		HtmlButton tijiaoButton = (HtmlButton) page1.getElementsByTagName("button").get(0);
-		hp = tijiaoButton.click();
-		if (hp != null) {
-			String pageUrl = hp.getUrl().toString().trim();
-			System.out.println(pageUrl);
-		}
+//		hp = tijiaoButton.click();
+//		if (hp != null) {
+//			String pageUrl = hp.getUrl().toString().trim();
+//			System.out.println(pageUrl);
+//		}
 		
 	}
 	
-	
+	@org.junit.Test
+	public void ReadFile() throws IOException {
+        // 创建文件输入流对象  
+        FileInputStream is = new FileInputStream("D:\\image1.png");  
+        // 设定读取的字节数  
+        int n = 512;  
+        byte buffer[] = new byte[n];  
+        // 读取输入流  
+        while ((is.read(buffer, 0, n) != -1) && (n > 0)) {  
+            System.out.print(new String(buffer));  
+        }  
+        System.out.println();  
+        // 关闭输入流  
+        is.close();  
+	}
 	
 
 	@org.junit.Test

@@ -1,5 +1,6 @@
 package com.esd.bs.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.HashMap;
@@ -7,12 +8,16 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.esd.config.BaseConfig;
 import com.esd.entity.other.Complain;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
@@ -49,8 +54,14 @@ public class ComplainController {
 	
 	@RequestMapping(value = "/addComplain", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> addComplain(Complain complain, HttpServletRequest request) throws InterruptedException {
+	public Map<String, Object> addComplain(Complain complain, String certicode, @RequestParam MultipartFile[] myfiles, HttpServletRequest request) throws InterruptedException {
 		Map<String, Object> map = new HashMap<String, Object>();
+		String randomCode = (String) request.getSession().getAttribute("randomCode");
+		if (!randomCode.equals(certicode)) {
+			map.put("notice", false);
+			map.put("message", "验证码错误");
+			return map;
+		}
 		HtmlPage page1 = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
 		try {
 			page1 = webClient.getPage(URL);
@@ -97,8 +108,22 @@ public class ComplainController {
 			
 			HtmlTextArea cptContent = (HtmlTextArea)page1.getElementsByName("cptFile.cptContent").get(0);
 			cptContent.setTextContent(complain.getCptContent());
-			
-			HtmlFileInput uploadFile1 = (HtmlFileInput) page1.getElementsByName("uploadFile").get(0);
+			for (int i = 0; i <= 4; i++) {
+				if (myfiles[i].isEmpty()) {
+					continue;
+				} else {
+					String originalFilename = myfiles[i].getOriginalFilename();
+					try {
+						FileUtils.copyInputStreamToFile(myfiles[i].getInputStream(), new File(BaseConfig.TEMP_ROOT, originalFilename));
+						HtmlFileInput uploadFile = (HtmlFileInput) page1.getElementsByName("uploadFile").get(i);
+						uploadFile.setValueAttribute(BaseConfig.TEMP_ROOT + File.separator + originalFilename);
+					} catch (IOException e) {
+						System.out.println("文件[" + originalFilename + "]上传失败,堆栈轨迹如下");
+						e.printStackTrace();
+					}
+				}
+
+			}
 			
 			HtmlAnchor submitBtn = (HtmlAnchor) page1.getElementById("submitBtn");
 			HtmlPage hp = submitBtn.click();

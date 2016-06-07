@@ -34,6 +34,8 @@ public class BaseConfig extends HttpServlet {
 	public static String HTML_ROOT;
 
 	public static String TEST_ROOT;
+	
+	public static String TEMP_ROOT;
 
 	public static final String[] INDEX_URL = { "http://www.caacca.org", "http://www.caacts.org.cn:8080" };
 
@@ -52,6 +54,7 @@ public class BaseConfig extends HttpServlet {
 		TEMPLATE_ROOT = ROOT + File.separator + "template";
 		HTML_ROOT = ROOT + File.separator + "html";
 		TEST_ROOT = ROOT + File.separator + "test";
+		TEMP_ROOT = ROOT + File.separator + "temp";
 	}
 
 }

@@ -27,87 +27,91 @@ $(document).ready(function() {
 		var timestamp = new Date().getTime();
 		$("#verifyImage").attr("src", "/iac/random/code?" + timestamp);
 	}
-	
+
 	$("#ts_form").validate({
 		rules : {
-			conName : {
-				required : true
-			},
-			email : {
+			"cptTargetName" : {
 				required : true,
-				email : true
 			},
-			conContent : {
-				required : true
+			"flightNo" : {
+				required : true,
+				maxlength : 6
 			},
-			phoneNumber : {
+			"passengerName" : {
+				required : true,
+				maxlength : 50
+			},
+			"passengerTel" : {
+				required : true,
+				digits:true,
+				maxlength : 12
+			},
+			"email" : {
+				required : true,
+				email : true,
+				maxlength : 30
+			},
+			"depPort" : {
+				required : true,
+			},
+			"arrPort" : {
+				required : true,
+			},
+			"certicode" : {
 				required : true,
 				digits:true
 			}
 
 		},
 		messages : {
-			conName : {
-				required : "请输入咨询人"
+			"cptTargetName" : {
+				required : '(必填)',
+				maxlength : '长度应在1-6个字符之间'
 			},
-			email: "请输入一个正确的邮箱",
-			conContent : {
-				required : "请输入咨询内容"
+			"flightNo" : {
+				required : '(必填)',
+				maxlength : '长度应在1-6个字符之间'
 			},
-			phoneNumber : "请输入正确的电话"
-
+			"passengerName" : {
+				required : '(必填)',
+				maxlength : '长度应在1-50个字符之间'
+			},
+			"passengerTel" : {
+				required : '(必填)',
+				maxlength : '长度应在1-12个字符之间'
+			},
+			"email" : {
+				required : '(必填)',
+				email : '必须输入正确格式的电子邮件',
+				maxlength : '长度应在1-30个字符之间'
+			},
+			"depPort" : {
+				required : '(必填)'
+			},
+			"arrPort" : {
+				required : '(必填)'
+			},
+			"certicode" : "请输入数字验证码"
 		},
-		submitHandler : function() {
-			var conTarget = $("#province").val();
-			
-			var conUnit = $("#city").val();
-			
-			var conType = $("#city1").val();
-			
-			
-			var conName = $("#conName").val();
-			var email = $("#email").val();
-			var conContent = $("#conContent").val();
-			var phoneNumber = $("#phoneNumber").val();
-			
-//			if (conName == '请输入表扬人') {
-//				$("#conName").val("");
-//			}
-//			if (email == '请输入邮箱') {
-//				$("#email").val("");
-//			}	
-//			if (conContent == '请输入表扬内容') {
-//				$("#conContent").val("");
-//			}	
-//			
-			$.ajax({
-				type : 'post',
-				url : '/iac/addConsult',
-				data : {
-					"conTarget" : conTarget,
-					"conUnit" : conUnit,
-					"conType" : conType,
-					"conName" : conName,
-					"email" : email,
-					"phoneNumber":phoneNumber,
-					"conContent" : conContent
-					},
+		submitHandler : function(form) {
+//			form.ajaxSubmit();
+			$('#ts_form').ajaxSubmit({
 				dataType : 'json',
 				success : function(data) {
+					alert(data);
 					if (data.notice == true) {
-						alert(data.message);
+						alert("提交成功! ");
 						window.location.reload();
 					} else {
 						alert(data.message);
 					}
 				}
-			});				
-			
-			
-			
+			});
+
 		}
 
 	})
+	
 
 
 })
