@@ -52,15 +52,12 @@ public class ComplainController {
 		webClient.getOptions().setThrowExceptionOnScriptError(false);
 	}
 	
-	@RequestMapping(value = "/addComplain", method = RequestMethod.POST)
+	@RequestMapping(value = "/addComplain", produces = "text/html;charset=UTF-8", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> addComplain(Complain complain, String certicode, @RequestParam MultipartFile[] myfiles, HttpServletRequest request) throws InterruptedException {
-		Map<String, Object> map = new HashMap<String, Object>();
+	public String addComplain(Complain complain, String certicode, @RequestParam MultipartFile[] myfiles, HttpServletRequest request) throws InterruptedException {
 		String randomCode = (String) request.getSession().getAttribute("randomCode");
 		if (!randomCode.equals(certicode)) {
-			map.put("notice", false);
-			map.put("message", "验证码错误");
-			return map;
+			return "验证码错误!";
 		}
 		HtmlPage page1 = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
 		try {
@@ -132,9 +129,7 @@ public class ComplainController {
 			if (hp != null) {
 				String pageUrl = hp.getUrl().toString().trim();
 				if (pageUrl.equals("http://www.caacts.org.cn:8080/struts2_spring3_hibernate3_1.0/add.action")) {
-					map.put("notice", true);
-					map.put("message", "提交成功!");
-					return map;
+					return "提交成功!";
 				}
 			}
 		} catch (FailingHttpStatusCodeException e) {
@@ -144,9 +139,7 @@ public class ComplainController {
 		} catch (IOException e) {
 			logger.error(e.getMessage());
 		}
-		map.put("notice", false);
-		map.put("message", "提交失败,请稍后再试!");
-		return map;
+		return "提交失败,请稍后再试!";
 	}
 	
 	
