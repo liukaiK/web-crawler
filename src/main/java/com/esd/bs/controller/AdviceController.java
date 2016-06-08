@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.esd.config.BaseConfig;
-import com.esd.entity.other.Complain;
+import com.esd.entity.other.Advice;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -29,20 +29,20 @@ import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
 /**
- * 我要投诉
+ * 意见建议
  * 
  * @author liukai
  * 
  */
 @Controller
-public class ComplainController {
-	private static Logger logger = Logger.getLogger(ComplainController.class);
+public class AdviceController {
+	private static Logger logger = Logger.getLogger(AdviceController.class);
 
 	private WebClient webClient = null;
 
-	private final String URL = "http://www.caacts.org.cn:8080/struts2_spring3_hibernate3_1.0/tsTianjia.action";
+	private final String URL = "http://www.caacts.org.cn:8080/struts2_spring3_hibernate3_1.0/yjTianjia.action";
 
-	public ComplainController() {
+	public AdviceController() {
 		webClient = new WebClient();
 		webClient.getOptions().setJavaScriptEnabled(true);
 		webClient.getOptions().setCssEnabled(false);
@@ -50,9 +50,9 @@ public class ComplainController {
 		webClient.getOptions().setThrowExceptionOnScriptError(false);
 	}
 	
-	@RequestMapping(value = "/addComplain", produces = "text/html;charset=UTF-8", method = RequestMethod.POST)
+	@RequestMapping(value = "/addAdvice", produces = "text/html;charset=UTF-8", method = RequestMethod.POST)
 	@ResponseBody
-	public String addComplain(Complain complain, String certicode, @RequestParam MultipartFile[] myfiles, HttpServletRequest request) throws InterruptedException {
+	public String addAdvice(Advice advice, String certicode, @RequestParam MultipartFile[] myfiles, HttpServletRequest request) throws InterruptedException {
 		String randomCode = (String) request.getSession().getAttribute("randomCode");
 		if (!randomCode.equals(certicode)) {
 			return "验证码错误!";
@@ -61,48 +61,48 @@ public class ComplainController {
 		try {
 			page1 = webClient.getPage(URL);
 			HtmlSelect provinceSelect = (HtmlSelect) page1.getElementById("province");
-			provinceSelect.setSelectedAttribute(complain.getConTarget(), true);
+			provinceSelect.setSelectedAttribute(advice.getCptTarget(), true);
 			Thread.sleep(500);
 			
 			HtmlSelect citySelect = (HtmlSelect) page1.getElementById("city");
-			citySelect.setSelectedAttribute(complain.getConUnit(), true);
+			citySelect.setSelectedAttribute(advice.getCptTargetName(), true);
 			Thread.sleep(500);
 			
 			HtmlSelect city1Select = (HtmlSelect) page1.getElementById("city1");
-			city1Select.setSelectedAttribute(complain.getConType(), true);
+			city1Select.setSelectedAttribute(advice.getCptType(), true);
 			
 			HtmlSelect cptFile_passengerType = (HtmlSelect) page1.getElementById("cptFile_passengerType");
-			cptFile_passengerType.setSelectedAttribute(complain.getPassengerType(), true);
+			cptFile_passengerType.setSelectedAttribute(advice.getPassengerType(), true);
 			
 			HtmlInput passengerName = (HtmlInput) page1.getElementsByName("cptFile.passengerName").get(0);
-			passengerName.setValueAttribute(complain.getPassengerName());
+			passengerName.setValueAttribute(advice.getPassengerName());
 			
 			HtmlSelect zhengjianid = (HtmlSelect) page1.getElementsByName("cptFile.zhengjianid").get(0);
-			zhengjianid.setSelectedAttribute(complain.getZhengjianid(), true);
+			zhengjianid.setSelectedAttribute(advice.getZhengjianid(), true);
 			
 			HtmlInput shenfenId = (HtmlInput) page1.getElementsByName("cptFile.shenfenId").get(0);
-			shenfenId.setValueAttribute(complain.getShenfenId());
+			shenfenId.setValueAttribute(advice.getShenfenId());
 			
 			HtmlInput flightNo = (HtmlInput)page1.getElementsByName("cptFile.flightNo").get(0);
-			flightNo.setValueAttribute(complain.getFlightNo());
+			flightNo.setValueAttribute(advice.getFlightNo());
 			
 			HtmlInput flightTime = (HtmlInput)page1.getElementsByName("cptFile.flightTime").get(0);
-			flightTime.setValueAttribute(complain.getFlightTime());
+			flightTime.setValueAttribute(advice.getFlightTime());
 			
 			HtmlInput passengerTel = (HtmlInput)page1.getElementsByName("cptFile.passengerTel").get(0);
-			passengerTel.setValueAttribute(complain.getPassengerTel());			
+			passengerTel.setValueAttribute(advice.getPassengerTel());			
 			
 			HtmlInput email = (HtmlInput)page1.getElementsByName("cptFile.Email").get(0);
-			email.setValueAttribute(complain.getEmail());	
+			email.setValueAttribute(advice.getEmail());	
 			
 			HtmlSelect depPort = (HtmlSelect)page1.getElementById("cptFile_depPort");
-			depPort.setSelectedAttribute(complain.getDepPort(), true);
+			depPort.setSelectedAttribute(advice.getDepPort(), true);
 			
 			HtmlSelect arrPort = (HtmlSelect)page1.getElementById("cptFile_arrPort");
-			arrPort.setSelectedAttribute(complain.getArrPort(), true);			
+			arrPort.setSelectedAttribute(advice.getArrPort(), true);			
 			
 			HtmlTextArea cptContent = (HtmlTextArea)page1.getElementsByName("cptFile.cptContent").get(0);
-			cptContent.setTextContent(complain.getCptContent());
+			cptContent.setTextContent(advice.getCptContent());
 			for (int i = 0; i <= 4; i++) {
 				if (myfiles[i].isEmpty()) {
 					continue;
@@ -126,7 +126,7 @@ public class ComplainController {
 			hp = tijiaoButton.click();
 			if (hp != null) {
 				String pageUrl = hp.getUrl().toString().trim();
-				if (pageUrl.equals("http://www.caacts.org.cn:8080/struts2_spring3_hibernate3_1.0/add.action")) {
+				if (pageUrl.equals("http://www.caacts.org.cn:8080/struts2_spring3_hibernate3_1.0/addYijian.action")) {
 					return "提交成功!";
 				}
 			}
@@ -139,10 +139,5 @@ public class ComplainController {
 		}
 		return "提交失败,请稍后再试!";
 	}
-	
-	
-	
-	
-	
 	
 }

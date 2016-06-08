@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-<title>增加投诉信息</title>
+<title>增加意见建议信息</title>
 <meta http-equiv="keywords" content="中国民用航空局消费者事务中心网站,中国民用航空局消费者事务中心无障碍" />
 <meta http-equiv="description" content="中国民用航空局消费者事务中心无障碍" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -11,28 +11,29 @@
 <script type="text/javascript" src="../etc/jquery-validation-1.15.0/dist/localization/messages_zh.min.js" charset="UTF-8"></script>
 <script type="text/javascript" src="../etc/js/jquery.form.js"></script>
 <script type="text/javascript" src="../etc/js/public.js" charset="UTF-8"></script>
-<script type="text/javascript" src="../etc/js/wytsform.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../etc/js/yjjyform.js" charset="UTF-8"></script>
 <link rel="stylesheet" type="text/css" href="../etc/styles/public.css" />
-<link rel="stylesheet" type="text/css" href="../etc/styles/wytsform.css" />
+<link rel="stylesheet" type="text/css" href="../etc/styles/yjjyform.css" />
 </head>
 
 <body>
 	<include src="header.html" />
 	<div class="main">
 		<div id="NewsShowConter_date">
-			<h3>增加投诉信息</h3>
+			<h3>增加意见建议信息</h3>
 		</div>
-		<form id="ts_form" action="/iac/addComplain" method="post" enctype="multipart/form-data">
+		<form id="shijianjb_form" action="/iac/addAdvice" method="post" enctype="multipart/form-data">
 			<div id="NewsShowConter_txt">
 				<div class="tstj_top">
-					<span> 投诉单位： </span> 
-					<select id="province" name="conTarget" onChange="Change_Select()" title="请选择投诉单位">
+					<span> 意见单位： </span> 
+					<select id="province" name="cptTarget" onChange="Change_Select()" title="请选择意见单位">
 						<option value="1">国内航空公司</option>
 						<option value="2">国外及地区航空公司</option>
 						<option value="3">机场</option>
 						<option value="4">地面服务代理人</option>
+						<option value="6">政府机关</option>
 					</select> 
-					<select name="conUnit" id="city" title="请选择投诉单位">
+					<select name="cptTargetName" id="city" title="请选择投诉单位">
 						<option value="BK ">A奥凯航空有限公司</option>
 						<option value="JD ">B北京首都航空有限公司</option>
 						<option value="EU ">C成都航空有限公司</option>
@@ -76,8 +77,8 @@
 						<option value="KN ">Z中国联合航空有限公司</option>
 						<option value="GJ ">Z浙江长龙航空公司</option>
 					</select> 
-					<span> 投诉的问题:</span> 
-					<select name="conType" id="city1" title="请选择投诉的问题">
+					<span> 提出意见的问题:</span> 
+					<select name="cptType" id="city1" title="请选择提出意见的问题">
 						<option value="A">航班问题</option>
 						<option value="B">超售</option>
 						<option value="C">预定、票务、登机</option>
@@ -102,11 +103,11 @@
 							<tr>
 								<td class="alt">投诉人:</td>
 								<td>
-									<select name="passengerType" id="passengerType" title="请选择投诉人类型">
+									<select name="passengerType" id="passengerType" title="请选择意见人类型">
 											<option value="1">旅客</option>
 											<option value="2">货主</option>
 									</select> 
-									<input type="text" name="passengerName" id="passengerName" value="请输入投诉人" title="请输入投诉人">
+									<input type="text" name="passengerName" id="passengerName" value="请输入意见人" title="请输入意见人">
 								</td>
 								<td class="alt">证件信息:</td>
 								<td>
