@@ -35,6 +35,6 @@ $(document).ready(function() {
 		$(this).find("td:eq(0)").remove();
 		$(this).find("td:eq(1)").remove();
 	})	
-	
+	$("#nav").find("a:eq(0)").focus();
 	$("#flash").remove();
 })

@@ -4,7 +4,7 @@ $(document).ready(function() {
 			'max-width' : '900px'
 		});
 	})
-
+	$("#nav").find("a:eq(1)").focus();
 
 })
 
