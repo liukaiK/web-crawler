@@ -7,6 +7,19 @@ $(document).ready(function() {
 
 	$("#NewsShowConter_date div:eq(1)").css({
 		"padding-top" : "10px"
-	})
+	});
+	
+
+	
+	
+//	var tabindex = $("#NewsShowConter_date div span ins").attr("tabindex");
+//	alert($("#NewsShowConter_date div span").html());
+//	alert(tabindex);
+	
+//	
+//	$("#NewsShowConter_date div span").attr("tabindex", "-1");
+//	
+//	$("#NewsShowConter_date div span").focus();
+	
 
 })

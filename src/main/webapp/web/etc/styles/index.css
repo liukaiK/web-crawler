@@ -34,11 +34,11 @@ h3 a {
 }
 
 .slide {
-	width: 486px;
+	width: 489px;
 	height: 316px;
 	border: #CCC 4px solid;
 	float: left;
-	margin: 3px;
+	margin: 3px 3px 3px 0px;
 	padding: 0px;
 	position: relative;
 }
@@ -92,8 +92,9 @@ h3 a {
 }
 
 #tqyb {
-	width: 488px;
+	width: 491px;
 	height: 194px;
+	margin: 3px 0px 3px 3px;
 	border: #0c92d1 3px solid;
 	background-color: #0c92d1;
 }
@@ -121,6 +122,7 @@ h3 a {
 #spxw {
 	border: #37bd9c 3px solid;
 	background-color: #37bd9c;
+	margin: 3px 0px 3px 3px;
 }
 
 .block2 {
@@ -137,6 +139,7 @@ h3 a {
 
 #zjyj {
 	width: 328px;
+	min-height: 354px;
 	background-color: #37bd9c;
 	border: #37bd9c 4px solid;
 }

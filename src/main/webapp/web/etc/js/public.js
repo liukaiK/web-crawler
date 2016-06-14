@@ -121,7 +121,7 @@ $(document).ready(function() {
 	})
 //	getPageView();
 	
-	$("#nav").find("a:eq(0)").focus();
+//	$("#nav").find("a:eq(0)").focus();
 	
 });
 function keySelectScroll(id) {

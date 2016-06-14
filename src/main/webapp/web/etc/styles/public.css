@@ -74,7 +74,9 @@ div { /*opacity: .97;*/
 }
 
 .col-nav {
+	width: 1000px;
 	clear: both;
+	margin: auto;
 	background-color: #2D67B0;
 }
 
@@ -176,6 +178,8 @@ div { /*opacity: .97;*/
 
 #footer {
 	clear: both;
+	width: 995px;
+	margin: auto;
 	height: 80px;
 	color: #FFFFFF;
 	font-size: 14px;

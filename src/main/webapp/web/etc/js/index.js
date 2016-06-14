@@ -1,13 +1,26 @@
 $(document).ready(function() {
+	var domain = "http://www.caacca.org";
 	var src = $("#flash embed").attr("flashvars");
-	var pic = src.split("&")[0].split("|")[0].substring(5);
-	var link = $.md5("http://www.caacca.org" + src.split("&")[1].split("|")[0].substring(7)) + ".html";
-	var text = src.split("&")[2].split("|")[0].substring(6);
-	var html = "<a href=" + link + " title=" + text + "><img src=" + pic + " alt=" + text + " title=" + text + "></a>"
-	var titleHtml = "<p>"+text+"</p>";
-	$("#slide1").html(html);
-	$("#slide_title").html(titleHtml);
+	var pic = src.split("&")[0].substring(5).split("|");
+	var text = src.split("&")[2].substring(6).split("|");
+	var link = src.split("&")[1].substring(6).split("|");
 	
+	
+	var md5link = $.md5(domain+link[0].substring(1))+".html";
+
+	var html = "<a href=\""+md5link+"\" id=\"maxImg1\" title=\""+text[0]+"\" >"+
+				"<img src=\""+pic[0]+"\" title=\""+text[0]+"\" alt=\"图片\"/>"+
+				"</a>"+
+				"<p><em>"+text[0]+"</em></p>"+
+				"<ol>";
+	for(var i = 0; i<pic.length;i++){
+		md5link = $.md5(domain+link[i].substring(1))+".html";
+		html+=  "<li class><a href=\""+md5link+"\" rel=\""+pic[i]+"\" con=\""+text[i]+"\" title=\""+text[i]+"\" ></a>"+
+				"</li>";
+	}
+	html += "</ol>";
+	
+	$("#showImg_1").html(html);
 	
 	
 	
