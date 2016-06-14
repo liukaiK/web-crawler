@@ -94,3 +94,9 @@ h2 p {
 	overflow: hidden;
 	line-height: normal;
 }
+
+.more {
+	display: block;
+	float: right;
+	margin: 22px 45px 20px 0px;
+}

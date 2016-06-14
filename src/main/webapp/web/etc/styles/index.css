@@ -144,7 +144,17 @@ h3 a {
 	border: #37bd9c 4px solid;
 }
 
+#gggs,#zjyj,#qyzs,#jqrd {
+	margin-left: 0px;
+}
+
+
+#mhdt,#tstb,#bzzn,#yqlj {
+	margin-right: 0px;
+}
+
 #jqrd {
+	width: 489px;
 	background-color: #d870ad;
 	border: #d870ad 4px solid;
 }
@@ -160,6 +170,7 @@ h3 a {
 }
 
 #qyzs {
+	width: 489px;
 	background-color: #967bdc;
 	border: #967bdc 4px solid;	
 }
@@ -171,7 +182,7 @@ h3 a {
 }
 
 #bzzn {
-	width: 300px;
+	width: 303px;
 	background-color: #5937B2;
 	border: #5937B2 4px solid;
 }
@@ -403,7 +414,7 @@ h3 a {
 #yqlj {
 	border: #169fa5 3px solid;
 	background-color: #169fa5;
-	width: 302px;
+	width: 306px;
 	min-height: 356px;
 	max-height: 519px;
 }

@@ -10,6 +10,7 @@ public class BaseConfig extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	public static String[] str = {
+			"http://www.caacca.org/tpxw/",
 			"http://www.caacts.org.cn:8080/struts2_spring3_hibernate3_1.0/byTianjia.action",
 			"http://www.caacts.org.cn:8080/struts2_spring3_hibernate3_1.0/yjTianjia.action",
 			"http://www.caacts.org.cn:8080/struts2_spring3_hibernate3_1.0/zxTianjia.action",
