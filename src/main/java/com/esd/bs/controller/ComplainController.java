@@ -103,22 +103,26 @@ public class ComplainController {
 			
 			HtmlTextArea cptContent = (HtmlTextArea)page1.getElementsByName("cptFile.cptContent").get(0);
 			cptContent.setTextContent(complain.getCptContent());
-			for (int i = 0; i <= 4; i++) {
-				if (myfiles[i].isEmpty()) {
-					continue;
-				} else {
-					String originalFilename = myfiles[i].getOriginalFilename();
-					try {
-						FileUtils.copyInputStreamToFile(myfiles[i].getInputStream(), new File(BaseConfig.TEMP_ROOT, originalFilename));
-						HtmlFileInput uploadFile = (HtmlFileInput) page1.getElementsByName("uploadFile").get(i);
-						uploadFile.setValueAttribute(BaseConfig.TEMP_ROOT + File.separator + originalFilename);
-					} catch (IOException e) {
-						System.out.println("文件[" + originalFilename + "]上传失败,堆栈轨迹如下");
-						e.printStackTrace();
+			
+			if(myfiles.length >= 1){
+				for (int i = 0; i <= 4; i++) {
+					if (myfiles[i].isEmpty()) {
+						continue;
+					} else {
+						String originalFilename = myfiles[i].getOriginalFilename();
+						try {
+							FileUtils.copyInputStreamToFile(myfiles[i].getInputStream(), new File(BaseConfig.TEMP_ROOT, originalFilename));
+							HtmlFileInput uploadFile = (HtmlFileInput) page1.getElementsByName("uploadFile").get(i);
+							uploadFile.setValueAttribute(BaseConfig.TEMP_ROOT + File.separator + originalFilename);
+						} catch (IOException e) {
+							System.out.println("文件[" + originalFilename + "]上传失败,堆栈轨迹如下");
+							e.printStackTrace();
+						}
 					}
+					
 				}
-
 			}
+			
 			
 			HtmlAnchor submitBtn = (HtmlAnchor) page1.getElementById("submitBtn");
 			HtmlPage hp = submitBtn.click();

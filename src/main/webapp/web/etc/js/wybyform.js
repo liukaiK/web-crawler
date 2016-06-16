@@ -31,10 +31,15 @@ $(document).ready(function() {
 		$("#verifyImage").attr("src", "/iac/random/code?" + timestamp);
 	}
 
+	$.validator.addMethod("conName", function(value, element) {   
+		var conName = "请输入表扬人";
+		return this.optional(element) || (conName != value);
+	}, "请输入表扬人");	
 	$("#by_form").validate({
 		rules : {
 			conName : {
-				required : true
+				required : true,
+				conName : true
 			},
 			email : {
 				required : true,
@@ -62,26 +67,12 @@ $(document).ready(function() {
 		},
 		submitHandler : function() {
 			var conTarget = $("#province").val();
-			
 			var conUnit = $("#city").val();
-			
 			var conType = $("#city1").val();
-			
 			var conName = $("#conName").val();
 			var email = $("#email").val();
 			var conContent = $("#conContent").val();
 			var certicode = $("#certicode").val();
-			
-//			if (conName == '请输入表扬人') {
-//				$("#conName").val("");
-//			}
-//			if (email == '请输入邮箱') {
-//				$("#email").val("");
-//			}	
-//			if (conContent == '请输入表扬内容') {
-//				$("#conContent").val("");
-//			}	
-//			
 			$.ajax({
 				type : 'post',
 				url : '/iac/addPraise',

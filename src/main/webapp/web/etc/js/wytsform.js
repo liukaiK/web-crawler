@@ -28,6 +28,91 @@ $(document).ready(function() {
 		$("#verifyImage").attr("src", "/iac/random/code?" + timestamp);
 	}
 
+
+	$.validator.addMethod("passengerName", function(value, element) {   
+		var passengerName = "请输入投诉人";
+		return this.optional(element) || (passengerName != value);
+	}, "请输入投诉人");	
+	
+	$.validator.addMethod("shenfenId", function(value, element) {   
+		var shenfenId = "请输入证件号";
+		return this.optional(element) || (shenfenId != value);
+	}, "请输入证件号");	
+	
+	$.validator.addMethod("flightNo", function(value, element) {   
+		var flightNo = "请输入航班号";
+		return this.optional(element) || (flightNo != value);
+	}, "请输入航班号");	
+	
+	$.validator.addMethod("passengerTel", function(value, element) {   
+		var passengerTel = "请输入联系电话";
+		return this.optional(element) || (passengerTel != value);
+	}, "请输入联系电话");	
+	
+	$.validator.addMethod("certicode", function(value, element) {   
+		var certicode = "请输入验证码";
+		return this.optional(element) || (certicode != value);
+	}, "请输入验证码");	
+	
+	$("#ts_form").validate({
+		rules : {
+			"passengerName" : {
+				required : true,
+				maxlength : 50,
+				passengerName : true
+			},
+			"shenfenId" : {
+				required : true,
+				shenfenId : true
+			},
+			"flightNo" : {
+				required : true,
+				maxlength : 6,
+				flightNo : true
+			},
+			"passengerTel" : {
+				required : true,
+				digits:true,
+				maxlength : 12,
+				passengerTel : true
+			},
+			"email" : {
+				required : true,
+				email : true,
+				maxlength : 30
+			},
+			"certicode" : {
+				required : true,
+				digits:true,
+				certicode : true
+			}
+
+		},
+		messages : {
+			"passengerName" : {
+				required : '(必填)',
+				maxlength : '长度应在1-50个字符之间'
+			},
+			"flightNo" : {
+				required : '(必填)',
+				maxlength : '长度应在1-6个字符之间'
+			},
+			"passengerTel" : {
+				required : '(必填)',
+				maxlength : '长度应在1-12个字符之间'
+			},
+			"email" : {
+				required : '(必填)',
+				email : '请输入正确格式的电子邮件',
+				maxlength : '长度应在1-30个字符之间'
+			},
+			"certicode" : "请输入数字验证码"
+		}
+
+	})
+	
+
+	
 	
     $('#ts_form').ajaxForm({  
     	type : 'POST',
@@ -38,45 +123,8 @@ $(document).ready(function() {
     
 })
 
-
 function doSubmit() {
-	var passengerName = $("#passengerName").val();
-	var shenfenId = $("#shenfenId").val();
-	var flightNo = $("#flightNo").val();
-	var passengerTel = $("#passengerTel").val();
-	var email = $("#email").val();
-	var cptContent = $("#cptContent").val();
-	var certicode = $("#certicode").val();
-	if (passengerName == "" || passengerName == "请输入投诉人") {
-		alert("请输入投诉人");
-		return;
-	}
-	if (shenfenId == "" || shenfenId == "请输入证件号") {
-		alert("请输入证件号");
-		return;
-	}
-	if (flightNo == "" || flightNo == "请输入航班号") {
-		alert("请输入航班号");
-		return;
-	}	
-	if (passengerTel == "" || passengerTel == "请输入联系电话") {
-		alert("请输入联系电话");
-		return;
-	}		
-	if (email == "" || email == "请输入电子邮件") {
-		alert("请输入电子邮件");
-		return;
-	}		
-	if (cptContent == "" || cptContent == "请输入正文内容") {
-		alert("请输入正文内容");
-		return;
-	}		
-	if (certicode == "" || certicode == "请输入验证码") {
-		alert("请输入验证码");
-		return;
-	}		
 	$('#ts_form').submit();
-	
 }
 
 

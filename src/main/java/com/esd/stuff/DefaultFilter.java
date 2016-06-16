@@ -122,27 +122,27 @@ public class DefaultFilter extends SrcFilter {
 		}
 	}
 	
-	private String alt2title(Element link) {
-		Elements childs = link.children();
-		if (childs == null || childs.size() == 0) {
-			return null;
-		}
-		for (Element element : childs) {
-			if (element.tagName().equals("img")) {
-				String alt = element.attr("alt");
-				if (alt != null) {
-					return alt;
-				} else {
-					String title = element.attr("title");
-					if (title != null) {
-						return title;
-					}
-				}
-				return "图片链接";
-			}
-		}
-		return "空链接";
-	}
+//	private String alt2title(Element link) {
+//		Elements childs = link.children();
+//		if (childs == null || childs.size() == 0) {
+//			return null;
+//		}
+//		for (Element element : childs) {
+//			if (element.tagName().equals("img")) {
+//				String alt = element.attr("alt");
+//				if (alt != null) {
+//					return alt;
+//				} else {
+//					String title = element.attr("title");
+//					if (title != null) {
+//						return title;
+//					}
+//				}
+//				return "图片链接";
+//			}
+//		}
+//		return "空链接";
+//	}
 
 	/**
 	 * 处理a 链接的title 替换绝对路径
@@ -181,7 +181,7 @@ public class DefaultFilter extends SrcFilter {
 		Elements links = element.select("img,embed");
 		for (Element link : links) {
 			String linkHref = link.attr("abs:src").trim();
-			String alt = link.attr("alt").trim();
+//			String alt = link.attr("alt").trim();
 			
 			
 			

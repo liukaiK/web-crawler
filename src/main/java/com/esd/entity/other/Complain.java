@@ -1,6 +1,5 @@
 package com.esd.entity.other;
 
-import java.io.File;
 
 /**
  * 我要投诉实体类

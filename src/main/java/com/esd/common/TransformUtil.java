@@ -31,7 +31,7 @@ public class TransformUtil {
 			// 设置绝对路径
 			voiceConfig.setRealPath(realPath);
 			// 获取将要播放语音文件网络路经也就是项目的网址
-			String path = request.getContextPath();
+//			String path = request.getContextPath();
 			String httpPath = request.getScheme() + "://" + request.getServerName() + "/";
 			// 获得到项目的根路径后须要加上文件夹的名称
 			// http://192.168.1.11:8080/yzm/Voice/生成的语音文件名称

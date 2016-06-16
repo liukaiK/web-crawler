@@ -25,8 +25,6 @@ import com.esd.util.Md5;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
-import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -121,10 +119,10 @@ public class Test {
 		
 		System.out.println(uploadFile1.getData());
 		
-		HtmlAnchor submitBtn = (HtmlAnchor) page1.getElementById("submitBtn");
-		HtmlPage hp = submitBtn.click();
-		
-		HtmlButton tijiaoButton = (HtmlButton) page1.getElementsByTagName("button").get(0);
+//		HtmlAnchor submitBtn = (HtmlAnchor) page1.getElementById("submitBtn");
+//		HtmlPage hp = submitBtn.click();
+//		
+//		HtmlButton tijiaoButton = (HtmlButton) page1.getElementsByTagName("button").get(0);
 //		hp = tijiaoButton.click();
 //		if (hp != null) {
 //			String pageUrl = hp.getUrl().toString().trim();
