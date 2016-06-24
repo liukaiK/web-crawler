@@ -125,7 +125,7 @@
 						return function () {
 							t.setTimes();
 						}
-					})(this), 100000);
+					})(this), 5000);
 		},
 		append : function (a, src, con, href) {
 
@@ -135,6 +135,7 @@
 			_this.img.setAttribute('src', src);
 			_this.img.setAttribute('title', con);
 			_this.a.setAttribute('href', href);
+			_this.a.setAttribute('title', con);
 			a.setAttribute('title', con);
 			a.parentNode.className = 'color';
 			_this.p.innerHTML = '<span></span>' + '<em>' + con + '</em>';

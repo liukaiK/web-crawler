@@ -9,7 +9,7 @@ $(document).ready(function() {
 
 		}
 	});
-	$("#nav").find("a:eq(9)").focus();
+	$("#serCon").focus();
 
 })
 function validate(obj) {

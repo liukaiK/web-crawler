@@ -308,7 +308,9 @@ ESDWebApp.toolbar.manageText = function(obj){
 			text = obj.innerHTML.replace(/<.+?>/g,'');
 		}
 		text = "链接："+text;
-	}else if(obj.tagName == "SELECT"){
+	}else 
+		
+		if(obj.tagName == "SELECT"){
 		var selected = obj;
 		for(var i=0;i<selected.options.length;i++){
 			if(selected.options[i].selected){
@@ -320,7 +322,10 @@ ESDWebApp.toolbar.manageText = function(obj){
 		}
 		//var selected = obj.selectedOptions[0].text;
 		text = text.replace(/\s/g, '');
-	}else if(obj.tagName == "INPUT"){
+	}else 
+		
+		
+		if(obj.tagName == "INPUT"){
 		var type = jq_1_7_1(obj).attr("type");
 		if(type == "hidden"){
 			return text;

@@ -12,6 +12,7 @@
 <script type="text/javascript" src="../etc/js/jquery.form.js"></script>
 <script type="text/javascript" src="../etc/js/public.js" charset="UTF-8"></script>
 <script type="text/javascript" src="../etc/js/yjjyform.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../etc/js/date.js" charset="UTF-8"></script>
 <link rel="stylesheet" type="text/css" href="../etc/styles/public.css" />
 <link rel="stylesheet" type="text/css" href="../etc/styles/yjjyform.css" />
 </head>
@@ -124,7 +125,11 @@
 								<td class="alt">航班号:</td>
 								<td><input type="text" name="flightNo" id="flightNo" value="请输入航班号" title="请输入航班号"></td>
 								<td class="alt">乘机日期:</td>
-								<td><input type="text" style="width:170px" name="flightTime" id="rid" title="请选择乘机日期" class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" /> 
+								<td>
+<!-- 									<input type="text" style="width:170px" name="flightTime" id="rid" title="请选择乘机日期" class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" />  -->
+									<select id="year" name="year" title="请选择乘机日期年份" onChange="swap_day()"></select>
+									<select id="month" name="month" title="请选择乘机日期月份" onChange="swap_day()"></select>
+									<select id="day" name="day" title="请选择乘机日期"></select>								
 								</td>
 							</tr>
 							<tr>

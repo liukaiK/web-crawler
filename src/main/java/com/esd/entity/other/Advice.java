@@ -14,7 +14,9 @@ public class Advice {
 	private String zhengjianid;
 	private String shenfenId;
 	private String flightNo; // 航班号
-	private String flightTime; // 乘机日期
+	private String year; //乘机日期年份
+	private String month; //乘机日期月份
+	private String day; //乘机日期日期
 	private String passengerTel; // 联系电话
 	private String email; // 邮箱
 	private String depPort; // 出发航站
@@ -68,11 +70,23 @@ public class Advice {
 	public void setFlightNo(String flightNo) {
 		this.flightNo = flightNo;
 	}
-	public String getFlightTime() {
-		return flightTime;
+	public String getYear() {
+		return year;
 	}
-	public void setFlightTime(String flightTime) {
-		this.flightTime = flightTime;
+	public void setYear(String year) {
+		this.year = year;
+	}
+	public String getMonth() {
+		return month;
+	}
+	public void setMonth(String month) {
+		this.month = month;
+	}
+	public String getDay() {
+		return day;
+	}
+	public void setDay(String day) {
+		this.day = day;
 	}
 	public String getPassengerTel() {
 		return passengerTel;
@@ -104,6 +118,9 @@ public class Advice {
 	public void setCptContent(String cptContent) {
 		this.cptContent = cptContent;
 	}
+
+	
+	
 	
 	
 	

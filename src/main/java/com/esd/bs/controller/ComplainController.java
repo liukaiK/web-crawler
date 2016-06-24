@@ -87,7 +87,11 @@ public class ComplainController {
 			flightNo.setValueAttribute(complain.getFlightNo());
 			
 			HtmlInput flightTime = (HtmlInput)page1.getElementsByName("cptFile.flightTime").get(0);
-			flightTime.setValueAttribute(complain.getFlightTime());
+			String year = complain.getYear();
+			String month = complain.getMonth();
+			String day = complain.getDay();
+			
+			flightTime.setValueAttribute(year + "-" + (month.length() > 1 ? month : "0" + month) + "-" + (day.length() > 1 ? day : "0" + day));
 			
 			HtmlInput passengerTel = (HtmlInput)page1.getElementsByName("cptFile.passengerTel").get(0);
 			passengerTel.setValueAttribute(complain.getPassengerTel());			

@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+	$("#NewsShowConter_nav a:last").focus();
 	$("#NewsShowConter_date div:eq(1)").css({
 		"padding-top" : "10px"
 	})

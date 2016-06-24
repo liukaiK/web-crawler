@@ -118,6 +118,10 @@ a {
 tbody {
 	display: none;
 }
+
+.form-control {
+	font-size: 18px;
+}
 </style>
 </head>
 <body>
@@ -128,7 +132,7 @@ tbody {
  %>
 	<div class="input_btn">
 		<form action="${contextPath}/search" method="post" id="search" name="search" role="form" class="form-signin">
-			<input type="text" id="serCon" name="serCon" value="${result.serCon}" autofocus required placeholder="填入搜索信息" class="form-control" value="${serCon}">
+			<input type="text" id="serCon" name="serCon" value="${result.serCon}" class="form-control" value="${serCon}">
 			<button id="search-btn" type="button" class="btn btn-primary">搜索</button>
 			<br>
 			<input id="currentPage" type="hidden" name="currentPage" value="${result.currentPage}">
@@ -196,6 +200,7 @@ tbody {
 	<script type="text/javascript">
 		$(document).ready(function() {
 			searchbtn();
+			$("#serCon").focus();
 		});
 		function searchbtn() {
 			$("button[id=search-btn]").click(function() {

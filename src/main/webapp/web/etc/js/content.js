@@ -10,7 +10,7 @@ $(document).ready(function() {
 	});
 	
 
-	
+	$("#NewsShowConter_nav a:last").focus();
 	
 //	var tabindex = $("#NewsShowConter_date div span ins").attr("tabindex");
 //	alert($("#NewsShowConter_date div span").html());

@@ -87,7 +87,12 @@ public class AdviceController {
 			flightNo.setValueAttribute(advice.getFlightNo());
 			
 			HtmlInput flightTime = (HtmlInput)page1.getElementsByName("cptFile.flightTime").get(0);
-			flightTime.setValueAttribute(advice.getFlightTime());
+			
+			String year = advice.getYear();
+			String month = advice.getMonth();
+			String day = advice.getDay();
+			
+			flightTime.setValueAttribute(year + "-" + (month.length() > 1 ? month : "0" + month) + "-" + (day.length() > 1 ? day : "0" + day));
 			
 			HtmlInput passengerTel = (HtmlInput)page1.getElementsByName("cptFile.passengerTel").get(0);
 			passengerTel.setValueAttribute(advice.getPassengerTel());			

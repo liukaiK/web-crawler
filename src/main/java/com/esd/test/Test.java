@@ -10,6 +10,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.MalformedURLException;
 import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.apache.log4j.Logger;
 import org.jsoup.Connection;
@@ -242,17 +245,25 @@ public class Test {
 	}	
 	
 
-	public static void main(String[] args) throws IOException {
-		// 这里的数后面加“D”是表明它是Double类型，否则相除的话取整，无法正常使用
-		double percent = 50.5D / 150D;
-		// 输出一下，确认你的小数无误
-		System.out.println("小数：" + percent);
-		// 获取格式化对象
-		NumberFormat nt = NumberFormat.getPercentInstance();
-		// 设置百分数精确度2即保留两位小数
-		nt.setMinimumFractionDigits(2);
-		// 最后格式化并输出
-		System.out.println("百分数：" + nt.format(percent));
+	public static void main(String[] args) throws IOException, ParseException {
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String ss = "2016-12-11";
+		
+		System.out.println(sdf.parse(ss).toString());
+		
+		
+		
+//		// 这里的数后面加“D”是表明它是Double类型，否则相除的话取整，无法正常使用
+//		double percent = 50.5D / 150D;
+//		// 输出一下，确认你的小数无误
+//		System.out.println("小数：" + percent);
+//		// 获取格式化对象
+//		NumberFormat nt = NumberFormat.getPercentInstance();
+//		// 设置百分数精确度2即保留两位小数
+//		nt.setMinimumFractionDigits(2);
+//		// 最后格式化并输出
+//		System.out.println("百分数：" + nt.format(percent));
 		
 	}
 

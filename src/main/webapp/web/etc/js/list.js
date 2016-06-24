@@ -1,5 +1,6 @@
 $(document).ready(
 		function() {
+			$("#Sbmenu a:last").focus();
 			$("#NewsListConter table tbody tr").each(function() {
 				$(this).children("td:eq(1)").remove();
 			})
