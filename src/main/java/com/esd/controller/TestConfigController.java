@@ -42,7 +42,7 @@ public class TestConfigController {
 		String url = request.getParameter("url");
 		String templateName = request.getParameter("template");
 		if (Util.isOutUrl(url)) {// 网址为外部链接
-			Document templeSource = Util.downLoadTemple(BaseConfig.TEMPLATE_ROOT + File.separator + templateName);
+			Document templeSource = Util.downLoadTemple(BaseConfig.TEMPLATE_ROOT + File.separator + "error.html");
 			templeSource.select("#error").attr("href", url);
 			try {
 				Util.createNewFile(templeSource.html(), BaseConfig.TEST_ROOT + File.separator + "view.html");
