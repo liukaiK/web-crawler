@@ -13,6 +13,7 @@
 <script type="text/javascript" src="/js/jquery-easyui-1.4.5/locale/easyui-lang-zh_CN.js" charset="UTF-8"></script>
 <link rel="stylesheet" type="text/css" href="/js/jquery-easyui-1.4.5/themes/default/easyui.css" charset="UTF-8" />
 <link rel="stylesheet" type="text/css" href="/js/jquery-easyui-1.4.5/themes/icon.css" charset="UTF-8" />
+<script type="text/javascript" src="/js/ajaxfileupload.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/js/jquery.sortable.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/js/init.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/js/pgFile.js" charset="UTF-8"></script>
@@ -78,6 +79,9 @@
 				    		<input id="templateName" class="easyui-textbox"/>
 				    		<a href="javascript:saveTemplate();" class="easyui-linkbutton" iconCls="icon-save">保存</a>
 				    		<a href="javascript:deleteTemplate();" class="easyui-linkbutton" iconCls="icon-clear">删除</a>
+				    		&nbsp;&nbsp;&nbsp;&nbsp;
+				    		<input id="myBlogImage" class="easyui-filebox" name="myfiles" data-options="prompt:'请选择图片文件'" style="width:170px" />
+				    		<a href="javascript:ajaxFileUpload();" class="easyui-linkbutton">上传图片</a>
 				    	</div>
 				    	<textarea id="template_content"></textarea>
 				    </div>
