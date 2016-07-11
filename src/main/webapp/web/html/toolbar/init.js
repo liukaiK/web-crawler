@@ -146,11 +146,13 @@ ESDWebApp.toolbar.pageContent = function(){
 			});
 		});	
 	}
-	
-	if (highContrast.pageColor != "") {
-		highContrast.changeTheme(highContrast.pageColor);
-	}
 
+	if (highContrast.pageColor != "") {
+		if(highContrast.pageColor!="defaltMode"){
+			highContrast.changeTheme(highContrast.pageColor);
+		}
+	}
+	
 	if (readZoom != 0) {
 		if (ESDWebApp.defalt.browser.mozilla || ESDWebApp.defalt.browser.opera) {
 			jq_1_7_1(esd_tool_iframe).css({"transform":"scale(" + readZoom + ")","transform-origin":"top"});

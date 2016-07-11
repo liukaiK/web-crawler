@@ -57,8 +57,8 @@ highContrast.changeTheme = function(modeStyle){
 		});
 	}*/
 	if (thmeMode == "defaltMode") {
-		//ESDWebApp.defalt.iframeReload();
-		ESDWebApp.defalt.pageReload();
+		ESDWebApp.defalt.iframeReload();
+		//ESDWebApp.defalt.pageReload();
 		jq_1_7_1(".toolbar_highContrastWhiteBlack img").css({"display":"none"});
 		jq_1_7_1(".toolbar_highContrastBlueYellow img").css({"display":"none"});
 		jq_1_7_1(".toolbar_highContrastYellowBlack img").css({"display":"none"});
