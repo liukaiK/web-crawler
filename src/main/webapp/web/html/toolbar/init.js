@@ -130,6 +130,9 @@ ESDWebApp.toolbar.pageContent = function(){
 		textMode.textMode();
 	}
 	
+    if(cursor.flg != ""){
+		cursor.changeArrow(cursor.flg);
+	}
 //	jq_1_7_1(esd_tool_iframe).find(".ESDAssetsTextCon").each(function(){
 //		if (changeFont.statusFont != 0) {
 //			jq_1_7_1(this).css("font-size", changeFont.statusFont + "px");
