@@ -26,7 +26,6 @@ public class TemplateStuff {
 	private String include = "include";
 
 	public TemplateStuff() {
-		// TODO Auto-generated constructor stub
 	}
 
 	private Document templateLoad(PageConfig pageConfig) {
@@ -81,7 +80,6 @@ public class TemplateStuff {
 			Document doc = Jsoup.parse(sb.toString());
 			return doc;
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		} finally {
 			try {

@@ -18,6 +18,27 @@ function catingAll() {
 	});
 }
 
+function catingtree() {
+	var url = $("#domain").textbox('getValue');
+	$.ajax({
+		url : root + '/core/dotreedir',
+		type : 'POST',
+		sync : true,
+		data : {
+			'url' : url
+		},
+		success : function(data) {
+			if (data.notice == true) {
+				$.messager.alert('提示', '目录树采集完成!', 'info');
+			}
+		},
+		error : function() {
+			$.messager.alert('发生错误', '目录树采集失败！', 'error');
+		}
+	});
+}
+
+
 function getRuleHtml(n) {
 	var addhtml = '<li style="width: 100%;display: block;">'
 			+ '<div class="easyui-panel" title=" " closable="true" style="background:#fafafa;">'

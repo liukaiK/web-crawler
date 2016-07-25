@@ -33,6 +33,7 @@
 		<a href="javascript:cancelCating();" class="easyui-linkbutton" iconCls="icon-cancel">取消采集</a> 
 		<input id="domain" value="http://www.szft.gov.cn/" class="easyui-textbox" style="width: 15%;">
 		<a href="javascript:cating();" class="easyui-linkbutton">一级采集</a>
+		<a href="javascript:catingtree();" class="easyui-linkbutton">目录采集</a>
 		预览网址:<input id="url" class="easyui-textbox" style="width: 25%;">
 		<a href="javascript:view();" class="easyui-linkbutton" text="预览"></a>
 		<input id="time" class="Wdate" onfocus="WdatePicker({dateFmt:'HH:mm:ss'})" readonly="readonly" value="<%=BaseConfig.time%>" />
