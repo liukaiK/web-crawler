@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.BasicQuery;
+import org.springframework.data.mongodb.core.query.BasicUpdate;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import com.mongodb.DBObject;
@@ -45,6 +47,16 @@ public class MongoDBDao {
 	
 	public void insert(Object obj) {
 		this.mongoTemplate.insert(obj);
+	}
+	
+	/**
+	 * 修改数据
+	 * @param query
+	 * @param update
+	 * @param entityClass
+	 */
+	public <T> void update(DBObject query, DBObject update, Class<T> entityClass) {
+		this.mongoTemplate.updateFirst(new BasicQuery(query), new BasicUpdate(update), entityClass);
 	}
 	
 	public void remove(Object obj) {

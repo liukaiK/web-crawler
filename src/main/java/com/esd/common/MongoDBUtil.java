@@ -1,8 +1,12 @@
 package com.esd.common;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.data.mongodb.core.query.BasicQuery;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import com.esd.collection.Downloads;
@@ -10,13 +14,14 @@ import com.esd.collection.History;
 import com.esd.collection.Urls;
 import com.esd.core.CollectionPage;
 import com.esd.dao.MongoDBDao;
+import com.esd.entity.other.PageView;
 import com.esd.util.Md5;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 
 @Repository
 public class MongoDBUtil {
-	
+
 	@Resource
 	private MongoDBDao mongoDBDao;
 
@@ -64,7 +69,6 @@ public class MongoDBUtil {
 		return obj;
 	}
 
-
 	public void urlsInsert(Urls urlsCollections, String title) {
 		if (urlsCollections == null) {
 			return;
@@ -94,6 +98,30 @@ public class MongoDBUtil {
 		history.setMd5(md);
 		history.setState(urlsCollections.getState());
 		mongoDBDao.insert(history);
+	}
+
+	/**
+	 * 获取网站浏览人数
+	 * 
+	 * @return
+	 */
+	public String getPageView() {
+		List<PageView> pageViewList = mongoDBDao.find(new BasicDBObject(), PageView.class);
+		if (pageViewList.size() == 0) {
+			mongoDBDao.insert(new PageView("0"));
+			return "0";
+		} else {
+			return pageViewList.get(0).getPageView();
+		}
+	}
+	
+	/**
+	 * 网站浏览人数+1
+	 */
+	public void addPageView() {
+		PageView pageView = mongoDBDao.find(new BasicDBObject(), PageView.class).get(0);
+		Long num = Long.valueOf(pageView.getPageView());
+		mongoDBDao.update(new BasicDBObject("pageView", num.toString()), new BasicDBObject("pageView", String.valueOf(num + 1)), PageView.class);
 	}
 
 }
