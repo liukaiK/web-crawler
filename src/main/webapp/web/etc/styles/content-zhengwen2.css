@@ -1,0 +1,20 @@
+/************************************正文*****************************************/
+#NewsShowConter_txt {
+	position: relative;
+	width: 940px;
+	margin: 0 auto;
+	text-align: left;
+	background-color: #fafafa;
+	padding: 30px;
+	font-size: 1em;
+	z-index: 1;
+	display: inline-block;
+}
+
+.leader #NewsShowConter_txt p {
+	float: left;
+	text-align: left;
+	line-height: 30px;
+	margin-left: 0px;
+	height: auto;
+}

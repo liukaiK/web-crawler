@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv="keywords" content="福田区政府无障碍网站,福田区政府无障碍,福田无障碍" />
+<meta http-equiv="description" content="深圳福田区无障碍网站" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="../etc/tool/Voice.js"></script>
+<script type="text/javascript" src="../etc/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../etc/js/public.js"></script>
+<script type="text/javascript" src="../etc/js/myzj.js" ></script>
+<link rel="stylesheet" type="text/css" href="../etc/styles/public.css" />
+<link rel="stylesheet" type="text/css" href="../etc/styles/content.css" />
+<link rel="stylesheet" type="text/css" href="../etc/styles/myzj.css" />
+</head>
+
+<body>
+	<include src="header.html" />
+	<div class="main">
+		<div id="NewsShowConter_nav"></div>
+                <div id="NewsShowConter_date"></div>
+		<div class="content">
+			<div id="NewsShowConter_txt"></div>
+		</div>
+		<div class="myzj">
+			<table>
+				<tbody>
+					<tr>
+						<td><span> 非常感谢您的参与，请输入您的意见或建议</span></td>
+					</tr>
+					<tr>
+						<td>
+							<table>
+								<tbody>
+									<tr>
+										<td><textarea id="nr" onfocus="javascript:if(this.value=='输入限制两千字，超出部分请分两次提交！')this.value='';" onblur="javascript:if(this.value=='')this.value='输入限制两千字，超出部分请分两次提交！';" title="输入限制两千字，超出部分请分两次提交">输入限制两千字，超出部分请分两次提交！</textarea>
+										</td>
+									</tr>
+									<tr>
+										<td><span>*请填写您的个人真实信息，建议采纳后方便与您联系</span>
+										</td>
+									</tr>
+									<tr>
+										<td><label for="username">姓名：</lable><input value="输入姓名" onfocus="javascript:if(this.value=='输入姓名')this.value='';" onblur="javascript:if(this.value=='')this.value='输入姓名';" title="输入姓名" id="username"
+												type="text" name="username" /><label for="telephone"> 电话：</lable><input value="输入电话" onfocus="javascript:if(this.value=='输入电话')this.value='';" onblur="javascript:if(this.value=='')this.value='输入电话';"
+													title="输入电话" id="telephone" type="text" name="telephone" /> <label for="idcard"> 有效证件：</lable><input value="输入有效证件" onfocus="javascript:if(this.value=='输入有效证件')this.value='';"
+														onblur="javascript:if(this.value=='')this.value='输入有效证件';" title="输入有效证件" id="idcard" type="text" name="idcard" /> <label for="code"> 验证码：</lable><input value="输入验证码"
+															onfocus="javascript:if(this.value=='输入验证码')this.value='';esdonfocus();" onblur="javascript:if(this.value=='')this.value='输入验证码';" title="输入验证码" id="code" type="text" name="code" /> <img
+															src="" id="codeImage" /><a href="static:javascript:esdonfocus();" title="播放验证码"><img id="audio" src="../etc/image/volume2.png" alt="播放验证码" title="播放验证码" /></a><a href="static:javascript:changeImage();" title="看不清，换一张" >看不清，换一张</a><input id="voicepath" type="hidden" />
+										</td>
+									</tr>
+									<tr>
+										<td><input id = "submitbtn" value=" 提　　交" type="button" /><span> </span><input value=" 查　　看" type="button" id = "lookbtn" /></td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+        
+	<include src="footer.html" />
+</body>
+</html>

@@ -1,0 +1,23 @@
+/************************************正文*****************************************/
+#NewsShowConter_txt{
+	padding:10px 30px;
+}
+#NewsShowConter_txt div{
+	text-align:left;
+	margin: 15px 10px;
+}
+#NewsShowConter_txt div li{
+	margin: 10px 50px;
+}
+#NewsShowConter_txt div ul{
+	margin: 10px 50px;
+}
+#NewsShowConter_txt div ul li{
+	margin: 10px;
+}
+#NewsShowConter_txt div span{
+	margin: 30px;
+}
+#NewsShowConter_txt div span a{
+	float:right;
+}

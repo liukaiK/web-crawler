@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv="keywords" content="福田区政府无障碍网站,福田区政府无障碍,福田无障碍" />
+<meta http-equiv="description" content="深圳福田区无障碍网站" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="../etc/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../etc/js/public.js"></script>
+<script type="text/javascript" src="../etc/js/wszx.js"></script>
+<link rel="stylesheet" type="text/css" href="../etc/styles/public.css" />
+<link rel="stylesheet" type="text/css" href="../etc/styles/content.css" />
+<link rel="stylesheet" type="text/css" href="../etc/styles/wszx.css" />
+</head>
+<body>
+	<include src="header.html" />
+	<div class="main">
+		<div id="NewsShowConter_nav"></div>
+		<div class="content">
+			<div id="NewsShowConter_txt"></div>
+		</div>
+		<div class="myzj">
+
+			<td>
+				<table>
+					<tbody>
+						<tr>
+							<td id="t1"></td>
+						</tr>
+						<tr>
+							<td><label for="question">咨询问题：</lable><input value="输入咨询问题" onfocus="javascript:if(this.value=='输入咨询问题')this.value='';" onblur="javascript:if(this.value=='')this.value='输入咨询问题';" title="输入咨询问题"
+									id="question" type="text" name="question" /> <label for="telephone"> 电话：</lable><input value="输入电话" onfocus="javascript:if(this.value=='输入电话')this.value='';"
+										onblur="javascript:if(this.value=='')this.value='输入电话';" title="输入电话" id="telephone" type="text" name="telephone" />
+							</td>
+						</tr>
+						<tr><td>咨询内容：</td></tr>
+						<tr>
+							<td><textarea id="nr" onfocus="javascript:if(this.value=='输入限制两千字，超出部分请分两次提交！')this.value='';" onblur="javascript:if(this.value=='')this.value='输入限制两千字，超出部分请分两次提交！';"
+									title="输入限制两千字，超出部分请分两次提交">输入限制两千字，超出部分请分两次提交！</textarea>
+							</td>
+						</tr>
+						<tr>
+							<td><label for="code"> 验证码：</lable> <input value="输入验证码" onfocus="javascript:if(this.value=='输入验证码')this.value='';esdonfocus();"	 onblur="javascript:if(this.value=='')this.value='输入验证码';" title="输入验证码" id="code" type="text" name="code" /><label ><img src="" id="codeImage" /><a href="static:javascript:esdonfocus();" title="播放验证码"><img id="audio" src="../etc/image/volume2.png" alt="播放验证码" title="播放验证码" /></a><a href="static:javascript:changeImage();" title="看不清，换一张" >看不清，换一张</a><input id="voicepath" type="hidden" /></label >
+							</td>
+						</tr>
+						<tr>
+							<td><input id="submitbtn" value=" 提　　交" type="button" /><span> </span><input value=" 清　　除" type="button" id="cl" /></td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+
+		</div>
+	</div>
+	<script type="text/javascript" src="../etc/tool/Voice.js"></script>
+	<include src="footer.html" />
+</body>
+</html>

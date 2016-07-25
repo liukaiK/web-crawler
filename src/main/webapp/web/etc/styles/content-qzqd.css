@@ -1,0 +1,67 @@
+/************************************正文*****************************************/
+#NewsShowConter_date1 {
+	position: relative;
+	width:940px;
+	margin: 0 auto;
+	text-align: center;
+	background-color: #fafafa;
+	padding: 30px;
+	border-bottom: 1px #CCC solid;
+	border-top: 1px #CCC solid;
+	z-index: 1;
+}
+
+#NewsShowConter_txt1 {
+	position: relative;
+	margin: 0 auto;
+	text-align: center;
+	background-color: #fafafa;
+	padding: 30px;
+	font-size: 1em;
+	z-index: 1;
+}
+#NewsShowConter_txt1 table{
+	margin:0px auto;
+}
+#NewsShowConter_txt1 a{
+	color:#666;
+}
+
+#NewsShowConter_txt1 p {
+	text-align: left;
+	line-height: 30px;
+}
+#NewsShowConter_date2,#NewsShowConter_date3,#NewsShowConter_date4,#NewsShowConter_date5,#NewsShowConter_date6 {
+	position: relative;
+	text-align: left;
+	background-color: #fafafa;
+	padding: 10px;
+	border-top: 1px #CCC solid;
+	border-bottom: 1px #CCC solid;
+	z-index: 1;
+	font-weight: bold;
+	color: rgb(97, 97, 97);
+}
+#NewsShowConter_date2 li,#NewsShowConter_date3 li,#NewsShowConter_date4 li,#NewsShowConter_date5 li,#NewsShowConter_date6 li{
+	list-style:none;
+}
+
+#NewsShowConter_txt2,#NewsShowConter_txt3,#NewsShowConter_txt4,#NewsShowConter_txt5,#NewsShowConter_txt6 {
+	position: relative;
+	text-align: center;
+	background-color: #fafafa;
+	padding: 10px 20px;
+	font-size: 1em;
+	z-index: 1;
+	text-align: left;
+	text-indent: 2em;
+}
+/**
+ * 职权信息表样式
+ **/
+#NewsShowConter_txt6 div table tbody tr td{
+	text-indent:1em;
+}
+#NewsShowConter_txt6 div table tbody tr td span{
+	font-size:12px;
+}

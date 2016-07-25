@@ -1,0 +1,11 @@
+/***********************************目录****************************/
+/**
+ * 视频新闻-低碳专题-缩略图样式
+ **/
+#NewsListConter div ul table tbody tr td {
+	text-align: center;
+}
+
+#NewsListConter div ul table tbody tr td a img {
+	width: 300px;
+}

@@ -20,7 +20,8 @@ ul li,ol li {
 
 body {
 	text-align: center;
-	background: url(../image/f_hbg.jpg) top repeat-x #ffffff;
+	background-image: url(../image/f_hbg.jpg);
+	background-repeat: no-repeat;
 	margin: 0 auto;
 	font-family: "Microsoft Yahei";
 }
@@ -74,10 +75,8 @@ div { /*opacity: .97;*/
 }
 
 .col-nav {
-	width: 1000px;
 	clear: both;
-	margin: auto;
-	background-color: #2D67B0;
+	background-color: #e43126;
 }
 
 .nav {
@@ -93,7 +92,7 @@ div { /*opacity: .97;*/
 	float: left;
 	padding: 0 14px;
 	color: #FFECEC;
-	width: 71px;
+	width: 80px;
 	border-left: #ED7461 1px solid;
 	font-size: 16px;
 }
@@ -107,11 +106,75 @@ div { /*opacity: .97;*/
 
 /****/
 .main {
-	overflow: hidden;
 	margin: 0 auto;
 	padding: 0px;
 	font-size: 14px;
 	width: 1000px;
+}
+/*****************************列表**************************************************/
+.blockbox {
+	background-color: #FFF;
+	line-height: 30px;
+	min-height: 500px;
+	height: auto !important;
+	height: 500px;
+	clear: both;
+}
+
+.blockbox .title {
+	font-size: 16px;
+	font-weight: bold;
+	height: 58px;
+	border-bottom: 1px solid #ddd;
+	background-color: #f8f9fa;
+	clear: both;
+}
+
+.blockbox .title a {
+	float: left;
+	font-size: 16px;
+	color: #4b4b4b;
+	text-decoration: none;
+	margin: 18px 15px 0 21px;
+	line-height: 24px;
+	font-weight: 700;
+	padding-right: 15px;
+	border-right: 1px dashed #ddd;
+}
+
+.blockbox .txt {
+	background-color: #FFF;
+	line-height: 30px;
+	clear: both;
+	padding: 20px;
+}
+
+.blockbox .txt a {
+	height: 94px;
+	line-height: 94px;
+	color: #4b4b4b;
+	font-size: 14px;
+	font-weight: 700;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	border: #CCC 2px solid;
+	padding: 30px;
+	margin: 10px;
+}
+
+.blockbox .txt a:hover {
+	background-color: #000;
+	color: yellow;
+	border: red 2px solid;
+}
+
+.blockbox .txt ul {
+	float: left;
+}
+
+.blockbox .txt ul li {
+	float: left;
 }
 /*************************总体class样式表******************************************/
 #top-nav {
@@ -122,7 +185,7 @@ div { /*opacity: .97;*/
 	width: 100%;
 	background-color: rgb(95, 148, 175);
 	opacity: 0.35;
-	filter: alpha(opacity =       35);
+	filter: alpha(opacity =   35);
 	position: absolute;
 	top: 0px;
 	left: 0px;
@@ -152,13 +215,14 @@ div { /*opacity: .97;*/
 	margin: 0 auto;
 	text-align: left;
 	/* border: #CCC 1px solid; */
-	margin-top: 0px;
+	margin-top: 5px;
 	margin-bottom: 5px;
 	height: 80px;
 }
 
 #logo h1 {
 	float: left;
+	margin-top: 10px;
 }
 
 #logo h1 a {
@@ -178,13 +242,11 @@ div { /*opacity: .97;*/
 
 #footer {
 	clear: both;
-	width: 1000px;
-	margin: auto;
 	height: 80px;
 	color: #FFFFFF;
 	font-size: 14px;
 	text-align: center;
-	background-color: #2D67B0;
+	background-color: #E0362C;
 	padding-top: 10px;
 }
 

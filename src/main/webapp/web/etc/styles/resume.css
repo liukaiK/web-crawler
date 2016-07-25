@@ -1,0 +1,111 @@
+@CHARSET "UTF-8";
+
+#NewsShowConter_nav {
+	position: relative;
+	width: 980px;
+	margin: 0 auto;
+	text-align: left;
+	background-color: #fafafa;
+	padding: 10px;
+	font-size: 1em;
+	z-index: 1;
+	border-bottom: 1px solid #CCC;
+}
+
+#NewsShowConter_txt {
+	background-color: #fafafa;
+}
+
+.btn {
+	height: 30px;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #CCC;
+}
+
+.btn div p {
+	float: left;
+	margin: auto;
+	margin-left: 94px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	display: inline-block;
+	text-align: left;
+}
+
+.btn div p a {
+	width: 81px;
+	height: 35px;
+	background: transparent url("http://www.szft.gov.cn/images/xl_XB_show02.jpg") no-repeat scroll 0% 0%;
+	display: block;
+	padding-left: 20px;
+	line-height: 35px;
+	font-weight: bold;
+	color: #FFF;
+}
+
+.box{
+	width: 1000px;
+}
+
+.box span {
+	text-align: left;
+}
+
+.box div dl {
+	height: 180px;
+}
+
+.box div h2 {
+	font-size: 14px;
+	width: 630px;
+	height: 30px;
+	background: transparent url("http://www.szft.gov.cn/images/xl_XB_show01.jpg") no-repeat scroll left bottom;
+	line-height: 26px;
+	padding-left: 12px;
+	font-weight: bold;
+	color: #1B10AE;
+	margin: 0px auto;
+	margin-left: 0px;
+}
+
+.box div h2 span{
+	margin-top: 6px;
+}
+
+.box div dl dd div span{
+	width: 820px;
+	margin-left: 0px;
+}
+
+.box div div span {
+	width: 950px;
+	margin-top: 3px;
+	margin: 3px;
+	margin-left: 0px;
+}
+
+.box div dl dt {
+	padding: 22px 28px;
+	float: left;
+	width: 96px;
+	height: 126px;
+}
+
+.box div dl dd {
+	margin-top: 25px;
+	width: 700px;
+	float: left;
+}
+
+.box img {
+	width: 95px;
+	float: left;
+}
+
+h2,dd,.box div div {
+	text-align: left;
+}
+
+p {
+	text-align: left;
+}

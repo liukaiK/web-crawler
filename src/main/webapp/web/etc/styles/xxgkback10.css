@@ -1,0 +1,166 @@
+.block2 {
+	width: 994px;
+	clear: both;
+	border: #ddd 1px solid;
+	/*background-color: #e9573e;*/
+	background-color: #FFF;
+	margin: 3px;
+	margin-bottom: 15px;
+}
+
+
+.block2 .title {
+	font-size: 16px;
+	font-weight: 400;
+	height: 58px;
+	border-bottom: 1px solid #ddd;
+	background-color: #f8f9fa;
+}
+
+.block2 .title h1 span {
+	float: right;
+	line-height: 50px;
+}
+
+.block2 .txt {
+	background-color: #FFF;
+	line-height: 30px;
+}
+/*************************************************
+ * 主题列表页面, 标题样式
+ *************************************************/
+.block2 .title p,.block2 .title span,.block2 .title h3 {
+	float: left;
+	font-size: 16px;
+	color: #4b4b4b;
+	text-decoration: none;
+	margin: 18px 15px 0 21px;
+	line-height: 24px;
+	font-weight: 700;
+	padding-right: 15px;
+	border-right: 1px dashed #ddd;
+}
+
+.block2 .title h3 span,.block2 .title h3 a {
+	float: left;
+	font-size: 16px;
+	color: #4b4b4b;
+	text-decoration: none;
+	margin: 0px 0px 0 10px;
+	line-height: 24px;
+	font-weight: 700;
+	padding-right: 15px;
+	border-right: none;
+}
+
+.block2 ul {
+	margin: 20px;
+}
+
+.block2 ul li {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	overflow: hidden;
+	line-height: 30px;
+	height: 30px;
+}
+
+.block2 ul li span {
+	float: right;
+}
+
+/*************************************************
+ * 区部门信息公开  后10个页面样式
+ *************************************************/
+.block2 #tengzdt_title h2 a,.block2 #tentzgg_title h2 a,.block2 #tenbszn_title h2 a,.block2 #tenzxxd_title h2 a,.block2 #tencjwt_title h2 a,.block2 #tenywbg_title h2 a,.block2 #tenmyzj_title h2 a,.block2 #tenzfjdxx_title h2 a,.block2 #tenxxgknb_title h2 a,.block2 #tensqxxgk_title h2 a,.block2 #tensqxxgk_title h2 a
+	{
+	float: right;
+	font-size: 16px;
+	margin: 18px 15px 0 21px;
+	line-height: 24px;
+	font-weight: 700;
+}
+
+#tenndgzzj_title h2 a {
+	float: right;
+	font-size: 16px;
+	margin: 18px 15px 0 21px;
+	line-height: 24px;
+	font-weight: 700;
+}
+
+.block2 #tengzdt ul li {
+	height: auto;
+}
+
+.block2 #tengzdt ul li a img {
+	width: 314px;
+}
+
+.block2 #tengzdt ul li p {
+	text-align: center;
+}
+
+#slide img{
+	width:306px;
+	height:208px;
+}
+
+#tengzdt{
+	width:674px;
+	float: left;
+}
+
+.content{
+	height: 227px;
+}
+
+#slide {
+	width: 306px;
+	height: 208px;
+	border: #CCC 4px solid;
+	float: left;
+	margin: 3px;
+	padding: 0px;
+	position: relative;
+	background-color: white;
+}
+
+#slide_title {
+	position: absolute;
+	color: white;
+	line-height: 40px;
+	opacity: 0.7;
+	filter: alpha(opacity = 70);
+	bottom: 7px;
+	width: 100%;
+	height: 25px;
+	font-size: 12px;
+}
+
+#slide_title p{
+	text-align: center;
+}
+
+#slide_title a {
+	font-size: 12px;
+	color: white;
+}
+
+#tzgg,#bszn {
+	height: 325px;
+}
+
+.block3,.block4 {
+	width: 492px;
+	height: 235px;
+	float: left;
+	clear: none;
+	overflow: hidden;
+	margin-bottom: 15px;
+}
+
+.block4 {
+	float: right;
+}

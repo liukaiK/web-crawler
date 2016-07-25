@@ -1,0 +1,16 @@
+/***********************************目录****************************/
+/**
+ * 网上咨询-页面样式
+ **/
+#NewsListConter table{
+	width:900px;
+}
+#NewsListConter table tbody tr td a{
+	margin:5px;
+}
+
+#NewsListConter div a img{
+	float: right;
+        margin: 0px 70px 10px auto;
+        height: 25px;
+}

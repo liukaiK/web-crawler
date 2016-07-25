@@ -1,0 +1,33 @@
+/*************************************************
+ * 民生服务-民生之窗-三级页面 页面样式
+ *************************************************/
+.block2 #mszcxiangmutou ul {
+	border-bottom: 1px dashed rgb(152, 152, 152);
+	margin-left: 40px;
+}
+.block2 #mszcxiangmutou ul li{
+	height: auto;
+}
+.block2 #mszcxiangmutou ul li strong {
+	font-weight: normal;
+}
+.block2 #mszcxiangmutou ul li span {
+	float: left;
+}
+.block2 #mszcxiangmutou_dl{
+	margin:20px;
+}
+
+.block2 #mszcxsanjilist strong{
+	font-size: 16px;
+	color: #4b4b4b;
+	text-decoration: none;
+	margin: 18px 15px 0 21px;
+	line-height: 24px;
+	font-weight: 700;
+	padding-right: 15px;
+	border-right: 1px dashed #ddd;
+}
+.block2 #mszcxsanjilist div dl{
+	margin:20px;
+}

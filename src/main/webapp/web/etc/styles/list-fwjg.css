@@ -1,0 +1,34 @@
+/*************************************************
+ * 权责清单 详细列表样式
+ *************************************************/
+#NewsListConter{
+	display: inline-block;
+}
+#NewsListConter div ul{
+	border-bottom: none;
+	margin: 20px 10px auto 20px;
+}
+#NewsListConter li {
+	border-bottom: none;
+	display: -webkit-box;
+	padding: 0px;
+	margin-bottom: 5px;
+}
+#NewsListConter div h2{
+	text-align:left;
+}
+#NewsListConter div{
+	display: inline-block;
+	float: left;
+}
+#NewsListConter div div{
+	text-align: left;
+	text-indent: 2em;
+	margin: 3px auto 10px auto;
+}
+#NewsListConter li span {
+	float:left;
+}
+#NewsListConter h1{
+	text-align:center;
+}
