@@ -147,7 +147,7 @@ tbody {
 			<ul>
 				<c:forEach items="${result.history }" var="res">
 					<li><p>
-							<a class="link" href="<%=domain %>/web/html/${res.md5 }" target="_blank">${res.title }</a>
+							<a class="link" href="<%=domain %>/szft/html/${res.md5 }" target="_blank">${res.title }</a>
 						<p>
 					</li>
 				</c:forEach>

@@ -42,7 +42,7 @@ public class BaseConfig extends HttpServlet {
 	public static String time = "03:00:00";
 
 	public void init() throws ServletException {
-		ROOT = getServletContext().getRealPath("/") + "web";
+		ROOT = getServletContext().getRealPath("/") + "szft";
 		IMAGE_ROOT = ROOT + File.separator + "etc" + File.separator + "image";
 		JS_ROOT = ROOT + File.separator + "etc" + File.separator + "js";
 		CSS_ROOT = ROOT + File.separator + "etc" + File.separator + "styles";

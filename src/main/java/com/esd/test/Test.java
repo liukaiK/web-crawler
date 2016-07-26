@@ -153,7 +153,7 @@ public class Test {
 
 	@org.junit.Test
 	public void getSource() throws IOException {
-		String url = "http://wza.caacca.org/";
+		String url = "http://www.szft.gov.cn/video/spxw/";
 		Document htmlSource = Jsoup.connect(url).get();
 		System.out.println(htmlSource);
 //		Elements links = htmlSource.select("a[href],area[href],iframe[src]");
@@ -171,7 +171,7 @@ public class Test {
 
 	@org.junit.Test
 	public void findPageConfigFile() {
-		String url = "http://www.szft.gov.cn/xxgk/zdly/sjxx/gzbg/201606/t20160629_510236.html";
+		String url = "http://www.szft.gov.cn/zf/ztbd/lxyz/";
 		BaseConfig.PG_ROOT = "E:\\apache-tomcat-iac\\webapps\\iac\\web" + File.separator + "db";
 		dao.collectPageConfig();
 		PageConfig pageConfig = dao.findPageConfig(url);
@@ -180,7 +180,7 @@ public class Test {
 
 	@org.junit.Test
 	public void getHtmlSource() throws IOException {
-		String url = "http://www.baic.gov.cn/zxbs/htsfwb/shxfl/";
+		String url = "http://www.szft.gov.cn/video/spxw/";
 		Connection jsoup = Jsoup.connect(url);
 		Element htmlSource = jsoup.get().select(".htwbtable").get(0);
 		Elements links = htmlSource.select("a");
