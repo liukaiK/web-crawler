@@ -1,10 +1,7 @@
 package com.esd.common;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -23,22 +20,13 @@ import com.esd.config.NodeConfig;
 import com.esd.config.PageConfig;
 import com.esd.stuff.TemplateStuff;
 import com.esd.util.Md5;
+import com.esd.util.Util;
 
 @SuppressWarnings("rawtypes")
 public class DirTreeCat {
 	private Map<String, Object> root = new HashMap<String, Object>();
 	private static Logger log = Logger.getLogger(DirTreeCat.class);
 	List<PageConfig> pcList = new ArrayList<PageConfig>();
-	
-	
-	public static void main(String[] args) throws IOException {
-		Connection con = Jsoup.connect("http://www.baic.gov.cn/xxgk/gsjjj/201401/t20140108_1043413.html");
-		Document htmlSource = con.get();
-		Elements elements = htmlSource.select(".sdmenu div");
-		Element e2 = elements.select("div").first();
-		System.out.println(e2.select("p").attr("onclick"));
-		
-	}
 
 	public void download(String catUrl) {
 		try {
@@ -49,11 +37,11 @@ public class DirTreeCat {
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-			Elements elements = htmlSource.select(".sdmenu");
+			Elements elements = htmlSource.select(".LeftNav_bg ul");
 			// System.out.println(elements.first().tagName());
 			// Element e1 = elements.first();
 			// Element title = e1.select("a").first();
-			Element e2 = elements.select("div").first();
+			Element e2 = elements.select("li").first();
 			Element title = e2.select("a").first();
 			title.absUrl("href");
 			root.put(title.absUrl("href"), e2);
@@ -82,7 +70,8 @@ public class DirTreeCat {
 				Md5 md5 = new Md5();
 				String m = md5.getMd5(new StringBuffer().append(p.getUrl()));
 				String path = BaseConfig.HTML_ROOT + File.separator + m + ".html";
-				updateHtml(doc1.html(), path);
+				Util.createNewFile(doc1.html(), path);
+//				updateHtml(doc1.html(), path);
 				// log.debug(p.getUrl() + "-----------" + m);
 			}
 		} catch (Exception e) {
@@ -150,7 +139,7 @@ public class DirTreeCat {
 		List<String> list = new ArrayList<String>();
 		list.add(url);
 		pc.setUrls(list);
-		pc.setTemplate(BaseConfig.TEMPLATE_ROOT + File.separator + "dir.html");
+		pc.setTemplate("dir.html");
 //		pc.setOutHtmlPath(BaseConfig.HTML_ROOT);
 		Elements subli = element.select("ul li");
 		if (subli == null) {
@@ -186,34 +175,34 @@ public class DirTreeCat {
 		return map;
 	}
 
-	private void updateHtml(String content, String templatePath) {
-		OutputStreamWriter write = null;
-		BufferedWriter bw = null;
-		File file = new File(templatePath);
-		try {
-			if (!file.exists()) {
-				file.createNewFile();
-			}
-			write = new OutputStreamWriter(new FileOutputStream(file), "utf-8");
-			bw = new BufferedWriter(write);
-			bw.write(content);
-			bw.close();
-			write.close();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (bw != null) {
-					bw.close();
-				}
-				if (write != null) {
-					write.close();
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-		}
-	}
+//	private void updateHtml(String content, String templatePath) {
+//		OutputStreamWriter write = null;
+//		BufferedWriter bw = null;
+//		File file = new File(templatePath);
+//		try {
+//			if (!file.exists()) {
+//				file.createNewFile();
+//			}
+//			write = new OutputStreamWriter(new FileOutputStream(file), "utf-8");
+//			bw = new BufferedWriter(write);
+//			bw.write(content);
+//			bw.close();
+//			write.close();
+//
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} finally {
+//			try {
+//				if (bw != null) {
+//					bw.close();
+//				}
+//				if (write != null) {
+//					write.close();
+//				}
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//
+//		}
+//	}
 }

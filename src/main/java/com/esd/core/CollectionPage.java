@@ -45,6 +45,7 @@ public class CollectionPage {
 
 		@Override
 		public void run() {
+			dao.createTree();
 			while (collectStatic && ctrl) {
 				ctrl = collect();
 			}
