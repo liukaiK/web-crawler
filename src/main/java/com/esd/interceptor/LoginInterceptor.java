@@ -23,7 +23,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 			Object obj = request.getSession().getAttribute(BaseConfig.USER);
 			if (obj == null) {
 				try {
-					response.sendRedirect(request.getContextPath() + "/iac/login");
+					response.sendRedirect(request.getContextPath() + "/login");
 					return false;
 				} catch (IOException e) {
 					e.printStackTrace();
