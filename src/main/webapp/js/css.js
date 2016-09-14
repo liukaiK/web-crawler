@@ -13,7 +13,8 @@ function loadCssFile(obj) {
 		},
 		success : function(data) {
 			if (data.notice == true) {
-				$("#css_content").val(data.message);
+//				$("#css_content").val(data.message);
+				cssEditor.setValue(data.message);
 			} else {
 				$.messager.alert('发生错误',data.message,'error');
 			}
@@ -29,7 +30,7 @@ function loadCssFile(obj) {
 
 function saveCss() {
 	var cssName = $("#cssName").textbox('getValue');
-	var cssContent = $("#css_content").val();
+	var cssContent = cssEditor.getValue();
 	$.ajax({
 		url : root + '/saveCss',
 		type : 'POST',

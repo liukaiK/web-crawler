@@ -13,7 +13,8 @@ function loadTemplateFile(obj) {
 		},
 		success : function(data) {
 			if (data.notice == true) {
-				$("#template_content").val(data.message);
+//				$("#template_content").val(data.message);
+				templateEditor.setValue(data.message);
 			} else {
 				$.messager.alert('发生错误',data.message,'error');
 			}
@@ -29,7 +30,7 @@ function loadTemplateFile(obj) {
 
 function saveTemplate() {
 	var templateName = $("#templateName").textbox('getValue');
-	var templateContent = $("#template_content").val();
+	var templateContent = templateEditor.getValue();
 	$.ajax({
 		url : root + '/saveTemplate',
 		type : 'POST',

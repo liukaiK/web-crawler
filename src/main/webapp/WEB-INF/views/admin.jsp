@@ -8,11 +8,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+<link rel="stylesheet" type="text/css" href="/js/jquery-easyui-1.4.5/themes/default/easyui.css" charset="UTF-8" />
+<link rel="stylesheet" type="text/css" href="/js/jquery-easyui-1.4.5/themes/icon.css" charset="UTF-8" />
+<link rel="stylesheet" type="text/css" href="/css/core.css" charset="UTF-8" />
 <script type="text/javascript" src="/js/jquery-easyui-1.4.5/jquery.min.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/js/jquery-easyui-1.4.5/jquery.easyui.min.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/js/jquery-easyui-1.4.5/locale/easyui-lang-zh_CN.js" charset="UTF-8"></script>
-<link rel="stylesheet" type="text/css" href="/js/jquery-easyui-1.4.5/themes/default/easyui.css" charset="UTF-8" />
-<link rel="stylesheet" type="text/css" href="/js/jquery-easyui-1.4.5/themes/icon.css" charset="UTF-8" />
 <script type="text/javascript" src="/js/ajaxfileupload.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/js/jquery.sortable.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/js/init.js" charset="UTF-8"></script>
@@ -22,7 +23,6 @@
 <script type="text/javascript" src="/js/js.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/js/cating.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/js/My97DatePicker/WdatePicker.js" charset="UTF-8"></script>
-<link rel="stylesheet" type="text/css" href="/css/core.css" charset="UTF-8" />
 
 <title>无障碍云后台管理</title>
 </head>
@@ -108,4 +108,122 @@
 		</div>
 	</div>
 </body>
+<script type="text/javascript" src="/js/codemirror-5.18.2/lib/codemirror.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/codemirror.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/codemirror-5.18.2/addon/selection/active-line.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/codemirror-5.18.2/addon/edit/matchtags.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/codemirror-5.18.2/addon/edit/matchbrackets.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/codemirror-5.18.2/addon/edit/closetag.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/codemirror-5.18.2/addon/edit/closebrackets.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/codemirror-5.18.2/addon/search/searchcursor.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/codemirror-5.18.2/addon/search/search.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/codemirror-5.18.2/addon/fold/xml-fold.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/codemirror-5.18.2/addon/hint/show-hint.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/codemirror-5.18.2/addon/hint/xml-hint.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/codemirror-5.18.2/addon/hint/html-hint.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/codemirror-5.18.2/addon/hint/javascript-hint.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/codemirror-5.18.2/addon/display/fullscreen.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/codemirror-5.18.2/keymap/sublime.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/codemirror-5.18.2/mode/xml/xml.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/codemirror-5.18.2/mode/css/css.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/codemirror-5.18.2/mode/javascript/javascript.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/js/codemirror-5.18.2/mode/htmlmixed/htmlmixed.js" charset="UTF-8"></script>
+<link rel="stylesheet" type="text/css" href="/js/codemirror-5.18.2/lib/codemirror.css" charset="UTF-8" />
+<link rel="stylesheet" type="text/css" href="/js/codemirror-5.18.2/doc/docs.css" charset="UTF-8" />
+<link rel="stylesheet" type="text/css" href="/js/codemirror-5.18.2/addon/hint/show-hint.css" charset="UTF-8" />
+<link rel="stylesheet" type="text/css" href="/js/codemirror-5.18.2/addon/display/fullscreen.css" charset="UTF-8" />
+<style type="text/css">
+.CodeMirror {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	border: none;
+}
+</style>
+<script type="text/javascript">
+	var urlsTextArea = document.getElementById("urls");
+	var urlsTextArea = CodeMirror.fromTextArea(urlsTextArea, {
+		keyMap: "sublime",
+		styleActiveLine : true,
+		lineNumbers : true
+	});
+	var template_content = document.getElementById("template_content");
+	var templateEditor = CodeMirror.fromTextArea(template_content, {
+		mode : "text/html",
+		keyMap: "sublime",
+		matchTags : {
+			bothTags : true
+		},
+		extraKeys : {
+			"Ctrl-J" : "toMatchingTag",
+			"Ctrl-M" : "autocomplete",
+			"F11" : function(cm) {
+				cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+			},
+			"Esc" : function(cm) {
+				if (cm.getOption("fullScreen"))
+					cm.setOption("fullScreen", false);
+			}
+		},
+		styleActiveLine : true,
+		lineNumbers : true,
+		autoCloseTags: true,
+		autoCloseBrackets: true,
+		matchBrackets: true,
+		gutters: ["CodeMirror-lint-markers"]
+	});
+	
+	var css_content = document.getElementById("css_content");
+	var cssEditor = CodeMirror.fromTextArea(css_content, {
+		mode : "text/css",
+		keyMap: "sublime",
+		matchTags : {
+			bothTags : true
+		},
+		extraKeys : {
+			"Ctrl-J" : "toMatchingTag",
+			"Ctrl-M" : "autocomplete",
+			"F11" : function(cm) {
+				cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+			},
+			"Esc" : function(cm) {
+				if (cm.getOption("fullScreen"))
+					cm.setOption("fullScreen", false);
+			}
+		},
+		styleActiveLine : true,
+		lineNumbers : true,
+		autoCloseTags: true,
+		autoCloseBrackets: true,
+		matchBrackets: true,
+		gutters: ["CodeMirror-lint-markers"],
+	});
+	
+	var js_content = document.getElementById("js_content");
+	var jsEditor = CodeMirror.fromTextArea(js_content, {
+		mode : "text/javascript",
+		keyMap: "sublime",
+		matchTags : {
+			bothTags : true
+		},
+		extraKeys : {
+			"Ctrl-J" : "toMatchingTag",
+			"Ctrl-M" : "autocomplete",
+			"F11" : function(cm) {
+				cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+			},
+			"Esc" : function(cm) {
+				if (cm.getOption("fullScreen"))
+					cm.setOption("fullScreen", false);
+			}
+		},
+		styleActiveLine : true,
+		lineNumbers : true,
+		autoCloseTags: true,
+		autoCloseBrackets: true,
+		matchBrackets: true,
+		gutters: ["CodeMirror-lint-markers"],
+	});
+</script>
 </html>

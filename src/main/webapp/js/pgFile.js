@@ -39,7 +39,8 @@ function loadUrls(data) {
 		for (var i = 0; i < urls.length; i++) {
 			textUrls = textUrls + urls[i] + "\r\n";
 		}
-		$("#urls").val(textUrls);
+//		$("#urls").val(textUrls);
+		urlsTextArea.setValue(textUrls);
 	}
 }
 
@@ -57,7 +58,8 @@ function loadTemplate(data) {
 		},
 		success : function(data) {
 			if (data.notice == true) {
-				$("#template_content").val(data.message);
+//				$("#template_content").val(data.message);
+				templateEditor.setValue(data.message);
 			} else {
 				$.messager.alert('发生错误', data.message, 'error');
 			}
@@ -167,7 +169,8 @@ function savePgFile() {
 		$.messager.alert('保存规则', '规则名称不能为空!', 'info');
 		return;
 	}
-	var urls = $("#urls").val();
+//	var urls = $("#urls").val();
+	var urls = urlsTextArea.getValue();
 	if (urls == "" || urls == undefined) {
 		$.messager.alert('保存规则', '链接网址集合不能为空!', 'info');
 		return;
