@@ -32,7 +32,7 @@
 <div class="logintop">    
     <span>欢迎进入无障碍云管理系统</span>    
     <ul>
-    <li><a href="${contextPath}/admin/logout">退出</a></li>
+    <li><a href="${contextPath}/logout">退出</a></li>
     </ul>    
     </div>
     

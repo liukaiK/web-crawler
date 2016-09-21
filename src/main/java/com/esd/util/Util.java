@@ -20,14 +20,14 @@ public class Util {
 
 	public static boolean isNull(String... parms) {
 		if (parms == null)
-			return false;
+			return true;
 		else
 			for (String str : parms) {
 				if (str == null || str.isEmpty()) {
-					return false;
+					return true;
 				}
 			}
-		return true;
+		return false;
 	}
 
 	public static boolean isOutUrl(String url) {
