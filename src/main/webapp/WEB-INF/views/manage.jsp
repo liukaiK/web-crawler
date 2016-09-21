@@ -139,6 +139,7 @@
 	margin: 0px;
 	padding: 0px;
 	border: none;
+	font-size: 14px;
 }
 </style>
 <script type="text/javascript">
