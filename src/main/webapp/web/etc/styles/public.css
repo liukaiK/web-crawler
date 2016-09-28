@@ -180,7 +180,7 @@ div { /*opacity: .97;*/
 	clear: both;
 	width: 1000px;
 	margin: auto;
-	height: 80px;
+	height: auto;
 	color: #FFFFFF;
 	font-size: 14px;
 	text-align: center;

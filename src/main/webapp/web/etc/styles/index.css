@@ -97,6 +97,7 @@ h3 a {
 	margin: 3px 0px 3px 3px;
 	border: #0c92d1 3px solid;
 	background-color: #0c92d1;
+	overflow: auto;
 }
 
 #bmdt {

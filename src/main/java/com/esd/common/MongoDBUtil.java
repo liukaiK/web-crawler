@@ -3,6 +3,8 @@ package com.esd.common;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import com.esd.collection.Downloads;
@@ -11,8 +13,6 @@ import com.esd.collection.Urls;
 import com.esd.core.CollectionPage;
 import com.esd.dao.MongoDBDao;
 import com.esd.util.Md5;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
 
 @Repository
 public class MongoDBUtil {
@@ -23,11 +23,11 @@ public class MongoDBUtil {
 	private static Logger logger = Logger.getLogger(CollectionPage.class);
 
 	public Long getDownloadsCount() {
-		return mongoDBDao.count(new BasicDBObject(), Downloads.class);
+		return mongoDBDao.count(new Query(), Downloads.class);
 	}
 
 	public Long getUrlsCount() {
-		return mongoDBDao.count(new BasicDBObject(), Urls.class);
+		return mongoDBDao.count(new Query(), Urls.class);
 	}
 
 	public void dropTable() {
@@ -39,24 +39,24 @@ public class MongoDBUtil {
 		if (url == null) {
 			return;
 		}
-		BasicDBObject obj = new BasicDBObject("url", url);
-		if (mongoDBDao.findOne(obj, Downloads.class) == null) {
-			if (mongoDBDao.findOne(obj, Urls.class) == null) {
+		Query query = new Query(Criteria.where("url").is(url));
+		if (mongoDBDao.findOne(query, Downloads.class) == null) {
+			if (mongoDBDao.findOne(query, Urls.class) == null) {
 				mongoDBDao.insert(new Downloads(url));
 			}
 		}
 	}
 
 	public synchronized Downloads downloadsFindAndDeleteOne() {
-		DBObject arg0 = new BasicDBObject();
-		Downloads obj = mongoDBDao.findAndRemove(arg0, Downloads.class);
+		Query query = new Query();
+		Downloads obj = mongoDBDao.findAndRemove(query, Downloads.class);
 		if (obj == null) {
 			logger.debug("-----------整站采集完成！----------------");
 			dropTable();// 采集完成 ，删除所有临时表
 			return null;
 		}
-		while (mongoDBDao.findOne(new BasicDBObject("url", obj.getUrl()), Urls.class) != null) {
-			obj = mongoDBDao.findAndRemove(arg0, Downloads.class);
+		while (mongoDBDao.findOne(new Query(Criteria.where("url").is(obj.getUrl())), Urls.class) != null) {
+			obj = mongoDBDao.findAndRemove(query, Downloads.class);
 			if (obj == null) {
 				return null;
 			}
@@ -70,21 +70,20 @@ public class MongoDBUtil {
 			return;
 		}
 		String url = urlsCollections.getUrl();
-		DBObject doc = new BasicDBObject();
+		Query query = new Query(Criteria.where("url").is(url));
 		Md5 md5 = new Md5();
 		String md = md5.getMd5(new StringBuffer(url));
 		md = md + ".html";
-		doc.put("url", url);
 		urlsCollections.setTitle(title);
 		urlsCollections.setMd5(md);
-		Urls ufs = mongoDBDao.findOne(doc, Urls.class);
+		Urls ufs = mongoDBDao.findOne(query, Urls.class);
 		if (ufs != null) {
 			return;
 		}
 		// 插入处理记录
 		mongoDBDao.insert(urlsCollections);
 		// 插入历史记录
-		History history = mongoDBDao.findOne(doc, History.class);
+		History history = mongoDBDao.findOne(query, History.class);
 		if (history != null) {
 			mongoDBDao.remove(history);
 		}

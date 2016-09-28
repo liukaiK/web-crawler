@@ -10,7 +10,8 @@ import java.util.regex.Pattern;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.data.mongodb.core.query.BasicQuery;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,8 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.esd.collection.History;
 import com.esd.dao.MongoDBDao;
 import com.esd.entity.SearchResult;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
 
 @Controller
 public class SearchController {
@@ -42,12 +41,14 @@ public class SearchController {
 	@ResponseBody
 	public ModelAndView searchPOST(String serCon, int currentPage, HttpSession session) throws NumberFormatException, UnknownHostException {
 		Map<String, Object> map = new HashMap<String, Object>();
-		DBObject dbo = new BasicDBObject();
+		Query dbo = new Query();
 		Pattern pattern = Pattern.compile("^.*" + serCon + ".*$", Pattern.CASE_INSENSITIVE);
-		dbo.put("title", pattern);
-		dbo.put("state", "1");
+//		dbo.put("title", pattern);
+//		dbo.put("state", "1");
+		dbo.addCriteria(Criteria.where("title").is(pattern));
+		dbo.addCriteria(Criteria.where("state").is("1"));
 		long total = mongoDBDao.count(dbo, History.class);
-		List<History> list = mongoDBDao.findPage(History.class, new BasicQuery(dbo), currentPage);
+		List<History> list = mongoDBDao.findPage(dbo, History.class, currentPage);
 		SearchResult searchResult = new SearchResult();
 		searchResult.setHistory(list);
 		searchResult.setCurrentPage(currentPage);
