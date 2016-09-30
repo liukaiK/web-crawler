@@ -71,8 +71,7 @@ public class MongoDBUtil {
 		}
 		String url = urlsCollections.getUrl();
 		Query query = new Query(Criteria.where("url").is(url));
-		Md5 md5 = new Md5();
-		String md = md5.getMd5(new StringBuffer(url));
+		String md = Md5.getMd5(url);
 		md = md + ".html";
 		urlsCollections.setTitle(title);
 		urlsCollections.setMd5(md);

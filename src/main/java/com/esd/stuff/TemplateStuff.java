@@ -1,102 +1,26 @@
 package com.esd.stuff;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.esd.common.CatDao;
 import com.esd.config.BaseConfig;
 import com.esd.config.NodeConfig;
 import com.esd.config.PageConfig;
-import com.esd.util.Md5;
+import com.esd.util.Util;
 
 public class TemplateStuff {
-	private static Logger log = Logger.getLogger(TemplateStuff.class);
+	private static Logger logger = Logger.getLogger(TemplateStuff.class);
 
 	private String include = "include";
 
 	public TemplateStuff() {
-		// TODO Auto-generated constructor stub
-	}
-
-	private Document templateLoad(PageConfig pageConfig) {
-
-		String templateName = pageConfig.getTemplate();
-		InputStreamReader read = null;
-		BufferedReader br = null;
-		File file = new File(BaseConfig.TEMPLATE_ROOT + File.separator + templateName);
-		try {
-			read = new InputStreamReader(new FileInputStream(file), "utf-8");
-			br = new BufferedReader(read);
-			String s = null;
-			StringBuffer sb = new StringBuffer();
-			while ((s = br.readLine()) != null) {
-				sb.append(s);
-			}
-			br.close();
-			read.close();
-			Document doc = Jsoup.parse(sb.toString());
-			return doc;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (read != null) {
-					read.close();
-				}
-				if (br != null) {
-					br.close();
-				}
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-
-		}
-		return null;
-
-	}
-
-	private Document templateLoad(String path) {
-		InputStreamReader read = null;
-		BufferedReader br = null;
-		try {
-			File file = new File(path);
-			read = new InputStreamReader(new FileInputStream(file), "utf-8");
-			br = new BufferedReader(read);
-			String s = null;
-			StringBuffer sb = new StringBuffer();
-			while ((s = br.readLine()) != null) {
-				sb.append(s);
-			}
-			Document doc = Jsoup.parse(sb.toString());
-			return doc;
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		} finally {
-			try {
-				if (read != null) {
-					read.close();
-				}
-				if (br != null) {
-					br.close();
-				}
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-
-		}
-		return null;
 	}
 
 	/**
@@ -115,12 +39,10 @@ public class TemplateStuff {
 				// link.attr("target", "_blank");
 				continue;
 			}
-			String path = CatDao.interceptDir(href);
+			String path = Util.interceptUrl(href);
 			link.attr("href", path);
 		}
 		pageMd5(doc);
-		md5URL(doc);
-
 	}
 
 	private void pageMd5(Document doc) {
@@ -131,26 +53,9 @@ public class TemplateStuff {
 		Elements elements = element.select("option[value]");
 		for (Element link : elements) {
 			String href = link.attr("value").trim();
-			String path = CatDao.interceptDir(href);
+			String path = Util.interceptUrl(href);
 			link.attr("value", path);
 		}
-	}
-
-	/**
-	 * 处理meta中跳转链接 进行md5加密
-	 */
-	private void md5URL(Document doc) {
-		// 0;URL=http://www.szft.gov.cn/zf/ftxx/xwdt/
-		Elements links = doc.select("meta[http-equiv=refresh]");
-		for (Element link : links) {
-			String con = link.attr("content");
-			String beg = con.substring(0, con.indexOf("=") + 1);
-			String end = con.substring(con.indexOf("=") + 1);
-			Md5 md5 = new Md5();
-			String m = md5.getMd5(new StringBuffer().append(end));
-			link.attr("content", beg + m + ".html");
-		}
-
 	}
 
 	private void headFooter(Document doc, PageConfig pageConfig) {
@@ -164,13 +69,18 @@ public class TemplateStuff {
 		for (Element element : elements) {
 			String src = element.attr("src");
 			String path = sub + File.separator + src;
-			Document srcDoc = templateLoad(path);
-			if (srcDoc == null) {
-				log.error("没有找到要包括的模版文件！");
-				return;
+			Document srcDoc;
+			try {
+				srcDoc = Util.loadTemplate(path);
+				if (srcDoc == null) {
+					logger.error("没有找到要包括的模版文件！");
+					return;
+				}
+				element.html(srcDoc.html());
+				element.unwrap();
+			} catch (IOException e) {
+				logger.error(e);
 			}
-			element.html(srcDoc.html());
-			element.unwrap();
 		}
 	}
 
@@ -184,9 +94,9 @@ public class TemplateStuff {
 	}
 
 	public Document templateStuff(PageConfig pageConfig) throws IOException {
-		Document doc = templateLoad(pageConfig);
+		Document doc = Util.loadTemplate(BaseConfig.TEMPLATE_ROOT + File.separator + pageConfig.getTemplate());
 		List<NodeConfig> list = pageConfig.getList();
-		SZFTFilter filter = new SZFTFilter();
+		DefaultFilter filter = new DefaultFilter();
 		for (Iterator<NodeConfig> iterator = list.iterator(); iterator.hasNext();) {
 			NodeConfig it = (NodeConfig) iterator.next();
 			if (it.getSrc() == null) {

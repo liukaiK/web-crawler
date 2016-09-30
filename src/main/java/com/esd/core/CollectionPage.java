@@ -1,6 +1,5 @@
 package com.esd.core;
 
-import java.io.File;
 import java.io.IOException;
 
 import javax.annotation.Resource;
@@ -20,7 +19,6 @@ import com.esd.common.MongoDBUtil;
 import com.esd.config.BaseConfig;
 import com.esd.config.PageConfig;
 import com.esd.download.EsdDownLoadHtml;
-import com.esd.util.Md5;
 import com.esd.util.Util;
 
 
@@ -85,15 +83,7 @@ public class CollectionPage {
 			return false;
 		}
 		if (Util.isOutUrl(url)) {
-			Document doc = Util.downLoadTemple(BaseConfig.TEMPLATE_ROOT + File.separator + "error.html");
-			doc.select("#error").attr("href", url);
-			String mName = interceptDir(url);
-			String path = BaseConfig.HTML_ROOT + File.separator + mName;
-			try {
-				Util.createNewFile(doc.html(), path);
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+			Util.doWithOutUrl(url);
 			return true;
 		}
 		PageConfig pageConfig = dao.findPageConfig(url);
@@ -153,23 +143,6 @@ public class CollectionPage {
 		mongoDBUtil.urlsInsert(urlsCollection, title);// 插入
 		return true;
 
-	}
-
-	/**
-	 * 处理截取生成文件的路径
-	 * @param url
-	 * @return
-	 */
-	public static String interceptDir(String url) {
-//		if (!url.startsWith(BaseConfig.index_url)) {
-//			url = BaseConfig.RETURN_URL;
-//		}
-		if (url.endsWith("doc")) {
-			return url;
-		}
-		Md5 md5 = new Md5();
-		String m = md5.getMd5(new StringBuffer(url));
-		return m + ".html";
 	}
 
 	/**

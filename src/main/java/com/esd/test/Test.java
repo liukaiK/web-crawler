@@ -9,10 +9,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.MalformedURLException;
-import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import org.apache.log4j.Logger;
 import org.jsoup.Connection;
@@ -197,8 +195,7 @@ public class Test {
 	public void getMd5() {
 		StringBuffer str;
 		str = new StringBuffer("http://www.caac.gov.cn/");
-		Md5 md5 = new Md5();
-		System.out.println(md5.getMd5(str));
+		System.out.println(Md5.getMd5(str));
 	}
 	
 	@org.junit.Test

@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.esd.common.DirTreeCat;
 import com.esd.config.BaseConfig;
 import com.esd.config.NodeConfig;
 import com.esd.config.PageConfig;
@@ -42,13 +41,7 @@ public class TestConfigController {
 		String url = request.getParameter("url");
 		String templateName = request.getParameter("template");
 		if (Util.isOutUrl(url)) {// 网址为外部链接
-			Document templeSource = Util.downLoadTemple(BaseConfig.TEMPLATE_ROOT + File.separator + "error.html");
-			templeSource.select("#error").attr("href", url);
-			try {
-				Util.createNewFile(templeSource.html(), BaseConfig.TEST_ROOT + File.separator + "view.html");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			Util.doWithOutUrl(url);
 		} else {
 			String javaScriptEnabled = request.getParameter("javaScriptEnabled");
 			String sleep = request.getParameter("sleep");
@@ -68,19 +61,6 @@ public class TestConfigController {
 				nc.setIndex(rule[5]);
 				nc.setAnchorId(rule[6]);
 				pageConfig.getList().add(nc);
-			}
-			if (pageConfig.getList().size() == 1) {
-				String des = pageConfig.getList().get(0).getDes();
-				if (des != null && des.equals("") == false) {
-					if (des.equals("@tree")) {
-						String catUrl = pageConfig.getUrl();
-						DirTreeCat dtc = new DirTreeCat();
-						dtc.download(catUrl);
-						log.debug("view finish");
-						map.put("message", true);
-						return map;
-					}
-				}
 			}
 			EsdDownLoadHtml down = new EsdDownLoadHtml();
 			Document htmlSource = down.downloadHtml(pageConfig);

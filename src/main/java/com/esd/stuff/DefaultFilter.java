@@ -1,41 +1,23 @@
 package com.esd.stuff;
 
+import java.util.List;
+
+import org.jsoup.nodes.Attribute;
 import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
 
-public class DefaultFilter extends SrcFilter {
+public class DefaultFilter {
 
-	@Override
 	public void filter(Element element) {
-		super.filter(element);
 		filterTitle(element);
 		removeStyle(element);
+		removeAttr(element);
 		removeJavascript(element);
-		filterMeta(element);
+		textWrapSpan(element);
 		filterHref(element);
 		filterSrc(element);
 		filterImg(element);
-	}
-
-	/**
-	 * Meta的相对路径替换为绝对路径
-	 * 
-	 * @param element
-	 */
-	private void filterMeta(Element element) {
-		if (element == null) {
-			return;
-		}
-
-		Elements links = element.select("meta");
-		for (Element link : links) {
-			Element content = link.attr("http-equiv", "refresh");
-			String con = content.attr("content");
-			String beg = con.substring(0, con.indexOf("=") + 1);
-			String end = con.substring(con.indexOf("/") + 1);
-			content.attr("content", beg + element.baseUri() + end);
-		}
-
 	}
 
 	/**
@@ -60,8 +42,79 @@ public class DefaultFilter extends SrcFilter {
 		}
 	}
 
+	private void textWrapSpan(Element element) {
+		if (element == null) {
+			return;
+		}
+
+		Elements elements = element.select("*");
+		for (Element e : elements) {
+			if (e.tagName().equals("a") && e.childNodeSize() == 0) {
+				String t = e.text().trim();
+				if (t == null || t.equals("")) {
+					e.remove();
+					continue;
+				}
+			}
+
+			if (e.hasText()) {
+				if (e.tagName().equals("a") || e.tagName().equals("p") || e.tagName().equals("span")) {
+					continue;
+				}
+				List<Node> list = e.childNodes();
+				for (Node node : list) {
+					if (node.childNodeSize() > 0) {// 有子节点不处理
+						continue;
+					}
+
+					String outerHtml = node.outerHtml().trim();
+					if (node.nodeName().equals("#text") == false) {// 文本节点
+						continue;
+					}
+					if (outerHtml.indexOf("&") != -1) {// 非转意符
+						continue;
+					}
+					if (outerHtml.trim().equals("") == false) {
+						// node.nodeName());
+						node.wrap("<span></span>");
+					}
+				}
+
+			}
+		}
+
+	}
+	
+	private void removeAttr(Element element) {
+		if (element == null) {
+			return;
+		}
+		if (element.tagName().equals("iframe")) {
+			return;
+		}
+		Elements cs = element.select("*");
+		String[] filerAttr = { "alt", "title", "src", "href", "type", "value", "rowspan", "colspan", "http-equiv", "content", "flashvars" };
+		for (Element c : cs) {
+			List<Attribute> list = c.attributes().asList();
+			for (Attribute attribute : list) {
+				String key = attribute.getKey();
+				boolean b = false;
+				for (String s : filerAttr) {
+					if (key.equals(s)) {
+						b = true;
+						break;
+					}
+				}
+				if (b == false) {
+					c.removeAttr(attribute.getKey());
+				}
+			}
+
+		}
+	}
+
 	/**
-	 * 删除所有时间
+	 * 删除所有事件
 	 * 
 	 * @param element
 	 */
@@ -122,28 +175,6 @@ public class DefaultFilter extends SrcFilter {
 		}
 	}
 	
-//	private String alt2title(Element link) {
-//		Elements childs = link.children();
-//		if (childs == null || childs.size() == 0) {
-//			return null;
-//		}
-//		for (Element element : childs) {
-//			if (element.tagName().equals("img")) {
-//				String alt = element.attr("alt");
-//				if (alt != null) {
-//					return alt;
-//				} else {
-//					String title = element.attr("title");
-//					if (title != null) {
-//						return title;
-//					}
-//				}
-//				return "图片链接";
-//			}
-//		}
-//		return "空链接";
-//	}
-
 	/**
 	 * 处理a 链接的title 替换绝对路径
 	 * 

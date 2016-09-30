@@ -27,7 +27,6 @@ import com.esd.config.BaseConfig;
 import com.esd.config.NodeConfig;
 import com.esd.config.PageConfig;
 import com.esd.download.EsdDownLoadHtml;
-import com.esd.util.Md5;
 import com.esd.util.Util;
 
 @Controller
@@ -54,15 +53,7 @@ public class PageConfigController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		urlMap.clear();
 		if (Util.isOutUrl(url)) {// 如果为外链接
-			Document templateSource = Util.downLoadTemple(BaseConfig.TEMPLATE_ROOT + File.separator + "error.html");
-			templateSource.select("#error").attr("href", url);
-			String mName = interceptDir(url);
-			String path = BaseConfig.HTML_ROOT + File.separator + mName;
-			try {
-				Util.createNewFile(templateSource.html(), path);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			Util.doWithOutUrl(url);
 			logger.debug("view finish");
 			map.put("message", true);
 			return map;
@@ -97,15 +88,7 @@ public class PageConfigController {
 				continue;
 			}
 			if (Util.isOutUrl(href)) {
-				htmlSource = Util.downLoadTemple(BaseConfig.TEMPLATE_ROOT + File.separator + "error.html");
-				htmlSource.select("#error").attr("href", href);
-				String mName = interceptDir(href);
-				String path = BaseConfig.HTML_ROOT + File.separator + mName;
-				try {
-					Util.createNewFile(htmlSource.html(), path);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				Util.doWithOutUrl(url);
 				continue;
 			}
 			Integer i = urlMap.get(href);
@@ -130,44 +113,6 @@ public class PageConfigController {
 		Double a1 = (Double.valueOf(remainCount) / Double.valueOf(progressCount)) * 100;
 		map.put("message", true);
 		map.put("g", a1.intValue());
-		return map;
-	}
-
-	/**
-	 * 处理截取生成文件的路径
-	 * 
-	 * @param url
-	 * @return
-	 */
-	public static String interceptDir(String url) {
-		// if (!url.startsWith(BaseConfig.index_url)) {
-		// url = BaseConfig.RETURN_URL;
-		// }
-		if (url.endsWith("doc")) {
-			return url;
-		}
-		Md5 md5 = new Md5();
-		String m = md5.getMd5(new StringBuffer(url));
-		return m + ".html";
-	}
-
-
-
-	@RequestMapping("/publish")
-	@ResponseBody
-	public Map<String, Object> publish(HttpServletRequest request) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		return map;
-	}
-
-	@RequestMapping("/dotreedir")
-	@ResponseBody
-	public Map<String, Object> dotreedir(HttpServletRequest request) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		String url = request.getParameter("url");
-		dao.collectPageConfig();
-		dao.createTree(url);
-		map.put("message", true);
 		return map;
 	}
 
