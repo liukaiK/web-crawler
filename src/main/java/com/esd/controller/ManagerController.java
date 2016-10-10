@@ -6,7 +6,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/admin")
-public class ManageController {
+public class ManagerController {
 
 	/**
 	 * 跳转到管理页面manage.jsp

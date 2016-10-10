@@ -80,7 +80,7 @@
 				    		<a href="javascript:saveTemplate();" class="easyui-linkbutton" iconCls="icon-save">保存</a>
 				    		<a href="javascript:deleteTemplate();" class="easyui-linkbutton" iconCls="icon-clear">删除</a>
 				    		&nbsp;&nbsp;&nbsp;&nbsp;
-				    		<input id="myBlogImage" class="easyui-filebox" name="myfiles" data-options="prompt:'请选择图片文件'" style="width:170px" />
+				    		<input id="myBlogImage" class="easyui-filebox" name="myfiles" data-options="prompt:'选择图片文件',buttonText:'&nbsp;选&nbsp;择&nbsp;'" style="width:170px" />
 				    		<a href="javascript:ajaxFileUpload();" class="easyui-linkbutton">上传图片</a>
 				    	</div>
 				    	<textarea id="template_content"></textarea>
