@@ -1,7 +1,7 @@
 function loadJsFile(obj) {
 	load();
-	var fileName = $(obj).text();
-	var filePath = js_root;
+	var fileName = obj;
+	var filePath = js;
 	$("#jsName").textbox('setValue', fileName);
 	$.ajax({
 		url : root + '/loadFileContent',
@@ -13,8 +13,7 @@ function loadJsFile(obj) {
 		},
 		success : function(data) {
 			if (data.notice == true) {
-//				$("#js_content").val(data.message);
-				jsEditor.setValue(data.message);
+				$("#js_content").val(data.message);
 			} else {
 				$.messager.alert('发生错误',data.message,'error');
 			}
@@ -30,7 +29,7 @@ function loadJsFile(obj) {
 
 function saveJs() {
 	var jsName = $("#jsName").textbox('getValue');
-	var jsContent = jsEditor.getValue();
+	var jsContent = $("#js_content").val();
 	$.ajax({
 		url : root + '/saveJs',
 		type : 'POST',

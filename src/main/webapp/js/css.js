@@ -1,14 +1,13 @@
 function loadCssFile(obj) {
 	load();
-	var fileName = $(obj).text();
-	var filePath = css_root;
+	var fileName = obj;
 	$("#cssName").textbox('setValue', fileName);
 	$.ajax({
 		url : root + '/loadFileContent',
 		type : 'POST',
 		sync : false,
 		data : {
-			filePath : filePath,
+			fileType : "css",
 			fileName : fileName
 		},
 		success : function(data) {
@@ -35,8 +34,8 @@ function saveCss() {
 		url : root + '/saveCss',
 		type : 'POST',
 		data : {
-			'cssName' : cssName,
-			'cssContent' : cssContent
+			cssName : cssName,
+			cssContent : cssContent
 		},
 		sync : false,
 		success : function(data) {

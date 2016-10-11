@@ -1,6 +1,7 @@
 package com.esd.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
@@ -48,12 +49,13 @@ public class LoginController {
 	 * @return
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView login(String username, String password, String code, HttpServletRequest request) {
+	public ModelAndView login(String username, String password, String code, HttpServletRequest request, HttpSession session) {
 		if (!Util.isNull(username, password, code)) {
 			if (code.equals(request.getSession().getAttribute("randomCode"))) {
 				if (this.username.equals(username) || this.password.equals(password)) {
 					request.getSession().setAttribute(BaseConfig.USER, username);
 					logger.debug("------------------登录成功!----------------");
+					session.setAttribute("siteName", "szft");
 					return new ModelAndView("redirect:admin/access");
 				} else {
 					request.getSession().setAttribute(BaseConfig.MESSAGE, "用户名或密码错误!");

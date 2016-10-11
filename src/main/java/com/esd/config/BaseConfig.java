@@ -21,6 +21,8 @@ public class BaseConfig extends HttpServlet {
 			".pdf", "wbk", "xml" };
 
 	public static String ROOT;
+	
+	public static String ROOT1;
 
 	public static String IMAGE_ROOT;
 
@@ -47,10 +49,13 @@ public class BaseConfig extends HttpServlet {
 	public static String time = "03:00:00";
 
 	public void init() throws ServletException {
-		ROOT = getServletContext().getRealPath("/") + "web";
+		ROOT = getServletContext().getRealPath("/") + "szft";
+		//使用时需要        + siteName(站点名)
+		ROOT1 = getServletContext().getRealPath("/");
 		IMAGE_ROOT = ROOT + File.separator + "etc" + File.separator + "image";
 		JS_ROOT = ROOT + File.separator + "etc" + File.separator + "js";
 		CSS_ROOT = ROOT + File.separator + "etc" + File.separator + "styles";
+		
 		PG_ROOT = ROOT + File.separator + "db";
 		TEMPLATE_ROOT = ROOT + File.separator + "template";
 		HTML_ROOT = ROOT + File.separator + "html";

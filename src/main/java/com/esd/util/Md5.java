@@ -27,7 +27,21 @@ public class Md5 {
 		}
 		return resultString;
 	}
-
+	/**
+	 * cx-20160914
+	 * @param str
+	 * @return
+	 */
+	public static String getMd5File(byte[] b) {
+		String resultString = null;
+		try {			
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			resultString = byteToString(md.digest(b));
+		} catch (NoSuchAlgorithmException e) {
+			logger.error(e.getMessage());
+		}
+		return resultString;
+	}
 	// 转换字节数组为16进制字串
 	private static String byteToString(byte[] bByte) {
 		StringBuffer sBuffer = new StringBuffer();

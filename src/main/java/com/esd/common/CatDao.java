@@ -1,9 +1,7 @@
 package com.esd.common;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -15,12 +13,14 @@ import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
 import org.jsoup.nodes.Document;
 
+import com.esd.collection.DbFile;
 import com.esd.config.BaseConfig;
 import com.esd.config.NodeConfig;
 import com.esd.config.PageConfig;
 import com.esd.download.EsdDownLoadHtml;
 import com.esd.parser.Parser;
 import com.esd.stuff.TemplateStuff;
+import com.esd.util.SerializeUtil;
 import com.esd.util.Util;
 
 public class CatDao {
@@ -37,7 +37,12 @@ public class CatDao {
 	 * @param linkHref
 	 * @throws IOException
 	 */
-	public String singlCat(PageConfig pageConfig, Document document) {
+	public String singlCat(PageConfig pageConfig, Document document,boolean ctrl) {
+		MongoDBUtil mdu = new MongoDBUtil();
+		if(!ctrl){
+			mdu.insertFile(null,null,null,null,null,ctrl);
+			return "end";
+		}
 		if (document == null) {
 			log.error("下载失败");
 			return null;// 下载失败
@@ -54,17 +59,25 @@ public class CatDao {
 			return null;// 组装时失败
 		}// 填充后返回代码
 		String mName = Util.interceptUrl(pageConfig.getUrl());
-		String path = BaseConfig.HTML_ROOT + File.separator + mName;
-		try {
-			Util.createNewFile(doc.html(), path);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		File f = new File(path);
-		if (!f.isFile()) {
-			log.error(pageConfig.getUrl() + "-------生成失败");
-			return null;// 未生成
-		}
+		//String path = BaseConfig.HTML_ROOT + File.separator + mName;
+		//从session获得站点名，siteName/html/mName
+		String siteName = "web";
+		String filedir = siteName + "/html/"+mName;
+		String content = doc.html();
+
+		System.out.println("开始了！！！");
+		mdu.insertFile(mName,content,filedir,siteName,"html",true);
+		//System.out.println("fileName:"+mName+"\n"+"path:"+path+"\n"+"byte:"+b+"\nbb"+bb);
+//		try {
+//			Util.createNewFile(doc.html(), path);//不要了，doc.html()文件内容
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		File f = new File(path);
+//		if (!f.isFile()) {
+//			log.error(pageConfig.getUrl() + "-------生成失败");
+//			return null;// 未生成
+//		}
 		return mName;
 	}
 
@@ -94,45 +107,78 @@ public class CatDao {
 		}// 填充后返回代码
 		String mName = Util.interceptUrl(url);
 		String path = BaseConfig.HTML_ROOT + File.separator + mName;
-		try {
-			Util.createNewFile(doc.html(), path);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		// cx-20160926 存入mongodb
+		MongoDBUtil mdu = new MongoDBUtil();
+		mdu.insertFile(mName, htmlSource.html().getBytes(), path, "szft", "html");
+//		try {
+//			Util.createNewFile(doc.html(), path);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		log.debug(url + "===[" + (System.currentTimeMillis() - l) + "]" + "===template[" + pageConfig.getTemplate() + ":" + mName + "]===rule[" + pageConfig.getDb() + ":" + pageConfig.getRule() + "]");
 		return true;
 	}
 
 	/**
 	 * 收集所有pageconfig
+	 * @throws ClassNotFoundException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
 	 */
-	public void collectPageConfig() {
-		// 收集所有采集规则PageConfig
-		File file = new File(BaseConfig.PG_ROOT);
+	public void collectPageConfig(String siteName)  {
+		//cx-20160926 从mongodb中find数据
+		MongoDBUtil mdu = new MongoDBUtil();
+		List<DbFile> listPg = mdu.findAll(DbFile.class, siteName+"_"+"pg");
 		List<PageConfig> list = new ArrayList<PageConfig>();
-		if (file.isDirectory()) {
-			File[] files = file.listFiles();
-			for (File f : files) {
-				ObjectInputStream oin = null;
+		if(listPg != null){
+			
+			for (Iterator<DbFile> iterator = listPg.iterator(); iterator.hasNext();) {
+				DbFile df = (DbFile) iterator.next();
+				byte[] buf = df.getFileByte();
+				//实例化
+				PageConfig config;
 				try {
-					oin = new ObjectInputStream(new FileInputStream(f));
-					PageConfig config = (PageConfig) oin.readObject();
-					config.setDb(f.getName());
+					config = (PageConfig)SerializeUtil.deserializeObject(buf);
+					config.setDb(df.getFileName());
 					list.add(config);
-					oin.close();
-				} catch (Exception e) {
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
-				} finally {
-					try {
-						if (oin != null) {
-							oin.close();
-						}
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
+				
 			}
+			
 		}
+		/****************************************************************/
+		// 收集所有采集规则PageConfig
+//		File file = new File(BaseConfig.PG_ROOT);
+//		List<PageConfig> list = new ArrayList<PageConfig>();
+//		if (file.isDirectory()) {
+//			File[] files = file.listFiles();
+//			for (File f : files) {
+//				ObjectInputStream oin = null;
+//				try {
+//					oin = new ObjectInputStream(new FileInputStream(f));
+//					PageConfig config = (PageConfig) oin.readObject();
+//					config.setDb(f.getName());
+//					list.add(config);
+//					oin.close();
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				} finally {
+//					try {
+//						if (oin != null) {
+//							oin.close();
+//						}
+//					} catch (Exception e) {
+//						e.printStackTrace();
+//					}
+//				}
+//			}
+//		}
 		// 处理成采集链接映射
 		for (Iterator<PageConfig> iterator = list.iterator(); iterator.hasNext();) {
 			PageConfig pageConfig = (PageConfig) iterator.next();

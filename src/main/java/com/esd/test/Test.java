@@ -171,7 +171,6 @@ public class Test {
 	public void findPageConfigFile() {
 		String url = "http://www.caacca.org/rdgz/qyzs/201511/t20151112_5816.html";
 		BaseConfig.PG_ROOT = "E:\\apache-tomcat-7.0.61\\webapps\\iac\\web" + File.separator + "db";
-		dao.collectPageConfig();
 		PageConfig pageConfig = dao.findPageConfig(url);
 		System.out.println(pageConfig.getDb());
 	}

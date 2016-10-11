@@ -1,5 +1,6 @@
 package com.esd.core;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.annotation.Resource;
@@ -10,6 +11,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.esd.collection.Downloads;
@@ -24,9 +26,21 @@ import com.esd.util.Util;
 
 @Component
 public class CollectionPage {
+	
+//	private static ApplicationContext ctx=null;
+//	private static TransportService transportService;
+//	
+//	static{
+//		ctx = new ClassPathXmlApplicationContext(
+//				"classpath:/springmvc.xml");
+//		transportService = (TransportService) ctx
+//				.getBean("transportService");	
+//	}
+	
 
 	private static Logger logger = Logger.getLogger(CollectionPage.class);
 	@Resource
+	@Autowired
 	private MongoDBUtil mongoDBUtil;
 	private CatDao dao = new CatDao();
 	private boolean collectStatic = true;
@@ -43,6 +57,7 @@ public class CollectionPage {
 
 		@Override
 		public void run() {
+			//计时
 			while (collectStatic && ctrl) {
 				ctrl = collect();
 			}
@@ -64,7 +79,7 @@ public class CollectionPage {
 		for (int i = 0; i < BaseConfig.str.length; i++) {
 			mongoDBUtil.downloadsInsert(BaseConfig.str[i]);
 		}
-		dao.collectPageConfig();
+		dao.collectPageConfig("szft");
 	}
 
 	/**
@@ -75,15 +90,30 @@ public class CollectionPage {
 		Long l = System.currentTimeMillis();
 		Downloads bson = mongoDBUtil.downloadsFindAndDeleteOne();
 		if (bson == null) {
+			dao.singlCat(null,null,false);
 			return false;
 		}
 		String url = bson.getUrl();
 		// 通过数局库获取url
 		if (url == null) {
+			dao.singlCat(null,null,false);
 			return false;
 		}
 		if (Util.isOutUrl(url)) {
-			Util.doWithOutUrl(url);
+			Document doc;
+			try {
+				doc = Util.loadTemplate(BaseConfig.TEMPLATE_ROOT + File.separator + "error.html");
+				doc.select("#error").attr("href", url);
+				String mName = Util.interceptUrl(url);
+				String path = BaseConfig.HTML_ROOT + File.separator + mName;
+				try {
+					Util.createNewFile(doc.html(), path);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			} catch (IOException e2) {
+				e2.printStackTrace();
+			}
 			return true;
 		}
 		PageConfig pageConfig = dao.findPageConfig(url);
@@ -123,14 +153,14 @@ public class CollectionPage {
 		Urls urlsCollection = new Urls();
 		urlsCollection.setUrl(bson.getUrl());
 		if (pageConfig != null && htmlSource != null) {
-			try {
-				dao.singlCat(pageConfig, htmlSource);
+//			try {
+				dao.singlCat(pageConfig, htmlSource,true);
 				urlsCollection.setState("1");// 已处理
-			} catch (Exception e) {
-				urlsCollection.setState("-1");// 已处理，发生错误
-				logger.error("singlCat" + url);
-				logger.error(e.getStackTrace());
-			}
+//			} catch (Exception e) {
+//				urlsCollection.setState("-1");// 已处理，发生错误
+//				logger.error("singlCat***" + url);
+//				logger.error(e.getStackTrace());
+//			}
 			// log.info(url +
 			// "==============Processing time==================>[" +
 			// (System.currentTimeMillis() - l) + "]");

@@ -48,9 +48,13 @@ function loadPgFileList() {
 		success : function(data) {
 			if (data.list != null) {
 				$("#pgFileList").empty();
-				for (var i = 0; i < data.list.length; i++) {
-					$("#pgFileList").append("<p><a href='#' onclick='loadPgFile(this)' >" + data.list[i] + "</a></p>");
-				}
+				//for (var i = 0; i < data.list.length; i++) {
+				//	$("#pgFileList").append("<p><a href='#' onclick='loadPgFile(this)' >" + data.list[i].get + "</a></p>");
+				//}
+				//cx-20160923
+				$.each(data.list,function(i,item){
+					$("#pgFileList").append("<p><a href='#' onclick='loadPgFile("+'"'+item.fileName+'"'+")' >" + item.fileName + "</a></p>");		
+				});
 			}
 		},
 		error : function() {
@@ -60,15 +64,18 @@ function loadPgFileList() {
 
 function loadTemplateFileList() {
 	$.ajax({
-		url : root + '/core/loadTemplateList',
+		url : root + '/loadTemplateList',
 		type : 'POST',
 		sync : false,
+		data : {
+			fileType : "template"
+		},
 		success : function(data) {
 			if (data.list != null) {
 				$("#templateFileList").empty();
-				for (var i = 0; i < data.list.length; i++) {
-					$("#templateFileList").append("<p><a href='#' onclick='loadTemplateFile(this)' >" + data.list[i] + "</a></p>");
-				}
+				$.each(data.list,function(i,item){
+					$("#templateFileList").append("<p><a href='#' onclick='loadTemplateFile("+'"'+item.fileName+'"'+")' >" + item.fileName + "</a></p>");
+				});
 			}
 		},
 		error : function() {
@@ -82,12 +89,15 @@ function loadCssFileList() {
 		url : root + '/loadCssList',
 		type : 'POST',
 		sync : false,
+		data : {
+			fileType : "css"
+		},
 		success : function(data) {
 			if (data.list != null) {
 				$("#cssFileList").empty();
-				for ( var i = 0; i < data.list.length; i++) {
-					$("#cssFileList").append("<p><a href='#' onclick='loadCssFile(this)' >" + data.list[i] + "</a></p>");
-				}
+				$.each(data.list,function(i,item){
+					$("#cssFileList").append("<p><a href='#' onclick='loadCssFile(item.fileName)' >" + item.fileName + "</a></p>");
+				});
 			}
 		},
 		error : function() {
@@ -97,15 +107,21 @@ function loadCssFileList() {
 
 function loadJsFileList(){
 	$.ajax({
-		url : root + '/loadJsList',
+		url : root + '/core/loadFileList',
 		type : 'POST',
 		sync : false,
+		data : {
+			fileType : "js"
+		},
 		success : function(data) {
 			if (data.list != null) {
 				$("#jsFileList").empty();
-				for ( var i = 0; i < data.list.length; i++) {
-					$("#jsFileList").append("<p><a href='#' onclick='loadJsFile(this)' >" + data.list[i] + "</a></p>");
-				}
+				$.each(data.list,function(i,item){
+					$("#jsFileList").append("<p><a href='#' onclick='loadJsFile(item.fileName)' >" + item.fileName + "</a></p>");
+				});
+//				for ( var i = 0; i < data.list.length; i++) {
+//					$("#jsFileList").append("<p><a href='#' onclick='loadJsFile(this)' >" + data.list[i] + "</a></p>");
+//				}
 			}
 		},
 		error : function() {

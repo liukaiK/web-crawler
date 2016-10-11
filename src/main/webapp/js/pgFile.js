@@ -1,6 +1,6 @@
 function loadPgFile(obj) {
 	load();
-	var pgFileName = $(obj).text();
+	var pgFileName = obj;
 	$.ajax({
 		url : root + '/core/loadPgFile',
 		type : 'POST',
@@ -14,9 +14,11 @@ function loadPgFile(obj) {
 				$("#sleep").textbox('setValue',data.pgFile.sleep);
 				// 开启脚本
 				data.pgFile.javaScriptEnabled == true ? $("#javaScriptEnabled").combobox("select","true") : $("#javaScriptEnabled").combobox("select","false");
+				
 				loadUrls(data);
 				loadTemplate(data);
 				loadRules(data);
+				
 				$('#tabs').tabs('select', '模板');
 				easyuipanel();
 				disLoad();
@@ -39,27 +41,25 @@ function loadUrls(data) {
 		for (var i = 0; i < urls.length; i++) {
 			textUrls = textUrls + urls[i] + "\r\n";
 		}
-//		$("#urls").val(textUrls);
-		urlsTextArea.setValue(textUrls);
+		$("#urls").val(textUrls);
 	}
 }
 
 function loadTemplate(data) {
 	var fileName = data.pgFile.template;
-	var filePath = template_root;
+//	var filePath = template_root;
 	$("#templateName").textbox('setValue', fileName)
 	$.ajax({
 		url : root + '/loadFileContent',
 		type : 'POST',
 		sync : false,
 		data : {
-			filePath : filePath,
+			'fileType' : 'template',
 			fileName : fileName
 		},
 		success : function(data) {
 			if (data.notice == true) {
-//				$("#template_content").val(data.message);
-				templateEditor.setValue(data.message);
+				$("#template_content").val(data.message);
 			} else {
 				$.messager.alert('发生错误', data.message, 'error');
 			}
@@ -169,8 +169,7 @@ function savePgFile() {
 		$.messager.alert('保存规则', '规则名称不能为空!', 'info');
 		return;
 	}
-//	var urls = $("#urls").val();
-	var urls = urlsTextArea.getValue();
+	var urls = $("#urls").val();
 	if (urls == "" || urls == undefined) {
 		$.messager.alert('保存规则', '链接网址集合不能为空!', 'info');
 		return;

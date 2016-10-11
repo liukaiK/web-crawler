@@ -42,7 +42,7 @@
 		<div id="progressbar" class="easyui-progressbar" style="height:10px;"></div>
 	</div>
 	<div id="pgFileList" region="east" title="规则列表" split="true" style="width:180px;padding: 10px;"></div>
-	<div region="west" title="主编辑区" split="true" style="width:300px;">
+	<div region="west" title="主编辑区" split="true" style="width:270px;">
 		<div class="easyui-accordion" fit="true">
 			<div title="规则编辑区" selected="true" style="padding:5px;">
 				<ul id="rules" class="gbin1-list">
@@ -109,7 +109,6 @@
 	</div>
 </body>
 <script type="text/javascript" src="/js/codemirror-5.18.2/lib/codemirror.js" charset="UTF-8"></script>
-<script type="text/javascript" src="/js/codemirror.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/js/codemirror-5.18.2/addon/selection/active-line.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/js/codemirror-5.18.2/addon/edit/matchtags.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/js/codemirror-5.18.2/addon/edit/matchbrackets.js" charset="UTF-8"></script>

@@ -1,28 +1,29 @@
 package com.esd.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.esd.collection.DbFile;
+import com.esd.collection.DbPgFile;
 import com.esd.common.CatDao;
+import com.esd.common.MongoDBUtil;
 import com.esd.config.BaseConfig;
 import com.esd.config.NodeConfig;
 import com.esd.config.PageConfig;
@@ -34,6 +35,10 @@ import com.esd.util.Util;
 public class PageConfigController {
 
 	private static Logger logger = Logger.getLogger(PageConfigController.class);
+	
+	@Autowired
+	private MongoDBUtil mdu;
+	
 	private Map<String, Integer> urlMap = new HashMap<String, Integer>(125);
 	private int progressCount = 1;
 	private int remainCount;// 进度条剩余多少
@@ -45,28 +50,42 @@ public class PageConfigController {
 	 * 
 	 * @param request
 	 * @return
+	 * @throws IOException 
 	 */
 	@RequestMapping("/cating")
 	@ResponseBody
-	public Map<String, Object> cating(HttpServletRequest request) {
+	public Map<String, Object> cating(HttpServletRequest request,HttpSession session) throws IOException {
 		String url = request.getParameter("url");
 		Map<String, Object> map = new HashMap<String, Object>();
 		urlMap.clear();
+		String siteName = "";
 		if (Util.isOutUrl(url)) {// 如果为外链接
-			Util.doWithOutUrl(url);
+			Document templateSource = Util.loadTemplate(BaseConfig.TEMPLATE_ROOT + File.separator + "error.html");
+			templateSource.select("#error").attr("href", url);
+			String mName = Util.interceptUrl(url);
+			//String path = BaseConfig.HTML_ROOT + File.separator + mName;
+			String path = File.separator + "html" + File.separator + mName;
+			 // cx-20160926 存入mongodb
+			siteName = session.getAttribute("siteName").toString();  
+			mdu.insertFile(mName, templateSource.html().getBytes(), path, siteName, "html");
+//			try {
+//				Util.createNewFile(templateSource.html(), path);
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
 			logger.debug("view finish");
 			map.put("message", true);
 			return map;
 		}
-		catPage(url);
+		catPage(url,siteName);
 		logger.debug("单层采集完成");
 		map.put("message", true);
 		return map;
 	}
 
-	private void catPage(String url) {
+	private void catPage(String url,String siteName) {
 		quitFlag = false; // 开启采集状态
-		dao.collectPageConfig();
+		dao.collectPageConfig(siteName);
 		PageConfig pageConfig = dao.findPageConfig(url);
 		pageConfig.setUrl(url);
 		EsdDownLoadHtml down = new EsdDownLoadHtml();// 下载
@@ -88,7 +107,24 @@ public class PageConfigController {
 				continue;
 			}
 			if (Util.isOutUrl(href)) {
-				Util.doWithOutUrl(url);
+				try {
+					htmlSource = Util.loadTemplate(BaseConfig.TEMPLATE_ROOT + File.separator + "error.html");
+					htmlSource.select("#error").attr("href", href);
+					String mName = Util.interceptUrl(href);
+					//String path = BaseConfig.HTML_ROOT + File.separator + mName;
+					String path = File.separator + "html" + File.separator + mName;
+					// cx-20160926 存入mongodb
+					
+					mdu.insertFile(mName, htmlSource.html().getBytes(), path, siteName, "html");
+//				try {
+//					Util.createNewFile(htmlSource.html(), path);
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				continue;
 			}
 			Integer i = urlMap.get(href);
@@ -115,10 +151,10 @@ public class PageConfigController {
 		map.put("g", a1.intValue());
 		return map;
 	}
-
+	
 	@RequestMapping("/savePgFile")
 	@ResponseBody
-	public Map<String, Object> savePgFile(HttpServletRequest request) {
+	public Map<String, Object> savePgFile(HttpServletRequest request,HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String pgName = request.getParameter("pgName");
 		String javaScriptEnabled = request.getParameter("javaScriptEnabled");
@@ -127,10 +163,13 @@ public class PageConfigController {
 		String url = request.getParameter("url");
 		String[] rules = request.getParameterValues("rules[]");
 		String[] urls = request.getParameterValues("urls[]");
+		String siteName = session.getAttribute("siteName").toString();
+		
 		PageConfig pageConfig = new PageConfig();
 		pageConfig.setJavaScriptEnabled(Boolean.valueOf(javaScriptEnabled));
 		pageConfig.setSleep(Long.valueOf(sleep));
 		pageConfig.setUrl(url);
+		
 		if (rules != null) {
 			for (String s : rules) {
 				String[] rule = s.split("&");
@@ -146,36 +185,58 @@ public class PageConfigController {
 			}
 		}
 		pageConfig.setTemplate(template);
+		
+		
 		List<String> urlList = new ArrayList<String>();
 		for (int i = 0; i < urls.length; i++) {
 			urlList.add(urls[i]);
 		}
 		pageConfig.setUrls(urlList);
 		/**
+		 * cx-201609222
+		 * pg存入数据库
+		 */
+		//String filedir = BaseConfig.PG_ROOT + File.separator + pgName + ".pg";
+		String filedir =  File.separator + "db" + File.separator + pgName + ".pg";
+		DbPgFile dpf = new DbPgFile();
+		dpf.setCreateDate(new Date());
+		dpf.setFiledir(filedir);
+		dpf.setFileName(pgName);
+		dpf.setMd5File(pageConfig.toString());
+		dpf.setPageConfig(pageConfig);
+		dpf.setSiteName(siteName);
+		dpf.setUpdateDate(new Date());
+		dpf.setUserId("0001");
+		//fileByte = SerializeUtil.serializeObject(pageConfig);
+		mdu.insertPg(dpf, siteName);
+		
+		map.put("notice", true);
+		map.put("message", pgName + "规则保存成功");
+		/**
 		 * 序列化该实体类
 		 */
-		ObjectOutputStream out = null;
-		File file = new File(BaseConfig.PG_ROOT + File.separator + pgName + ".pg");
-		try {
-			out = new ObjectOutputStream(new FileOutputStream(file));
-			out.writeObject(pageConfig);
-			out.close();
-			map.put("notice", true);
-			map.put("message", pgName + "规则保存成功");
-		} catch (Exception e) {
-			logger.error(e);
-			map.put("notice", false);
-			map.put("message", pgName + "规则保存失败");
-		} finally {
-			try {
-				if (out != null) {
-					out.close();
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-		}
+//		ObjectOutputStream out = null;
+//		File file = new File(BaseConfig.PG_ROOT + File.separator + pgName + ".pg");
+//		try {
+//			out = new ObjectOutputStream(new FileOutputStream(file));
+//			out.writeObject(pageConfig);
+//			out.close();
+//			map.put("notice", true);
+//			map.put("message", pgName + "规则保存成功");
+//		} catch (Exception e) {
+//			logger.error(e);
+//			map.put("notice", false);
+//			map.put("message", pgName + "规则保存失败");
+//		} finally {
+//			try {
+//				if (out != null) {
+//					out.close();
+//				}
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//
+//		}
 		return map;
 	}
 
@@ -187,11 +248,17 @@ public class PageConfigController {
 	 */
 	@RequestMapping("/loadPgFileList")
 	@ResponseBody
-	public Map<String, Object> loadPgFileList(HttpServletRequest request) {
+	public Map<String, Object> loadPgFileList(HttpServletRequest request,HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		File file = new File(BaseConfig.PG_ROOT);
-		String[] files = file.list();
-		map.put("list", files);
+		String siteName = session.getAttribute("siteName").toString();
+		//从本地取
+		//File file = new File(BaseConfig.PG_ROOT);
+		//String[] files = file.list();
+		/*****************************/
+		//从mongodb取（cx-20160923）
+		
+		List<DbPgFile> pgs = mdu.findAll(DbPgFile.class,siteName+"_pg");
+		map.put("list", pgs);
 		return map;
 	}
 
@@ -203,30 +270,42 @@ public class PageConfigController {
 	 */
 	@RequestMapping("/loadPgFile")
 	@ResponseBody
-	public Map<String, Object> loadPgFile(String pgFileName, HttpServletRequest request) {
+	public Map<String, Object> loadPgFile(String pgFileName, HttpServletRequest request,HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		File file = new File(BaseConfig.PG_ROOT + File.separator + pgFileName);
-		try {
-			ObjectInputStream oin = new ObjectInputStream(new FileInputStream(file));
-			try {
-				PageConfig pgFile = (PageConfig) oin.readObject();
-				oin.close();
-				map.put("pgFile", pgFile);
-				map.put("notice", true);
-			} catch (ClassNotFoundException e) {
-				logger.error(e);
-				map.put("notice", false);
-				map.put("message", "系统错误!");
-			}
-		} catch (FileNotFoundException e) {
-			logger.error(e);
-			map.put("notice", false);
-			map.put("message", pgFileName + "文件不存在!");
-		} catch (IOException e) {
-			logger.error(e);
-			map.put("notice", false);
-			map.put("message", "系统错误!");
-		}
+		System.out.println("pg的controller进来了！！！");
+		System.out.println(pgFileName);
+		//cx-20160928 从mongodb取数据
+		String siteName = session.getAttribute("siteName").toString();
+		DbPgFile df = mdu.findOneByCollectionName(siteName + "_pg", pgFileName,DbPgFile.class);
+		System.out.println("fd.Filedir:"+df.getFiledir());
+		
+		PageConfig pgFile = df.getPageConfig();
+		
+		map.put("pgFile", pgFile);
+		map.put("notice", true);
+		/**************************************************/
+//		File file = new File(BaseConfig.PG_ROOT + File.separator + pgFileName);
+//		try {
+//			ObjectInputStream oin = new ObjectInputStream(new FileInputStream(file));
+//			try {
+//				PageConfig pgFile = (PageConfig) oin.readObject();
+//				oin.close();
+//				map.put("pgFile", pgFile);
+//				map.put("notice", true);
+//			} catch (ClassNotFoundException e) {
+//				logger.error(e);
+//				map.put("notice", false);
+//				map.put("message", "系统错误!");
+//			}
+//		} catch (FileNotFoundException e) {
+//			logger.error(e);
+//			map.put("notice", false);
+//			map.put("message", pgFileName + "文件不存在!");
+//		} catch (IOException e) {
+//			logger.error(e);
+//			map.put("notice", false);
+//			map.put("message", "系统错误!");
+//		}
 		return map;
 	}
 
@@ -238,16 +317,19 @@ public class PageConfigController {
 	 */
 	@RequestMapping("/loadTemplateList")
 	@ResponseBody
-	public Map<String, Object> loadtemplatelist(HttpServletRequest request) {
+	public Map<String, Object> loadtemplatelist(HttpServletRequest request,HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		File file = new File(BaseConfig.TEMPLATE_ROOT);
-		if (file.isDirectory()) {
-			String[] files = file.list();
-			map.put("list", files);
-		}
+		String siteName = session.getAttribute("siteName").toString();
+		
+		List<DbFile> list= mdu.findAll(DbFile.class, siteName + "_template");
+		map.put("list", list);
+//		File file = new File(BaseConfig.TEMPLATE_ROOT);
+//		if (file.isDirectory()) {
+//			String[] files = file.list();
+//			map.put("list", files);
+//		}
 
 		return map;
-
 	}
 
 }

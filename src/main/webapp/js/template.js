@@ -1,19 +1,17 @@
 function loadTemplateFile(obj) {
 	load();
-	var fileName = $(obj).text();
-	var filePath = template_root;
+	var fileName = obj;
 	$("#templateName").textbox('setValue',fileName);
 	$.ajax({
-		url : root + '/loadFileContent',
+		url : root + '/loadTemplate',
 		type : 'POST',
 		sync : false,
 		data : {
-			filePath : filePath,
+			fileType : "template",
 			fileName : fileName
 		},
 		success : function(data) {
 			if (data.notice == true) {
-//				$("#template_content").val(data.message);
 				templateEditor.setValue(data.message);
 			} else {
 				$.messager.alert('发生错误',data.message,'error');
@@ -35,8 +33,8 @@ function saveTemplate() {
 		url : root + '/saveTemplate',
 		type : 'POST',
 		data : {
-			'templateName' : templateName,
-			'templateContent' : templateContent
+			templateName : templateName,
+			templateContent : templateContent
 		},
 		sync : false,
 		success : function(data) {

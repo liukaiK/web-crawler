@@ -1,27 +1,110 @@
 package com.esd.common;
 
+import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
+import com.esd.collection.DbFile;
+import com.esd.collection.DbPgFile;
 import com.esd.collection.Downloads;
 import com.esd.collection.History;
 import com.esd.collection.Urls;
 import com.esd.core.CollectionPage;
 import com.esd.dao.MongoDBDao;
 import com.esd.util.Md5;
+import com.esd.util.SpringContextUtil;
+import com.esd.util.UtilFile;
+import com.mongodb.WriteResult;
 
 @Repository
 public class MongoDBUtil {
-	
+
 	@Resource
+	@Autowired
 	private MongoDBDao mongoDBDao;
+	
+	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+	
+	private Collection<Object> db = new ArrayList<Object>();
 
 	private static Logger logger = Logger.getLogger(CollectionPage.class);
-
+	
+	
+	/**
+	 * liukai-2016.10.11
+	 * @param fileName
+	 * @param collectionName
+	 * @return
+	 */
+	public <T> DbFile findOne(String fileName, String collectionName) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("fileName").is(fileName));
+		return mongoDBDao.findOne(query, DbFile.class, collectionName);
+	}
+	
+	
+	
+	/**
+	 * liukai-2016.10.11
+	 * @param fileName
+	 * @param content
+	 * @param siteName
+	 * @param collectionName
+	 * @return
+	 * @throws UnsupportedEncodingException 
+	 */
+	public WriteResult upsert(String fileName, String content, String siteName, String collectionName) throws UnsupportedEncodingException {
+		String date = sdf.format(new Date());
+		String filedir = File.separator + fileName;
+		byte[] fileByte = content.getBytes("UTF-8");
+		String md5File = Md5.getMd5File(fileByte);
+		
+		Query query = new Query();
+		query.addCriteria(Criteria.where("fileName").is(fileName));
+		query.addCriteria(Criteria.where("siteName").is(siteName));
+		
+		Update update = new Update();
+//		update.set("createDate", date);
+		update.set("fileByte", fileByte);
+		update.set("filedir", filedir);
+		update.set("fileName", fileName);
+		update.set("md5File", md5File);
+		update.set("siteName", siteName);
+		update.set("updateDate", date);
+		
+		return mongoDBDao.upsert(query, update, collectionName);
+	}
+	
+	
+	/**
+	 * liukai-2016.10.11
+	 * @param fileName
+	 * @param collectionName
+	 * @return
+	 */
+	public WriteResult remove(String fileName, String collectionName) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("fileName").is(fileName));
+		return mongoDBDao.remove(query, collectionName);
+	}
+	
+	
+	
+	
 	public Long getDownloadsCount() {
 		return mongoDBDao.count(new Query(), Downloads.class);
 	}
@@ -29,7 +112,7 @@ public class MongoDBUtil {
 	public Long getUrlsCount() {
 		return mongoDBDao.count(new Query(), Urls.class);
 	}
-
+	
 	public void dropTable() {
 		mongoDBDao.dropCollection(Downloads.class);
 		mongoDBDao.dropCollection(Urls.class);
@@ -64,7 +147,6 @@ public class MongoDBUtil {
 		return obj;
 	}
 
-
 	public void urlsInsert(Urls urlsCollections, String title) {
 		if (urlsCollections == null) {
 			return;
@@ -92,6 +174,163 @@ public class MongoDBUtil {
 		history.setMd5(md);
 		history.setState(urlsCollections.getState());
 		mongoDBDao.insert(history);
+	}
+	/**
+	 * cx-20160926
+	 */
+	public void insertFile(String fileName, byte[] fileByte, String filedir, String siteName, String type){
+		DbFile df = new DbFile();
+		String md5File = Md5.getMd5File(fileByte);
+//		df.setCreateDate(new Date());
+		df.setFileByte(fileByte);
+		df.setFiledir(filedir);
+		df.setFileName(fileName);
+		df.setMd5File(md5File);
+		df.setSiteName(siteName);
+//		df.setUpdateDate(new Date());
+		mongoDBDao.insert(df, siteName + "_" + type);
+	}
+	
+	
+	public void insertPg(DbPgFile dbPgFile,String siteName){
+		mongoDBDao.insert(dbPgFile, siteName+"_pg");
+	}
+	/**
+	 * cx-20160927
+	 * 删除file
+	 */
+	public <T> void delete(String fileName,String siteName,String type,Class<T> c){
+		Criteria criatira = new Criteria();
+		criatira.andOperator(Criteria.where("fileName").is(fileName));
+		
+		mongoDBDao.delete(new Query(criatira), fileName, siteName+"_"+type,c);
+	}
+	/**
+	 * cx-20160928
+	 * 按条件查询一条数据
+	 * 返回DbFile类型数据
+	 */
+	public <T> T findOneByCollectionName(String collectionName,String fileName,Class<T> entityClass){
+		Criteria criatira = new Criteria();
+		criatira.andOperator(Criteria.where("fileName").is(fileName)); 
+		return mongoDBDao.findOneByCollectionName(new Query(criatira),entityClass ,collectionName);
+	}
+	/**
+	 * 
+	 */
+	public void insertFile(String fileName,String content,String filedir,String siteName,String fileType,boolean ctrl){
+		
+		if(!ctrl){
+			MongoDBDao mongoDBDao = (MongoDBDao)SpringContextUtil.getBean("mongoDBDao");
+			mongoDBDao.inserts(db,siteName + "_" + fileType);
+		}
+		Md5 md5 = new Md5();
+		String md5File =  md5.getMd5(content);
+		//String bb = new String(b); 1474447098246
+		//存入mongodb
+		byte[] fileByte = new byte[content.length()]; 
+		fileByte = content.getBytes();
+		DbFile df = new DbFile();
+//		df.setId(1);
+//		df.setUserId("123456");
+		df.setFileName(fileName);
+		df.setFileByte(fileByte);
+		df.setMd5File(md5File);
+		df.setFiledir(filedir);
+//		df.setCreateDate(new Date());
+//		df.setUpdateDate(new Date());
+		df.setSiteName(siteName);
+		
+		db.add(df);
+		//新线程中重新获取bean
+		
+		//mongoDBDao.insert1(df,"_html");
+		//
+	}
+	/**
+	 * 批量插入数据，输入域名（表名）
+	 * cx-20160909
+	 * @param obj
+	 * @param collectionName
+	 */
+	public void insertFiles(String collectionName,String url,String siteName){
+		System.out.println("db!");
+		File fold = new File(url);
+		if (fold.exists()) {
+			
+			System.out.println("路径："+url+"\n"+"表名："+collectionName);
+			//文件组
+			File[] file = fold.listFiles();
+			byte[] fileByte = null; 
+			String md5File = null;
+			String fileName = null;
+			int m = 1;
+			Collection<Object> db = new ArrayList<Object>();
+
+			Md5 md5 = new Md5();
+			System.out.println("文件长："+file.length);
+			for (int i = 0; i < file.length; i++) {
+				if(!file[i].isDirectory()){
+					
+					fileName = file[i].getName();
+					
+					fileByte = UtilFile.FiletoBytes(file[i]);
+					md5File = md5.getMd5File(fileByte);
+					//fileName = md5.getMd5(fileName);
+					
+					DbFile df = new DbFile();
+//					df.setId(m);
+//					df.setUserId("00000");
+					df.setFileName(fileName);
+					df.setFileByte(fileByte);
+					df.setMd5File(md5File);
+//					df.setCreateDate(new Date());
+//					df.setUpdateDate(new Date());
+					df.setSiteName(siteName);
+					
+					m++;
+					db.add(df);
+				}
+			}
+			
+			mongoDBDao.inserts(db, collectionName);
+			System.out.println("db3!");
+		}
+	}
+	/**
+	 * 取得项目根目录
+	 * cx-20160910
+	 * @param request
+	 * @return
+	 */
+	public String url(HttpServletRequest request) {
+		String url = request.getSession().getServletContext().getRealPath("/");
+		return url;
+	}
+	/**
+	 * cx-201609110
+	 * 查询file
+	 */
+	public DbFile findFile(Query query){
+		return mongoDBDao.findOne(query, DbFile.class);
+	}
+	/**
+	 * cx-201609110
+	 * 查询files
+	 */
+	public List<DbFile> findFiles(Query query){		
+		return mongoDBDao.find(query, DbFile.class);
+	}
+	/**
+	 * cx-20160920
+	 * 查询files by collectionName
+	 * @param entityClass
+	 * @param collectionName
+	 * @return
+	 */
+	public <T> List<T> findAll(Class<T> entityClass,String collectionName) {
+		
+		return this.mongoDBDao.findAll(entityClass, collectionName);
 	}
 
 }
