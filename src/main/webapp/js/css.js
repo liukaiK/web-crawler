@@ -3,16 +3,14 @@ function loadCssFile(obj) {
 	var fileName = obj;
 	$("#cssName").textbox('setValue', fileName);
 	$.ajax({
-		url : root + '/loadFileContent',
+		url : root + '/loadCss',
 		type : 'POST',
 		sync : false,
 		data : {
-			fileType : "css",
 			fileName : fileName
 		},
 		success : function(data) {
 			if (data.notice == true) {
-//				$("#css_content").val(data.message);
 				cssEditor.setValue(data.message);
 			} else {
 				$.messager.alert('发生错误',data.message,'error');

@@ -7,7 +7,6 @@ function loadTemplateFile(obj) {
 		type : 'POST',
 		sync : false,
 		data : {
-			fileType : "template",
 			fileName : fileName
 		},
 		success : function(data) {

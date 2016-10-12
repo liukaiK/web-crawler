@@ -41,7 +41,7 @@ public class LoginController {
 
 	/**
 	 * 登录
-	 * 
+	 * liukai-2016-10.12
 	 * @param username
 	 * @param password
 	 * @param code
@@ -49,21 +49,21 @@ public class LoginController {
 	 * @return
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView login(String username, String password, String code, HttpServletRequest request, HttpSession session) {
+	public ModelAndView login(String username, String password, String code, HttpSession session) {
 		if (!Util.isNull(username, password, code)) {
-			if (code.equals(request.getSession().getAttribute("randomCode"))) {
+			if (code.equals(session.getAttribute("randomCode"))) {
 				if (this.username.equals(username) || this.password.equals(password)) {
-					request.getSession().setAttribute(BaseConfig.USER, username);
+					session.setAttribute(BaseConfig.USER, username);
+					session.setAttribute("siteName", "szft"); //TODO 以后去掉这句
 					logger.debug("------------------登录成功!----------------");
-					session.setAttribute("siteName", "szft");
 					return new ModelAndView("redirect:admin/access");
 				} else {
-					request.getSession().setAttribute(BaseConfig.MESSAGE, "用户名或密码错误!");
+					session.setAttribute(BaseConfig.MESSAGE, "用户名或密码错误!");
 					logger.debug("------------------用户名或密码错误!----------------");
 					return new ModelAndView("redirect:login");
 				}
 			} else {
-				request.getSession().setAttribute(BaseConfig.MESSAGE, "验证码错误!");
+				session.setAttribute(BaseConfig.MESSAGE, "验证码错误!");
 				logger.debug("------------------验证码错误!----------------");
 				return new ModelAndView("redirect:login");
 			}
@@ -74,13 +74,13 @@ public class LoginController {
 
 	/**
 	 * 退出登录
-	 * 
+	 * liukai-2016-10.12
 	 * @param request
 	 * @return
 	 */
 	@RequestMapping(value = "/logout")
-	public ModelAndView logout(HttpServletRequest request) {
-		request.getSession().removeAttribute(BaseConfig.USER);
+	public ModelAndView logout(HttpSession session) {
+		session.removeAttribute(BaseConfig.USER);
 		logger.debug("-------------------清除session 退出用户!----------------");
 		return new ModelAndView("redirect:login");
 	}

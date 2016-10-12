@@ -48,10 +48,6 @@ function loadPgFileList() {
 		success : function(data) {
 			if (data.list != null) {
 				$("#pgFileList").empty();
-				//for (var i = 0; i < data.list.length; i++) {
-				//	$("#pgFileList").append("<p><a href='#' onclick='loadPgFile(this)' >" + data.list[i].get + "</a></p>");
-				//}
-				//cx-20160923
 				$.each(data.list,function(i,item){
 					$("#pgFileList").append("<p><a href='#' onclick='loadPgFile("+'"'+item.fileName+'"'+")' >" + item.fileName + "</a></p>");		
 				});
@@ -96,7 +92,7 @@ function loadCssFileList() {
 			if (data.list != null) {
 				$("#cssFileList").empty();
 				$.each(data.list,function(i,item){
-					$("#cssFileList").append("<p><a href='#' onclick='loadCssFile(item.fileName)' >" + item.fileName + "</a></p>");
+					$("#cssFileList").append("<p><a href='#' onclick='loadCssFile("+'"'+item.fileName+'"'+")' >" + item.fileName + "</a></p>");
 				});
 			}
 		},
@@ -107,7 +103,7 @@ function loadCssFileList() {
 
 function loadJsFileList(){
 	$.ajax({
-		url : root + '/core/loadFileList',
+		url : root + '/loadJsList',
 		type : 'POST',
 		sync : false,
 		data : {
@@ -117,11 +113,8 @@ function loadJsFileList(){
 			if (data.list != null) {
 				$("#jsFileList").empty();
 				$.each(data.list,function(i,item){
-					$("#jsFileList").append("<p><a href='#' onclick='loadJsFile(item.fileName)' >" + item.fileName + "</a></p>");
+					$("#jsFileList").append("<p><a href='#' onclick='loadJsFile("+'"'+item.fileName+'"'+")' >" + item.fileName + "</a></p>");
 				});
-//				for ( var i = 0; i < data.list.length; i++) {
-//					$("#jsFileList").append("<p><a href='#' onclick='loadJsFile(this)' >" + data.list[i] + "</a></p>");
-//				}
 			}
 		},
 		error : function() {

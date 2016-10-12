@@ -1,4 +1,4 @@
-package com.esd.controller;
+package com.esd.controller.file;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
@@ -18,67 +18,49 @@ import com.esd.collection.DbFile;
 import com.esd.common.MongoDBUtil;
 
 /**
- * 模板控制器
+ * 样式控制器
  * 
  * @author K'
  * 
  */
 @Controller
 @RequestMapping("/admin")
-public class TemplateController {
+public class CssController {
 
-	private static Logger logger = Logger.getLogger(TemplateController.class);
+	private static Logger logger = Logger.getLogger(CssController.class);
+	
+	private final String fileType = "css";
 	
 	@Autowired
 	private MongoDBUtil mdu;
 
-	/**
-	 * liukai-2016.10.11
-	 * @param templateName
-	 * @param templateContent
-	 * @param session
-	 * @return
-	 * @throws UnsupportedEncodingException 
-	 */
-	@RequestMapping(value = "/saveTemplate", method = RequestMethod.POST)
+	@RequestMapping(value = "/saveCss", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> saveTemplate(String templateName, String templateContent, HttpSession session) throws UnsupportedEncodingException {
+	public Map<String, Object> saveCss(String cssName, String cssContent, HttpSession session) throws UnsupportedEncodingException {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String siteName = session.getAttribute("siteName").toString();
-		String collectionName = siteName + "_" + "template";
-		mdu.upsert(templateName, templateContent, siteName, collectionName);
+		String collectionName = siteName + "_" + fileType;
+		mdu.upsert(cssName, cssContent, siteName, collectionName);
 		map.put("notice", true);
-		map.put("message", templateName + "模板文件保存成功!");
+		map.put("message", cssName + "样式文件保存成功!");
 		return map;
 	}
 
-	/**
-	 * liukai-2016.10.11
-	 * @param templateName
-	 * @param session
-	 * @return
-	 */
-	@RequestMapping(value = "/deleteTemplate", method = RequestMethod.POST)
+	@RequestMapping(value = "/deleteCss", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> deleteTemplate(String templateName, HttpSession session) {
+	public Map<String, Object> deleteCss(String cssName, HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String siteName = session.getAttribute("siteName").toString();
-		String collectionName = siteName + "_" + "template";
-		mdu.remove(templateName, collectionName);
+		String collectionName = siteName + "_" + fileType;
+		mdu.remove(cssName, collectionName);
 		map.put("notice", true);
-		map.put("message", templateName + "模板文件删除成功!");
+		map.put("message", cssName + "样式文件删除成功!");
 		return map;
 	}
 	
-	/**
-	 * liukai-2016.10.11
-	 * @param fileType
-	 * @param session
-	 * @return
-	 */
-	@RequestMapping("/loadTemplateList")
+	@RequestMapping("/loadCssList")
 	@ResponseBody
-	public Map<String, Object> loadTemplateList(String fileType, HttpSession session) {
+	public Map<String, Object> loadCssList(HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String siteName = session.getAttribute("siteName").toString();
 		if(siteName != null){
@@ -91,20 +73,12 @@ public class TemplateController {
 		return map;
 	}
 	
-	/**
-	 * liukai-2016.10.11
-	 * @param fileType
-	 * @param fileName
-	 * @param session
-	 * @return
-	 */
-	@RequestMapping(value = "/loadTemplate", method = RequestMethod.POST)
+	@RequestMapping(value = "/loadCss", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> loadTemplate(String fileType, String fileName, HttpSession session) {
+	public Map<String, Object> loadCss(String fileName, HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String siteName = session.getAttribute("siteName").toString();
 		String collectionName = siteName + "_" + fileType;
-//		DbFile df = mdu.findOneByCollectionName(siteName + "_" + fileType, fileName, DbFile.class);
 		DbFile df = mdu.findOne(fileName, collectionName);
 		byte[] buf = df.getFileByte();
 		try {
@@ -116,5 +90,4 @@ public class TemplateController {
 		}
 		return map;
 	}
-
 }

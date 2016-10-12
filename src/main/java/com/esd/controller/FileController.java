@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -46,116 +45,9 @@ public class FileController {
 		mdu.delete(pgFileName, siteName, "pg",DbFile.class);
 		map.put("notice", true);
 		map.put("message", pgFileName + "规则文件删除成功!");
-//		File file = new File(BaseConfig.PG_ROOT + File.separator + pgFileName + ".pg");
-//		if (file.isFile()) {
-//			if (file.getAbsoluteFile().delete()) {
-//				map.put("notice", true);
-//				map.put("message", pgFileName + "规则文件删除成功!");
-//			} else {
-//				map.put("notice", false);
-//				map.put("message", pgFileName + "规则文件删除失败!");
-//			}
-//		} else {
-//			map.put("notice", false);
-//			map.put("message", pgFileName + "规则文件删除失败!");
-//		}
 		return map;
 
 	}
-	
-	/**
-	 * 获取模版列表
-	 * 
-	 * @param request
-	 * @return
-	 */
-//	@RequestMapping("/loadFileList")
-//	@ResponseBody
-//	public Map<String, Object> loadFilelist(String fileType, HttpServletRequest request, HttpSession session) {
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		String siteName = session.getAttribute("siteName").toString();
-//		if(siteName != null){
-//			siteName = siteName + "_" + fileType;
-//			List<DbFile> list= mdu.findAll(DbFile.class, siteName);
-//			map.put("list", list);
-//		}else{
-//			map.put("list", null);
-//		}
-//		return map;
-//	}
-	
-	
-	@RequestMapping(value = "/saveJs", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> saveJs(String jsContent, String jsName, HttpServletRequest request,HttpSession session) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		/**
-		 * cx-20160926
-		 * 存入mongodb
-		 */
-		String filedir = File.separator + "etc" + File.separator + "js" + File.separator + jsName;
-		String siteName = session.getAttribute("siteName").toString();
-		
-		mdu.insertFile(jsName, jsContent.getBytes(), filedir, siteName, "template");
-		map.put("notice", true);
-		map.put("message", jsName + "脚本文件保存成功!");
-		
-//		try {
-//			Util.createNewFile(jsContent,BaseConfig.JS_ROOT + File.separator + jsName);
-//			map.put("notice", true);
-//			map.put("message", jsName + "脚本文件保存成功!");
-//		} catch (IOException e) {
-//			map.put("notice", false);
-//			map.put("message", jsName + "脚本文件保存失败!");
-//		}
-		return map;
-	}	
-	
-	
-	@RequestMapping(value = "/deleteJs", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> deleteJs(String jsName, HttpServletRequest request,HttpSession session) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		String siteName = session.getAttribute("siteName").toString();
-		
-		mdu.delete(jsName, siteName, "template",DbFile.class);
-		map.put("notice", true);
-		map.put("message", jsName + "脚本文件删除成功!");
-//		File file = new File(BaseConfig.JS_ROOT + File.separator + jsName);
-//		if (file.isFile()) {
-//			if (file.getAbsoluteFile().delete()) {
-//				map.put("notice", true);
-//				map.put("message", jsName + "脚本文件删除成功!");
-//			} else {
-//				map.put("notice", false);
-//				map.put("message", jsName + "脚本文件删除失败!");
-//			}
-//		} else {
-//			map.put("notice", false);
-//			map.put("message", jsName + "脚本文件删除失败!");
-//		}
-		return map;
-	}
-	
-//	@RequestMapping(value = "/loadFileContent", method = RequestMethod.POST)
-//	@ResponseBody
-//	public Map<String, Object> loadFileContent(String fileType, String fileName, HttpServletRequest request,HttpSession session) {
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		String siteName = session.getAttribute("siteName").toString();
-//		
-//		DbFile df = mdu.findOneByCollectionName(siteName+"_"+fileType, fileName,DbFile.class);
-//		byte[] buf = df.getFileByte();
-//		try {
-//			String s = new String(buf,"utf-8");
-//			map.put("notice", true);
-//			map.put("message", s);
-//		} catch (UnsupportedEncodingException e) {
-//			e.printStackTrace();
-//		}
-//		return map;
-//	}
-	
 	
 	/**
 	 * 这里这里用的是MultipartFile[] myfiles参数,所以前台就要用<input type="file"
@@ -263,34 +155,5 @@ public class FileController {
 		}
 
 	}
-
-	@RequestMapping("/loadJsList")
-	@ResponseBody
-	public Map<String, Object> loadjslist(HttpServletRequest request) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		File js_file = new File(BaseConfig.JS_ROOT);
-		if (js_file.isDirectory()) {
-			String[] files = js_file.list();
-			map.put("list", files);
-		}
-		return map;
-	}
-
-//	@RequestMapping("/loadCssList")
-//	@ResponseBody
-//	public Map<String, Object> loadCssList(HttpServletRequest request,HttpSession session) {
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		String siteName = session.getAttribute("siteName").toString();
-//		
-//		List<DbFile> l = mdu.findAll(DbFile.class,siteName +"_css");
-//		
-//		map.put("list", l);
-//		File js_file = new File(BaseConfig.CSS_ROOT);
-//		if (js_file.isDirectory()) {
-//			String[] files = js_file.list();
-//			map.put("list", files);
-//		}
-//		return map;
-//	}
 
 }
