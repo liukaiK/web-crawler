@@ -142,8 +142,8 @@
 }
 </style>
 <script type="text/javascript">
-	var urlsTextArea = document.getElementById("urls");
-	var urlsTextArea = CodeMirror.fromTextArea(urlsTextArea, {
+	var urls_content = document.getElementById("urls");
+	var urlsTextArea = CodeMirror.fromTextArea(urls_content, {
 		keyMap: "sublime",
 		styleActiveLine : true,
 		lineNumbers : true

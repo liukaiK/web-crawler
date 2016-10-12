@@ -3,28 +3,21 @@ package com.esd.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.esd.collection.DbFile;
-import com.esd.common.MongoDBUtil;
 import com.esd.config.BaseConfig;
 import com.esd.core.CollectionPage;
 
@@ -33,21 +26,6 @@ import com.esd.core.CollectionPage;
 public class FileController {
 	
 	private static Logger logger = Logger.getLogger(CollectionPage.class);
-	@Autowired
-	private MongoDBUtil mdu;
-	
-	
-	@RequestMapping("/deletePgFile")
-	@ResponseBody
-	public Map<String, Object> deletePgFile(String pgFileName, HttpServletRequest request,HttpSession session) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		String siteName = session.getAttribute("siteName").toString();
-		mdu.delete(pgFileName, siteName, "pg",DbFile.class);
-		map.put("notice", true);
-		map.put("message", pgFileName + "规则文件删除成功!");
-		return map;
-
-	}
 	
 	/**
 	 * 这里这里用的是MultipartFile[] myfiles参数,所以前台就要用<input type="file"

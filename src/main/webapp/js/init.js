@@ -42,7 +42,7 @@ function easyuipanel() {
 
 function loadPgFileList() {
 	$.ajax({
-		url : root + '/core/loadPgFileList',
+		url : root + '/loadPgFileList',
 		type : 'POST',
 		sync : false,
 		success : function(data) {

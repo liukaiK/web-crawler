@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.esd.collection.DbFile;
 import com.esd.common.MongoDBUtil;
+import com.esd.dao.file.FileDao;
 
 /**
  * 样式控制器
@@ -32,7 +33,7 @@ public class CssController {
 	private final String fileType = "css";
 	
 	@Autowired
-	private MongoDBUtil mdu;
+	private FileDao fileDao;
 
 	@RequestMapping(value = "/saveCss", method = RequestMethod.POST)
 	@ResponseBody
@@ -40,7 +41,7 @@ public class CssController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String siteName = session.getAttribute("siteName").toString();
 		String collectionName = siteName + "_" + fileType;
-		mdu.upsert(cssName, cssContent, siteName, collectionName);
+		fileDao.upsertFile(cssName, cssContent, siteName, collectionName);
 		map.put("notice", true);
 		map.put("message", cssName + "样式文件保存成功!");
 		return map;
@@ -52,7 +53,7 @@ public class CssController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String siteName = session.getAttribute("siteName").toString();
 		String collectionName = siteName + "_" + fileType;
-		mdu.remove(cssName, collectionName);
+		fileDao.removeFileByName(cssName, collectionName);
 		map.put("notice", true);
 		map.put("message", cssName + "样式文件删除成功!");
 		return map;
@@ -65,7 +66,7 @@ public class CssController {
 		String siteName = session.getAttribute("siteName").toString();
 		if(siteName != null){
 			String collectionName = siteName + "_" + fileType;
-			List<DbFile> list= mdu.findAll(DbFile.class, collectionName);
+			List<DbFile> list= fileDao.findAll(DbFile.class, collectionName);
 			map.put("list", list);
 		}else{
 			map.put("list", null);
@@ -79,7 +80,7 @@ public class CssController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String siteName = session.getAttribute("siteName").toString();
 		String collectionName = siteName + "_" + fileType;
-		DbFile df = mdu.findOne(fileName, collectionName);
+		DbFile df = fileDao.findFileByName(fileName, collectionName);
 		byte[] buf = df.getFileByte();
 		try {
 			String content = new String(buf,"utf-8");

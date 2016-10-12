@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -75,15 +74,15 @@ public class FileDbController {
 				  oin.close();
 				  
 				  DbPgFile dpf = new DbPgFile();
-					dpf.setCreateDate(new Date());
-					dpf.setFiledir(filedir);
-					dpf.setFileName(fileName);
-					dpf.setMd5File(pgFile.toString());
-					dpf.setPageConfig(pgFile);
-					dpf.setSiteName(siteName);
-					dpf.setUpdateDate(new Date());
-					dpf.setUserId("0001");
-					dpf.setId(mm);
+//					dpf.setCreateDate(new Date());
+//					dpf.setFiledir(filedir);
+//					dpf.setFileName(fileName);
+//					dpf.setMd5File(pgFile.toString());
+//					dpf.setPageConfig(pgFile);
+//					dpf.setSiteName(siteName);
+//					dpf.setUpdateDate(new Date());
+//					dpf.setUserId("0001");
+//					dpf.setId(mm);
 					mdu.insertPg(dpf, siteName + "_pg");
 				  mm++;	  
 			  }

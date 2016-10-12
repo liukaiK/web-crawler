@@ -1,11 +1,9 @@
 package com.esd.common;
 
 import java.io.File;
-import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -15,7 +13,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import com.esd.collection.DbFile;
@@ -28,7 +25,6 @@ import com.esd.dao.MongoDBDao;
 import com.esd.util.Md5;
 import com.esd.util.SpringContextUtil;
 import com.esd.util.UtilFile;
-import com.mongodb.WriteResult;
 
 @Repository
 public class MongoDBUtil {
@@ -44,63 +40,32 @@ public class MongoDBUtil {
 	private static Logger logger = Logger.getLogger(CollectionPage.class);
 	
 	
-	/**
-	 * liukai-2016.10.11
-	 * @param fileName
-	 * @param collectionName
-	 * @return
-	 */
-	public <T> DbFile findOne(String fileName, String collectionName) {
-		Query query = new Query();
-		query.addCriteria(Criteria.where("fileName").is(fileName));
-		return mongoDBDao.findOne(query, DbFile.class, collectionName);
-	}
+
 	
 	
 	
-	/**
-	 * liukai-2016.10.11
-	 * @param fileName
-	 * @param content
-	 * @param siteName
-	 * @param collectionName
-	 * @return
-	 * @throws UnsupportedEncodingException 
-	 */
-	public WriteResult upsert(String fileName, String content, String siteName, String collectionName) throws UnsupportedEncodingException {
-		String date = sdf.format(new Date());
-		String filedir = File.separator + fileName;
-		byte[] fileByte = content.getBytes("UTF-8");
-		String md5File = Md5.getMd5File(fileByte);
-		
-		Query query = new Query();
-		query.addCriteria(Criteria.where("fileName").is(fileName));
-		query.addCriteria(Criteria.where("siteName").is(siteName));
-		
-		Update update = new Update();
-//		update.set("createDate", date);
-		update.set("fileByte", fileByte);
-		update.set("filedir", filedir);
-		update.set("fileName", fileName);
-		update.set("md5File", md5File);
-		update.set("siteName", siteName);
-		update.set("updateDate", date);
-		
-		return mongoDBDao.upsert(query, update, collectionName);
-	}
 	
 	
-	/**
-	 * liukai-2016.10.11
-	 * @param fileName
-	 * @param collectionName
-	 * @return
-	 */
-	public WriteResult remove(String fileName, String collectionName) {
-		Query query = new Query();
-		query.addCriteria(Criteria.where("fileName").is(fileName));
-		return mongoDBDao.remove(query, collectionName);
-	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -191,9 +156,13 @@ public class MongoDBUtil {
 		mongoDBDao.insert(df, siteName + "_" + type);
 	}
 	
-	
+	/**
+	 * 新增pg插入数据库
+	 * @param dbPgFile
+	 * @param siteName
+	 */
 	public void insertPg(DbPgFile dbPgFile,String siteName){
-		mongoDBDao.insert(dbPgFile, siteName+"_pg");
+		mongoDBDao.insert(dbPgFile, siteName + "_pg");
 	}
 	/**
 	 * cx-20160927

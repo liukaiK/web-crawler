@@ -2,10 +2,7 @@ package com.esd.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,12 +17,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.esd.collection.DbFile;
-import com.esd.collection.DbPgFile;
 import com.esd.common.CatDao;
 import com.esd.common.MongoDBUtil;
 import com.esd.config.BaseConfig;
-import com.esd.config.NodeConfig;
 import com.esd.config.PageConfig;
 import com.esd.download.EsdDownLoadHtml;
 import com.esd.util.Util;
@@ -152,184 +146,6 @@ public class PageConfigController {
 		return map;
 	}
 	
-	@RequestMapping("/savePgFile")
-	@ResponseBody
-	public Map<String, Object> savePgFile(HttpServletRequest request,HttpSession session) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		String pgName = request.getParameter("pgName");
-		String javaScriptEnabled = request.getParameter("javaScriptEnabled");
-		String template = request.getParameter("template");
-		String sleep = request.getParameter("sleep");
-		String url = request.getParameter("url");
-		String[] rules = request.getParameterValues("rules[]");
-		String[] urls = request.getParameterValues("urls[]");
-		String siteName = session.getAttribute("siteName").toString();
-		
-		PageConfig pageConfig = new PageConfig();
-		pageConfig.setJavaScriptEnabled(Boolean.valueOf(javaScriptEnabled));
-		pageConfig.setSleep(Long.valueOf(sleep));
-		pageConfig.setUrl(url);
-		
-		if (rules != null) {
-			for (String s : rules) {
-				String[] rule = s.split("&");
-				NodeConfig nc = new NodeConfig();
-				nc.setDes(rule[0]);
-				nc.setParent(rule[1]);
-				nc.setTag(rule[2]);
-				nc.setType(rule[3]);
-				nc.setName(rule[4]);
-				nc.setIndex(rule[5]);
-				nc.setAnchorId(rule[6]);
-				pageConfig.getList().add(nc);
-			}
-		}
-		pageConfig.setTemplate(template);
-		
-		
-		List<String> urlList = new ArrayList<String>();
-		for (int i = 0; i < urls.length; i++) {
-			urlList.add(urls[i]);
-		}
-		pageConfig.setUrls(urlList);
-		/**
-		 * cx-201609222
-		 * pg存入数据库
-		 */
-		//String filedir = BaseConfig.PG_ROOT + File.separator + pgName + ".pg";
-		String filedir =  File.separator + "db" + File.separator + pgName + ".pg";
-		DbPgFile dpf = new DbPgFile();
-		dpf.setCreateDate(new Date());
-		dpf.setFiledir(filedir);
-		dpf.setFileName(pgName);
-		dpf.setMd5File(pageConfig.toString());
-		dpf.setPageConfig(pageConfig);
-		dpf.setSiteName(siteName);
-		dpf.setUpdateDate(new Date());
-		dpf.setUserId("0001");
-		//fileByte = SerializeUtil.serializeObject(pageConfig);
-		mdu.insertPg(dpf, siteName);
-		
-		map.put("notice", true);
-		map.put("message", pgName + "规则保存成功");
-		/**
-		 * 序列化该实体类
-		 */
-//		ObjectOutputStream out = null;
-//		File file = new File(BaseConfig.PG_ROOT + File.separator + pgName + ".pg");
-//		try {
-//			out = new ObjectOutputStream(new FileOutputStream(file));
-//			out.writeObject(pageConfig);
-//			out.close();
-//			map.put("notice", true);
-//			map.put("message", pgName + "规则保存成功");
-//		} catch (Exception e) {
-//			logger.error(e);
-//			map.put("notice", false);
-//			map.put("message", pgName + "规则保存失败");
-//		} finally {
-//			try {
-//				if (out != null) {
-//					out.close();
-//				}
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//
-//		}
-		return map;
-	}
 
-	/**
-	 * 获取pageConfig列表
-	 * 
-	 * @param request
-	 * @return
-	 */
-	@RequestMapping("/loadPgFileList")
-	@ResponseBody
-	public Map<String, Object> loadPgFileList(HttpServletRequest request,HttpSession session) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		String siteName = session.getAttribute("siteName").toString();
-		//从本地取
-		//File file = new File(BaseConfig.PG_ROOT);
-		//String[] files = file.list();
-		/*****************************/
-		//从mongodb取（cx-20160923）
-		
-		List<DbPgFile> pgs = mdu.findAll(DbPgFile.class,siteName+"_pg");
-		map.put("list", pgs);
-		return map;
-	}
-
-	/**
-	 * 载入pageConfig文件
-	 * 
-	 * @param request
-	 * @return
-	 */
-	@RequestMapping("/loadPgFile")
-	@ResponseBody
-	public Map<String, Object> loadPgFile(String pgFileName, HttpServletRequest request,HttpSession session) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		System.out.println("pg的controller进来了！！！");
-		System.out.println(pgFileName);
-		//cx-20160928 从mongodb取数据
-		String siteName = session.getAttribute("siteName").toString();
-		DbPgFile df = mdu.findOneByCollectionName(siteName + "_pg", pgFileName,DbPgFile.class);
-		System.out.println("fd.Filedir:"+df.getFiledir());
-		
-		PageConfig pgFile = df.getPageConfig();
-		
-		map.put("pgFile", pgFile);
-		map.put("notice", true);
-		/**************************************************/
-//		File file = new File(BaseConfig.PG_ROOT + File.separator + pgFileName);
-//		try {
-//			ObjectInputStream oin = new ObjectInputStream(new FileInputStream(file));
-//			try {
-//				PageConfig pgFile = (PageConfig) oin.readObject();
-//				oin.close();
-//				map.put("pgFile", pgFile);
-//				map.put("notice", true);
-//			} catch (ClassNotFoundException e) {
-//				logger.error(e);
-//				map.put("notice", false);
-//				map.put("message", "系统错误!");
-//			}
-//		} catch (FileNotFoundException e) {
-//			logger.error(e);
-//			map.put("notice", false);
-//			map.put("message", pgFileName + "文件不存在!");
-//		} catch (IOException e) {
-//			logger.error(e);
-//			map.put("notice", false);
-//			map.put("message", "系统错误!");
-//		}
-		return map;
-	}
-
-	/**
-	 * 获取模版列表
-	 * 
-	 * @param request
-	 * @return
-	 */
-	@RequestMapping("/loadTemplateList")
-	@ResponseBody
-	public Map<String, Object> loadtemplatelist(HttpServletRequest request,HttpSession session) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		String siteName = session.getAttribute("siteName").toString();
-		
-		List<DbFile> list= mdu.findAll(DbFile.class, siteName + "_template");
-		map.put("list", list);
-//		File file = new File(BaseConfig.TEMPLATE_ROOT);
-//		if (file.isDirectory()) {
-//			String[] files = file.list();
-//			map.put("list", files);
-//		}
-
-		return map;
-	}
 
 }

@@ -1,33 +1,25 @@
 package com.esd.collection;
 
-import java.util.Date;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.esd.config.PageConfig;
 
+@Document
 public class DbPgFile {
-	
-	private int id;
-	private String userId;
+	private String id;
+//	private String userId;
 	private String fileName;
 	private PageConfig pageConfig;	
 	private String filedir;
 	private String md5File;
-	private Date createDate;
-	private Date updateDate;
+//	private String createDate;
+	private String updateDate;
 	private String siteName;
-	
-
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
-	}
-	public String getUserId() {
-		return userId;
-	}
-	public void setUserId(String userId) {
-		this.userId = userId;
 	}
 	public String getFileName() {
 		return fileName;
@@ -35,7 +27,6 @@ public class DbPgFile {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-	
 	public PageConfig getPageConfig() {
 		return pageConfig;
 	}
@@ -54,16 +45,10 @@ public class DbPgFile {
 	public void setMd5File(String md5File) {
 		this.md5File = md5File;
 	}
-	public Date getCreateDate() {
-		return createDate;
-	}
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-	public Date getUpdateDate() {
+	public String getUpdateDate() {
 		return updateDate;
 	}
-	public void setUpdateDate(Date updateDate) {
+	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
 	}
 	public String getSiteName() {
@@ -72,4 +57,9 @@ public class DbPgFile {
 	public void setSiteName(String siteName) {
 		this.siteName = siteName;
 	}
+
+	
+	
+	
+	
 }

@@ -20,6 +20,16 @@ public class  MongoDBDao {
 	@Qualifier("mongoTemplate")
 	protected MongoTemplate mongoTemplate;
 	
+
+	/**
+	 * cx-20160919
+	 * @param objectToSave
+	 * @param collectionName
+	 */
+	public void insert(Object objectToSave, String collectionName) {
+		this.mongoTemplate.insert(objectToSave, collectionName);
+	}
+	
 	
 	/**
 	 * liukai-2016.10.11
@@ -56,13 +66,22 @@ public class  MongoDBDao {
 	}
 
 	
+	public <T> List<T> findAll(Class<T> entityClass, String collectionName) {
+		return this.mongoTemplate.findAll(entityClass, collectionName);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	public <T> List<T> findAll(Class<T> entityClass) {
 		return this.mongoTemplate.findAll(entityClass);
-	}
-	
-    public <T> List<T> findAll(Class<T> entityClass,String collectionName) {
-		return this.mongoTemplate.findAll(entityClass, collectionName);
 	}
 	
 	public <T> T findById(String id, Class<T> entityClass) {
@@ -102,13 +121,7 @@ public class  MongoDBDao {
 	public void insert(Object obj) {
 		this.mongoTemplate.insert(obj);
 	}
-	/**
-	 * cx-20160919
-	 * @param obj
-	 */
-	public void insert(Object obj,String collectionName) {
-		this.mongoTemplate.insert(obj, collectionName);
-	}
+
 	public void insert(Collection<Object> batchToSave,String collectionName) {
 		this.mongoTemplate.insert(batchToSave, collectionName);
 	}
@@ -124,7 +137,7 @@ public class  MongoDBDao {
 	 * 删除数据
 	 */
 	public <T> void delete(Query q,String fileName,String collectionName,Class<T> c){
-			this.mongoTemplate.findAndRemove(q, c, collectionName);
+		this.mongoTemplate.findAndRemove(q, c, collectionName);
 	}
 	
 	public void remove(Object obj) {
