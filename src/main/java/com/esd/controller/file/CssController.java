@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.esd.collection.DbFile;
-import com.esd.common.MongoDBUtil;
-import com.esd.dao.file.FileDao;
+import com.esd.service.file.FileService;
 
 /**
  * 样式控制器
@@ -33,7 +32,7 @@ public class CssController {
 	private final String fileType = "css";
 	
 	@Autowired
-	private FileDao fileDao;
+	private FileService fileService;
 
 	@RequestMapping(value = "/saveCss", method = RequestMethod.POST)
 	@ResponseBody
@@ -41,7 +40,7 @@ public class CssController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String siteName = session.getAttribute("siteName").toString();
 		String collectionName = siteName + "_" + fileType;
-		fileDao.upsertFile(cssName, cssContent, siteName, collectionName);
+		fileService.upsertFile(cssName, cssContent, siteName, collectionName);
 		map.put("notice", true);
 		map.put("message", cssName + "样式文件保存成功!");
 		return map;
@@ -53,7 +52,7 @@ public class CssController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String siteName = session.getAttribute("siteName").toString();
 		String collectionName = siteName + "_" + fileType;
-		fileDao.removeFileByName(cssName, collectionName);
+		fileService.removeFileByName(cssName, collectionName);
 		map.put("notice", true);
 		map.put("message", cssName + "样式文件删除成功!");
 		return map;
@@ -66,7 +65,7 @@ public class CssController {
 		String siteName = session.getAttribute("siteName").toString();
 		if(siteName != null){
 			String collectionName = siteName + "_" + fileType;
-			List<DbFile> list= fileDao.findAll(DbFile.class, collectionName);
+			List<DbFile> list= fileService.findAll(DbFile.class, collectionName);
 			map.put("list", list);
 		}else{
 			map.put("list", null);
@@ -80,7 +79,7 @@ public class CssController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String siteName = session.getAttribute("siteName").toString();
 		String collectionName = siteName + "_" + fileType;
-		DbFile df = fileDao.findFileByName(fileName, collectionName);
+		DbFile df = fileService.findFileByName(fileName, collectionName);
 		byte[] buf = df.getFileByte();
 		try {
 			String content = new String(buf,"utf-8");

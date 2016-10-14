@@ -52,7 +52,6 @@ public class  MongoDBDao {
 	 */
 	public WriteResult upsert(Query query, Update update, String collectionName) {
 		return mongoTemplate.upsert(query, update, collectionName);
-		
 	}
 	
 	/**

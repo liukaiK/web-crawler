@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.esd.collection.DbPgFile;
 import com.esd.config.NodeConfig;
 import com.esd.config.PageConfig;
-import com.esd.dao.file.PgDao;
+import com.esd.service.file.PgService;
 
 @Controller
 @RequestMapping("/admin")
@@ -30,7 +30,7 @@ public class PgController {
 	private final String fileType = "pg";
 	
 	@Autowired
-	private PgDao pgDao;
+	private PgService pgService;
 	
 	@RequestMapping("/savePgFile")
 	@ResponseBody
@@ -78,7 +78,7 @@ public class PgController {
 		 */
 		//String filedir = BaseConfig.PG_ROOT + File.separator + pgName + ".pg";
 		String filedir =  File.separator + "db" + File.separator + pgName + ".pg";
-		pgDao.upsertFile(pgName, filedir, siteName, pageConfig, siteName + "_pg");
+		pgService.upsertFile(pgName, filedir, siteName, pageConfig, siteName + "_pg");
 		
 		map.put("notice", true);
 		map.put("message", pgName + "规则保存成功");
@@ -91,7 +91,7 @@ public class PgController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String siteName = session.getAttribute("siteName").toString();
 		String collectionName = siteName + "_" + fileType;
-		pgDao.removeFileByName(pgFileName, collectionName);
+		pgService.removeFileByName(pgFileName, collectionName);
 		map.put("notice", true);
 		map.put("message", pgFileName + "规则文件删除成功!");
 		return map;
@@ -103,7 +103,7 @@ public class PgController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String siteName = session.getAttribute("siteName").toString();
 		String collectionName = siteName + "_" + fileType;
-		DbPgFile df = pgDao.findFileByName(pgFileName, collectionName);
+		DbPgFile df = pgService.findFileByName(pgFileName, collectionName);
 		PageConfig pgFile = df.getPageConfig();
 		map.put("pgFile", pgFile);
 		map.put("notice", true);
@@ -116,7 +116,7 @@ public class PgController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String siteName = session.getAttribute("siteName").toString();
 		String collectionName = siteName + "_" + fileType;
-		List<DbPgFile> list = pgDao.findAll(DbPgFile.class, collectionName);
+		List<DbPgFile> list = pgService.findAll(DbPgFile.class, collectionName);
 		map.put("list", list);
 		return map;
 	}

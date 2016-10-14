@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.esd.collection.DbFile;
-import com.esd.dao.file.FileDao;
+import com.esd.service.file.FileService;
 
 /**
  * 模板控制器
@@ -32,7 +32,7 @@ public class TemplateController {
 	private final String fileType = "template";
 	
 	@Autowired
-	private FileDao fileDao;
+	private FileService fileService;
 
 	/**
 	 * liukai-2016.10.11
@@ -48,7 +48,7 @@ public class TemplateController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String siteName = session.getAttribute("siteName").toString();
 		String collectionName = siteName + "_" + fileType;
-		fileDao.upsertFile(templateName, templateContent, siteName, collectionName);
+		fileService.upsertFile(templateName, templateContent, siteName, collectionName);
 		map.put("notice", true);
 		map.put("message", templateName + "模板文件保存成功!");
 		return map;
@@ -66,7 +66,7 @@ public class TemplateController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String siteName = session.getAttribute("siteName").toString();
 		String collectionName = siteName + "_" + fileType;
-		fileDao.removeFileByName(templateName, collectionName);
+		fileService.removeFileByName(templateName, collectionName);
 		map.put("notice", true);
 		map.put("message", templateName + "模板文件删除成功!");
 		return map;
@@ -85,7 +85,7 @@ public class TemplateController {
 		String siteName = session.getAttribute("siteName").toString();
 		if(siteName != null){
 			String collectionName = siteName + "_" + fileType;
-			List<DbFile> list= fileDao.findAll(DbFile.class, collectionName);
+			List<DbFile> list= fileService.findAll(DbFile.class, collectionName);
 			map.put("list", list);
 		}else{
 			map.put("list", null);
@@ -106,7 +106,7 @@ public class TemplateController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String siteName = session.getAttribute("siteName").toString();
 		String collectionName = siteName + "_" + fileType;
-		DbFile df = fileDao.findFileByName(fileName, collectionName);
+		DbFile df = fileService.findFileByName(fileName, collectionName);
 		byte[] buf = df.getFileByte();
 		try {
 			String content = new String(buf,"utf-8");

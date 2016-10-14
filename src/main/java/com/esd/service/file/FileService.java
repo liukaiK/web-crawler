@@ -1,5 +1,6 @@
-package com.esd.dao.file;
+package com.esd.service.file;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,20 +10,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
-import com.esd.collection.DbPgFile;
-import com.esd.config.PageConfig;
+import com.esd.collection.DbFile;
 import com.esd.dao.MongoDBDao;
+import com.esd.util.Md5;
 import com.mongodb.WriteResult;
 
-@Repository
-public class PgDao {
-	
-	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-
+@Service
+public class FileService {
 	@Autowired
 	private MongoDBDao mongoDBDao;
+	
+	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 	
 	/**
 	 * liukai-2016.10.11
@@ -30,23 +30,39 @@ public class PgDao {
 	 * @param collectionName
 	 * @return
 	 */
-	public <T> DbPgFile findFileByName(String fileName, String collectionName) {
+	public <T> DbFile findFileByName(String fileName, String collectionName) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("fileName").is(fileName));
-		return mongoDBDao.findOne(query, DbPgFile.class, collectionName);
+		return mongoDBDao.findOne(query, DbFile.class, collectionName);
 	}
 	
-	public WriteResult upsertFile(String fileName, String filedir, String siteName, PageConfig pageConfig, String collectionName) throws UnsupportedEncodingException {
+	
+	
+	/**
+	 * liukai-2016.10.11
+	 * @param fileName
+	 * @param content
+	 * @param siteName
+	 * @param collectionName
+	 * @return
+	 * @throws UnsupportedEncodingException 
+	 */
+	public WriteResult upsertFile(String fileName, String content, String siteName, String collectionName) throws UnsupportedEncodingException {
 		String date = sdf.format(new Date());
+		String filedir = File.separator + fileName;
+		byte[] fileByte = content.getBytes("UTF-8");
+		String md5File = Md5.getMd5File(fileByte);
+		
 		Query query = new Query();
 		query.addCriteria(Criteria.where("fileName").is(fileName));
 		query.addCriteria(Criteria.where("siteName").is(siteName));
 		
 		Update update = new Update();
-		update.set("fileName", fileName);
+//		update.set("createDate", date);
+		update.set("fileByte", fileByte);
 		update.set("filedir", filedir);
-		update.set("pageConfig", pageConfig);
-		update.set("md5File", pageConfig.toString());
+		update.set("fileName", fileName);
+		update.set("md5File", md5File);
 		update.set("siteName", siteName);
 		update.set("updateDate", date);
 		
@@ -54,6 +70,17 @@ public class PgDao {
 	}
 	
 	
+	/**
+	 * liukai-2016.10.11
+	 * @param fileName
+	 * @param collectionName
+	 * @return
+	 */
+	public WriteResult removeFileByName(String fileName, String collectionName) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("fileName").is(fileName));
+		return mongoDBDao.remove(query, collectionName);
+	}
 	
 	/**
 	 * liukai-2016.10.11
@@ -65,20 +92,4 @@ public class PgDao {
 	public <T> List<T> findAll(Class<T> entityClass,String collectionName) {
 		return this.mongoDBDao.findAll(entityClass, collectionName);
 	}
-	
-	/**
-	 * liukai-2016.10.12
-	 * @param fileName
-	 * @param collectionName
-	 * @return
-	 */
-	public WriteResult removeFileByName(String fileName, String collectionName) {
-		Query query = new Query();
-		query.addCriteria(Criteria.where("fileName").is(fileName));
-		return mongoDBDao.remove(query, collectionName);
-	}
-	
-	
-	
-	
 }
