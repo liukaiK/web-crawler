@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -30,8 +32,10 @@ public class SiteService {
 	 * @param collectionName
 	 * @return
 	 */
-	public <T> List<T> findAllSite(Class<T> entityClass) {
-		return this.mongoDBDao.findAll(entityClass, collectionName);
+	public <T> List<Site> findAllSite(Class<T> entityClass) {
+		Query query = new Query();
+		query.with(new Sort(Direction.DESC, "updateDate"));
+		return this.mongoDBDao.find(query, Site.class, collectionName);
 	}
 
 	public void addSite(String siteName, String domainName, String port) {
@@ -49,9 +53,13 @@ public class SiteService {
 	public WriteResult removeSite(String id) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("_id").is(id));
+		// 删除站点的同时 删除相关的表
+		mongoDBDao.dropCollection(id + "_css");
+		mongoDBDao.dropCollection(id + "_js");
+		mongoDBDao.dropCollection(id + "_template");
 		return mongoDBDao.remove(query, collectionName);
 	}
-	
+
 	public WriteResult update(String id, String siteName, String domainName, String port) {
 		Date date = new Date();
 		Query query = new Query();
@@ -64,12 +72,9 @@ public class SiteService {
 		return mongoDBDao.upsert(query, update, collectionName);
 	}
 	
-	
-	
-	
-//	public <T> Site findOne(String id) {
-//		Query query = new Query();
-//		query.addCriteria(Criteria.where("_id").is(id));
-//		return mongoDBDao.findOne(query, Site.class, "sites");
-//	}
+	public <T> Site findOneById(String id) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("_id").is(id));
+		return mongoDBDao.findOne(query, Site.class, collectionName);
+	}
 }

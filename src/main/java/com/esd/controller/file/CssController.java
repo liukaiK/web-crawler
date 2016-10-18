@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.esd.collection.DbFile;
+import com.esd.config.BaseConfig;
 import com.esd.service.file.FileService;
 
 /**
@@ -38,7 +39,7 @@ public class CssController {
 	@ResponseBody
 	public Map<String, Object> saveCss(String cssName, String cssContent, HttpSession session) throws UnsupportedEncodingException {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String siteName = session.getAttribute("siteName").toString();
+		String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
 		String collectionName = siteName + "_" + fileType;
 		fileService.upsertFile(cssName, cssContent, siteName, collectionName);
 		map.put("notice", true);
@@ -50,7 +51,7 @@ public class CssController {
 	@ResponseBody
 	public Map<String, Object> deleteCss(String cssName, HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String siteName = session.getAttribute("siteName").toString();
+		String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
 		String collectionName = siteName + "_" + fileType;
 		fileService.removeFileByName(cssName, collectionName);
 		map.put("notice", true);
@@ -62,7 +63,7 @@ public class CssController {
 	@ResponseBody
 	public Map<String, Object> loadCssList(HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String siteName = session.getAttribute("siteName").toString();
+		String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
 		if(siteName != null){
 			String collectionName = siteName + "_" + fileType;
 			List<DbFile> list= fileService.findAll(DbFile.class, collectionName);
@@ -77,16 +78,18 @@ public class CssController {
 	@ResponseBody
 	public Map<String, Object> loadCss(String fileName, HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String siteName = session.getAttribute("siteName").toString();
+		String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
 		String collectionName = siteName + "_" + fileType;
 		DbFile df = fileService.findFileByName(fileName, collectionName);
-		byte[] buf = df.getFileByte();
-		try {
-			String content = new String(buf,"utf-8");
-			map.put("notice", true);
-			map.put("message", content);
-		} catch (UnsupportedEncodingException e) {
-			logger.error(e);
+		if (df != null) {
+			byte[] buf = df.getFileByte();
+			try {
+				String content = new String(buf, "utf-8");
+				map.put("notice", true);
+				map.put("message", content);
+			} catch (UnsupportedEncodingException e) {
+				logger.error(e);
+			}
 		}
 		return map;
 	}

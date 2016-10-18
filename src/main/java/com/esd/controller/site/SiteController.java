@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.esd.collection.Site;
+import com.esd.config.BaseConfig;
 import com.esd.service.site.SiteService;
 
 @Controller
@@ -53,10 +56,8 @@ public class SiteController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		siteService.removeSite(id);
 		map.put("notice", true);
-		map.put("message", "删除成功!");
 		return map;
 	}
-	
 	
 	@RequestMapping(value = "/updateSite", method = RequestMethod.POST)
 	@ResponseBody
@@ -68,16 +69,22 @@ public class SiteController {
 		return map;
 	}
 
-	
-	
-	
-//	@RequestMapping(value = "/getSiteById", method = RequestMethod.POST)
-//	@ResponseBody
-//	public Map<String, Object> getSiteById(String id) {
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		Site site = siteService.findOne(id);
-//		System.out.println(id);
-//		map.put("site", site);
-//		return map;
-//	}
+	/**
+	 * liukai-2016.10.18
+	 * 进入一个站点
+	 * @param id
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value = "/getSite")
+	@ResponseBody
+	public ModelAndView getSite(String id, HttpSession session) {
+		Site site = siteService.findOneById(id);
+//		String siteName = site.getSiteName();
+		String domainName = site.getDomainName();
+		session.setAttribute(BaseConfig.SITENAME, id);
+//		session.setAttribute(BaseConfig.SITENAME, siteName);
+		session.setAttribute(BaseConfig.DOMAINNAME, domainName);
+		return new ModelAndView("redirect:manage");
+	}
 }

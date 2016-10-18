@@ -71,10 +71,14 @@ public class  MongoDBDao {
 	
 	
 	
+	public <T> List<T> find(Query query, Class<T> entityClass, String collectionName) {
+		return this.mongoTemplate.find(query, entityClass, collectionName);
+	}
 	
 	
-	
-	
+	public void dropCollection(String collectionName) {
+		this.mongoTemplate.dropCollection(collectionName);
+	}
 	
 	
 	

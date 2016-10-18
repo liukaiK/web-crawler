@@ -54,7 +54,6 @@ public class LoginController {
 			if (code.equals(session.getAttribute("randomCode"))) {
 				if (this.username.equals(username) || this.password.equals(password)) {
 					session.setAttribute(BaseConfig.USER, username);
-					session.setAttribute("siteName", "szft"); //TODO 以后去掉这句
 					logger.debug("------------------登录成功!----------------");
 					return new ModelAndView("redirect:admin/access");
 				} else {

@@ -11,6 +11,73 @@
 <script type="text/javascript" src="/js/jquery-easyui-1.4.5/locale/easyui-lang-zh_CN.js" charset="UTF-8"></script>
 <title>站点列表</title>
 <script type="text/javascript">
+	$(function() {
+		$('#dg').datagrid(
+						{
+							title : '站点选择',
+							width : 1400,
+							height : 600,
+							singleSelect : true,
+							rownumbers : true,
+							fitColumns : true,
+							toolbar : '#toolbar',
+							url : 'getSiteList',
+							columns : [ [
+									{
+										field : 'siteName',
+										title : '站点名',
+										width : 50
+									},
+									{
+										field : 'domainName',
+										title : '主域名',
+										width : 50
+									},
+									{
+										field : 'port',
+										title : '端口号',
+										width : 50
+									},
+									{
+										field : 'createDate',
+										title : '创建时间',
+										width : 50
+									},
+									{
+										field : 'updateDate',
+										title : '最近修改时间',
+										width : 50
+									},
+									{
+										field : 'action',
+										title : '操作',
+										width : 70,
+										align : 'center',
+										formatter : function(value, row, index) {
+											return '<a href="#" onclick="getSite(this)">进入</a>';
+// 											if (row.editing) {
+// 												var s = '<a href="#" onclick="saverow(this)">Save</a> ';
+// 												var c = '<a href="#" onclick="cancelrow(this)">Cancel</a>';
+// 												return s + c;
+// 											} else {
+// 												var e = '<a href="#" onclick="editrow(this)">Edit</a> ';
+// 												var d = '<a href="#" onclick="deleterow(this)">Delete</a>';
+// 												return e + d;
+// 											}
+										}
+									} ] ],
+						});
+	});
+	
+	function getSite(target) {
+		var row = $('#dg').datagrid('getSelected');
+		if (row) {
+// 			alert(row.id);
+			window.location.href = 'getSite?id=' + row.id;
+// 			$('#dlg').dialog('open').dialog('setTitle', '编辑站点');
+// 			url = 'updateSite?id=' + row.id;
+		}
+	}
 
 	function newUser() {
 		$('#dlg').dialog('open').dialog('setTitle', '新增站点');
@@ -71,10 +138,7 @@
 </script>
 </head>
 <body>
-    <table id="dg" title="站点选择" class="easyui-datagrid" style="width:100%;height:600px"
-    		url="getSiteList"
-    		toolbar="#toolbar"
-    		rownumbers="true" fitColumns="true" singleSelect="true">
+    <table id="dg" >
     	<thead>
     		<tr>
     			<th field="siteName" width="50">站点名</th>

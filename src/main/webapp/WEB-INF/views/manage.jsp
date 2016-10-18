@@ -31,7 +31,7 @@
 		<div id="progressbarAll" class="easyui-progressbar" style="height: 10px;"></div>
 		<a href="javascript:catingAll();" class="easyui-linkbutton" iconCls="icon-start">开启采集</a>
 		<a href="javascript:cancelCating();" class="easyui-linkbutton" iconCls="icon-cancel">取消采集</a> 
-		<input id="domain" value="http://www.caacca.org/" class="easyui-textbox" style="width: 15%;">
+		<input id="domain" value="<%=request.getSession().getAttribute(BaseConfig.DOMAINNAME) %>" class="easyui-textbox" style="width: 15%;">
 		<a href="javascript:cating();" class="easyui-linkbutton">一级采集</a>
 		预览网址:<input id="url" class="easyui-textbox" style="width: 25%;">
 		<a href="javascript:view();" class="easyui-linkbutton" text="预览"></a>

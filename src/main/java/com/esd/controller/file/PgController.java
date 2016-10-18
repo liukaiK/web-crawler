@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.esd.collection.DbPgFile;
+import com.esd.config.BaseConfig;
 import com.esd.config.NodeConfig;
 import com.esd.config.PageConfig;
 import com.esd.service.file.PgService;
@@ -43,7 +44,7 @@ public class PgController {
 		String url = request.getParameter("url");
 		String[] rules = request.getParameterValues("rules[]");
 		String[] urls = request.getParameterValues("urls[]");
-		String siteName = session.getAttribute("siteName").toString();
+		String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
 		
 		PageConfig pageConfig = new PageConfig();
 		pageConfig.setJavaScriptEnabled(Boolean.valueOf(javaScriptEnabled));
@@ -89,7 +90,7 @@ public class PgController {
 	@ResponseBody
 	public Map<String, Object> deletePgFile(String pgFileName, HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String siteName = session.getAttribute("siteName").toString();
+		String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
 		String collectionName = siteName + "_" + fileType;
 		pgService.removeFileByName(pgFileName, collectionName);
 		map.put("notice", true);
@@ -101,7 +102,7 @@ public class PgController {
 	@ResponseBody
 	public Map<String, Object> loadPgFile(String pgFileName, HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String siteName = session.getAttribute("siteName").toString();
+		String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
 		String collectionName = siteName + "_" + fileType;
 		DbPgFile df = pgService.findFileByName(pgFileName, collectionName);
 		PageConfig pgFile = df.getPageConfig();
@@ -114,7 +115,7 @@ public class PgController {
 	@ResponseBody
 	public Map<String, Object> loadPgFileList(HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String siteName = session.getAttribute("siteName").toString();
+		String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
 		String collectionName = siteName + "_" + fileType;
 		List<DbPgFile> list = pgService.findAll(DbPgFile.class, collectionName);
 		map.put("list", list);
