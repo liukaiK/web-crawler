@@ -52,7 +52,7 @@ public class PageConfigController {
 		String url = request.getParameter("url");
 		Map<String, Object> map = new HashMap<String, Object>();
 		urlMap.clear();
-		String siteName = "";
+		String siteId = "";
 		if (Util.isOutUrl(url)) {// 如果为外链接
 			Document templateSource = Util.loadTemplate(BaseConfig.TEMPLATE_ROOT + File.separator + "error.html");
 			templateSource.select("#error").attr("href", url);
@@ -60,8 +60,8 @@ public class PageConfigController {
 			//String path = BaseConfig.HTML_ROOT + File.separator + mName;
 			String path = File.separator + "html" + File.separator + mName;
 			 // cx-20160926 存入mongodb
-			siteName = session.getAttribute("siteName").toString();  
-			mdu.insertFile(mName, templateSource.html().getBytes(), path, siteName, "html");
+			siteId = session.getAttribute("siteId").toString();  
+			mdu.insertFile(mName, templateSource.html().getBytes(), path, "html");
 //			try {
 //				Util.createNewFile(templateSource.html(), path);
 //			} catch (IOException e) {
@@ -71,15 +71,15 @@ public class PageConfigController {
 			map.put("message", true);
 			return map;
 		}
-		catPage(url,siteName);
+		catPage(url,siteId);
 		logger.debug("单层采集完成");
 		map.put("message", true);
 		return map;
 	}
 
-	private void catPage(String url,String siteName) {
+	private void catPage(String url,String siteId) {
 		quitFlag = false; // 开启采集状态
-		dao.collectPageConfig(siteName);
+		dao.collectPageConfig(siteId);
 		PageConfig pageConfig = dao.findPageConfig(url);
 		pageConfig.setUrl(url);
 		EsdDownLoadHtml down = new EsdDownLoadHtml();// 下载
@@ -109,14 +109,13 @@ public class PageConfigController {
 					String path = File.separator + "html" + File.separator + mName;
 					// cx-20160926 存入mongodb
 					
-					mdu.insertFile(mName, htmlSource.html().getBytes(), path, siteName, "html");
+					mdu.insertFile(mName, htmlSource.html().getBytes(), path,"html");
 //				try {
 //					Util.createNewFile(htmlSource.html(), path);
 //				} catch (IOException e) {
 //					e.printStackTrace();
 //				}
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				continue;

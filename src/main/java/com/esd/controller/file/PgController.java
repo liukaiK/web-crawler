@@ -20,6 +20,7 @@ import com.esd.collection.DbPgFile;
 import com.esd.config.BaseConfig;
 import com.esd.config.NodeConfig;
 import com.esd.config.PageConfig;
+import com.esd.controller.site.SiteController;
 import com.esd.service.file.PgService;
 
 @Controller
@@ -35,7 +36,7 @@ public class PgController {
 	
 	@RequestMapping("/savePgFile")
 	@ResponseBody
-	public Map<String, Object> savePgFile(HttpServletRequest request,HttpSession session) throws UnsupportedEncodingException {
+	public Map<String, Object> savePgFile(HttpServletRequest request) throws UnsupportedEncodingException {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String pgName = request.getParameter("pgName");
 		String javaScriptEnabled = request.getParameter("javaScriptEnabled");
@@ -44,7 +45,7 @@ public class PgController {
 		String url = request.getParameter("url");
 		String[] rules = request.getParameterValues("rules[]");
 		String[] urls = request.getParameterValues("urls[]");
-		String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
+		//String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
 		
 		PageConfig pageConfig = new PageConfig();
 		pageConfig.setJavaScriptEnabled(Boolean.valueOf(javaScriptEnabled));
@@ -79,7 +80,7 @@ public class PgController {
 		 */
 		//String filedir = BaseConfig.PG_ROOT + File.separator + pgName + ".pg";
 		String filedir =  File.separator + "db" + File.separator + pgName + ".pg";
-		pgService.upsertFile(pgName, filedir, siteName, pageConfig, siteName + "_pg");
+		pgService.upsertFile(pgName, filedir, SiteController.siteId, pageConfig, SiteController.siteId + "_pg");
 		
 		map.put("notice", true);
 		map.put("message", pgName + "规则保存成功");
@@ -88,10 +89,10 @@ public class PgController {
 	
 	@RequestMapping("/deletePgFile")
 	@ResponseBody
-	public Map<String, Object> deletePgFile(String pgFileName, HttpSession session) {
+	public Map<String, Object> deletePgFile(String pgFileName) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
-		String collectionName = siteName + "_" + fileType;
+		//String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
+		String collectionName = SiteController.siteId + "_" + fileType;
 		pgService.removeFileByName(pgFileName, collectionName);
 		map.put("notice", true);
 		map.put("message", pgFileName + "规则文件删除成功!");
@@ -100,10 +101,10 @@ public class PgController {
 	
 	@RequestMapping("/loadPgFile")
 	@ResponseBody
-	public Map<String, Object> loadPgFile(String pgFileName, HttpSession session) {
+	public Map<String, Object> loadPgFile(String pgFileName) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
-		String collectionName = siteName + "_" + fileType;
+		//String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
+		String collectionName = SiteController.siteId + "_" + fileType;
 		DbPgFile df = pgService.findFileByName(pgFileName, collectionName);
 		PageConfig pgFile = df.getPageConfig();
 		map.put("pgFile", pgFile);
@@ -113,10 +114,10 @@ public class PgController {
 	
 	@RequestMapping("/loadPgFileList")
 	@ResponseBody
-	public Map<String, Object> loadPgFileList(HttpSession session) {
+	public Map<String, Object> loadPgFileList() {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
-		String collectionName = siteName + "_" + fileType;
+		//String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
+		String collectionName = SiteController.siteId + "_" + fileType;
 		List<DbPgFile> list = pgService.findAll(DbPgFile.class, collectionName);
 		map.put("list", list);
 		return map;

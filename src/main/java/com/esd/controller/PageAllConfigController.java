@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -27,9 +28,10 @@ public class PageAllConfigController {
 
 	@RequestMapping("/catingAll")
 	@ResponseBody
-	public Map<String, Object> catingAll(String url, HttpServletRequest request) {
+	public Map<String, Object> catingAll(String url, HttpServletRequest request,HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		collectionPage.init(url);
+		String siteId = session.getAttribute("siteId").toString();
+		collectionPage.init(url,siteId);
 		collectionPage.start();
 		map.put("notice", true);
 		return map;

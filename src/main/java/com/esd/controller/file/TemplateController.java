@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.esd.collection.DbFile;
-import com.esd.config.BaseConfig;
+import com.esd.controller.site.SiteController;
 import com.esd.service.file.FileService;
 
 /**
@@ -45,11 +43,11 @@ public class TemplateController {
 	 */
 	@RequestMapping(value = "/saveTemplate", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> saveTemplate(String templateName, String templateContent, HttpSession session) throws UnsupportedEncodingException {
+	public Map<String, Object> saveTemplate(String templateName, String templateContent) throws UnsupportedEncodingException {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
-		String collectionName = siteName + "_" + fileType;
-		fileService.upsertFile(templateName, templateContent, siteName, collectionName);
+		//String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
+		String collectionName = SiteController.siteId + "_" + fileType;
+		fileService.upsertFile(templateName, templateContent, SiteController.siteId, collectionName);
 		map.put("notice", true);
 		map.put("message", templateName + "模板文件保存成功!");
 		return map;
@@ -63,10 +61,10 @@ public class TemplateController {
 	 */
 	@RequestMapping(value = "/deleteTemplate", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> deleteTemplate(String templateName, HttpSession session) {
+	public Map<String, Object> deleteTemplate(String templateName) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
-		String collectionName = siteName + "_" + fileType;
+		//String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
+		String collectionName = SiteController.siteId + "_" + fileType;
 		fileService.removeFileByName(templateName, collectionName);
 		map.put("notice", true);
 		map.put("message", templateName + "模板文件删除成功!");
@@ -81,11 +79,11 @@ public class TemplateController {
 	 */
 	@RequestMapping("/loadTemplateList")
 	@ResponseBody
-	public Map<String, Object> loadTemplateList(HttpSession session) {
+	public Map<String, Object> loadTemplateList() {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
-		if(siteName != null){
-			String collectionName = siteName + "_" + fileType;
+		//String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
+		if(SiteController.siteId != null){
+			String collectionName = SiteController.siteId + "_" + fileType;
 			List<DbFile> list= fileService.findAll(DbFile.class, collectionName);
 			map.put("list", list);
 		}else{
@@ -103,10 +101,10 @@ public class TemplateController {
 	 */
 	@RequestMapping(value = "/loadTemplate", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> loadTemplate(String fileName, HttpSession session) {
+	public Map<String, Object> loadTemplate(String fileName) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
-		String collectionName = siteName + "_" + fileType;
+		//String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
+		String collectionName = SiteController.siteId + "_" + fileType;
 		DbFile df = fileService.findFileByName(fileName, collectionName);
 		if (df != null) {
 			byte[] buf = df.getFileByte();

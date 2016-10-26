@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.esd.collection.DbFile;
 import com.esd.config.BaseConfig;
+import com.esd.controller.site.SiteController;
 import com.esd.service.file.FileService;
 
 /**
@@ -37,11 +38,11 @@ public class CssController {
 
 	@RequestMapping(value = "/saveCss", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> saveCss(String cssName, String cssContent, HttpSession session) throws UnsupportedEncodingException {
+	public Map<String, Object> saveCss(String cssName, String cssContent) throws UnsupportedEncodingException {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
-		String collectionName = siteName + "_" + fileType;
-		fileService.upsertFile(cssName, cssContent, siteName, collectionName);
+		//String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
+		String collectionName = SiteController.siteId + "_" + fileType;
+		fileService.upsertFile(cssName, cssContent, SiteController.siteId, collectionName);
 		map.put("notice", true);
 		map.put("message", cssName + "样式文件保存成功!");
 		return map;
@@ -49,10 +50,10 @@ public class CssController {
 
 	@RequestMapping(value = "/deleteCss", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> deleteCss(String cssName, HttpSession session) {
+	public Map<String, Object> deleteCss(String cssName) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
-		String collectionName = siteName + "_" + fileType;
+		//String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
+		String collectionName = SiteController.siteId + "_" + fileType;
 		fileService.removeFileByName(cssName, collectionName);
 		map.put("notice", true);
 		map.put("message", cssName + "样式文件删除成功!");
@@ -61,11 +62,11 @@ public class CssController {
 	
 	@RequestMapping("/loadCssList")
 	@ResponseBody
-	public Map<String, Object> loadCssList(HttpSession session) {
+	public Map<String, Object> loadCssList() {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
-		if(siteName != null){
-			String collectionName = siteName + "_" + fileType;
+		//String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
+		if(SiteController.siteId != null){
+			String collectionName = SiteController.siteId + "_" + fileType;
 			List<DbFile> list= fileService.findAll(DbFile.class, collectionName);
 			map.put("list", list);
 		}else{
@@ -76,10 +77,10 @@ public class CssController {
 	
 	@RequestMapping(value = "/loadCss", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> loadCss(String fileName, HttpSession session) {
+	public Map<String, Object> loadCss(String fileName) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
-		String collectionName = siteName + "_" + fileType;
+		//String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
+		String collectionName = SiteController.siteId + "_" + fileType;
 		DbFile df = fileService.findFileByName(fileName, collectionName);
 		if (df != null) {
 			byte[] buf = df.getFileByte();

@@ -16,7 +16,9 @@ public class BaseConfig extends HttpServlet {
 			".pdf", "wbk", "xml" };
 	
 	
-	public final static String SITENAME = "siteName"; 
+	public final static String SITENAME = "siteName";
+	
+	public final static String SITEID = "siteId"; 
 	
 	public final static String DOMAINNAME = "domainName";
 

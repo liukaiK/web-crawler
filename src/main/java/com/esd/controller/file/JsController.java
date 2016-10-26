@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.esd.collection.DbFile;
 import com.esd.config.BaseConfig;
+import com.esd.controller.site.SiteController;
 import com.esd.service.file.FileService;
 
 /**
@@ -45,11 +46,11 @@ public class JsController {
 	 */
 	@RequestMapping(value = "/saveJs", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> saveJs(String jsName, String jsContent, HttpSession session) throws UnsupportedEncodingException {
+	public Map<String, Object> saveJs(String jsName, String jsContent) throws UnsupportedEncodingException {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
-		String collectionName = siteName + "_" + fileType;
-		fileService.upsertFile(jsName, jsContent, siteName, collectionName);
+		//String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
+		String collectionName = SiteController.siteId + "_" + fileType;
+		fileService.upsertFile(jsName, jsContent, SiteController.siteId, collectionName);
 		map.put("notice", true);
 		map.put("message", jsName + "脚本文件保存成功!");
 		return map;
@@ -63,10 +64,10 @@ public class JsController {
 	 */
 	@RequestMapping(value = "/deleteJs", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> deleteJs(String jsName, HttpSession session) {
+	public Map<String, Object> deleteJs(String jsName) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
-		String collectionName = siteName + "_" + fileType;
+		//String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
+		String collectionName = SiteController.siteId + "_" + fileType;
 		fileService.removeFileByName(jsName, collectionName);
 		map.put("notice", true);
 		map.put("message", jsName + "脚本文件删除成功!");
@@ -81,11 +82,11 @@ public class JsController {
 	 */
 	@RequestMapping("/loadJsList")
 	@ResponseBody
-	public Map<String, Object> loadJsList(HttpSession session) {
+	public Map<String, Object> loadJsList() {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
-		if(siteName != null){
-			String collectionName = siteName + "_" + fileType;
+		//String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
+		if(SiteController.siteId != null){
+			String collectionName = SiteController.siteId + "_" + fileType;
 			List<DbFile> list= fileService.findAll(DbFile.class, collectionName);
 			map.put("list", list);
 		}else{
@@ -103,10 +104,10 @@ public class JsController {
 	 */
 	@RequestMapping(value = "/loadJs", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> loadJs(String fileName, HttpSession session) {
+	public Map<String, Object> loadJs(String fileName) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
-		String collectionName = siteName + "_" + fileType;
+		//String siteName = session.getAttribute(BaseConfig.SITENAME).toString();
+		String collectionName = SiteController.siteId + "_" + fileType;
 		DbFile df = fileService.findFileByName(fileName, collectionName);
 		if (df != null) {
 			byte[] buf = df.getFileByte();

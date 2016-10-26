@@ -83,7 +83,7 @@ public class FileDbController {
 //					dpf.setUpdateDate(new Date());
 //					dpf.setUserId("0001");
 //					dpf.setId(mm);
-					mdu.insertPg(dpf, siteName + "_pg");
+					mdu.insertPg(dpf);
 				  mm++;	  
 			  }
 			  
@@ -110,7 +110,7 @@ public class FileDbController {
 			}
 			//collectionName = siteName + dir;
 			url = BaseConfig.ROOT1+siteName + "/" + dir + "/";
-			mdu.insertFiles(collectionName,url,siteName);
+			mdu.insertFiles(collectionName,url);
 			fileType++;
 		}
 		

@@ -63,25 +63,18 @@ public class  MongoDBDao {
 	public WriteResult remove(Query query, String collectionName) {
 		return mongoTemplate.remove(query, collectionName);
 	}
-
 	
 	public <T> List<T> findAll(Class<T> entityClass, String collectionName) {
 		return this.mongoTemplate.findAll(entityClass, collectionName);
 	}
 	
-	
-	
 	public <T> List<T> find(Query query, Class<T> entityClass, String collectionName) {
 		return this.mongoTemplate.find(query, entityClass, collectionName);
 	}
 	
-	
 	public void dropCollection(String collectionName) {
 		this.mongoTemplate.dropCollection(collectionName);
 	}
-	
-	
-	
 	
 	public <T> List<T> findAll(Class<T> entityClass) {
 		return this.mongoTemplate.findAll(entityClass);

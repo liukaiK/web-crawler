@@ -19,7 +19,7 @@ public class Md5 {
 	public static String getMd5(String str) {
 		String resultString = null;
 		try {
-			resultString = new String(str);
+			//resultString = new String(str);
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			resultString = byteToString(md.digest(str.getBytes()));
 		} catch (NoSuchAlgorithmException e) {

@@ -1,6 +1,5 @@
 package com.esd.core;
 
-import java.io.File;
 import java.io.IOException;
 
 import javax.annotation.Resource;
@@ -11,36 +10,25 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.esd.collection.DbFile;
 import com.esd.collection.Downloads;
 import com.esd.collection.Urls;
 import com.esd.common.CatDao;
 import com.esd.common.MongoDBUtil;
 import com.esd.config.BaseConfig;
 import com.esd.config.PageConfig;
+import com.esd.controller.site.SiteController;
 import com.esd.download.EsdDownLoadHtml;
 import com.esd.util.Util;
-
 
 @Component
 public class CollectionPage {
 	
-//	private static ApplicationContext ctx=null;
-//	private static TransportService transportService;
-//	
-//	static{
-//		ctx = new ClassPathXmlApplicationContext(
-//				"classpath:/springmvc.xml");
-//		transportService = (TransportService) ctx
-//				.getBean("transportService");	
-//	}
-	
-
 	private static Logger logger = Logger.getLogger(CollectionPage.class);
+	
 	@Resource
-	@Autowired
 	private MongoDBUtil mongoDBUtil;
 	private CatDao dao = new CatDao();
 	private boolean collectStatic = true;
@@ -49,15 +37,24 @@ public class CollectionPage {
 	private Thread thread = new A();
 	
 	public void start() {
-		thread = new A();
+		
+		thread = new A(SiteController.siteId);
 		thread.start();
 	}
 
 	private class A extends Thread {
-
+		private String siteId;
+		
+		public A(String siteId) {
+			this.siteId = siteId;
+		}
+		public A() {
+			
+		}
 		@Override
 		public void run() {
 			//计时
+			SiteController.siteId = siteId;
 			while (collectStatic && ctrl) {
 				ctrl = collect();
 			}
@@ -71,7 +68,7 @@ public class CollectionPage {
 
 	}
 
-	public void init(String domain) {
+	public void init(String domain,String siteId) {
 		collectStatic = true;
 		ctrl = true;
 		mongoDBUtil.dropTable();
@@ -79,7 +76,7 @@ public class CollectionPage {
 		for (int i = 0; i < BaseConfig.str.length; i++) {
 			mongoDBUtil.downloadsInsert(BaseConfig.str[i]);
 		}
-		dao.collectPageConfig("szft");
+		dao.collectPageConfig(siteId);
 	}
 
 	/**
@@ -101,19 +98,21 @@ public class CollectionPage {
 		}
 		if (Util.isOutUrl(url)) {
 			Document doc;
-			try {
-				doc = Util.loadTemplate(BaseConfig.TEMPLATE_ROOT + File.separator + "error.html");
-				doc.select("#error").attr("href", url);
-				String mName = Util.interceptUrl(url);
-				String path = BaseConfig.HTML_ROOT + File.separator + mName;
-				try {
-					Util.createNewFile(doc.html(), path);
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-			} catch (IOException e2) {
-				e2.printStackTrace();
-			}
+			//doc = Util.loadTemplate(BaseConfig.TEMPLATE_ROOT + File.separator + "error.html");
+			//20161020-cx
+			DbFile df = mongoDBUtil.findOneByCollectionName(SiteController.siteId + "_template" , "error.html", DbFile.class);
+			
+			String file = new String(df.getFileByte());		
+			doc = Jsoup.parse(file);
+			doc.select("#error").attr("href", url);
+			String mName = Util.interceptUrl(url);
+//				String path = BaseConfig.HTML_ROOT + File.separator + mName;
+			mongoDBUtil.insertFile(mName, doc.html().getBytes(), "/html/"+mName, "html");
+//				try {
+//					Util.createNewFile(doc.html(), path);
+//				} catch (IOException e1) {
+//					e1.printStackTrace();
+//				}
 			return true;
 		}
 		PageConfig pageConfig = dao.findPageConfig(url);
@@ -172,7 +171,6 @@ public class CollectionPage {
 		}
 		mongoDBUtil.urlsInsert(urlsCollection, title);// 插入
 		return true;
-
 	}
 
 	/**

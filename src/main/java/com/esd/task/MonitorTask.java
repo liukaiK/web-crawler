@@ -9,6 +9,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.esd.config.BaseConfig;
+import com.esd.controller.site.SiteController;
 import com.esd.core.CollectionPage;
 
 /**
@@ -26,7 +27,7 @@ public class MonitorTask {
 	@Scheduled(cron = "* * * * * ? ")
 	public void timerTask() {
 		if (new SimpleDateFormat("HH:mm:ss").format(new Date()).equals(BaseConfig.time)) {
-			collectionPage.init(BaseConfig.INDEX_URL[0]);
+			collectionPage.init(BaseConfig.INDEX_URL[0],SiteController.siteId);
 			collectionPage.start();
 		}
 	}

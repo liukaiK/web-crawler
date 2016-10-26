@@ -69,6 +69,7 @@ public class Util {
 
 	public static Document loadTemplate(String templePath) throws IOException {
 		String str = "";
+		
 		StringBuffer sb = new StringBuffer();
 		InputStreamReader read = new InputStreamReader(new FileInputStream(templePath), "UTF-8");
 		BufferedReader br = new BufferedReader(read);
@@ -77,7 +78,7 @@ public class Util {
 		}
 		read.close();
 		br.close();
-		Document doc = Jsoup.parse(sb.toString());
+		Document doc = Jsoup.parse(str);
 		return doc;
 	}
 

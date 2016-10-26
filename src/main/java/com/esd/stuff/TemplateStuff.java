@@ -9,7 +9,6 @@ import org.apache.log4j.Logger;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
 import com.esd.config.BaseConfig;
 import com.esd.config.NodeConfig;
 import com.esd.config.PageConfig;
@@ -39,7 +38,11 @@ public class TemplateStuff {
 				// link.attr("target", "_blank");
 				continue;
 			}
-			String path = Util.interceptUrl(href);
+			//String path = Util.interceptUrl(href);
+			//link.attr("href", path);
+			//2016-10-20 加访问方法名传递参数
+			String fileName =  Util.interceptUrl(href);
+			String path = "showPage?fileName="+fileName.split("\\.")[0];
 			link.attr("href", path);
 		}
 		pageMd5(doc);

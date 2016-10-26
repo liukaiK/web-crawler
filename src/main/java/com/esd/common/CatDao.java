@@ -10,26 +10,36 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.annotation.Resource;
+
 import org.apache.log4j.Logger;
 import org.jsoup.nodes.Document;
+import org.springframework.stereotype.Repository;
 
 import com.esd.collection.DbFile;
+import com.esd.collection.DbPgFile;
 import com.esd.config.BaseConfig;
 import com.esd.config.NodeConfig;
 import com.esd.config.PageConfig;
+import com.esd.controller.site.SiteController;
 import com.esd.download.EsdDownLoadHtml;
 import com.esd.parser.Parser;
 import com.esd.stuff.TemplateStuff;
 import com.esd.util.SerializeUtil;
+import com.esd.util.SpringContextUtil;
 import com.esd.util.Util;
 
+@Repository
 public class CatDao {
-
+	
+	@Resource
+	private MongoDBUtil mongoDBUtil;
+	
 	private static Logger log = Logger.getLogger(CatDao.class);
 	private Map<String, PageConfig> pageConfigMap = new HashMap<String, PageConfig>();
 	private Map<String, PageConfig> wildcardMap = new HashMap<String, PageConfig>();
 	private static List<PageConfig> treeDirList = new ArrayList<PageConfig>();
-
+	
 	/**
 	 * 单页采集与组合网页
 	 * 
@@ -38,9 +48,9 @@ public class CatDao {
 	 * @throws IOException
 	 */
 	public String singlCat(PageConfig pageConfig, Document document,boolean ctrl) {
-		MongoDBUtil mdu = new MongoDBUtil();
+		MongoDBUtil mongoDBUtil = (MongoDBUtil)SpringContextUtil.getBean("mongoDBUtil");
 		if(!ctrl){
-			mdu.insertFile(null,null,null,null,null,ctrl);
+			mongoDBUtil.insertFile(null,null,null,null,ctrl);
 			return "end";
 		}
 		if (document == null) {
@@ -61,13 +71,9 @@ public class CatDao {
 		String mName = Util.interceptUrl(pageConfig.getUrl());
 		//String path = BaseConfig.HTML_ROOT + File.separator + mName;
 		//从session获得站点名，siteName/html/mName
-		String siteName = "web";
-		String filedir = siteName + "/html/"+mName;
+		String filedir = SiteController.siteId + "/html/"+mName;
 		String content = doc.html();
-
-		System.out.println("开始了！！！");
-		mdu.insertFile(mName,content,filedir,siteName,"html",true);
-		//System.out.println("fileName:"+mName+"\n"+"path:"+path+"\n"+"byte:"+b+"\nbb"+bb);
+		mongoDBUtil.insertFile(mName,content,filedir,"html",true);
 //		try {
 //			Util.createNewFile(doc.html(), path);//不要了，doc.html()文件内容
 //		} catch (IOException e) {
@@ -108,8 +114,8 @@ public class CatDao {
 		String mName = Util.interceptUrl(url);
 		String path = BaseConfig.HTML_ROOT + File.separator + mName;
 		// cx-20160926 存入mongodb
-		MongoDBUtil mdu = new MongoDBUtil();
-		mdu.insertFile(mName, htmlSource.html().getBytes(), path, "szft", "html");
+		
+		mongoDBUtil.insertFile(mName, htmlSource.html().getBytes(), path, "html");
 //		try {
 //			Util.createNewFile(doc.html(), path);
 //		} catch (IOException e) {
@@ -125,30 +131,18 @@ public class CatDao {
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
 	 */
-	public void collectPageConfig(String siteName)  {
+	public void collectPageConfig(String siteId)  throws NullPointerException{
 		//cx-20160926 从mongodb中find数据
-		MongoDBUtil mdu = new MongoDBUtil();
-		List<DbFile> listPg = mdu.findAll(DbFile.class, siteName+"_"+"pg");
+		MongoDBUtil mongoDBUtil = (MongoDBUtil)SpringContextUtil.getBean("mongoDBUtil");
+		List<DbPgFile> listPg = mongoDBUtil.findAll(DbPgFile.class,siteId+"_pg");
 		List<PageConfig> list = new ArrayList<PageConfig>();
 		if(listPg != null){
 			
-			for (Iterator<DbFile> iterator = listPg.iterator(); iterator.hasNext();) {
-				DbFile df = (DbFile) iterator.next();
-				byte[] buf = df.getFileByte();
-				//实例化
-				PageConfig config;
-				try {
-					config = (PageConfig)SerializeUtil.deserializeObject(buf);
-					config.setDb(df.getFileName());
-					list.add(config);
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
+			for (Iterator<DbPgFile> iterator = listPg.iterator(); iterator.hasNext();) {
+				DbPgFile df = (DbPgFile) iterator.next();
+				PageConfig config = df.getPageConfig();
+				config.setDb(df.getFileName());
+				list.add(config);	
 			}
 			
 		}

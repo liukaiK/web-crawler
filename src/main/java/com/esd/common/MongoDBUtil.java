@@ -10,7 +10,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
@@ -20,6 +19,7 @@ import com.esd.collection.DbPgFile;
 import com.esd.collection.Downloads;
 import com.esd.collection.History;
 import com.esd.collection.Urls;
+import com.esd.controller.site.SiteController;
 import com.esd.core.CollectionPage;
 import com.esd.dao.MongoDBDao;
 import com.esd.util.Md5;
@@ -30,7 +30,6 @@ import com.esd.util.UtilFile;
 public class MongoDBUtil {
 
 	@Resource
-	@Autowired
 	private MongoDBDao mongoDBDao;
 	
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -38,37 +37,6 @@ public class MongoDBUtil {
 	private Collection<Object> db = new ArrayList<Object>();
 
 	private static Logger logger = Logger.getLogger(CollectionPage.class);
-	
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	public Long getDownloadsCount() {
 		return mongoDBDao.count(new Query(), Downloads.class);
@@ -143,7 +111,7 @@ public class MongoDBUtil {
 	/**
 	 * cx-20160926
 	 */
-	public void insertFile(String fileName, byte[] fileByte, String filedir, String siteName, String type){
+	public void insertFile(String fileName, byte[] fileByte, String filedir, String type){
 		DbFile df = new DbFile();
 		String md5File = Md5.getMd5File(fileByte);
 //		df.setCreateDate(new Date());
@@ -151,9 +119,9 @@ public class MongoDBUtil {
 		df.setFiledir(filedir);
 		df.setFileName(fileName);
 		df.setMd5File(md5File);
-		df.setSiteName(siteName);
+		df.setSiteName(SiteController.siteId);
 //		df.setUpdateDate(new Date());
-		mongoDBDao.insert(df, siteName + "_" + type);
+		mongoDBDao.insert(df, SiteController.siteId + "_" + type);
 	}
 	
 	/**
@@ -161,18 +129,18 @@ public class MongoDBUtil {
 	 * @param dbPgFile
 	 * @param siteName
 	 */
-	public void insertPg(DbPgFile dbPgFile,String siteName){
-		mongoDBDao.insert(dbPgFile, siteName + "_pg");
+	public void insertPg(DbPgFile dbPgFile){
+		mongoDBDao.insert(dbPgFile, SiteController.siteId + "_pg");
 	}
 	/**
 	 * cx-20160927
 	 * 删除file
 	 */
-	public <T> void delete(String fileName,String siteName,String type,Class<T> c){
+	public <T> void delete(String fileName,String type,Class<T> c){
 		Criteria criatira = new Criteria();
 		criatira.andOperator(Criteria.where("fileName").is(fileName));
 		
-		mongoDBDao.delete(new Query(criatira), fileName, siteName+"_"+type,c);
+		mongoDBDao.delete(new Query(criatira), fileName, SiteController.siteId+"_"+type,c);
 	}
 	/**
 	 * cx-20160928
@@ -187,32 +155,30 @@ public class MongoDBUtil {
 	/**
 	 * 
 	 */
-	public void insertFile(String fileName,String content,String filedir,String siteName,String fileType,boolean ctrl){
+	public void insertFile(String fileName,String content,String filedir,String fileType,boolean ctrl){
 		
 		if(!ctrl){
 			MongoDBDao mongoDBDao = (MongoDBDao)SpringContextUtil.getBean("mongoDBDao");
-			mongoDBDao.inserts(db,siteName + "_" + fileType);
+			mongoDBDao.inserts(db,SiteController.siteId + "_" + fileType);
+		}else{
+			String md5File =  Md5.getMd5(content);
+			//存入mongodb
+			byte[] fileByte = new byte[content.length()]; 
+			fileByte = content.getBytes();
+			DbFile df = new DbFile();
+//			df.setId(1);
+//			df.setUserId("123456");
+			df.setFileName(fileName);
+			df.setFileByte(fileByte);
+			df.setMd5File(md5File);
+			df.setFiledir(filedir);
+//			df.setCreateDate(new Date());
+//			df.setUpdateDate(new Date());
+			df.setSiteName(SiteController.siteId);
+			
+			db.add(df);
 		}
-		Md5 md5 = new Md5();
-		String md5File =  md5.getMd5(content);
-		//String bb = new String(b); 1474447098246
-		//存入mongodb
-		byte[] fileByte = new byte[content.length()]; 
-		fileByte = content.getBytes();
-		DbFile df = new DbFile();
-//		df.setId(1);
-//		df.setUserId("123456");
-		df.setFileName(fileName);
-		df.setFileByte(fileByte);
-		df.setMd5File(md5File);
-		df.setFiledir(filedir);
-//		df.setCreateDate(new Date());
-//		df.setUpdateDate(new Date());
-		df.setSiteName(siteName);
-		
-		db.add(df);
 		//新线程中重新获取bean
-		
 		//mongoDBDao.insert1(df,"_html");
 		//
 	}
@@ -222,8 +188,7 @@ public class MongoDBUtil {
 	 * @param obj
 	 * @param collectionName
 	 */
-	public void insertFiles(String collectionName,String url,String siteName){
-		System.out.println("db!");
+	public void insertFiles(String collectionName,String url){
 		File fold = new File(url);
 		if (fold.exists()) {
 			
@@ -233,10 +198,9 @@ public class MongoDBUtil {
 			byte[] fileByte = null; 
 			String md5File = null;
 			String fileName = null;
-			int m = 1;
+			
 			Collection<Object> db = new ArrayList<Object>();
 
-			Md5 md5 = new Md5();
 			System.out.println("文件长："+file.length);
 			for (int i = 0; i < file.length; i++) {
 				if(!file[i].isDirectory()){
@@ -244,7 +208,7 @@ public class MongoDBUtil {
 					fileName = file[i].getName();
 					
 					fileByte = UtilFile.FiletoBytes(file[i]);
-					md5File = md5.getMd5File(fileByte);
+					md5File = Md5.getMd5File(fileByte);
 					//fileName = md5.getMd5(fileName);
 					
 					DbFile df = new DbFile();
@@ -255,9 +219,7 @@ public class MongoDBUtil {
 					df.setMd5File(md5File);
 //					df.setCreateDate(new Date());
 //					df.setUpdateDate(new Date());
-					df.setSiteName(siteName);
-					
-					m++;
+					df.setSiteName(SiteController.siteId);
 					db.add(df);
 				}
 			}
@@ -298,8 +260,8 @@ public class MongoDBUtil {
 	 * @return
 	 */
 	public <T> List<T> findAll(Class<T> entityClass,String collectionName) {
-		
-		return this.mongoDBDao.findAll(entityClass, collectionName);
+		//MongoDBDao mongoDBDao = (MongoDBDao)SpringContextUtil.getBean("mongoDBDao");
+		return mongoDBDao.findAll(entityClass, collectionName);
 	}
 
 }
