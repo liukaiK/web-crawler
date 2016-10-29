@@ -166,7 +166,6 @@ public class PageConfigController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String url = request.getParameter("url");
 		dao.collectPageConfig();
-		dao.createTree(url);
 		map.put("message", true);
 		return map;
 	}

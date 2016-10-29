@@ -1,0 +1,47 @@
+#Sbmenu {
+	width: 980px;
+	margin: 0 auto;
+	text-align: left;
+	background-color: #fafafa;
+	padding: 10px;
+	font-size: 1em;
+}
+
+#Sbmenu a {
+	color: #666;
+}
+
+#NewsListConter {
+	width: 940px;
+	margin: 0 auto;
+	text-align: center;
+	background-color: #fafafa;
+	padding: 30px;
+	border-bottom: 1px #CCC solid;
+	border-top: 1px #CCC solid;
+	font-size: 1em;
+}
+
+
+#NewsListConter ul {
+	overflow: auto;	
+}
+
+#NewsListConter ul li,#NewsListConter ul li img {
+	float: left;
+	width: 285px;
+	margin: 0px 15px 10px 0px;
+}
+
+#page {
+	width: 980px;
+	margin: 0 auto;
+	text-align: center;
+	background-color: #fafafa;
+	padding: 10px;
+	font-size: 1em;
+}
+
+#page a {
+	color: #666;
+}

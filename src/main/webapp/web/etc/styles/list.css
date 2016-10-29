@@ -39,6 +39,27 @@
 	line-height: normal;
 }
 
+#NewsListConter ul {
+	text-align: left;
+}
+
+#NewsListConter li {
+	padding: 10px;
+	border-bottom: 1px #CCC dashed;
+}
+
+#NewsListConter ul li a {
+	display: block;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	overflow: hidden;
+	text-align: left;
+	color: #666;
+	float: left;
+	width: 800px;
+}
+
 #page {
 	width: 980px;
 	margin: 0 auto;

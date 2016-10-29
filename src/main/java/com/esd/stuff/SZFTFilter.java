@@ -16,44 +16,6 @@ public class SZFTFilter extends DefaultFilter {
 		removeAttr(element);
 		filterOption(element);
 		textWrapSpan(element);
-		more2text(element);// 主要用于替换医疗服务中的更多
-	}
-
-	/**
-	 * 主要用于替换医疗服务中的更多
-	 * 
-	 * @param element
-	 */
-	private void more2text(Element element) {
-		if (element == null) {
-			return;
-		}
-		String s = "http://www.szft.gov.cn/images/More.jpg";
-		Elements elements = element.select("img");
-		for (Element e : elements) {
-			String src = e.attr("src");
-			if (s.equals(src)) {
-				Element parent = e.parent();
-				Element span = parent.parent();
-				if (span != null && span.tagName().equals("span")) {
-					Elements sib = span.siblingElements();
-					if (sib != null && sib.size() > 0) {
-						String t = sib.get(0).text();
-						parent.attr("title", "查看" + t + "更多");
-						e.html(">>更多");
-						e.unwrap();
-						continue;
-					}
-				}
-
-				if (parent.tagName().equals("a")) {
-					parent.attr("title", "查看更多");
-				}
-				e.html(">>更多");
-				e.unwrap();
-			}
-		}
-
 	}
 
 	private void textWrapSpan(Element element) {

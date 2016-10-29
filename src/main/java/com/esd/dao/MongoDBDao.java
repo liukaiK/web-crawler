@@ -3,7 +3,6 @@ package com.esd.dao;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Repository;
 public class MongoDBDao {
 
 	@Autowired
-	@Qualifier("mongoTemplate")
 	protected MongoTemplate mongoTemplate;
 
 	

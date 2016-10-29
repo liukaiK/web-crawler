@@ -1,53 +1,22 @@
 $(document).ready(function() {
-	var domain = "http://www.caacca.org";
-	var src = $("#flash embed").attr("flashvars");
-	var pic = src.split("&")[0].substring(5).split("|");
-	var text = src.split("&")[2].substring(6).split("|");
-	var link = src.split("&")[1].substring(6).split("|");
-	
-	
-	var md5link = $.md5(domain+link[0].substring(1))+".html";
-
-	var html = "<a href=\""+md5link+"\" id=\"maxImg1\" title=\""+text[0]+"\" >"+
-				"<img src=\""+pic[0]+"\" title=\""+text[0]+"\" alt=\"图片\"/>"+
-				"</a>"+
-				"<p><em>"+text[0]+"</em></p>"+
-				"<ol>";
-	for(var i = 0; i<pic.length;i++){
-		md5link = $.md5(domain+link[i].substring(1))+".html";
-		html+=  "<li class><a href=\""+md5link+"\" rel=\""+pic[i]+"\" con=\""+text[i]+"\" title=\""+text[i]+"\" ></a>"+
-				"</li>";
+	/*********************************轮播图************************************/
+	var href = $("#flash div ul:first li:eq(0) a").attr("href");
+	var title = $("#flash div div:last ul li:eq(0) a").attr("title");
+	var src = $("#flash div ul:first li:eq(0) a img").attr("src");
+	var html = "<a href=\"" + href + "\" id=\"maxImg1\" title=\"" + title + "\" >";
+	html += "<img src=\"" + src + "\" title=\"" + title + "\" alt=\"图片\"/>";
+	html += "</a>";
+	html += "<p><em>" + title + "</em></p>";
+	html += "<ol>";
+	for ( var i = 0; i <= 4; i++) {
+		var md5link = $("#flash div div:last ul li:eq(" + i + ") a").attr("href");
+		var pic = $("#flash div ul:first li:eq(" + i + ") a img").attr("src");
+		var text = $("#flash div div:last ul li:eq(" + i + ") a").attr("title");
+		html += "<li class><a href=\"" + md5link + "\" rel=\"" + pic + "\" con=\"" + text + "\" title=\"" + text + "\" ></a></li>";
 	}
 	html += "</ol>";
-	
 	$("#showImg_1").html(html);
+	/*********************************轮播图************************************/
 	
-	
-	
-	
-	
-	
-	$("#gggs-list table").remove();
-	$("#gggs-list li span").remove();
-	$("#sqtz-list span").remove();
-	$("#bzzn-list span").remove();
-	$("#zjyj-list span").remove();
-	$("#jqrd-list tr").each(function(){
-		$(this).find("td:eq(0)").remove();
-	})
-	$("#mhdt-list tr").each(function(){
-		$(this).find("td:eq(0)").remove();
-	})
-	$("#qyzs-list tr").each(function(){
-		$(this).find("td:eq(0)").remove();
-	})
-	$("#tstb-list tr").each(function(){
-		$(this).find("td:eq(0)").remove();
-	})	
-	$("#hkystj-list tr").each(function(){
-		$(this).find("td:eq(0)").remove();
-		$(this).find("td:eq(1)").remove();
-	})	
-	$("#nav").find("a:eq(0)").focus();
 	$("#flash").remove();
 })

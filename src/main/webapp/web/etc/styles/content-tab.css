@@ -42,7 +42,7 @@
 	font-weight: normal;
 }
 
-#NewsShowConter_txt {
+.NewsShowConter_txt {
 	position: relative;
 	width: 940px;
 	margin: 0 auto;
@@ -54,12 +54,11 @@
 	display: inline-block;
 }
 
-#NewsShowConter_txt div {
-	width: 570px;
+.NewsShowConter_txt div {
 	margin: auto;
 }
 
-#NewsShowConter_txt a {
+.NewsShowConter_txt a {
 	color: #666;
 }
 
@@ -72,11 +71,10 @@ table {
 table td {
 	border: solid #000 1px;
 	padding: 1px 3px;
-	width: 1%;
 }
 
-#NewsShowConter_txt p,#NewsShowConter_txt span,#NewsShowConter_txt font,#NewsShowConter_txt div {
-	text-align: left;
+.NewsShowConter_txt p,.NewsShowConter_txt span,.NewsShowConter_txt font,.NewsShowConter_txt div {
+	text-align: center;
 	line-height: 40px;
 }
 
@@ -86,27 +84,64 @@ table td {
 	line-height: 30px;
 }
 
-.leader #NewsShowConter_txt p {
+.leader .NewsShowConter_txt p {
 	float: left;
 	text-align: center;
 	line-height: 30px;
 	margin-left: 94px;
 	height: auto;
 }
-#NewsShowConter_txt div table tbody tr td pre span {
+.NewsShowConter_txt div table tbody tr td pre span {
 	white-space: pre-wrap;
 	text-align: left;
 }
 
-#NewsShowConter_txt div table tbody tr td pre {
+.NewsShowConter_txt div table tbody tr td pre {
 	white-space: pre-wrap;
 	text-align: left;
 }
 
-#NewsShowConter_txt div table tbody tr td p img {
+.NewsShowConter_txt div table tbody tr td p img {
 	width: 100%;
 	text-align: center;
 }
-#NewsShowConter_txt p {
+.NewsShowConter_txt p {
     margin-top: 20px;
+}
+
+.block1 .title {
+	font-size: 16px;
+	font-weight: 400;
+	height: 58px;
+	border-bottom: 1px solid #ddd;
+	background-color: #f8f9fa;
+}
+
+.block1 .title h3 {
+	float: left;
+	font-size: 16px;
+	color: #4b4b4b;
+	text-decoration: none;
+	margin: 18px 15px 0 21px;
+	line-height: 24px;
+	font-weight: 700;
+	padding-right: 15px;
+	border-right: 1px dashed #ddd;
+}
+
+.col {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+.block1 .title span {
+	float: left;
+	font-size: 16px;
+	color: #4b4b4b;
+	text-decoration: none;
+	margin: 0px 0px 0 10px;
+	line-height: 24px;
+	font-weight: 700;
+	padding-right: 15px;
+	border-right: none;
 }

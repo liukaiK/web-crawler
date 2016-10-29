@@ -153,7 +153,7 @@ public class Test {
 
 	@org.junit.Test
 	public void getSource() throws IOException {
-		String url = "http://wza.caacca.org/";
+		String url = "http://www.jlsy.gov.cn/bsfw/fw/flfw/gm/";
 		Document htmlSource = Jsoup.connect(url).get();
 		System.out.println(htmlSource);
 //		Elements links = htmlSource.select("a[href],area[href],iframe[src]");
@@ -196,7 +196,7 @@ public class Test {
 	@org.junit.Test
 	public void getMd5() {
 		StringBuffer str;
-		str = new StringBuffer("http://www.caac.gov.cn/");
+		str = new StringBuffer("http://www.jlsy.gov.cn/zw/zcwj/szbh/201608/t20160810_116747.html");
 		Md5 md5 = new Md5();
 		System.out.println(md5.getMd5(str));
 	}

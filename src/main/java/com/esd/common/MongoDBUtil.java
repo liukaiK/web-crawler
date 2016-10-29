@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import com.esd.collection.Downloads;
 import com.esd.collection.History;
 import com.esd.collection.Urls;
-import com.esd.core.CollectionPage;
 import com.esd.dao.MongoDBDao;
 import com.esd.util.Md5;
 
@@ -20,7 +19,7 @@ public class MongoDBUtil {
 	@Resource
 	private MongoDBDao mongoDBDao;
 
-	private static Logger logger = Logger.getLogger(CollectionPage.class);
+	private static Logger logger = Logger.getLogger(MongoDBUtil.class);
 
 	public Long getDownloadsCount() {
 		return mongoDBDao.count(new Query(), Downloads.class);

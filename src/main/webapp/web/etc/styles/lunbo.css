@@ -34,18 +34,18 @@ div#scrollimg1 div.scrollimg1-title span.more a{
 }
 /* #showImg_1.css */
 #showImg_1 {
-	width:480px;
+	width:672px;
 	position:relative;
 	height:318px;
 }
 #showImg_1 img {
-	width:489px;
+	width:672px;
 	height:291px;
 }
 
 #showImg_1 p {
 	position:absolute;
-	width:489px;
+	width:672px;
 	bottom:2px;
 	line-height:24px;
 	background:#16a1e2;
@@ -66,7 +66,7 @@ div#scrollimg1 div.scrollimg1-title span.more a{
 }
 #showImg_1 em {
 	position:absolute;
-	width:297px;
+	width:500px;
 	line-height:24px;
 	padding:0 0 0 80px;
 	color:#FFFFFF;

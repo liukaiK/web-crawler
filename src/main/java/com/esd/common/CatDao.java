@@ -16,7 +16,6 @@ import org.apache.log4j.Logger;
 import org.jsoup.nodes.Document;
 
 import com.esd.config.BaseConfig;
-import com.esd.config.NodeConfig;
 import com.esd.config.PageConfig;
 import com.esd.download.EsdDownLoadHtml;
 import com.esd.parser.Parser;
@@ -29,37 +28,6 @@ public class CatDao {
 	private static Logger log = Logger.getLogger(CatDao.class);
 	private Map<String, PageConfig> pageConfigMap = new HashMap<String, PageConfig>();
 	private Map<String, PageConfig> wildcardMap = new HashMap<String, PageConfig>();
-	private static List<PageConfig> treeDirList = new ArrayList<PageConfig>();
-
-	/**
-	 * 自动创建所有目录树
-	 */
-	public void createTree() {
-		for (PageConfig pageConfig : treeDirList) {
-			List<String> urls = pageConfig.getUrls();
-			for (String url : urls) {
-				DirTreeCat dtc = new DirTreeCat();
-				dtc.download(url);
-			}
-
-		}
-	}
-
-	/**
-	 * 根据网址自动创建目录树
-	 */
-	public void createTree(String url) {
-		for (PageConfig pageConfig : treeDirList) {
-			List<String> urls = pageConfig.getUrls();
-			for (String s : urls) {
-				if (s.equals(url)) {
-					DirTreeCat dtc = new DirTreeCat();
-					dtc.download(s);
-				}
-			}
-
-		}
-	}
 
 	/**
 	 * 单页采集与组合网页
@@ -187,19 +155,6 @@ public class CatDao {
 			PageConfig pageConfig = (PageConfig) iterator.next();
 			if (pageConfig == null) {
 				continue;
-			}
-			List<NodeConfig> l = pageConfig.getList();
-			if (l != null) {
-				if (l.size() == 1) {
-					if (l.get(0).getDes() != null) {
-						String s = l.get(0).getDes();
-						if (s.equals("@tree")) {
-							treeDirList.add(pageConfig);
-							continue;
-						}
-					}
-
-				}
 			}
 			List<String> urls = pageConfig.getUrls();
 			for (String url : urls) {
