@@ -51,8 +51,8 @@ $(document).ready(
 			$("#NewsListConter ul li:eq(15)").remove();
 			$("#NewsListConter ul li:eq(20)").remove();
 			
-			
-			
+			var title = $("#Sbmenu a:last").text();
+			$(document).attr("title", title);	
 			
 		});
 

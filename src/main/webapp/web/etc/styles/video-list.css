@@ -24,13 +24,18 @@
 
 
 #NewsListConter ul {
-	overflow: auto;	
+	overflow: hidden;	
 }
 
-#NewsListConter ul li,#NewsListConter ul li img {
+#NewsListConter ul li{
 	float: left;
 	width: 285px;
+	height: 285px;
 	margin: 0px 15px 10px 0px;
+}
+#NewsListConter ul li img {
+	width: 285px;
+	height: 250px;
 }
 
 #page {

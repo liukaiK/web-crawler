@@ -109,7 +109,6 @@
 	</div>
 </body>
 <script type="text/javascript" src="/js/codemirror-5.18.2/lib/codemirror.js" charset="UTF-8"></script>
-<script type="text/javascript" src="/js/codemirror.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/js/codemirror-5.18.2/addon/selection/active-line.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/js/codemirror-5.18.2/addon/edit/matchtags.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/js/codemirror-5.18.2/addon/edit/matchbrackets.js" charset="UTF-8"></script>
