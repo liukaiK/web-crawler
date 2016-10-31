@@ -46,10 +46,10 @@ $(document).ready(
 				
 			})
 			
-			$("#NewsListConter ul li:eq(5)").remove();
-			$("#NewsListConter ul li:eq(10)").remove();
-			$("#NewsListConter ul li:eq(15)").remove();
-			$("#NewsListConter ul li:eq(20)").remove();
+//			$("#NewsListConter ul li:eq(5)").remove();
+//			$("#NewsListConter ul li:eq(10)").remove();
+//			$("#NewsListConter ul li:eq(15)").remove();
+//			$("#NewsListConter ul li:eq(20)").remove();
 			var title = $("#Sbmenu a:last").text();
 			$(document).attr("title", title);	
 			

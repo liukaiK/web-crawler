@@ -30,12 +30,12 @@
 #NewsListConter ul li{
 	float: left;
 	width: 285px;
-	height: 285px;
+	height: 200px;
 	margin: 0px 15px 10px 0px;
 }
 #NewsListConter ul li img {
-	width: 285px;
-	height: 250px;
+	width: 232px;
+	height: 174px;
 }
 
 #page {

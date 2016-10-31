@@ -100,3 +100,76 @@ h2 p {
 	float: right;
 	margin: 22px 45px 20px 0px;
 }
+
+.img {
+	width: 500px;
+	float: left;
+}
+
+.img img {
+	height: 280px;
+	width: 400px;
+	margin-left: 10px;
+	margin-top: 10px;
+}
+
+.img2 {
+	width: 500px;
+	float: left;
+}
+
+.img2 img {
+	height: 180px;
+	width: 400px;
+	margin-left: 10px;
+	margin-top: 10px;
+}
+
+.txt2 {
+	font-size: 16px;
+	font-weight: 400;
+	margin-top: 35px;
+	margin-right: 65px;
+	line-height: 25px;
+}
+
+.txt3 ul {
+	font-size: 16px;
+	font-weight: 400;
+	margin-top: 35px;
+	margin-right: 65px;
+	line-height: 25px;
+}
+
+.txt3 li {
+	float: left;
+	width: 200px;
+	line-height: 30px;
+	display: block;
+}
+
+#fenlei ul {
+	overflow: hidden;
+	display: block;
+	background-color: #fafafa;
+}
+
+#fenlei ul li {
+	float: left;
+	width: 190px;
+	display: block;
+}
+
+#fenlei ul li a {
+	height: 94px;
+	line-height: 94px;
+	color: #4b4b4b;
+	font-size: 14px;
+	font-weight: 700;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	border: #CCC 2px solid;
+	padding: 30px;
+	margin: 10px;
+}

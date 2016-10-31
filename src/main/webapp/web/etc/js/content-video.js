@@ -3,7 +3,8 @@ $(document).ready(function() {
 	$("#NewsShowConter_date div:eq(1)").css({
 		"padding-top" : "10px"
 	})
-	var url = $.trim($("#artibody").text());
+	var value = $.trim($("#artibody param").attr("value"));
+	url = value.substring(value.indexOf("=") + 1);
 	var flashvars = {
 			f : url,// 视频地址
 			a : '',// 调用时的参数，只有当s>0的时候有效
@@ -52,6 +53,10 @@ $(document).ready(function() {
 	document.getElementById('button4').onclick = function() {
 		CKobject.getObjectById('ckplayer_a1').fastBack();
 	}
+	
+	var title = $("#NewsShowConter_date h1").text();
+	
+	$(document).attr("title", title);
 
 })
 

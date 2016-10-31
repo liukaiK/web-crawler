@@ -106,7 +106,13 @@ table td {
 	width: 100%;
 	text-align: center;
 }
+
 embed {
 	height: 480px;
 	width: 640px;
+}
+
+#NewsShowConter_date h1 p,#NewsShowConter_date h1 span {
+	font-size: 18px;
+	font-weight: normal;
 }
