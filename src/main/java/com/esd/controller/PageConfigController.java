@@ -151,25 +151,6 @@ public class PageConfigController {
 		return m + ".html";
 	}
 
-
-
-	@RequestMapping("/publish")
-	@ResponseBody
-	public Map<String, Object> publish(HttpServletRequest request) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		return map;
-	}
-
-	@RequestMapping("/dotreedir")
-	@ResponseBody
-	public Map<String, Object> dotreedir(HttpServletRequest request) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		String url = request.getParameter("url");
-		dao.collectPageConfig();
-		map.put("message", true);
-		return map;
-	}
-
 	@RequestMapping("/savePgFile")
 	@ResponseBody
 	public Map<String, Object> savePgFile(HttpServletRequest request) {

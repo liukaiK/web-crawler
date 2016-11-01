@@ -3,11 +3,9 @@ package com.esd.stuff;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class DefaultFilter extends SrcFilter {
+public class DefaultFilter {
 
-	@Override
 	public void filter(Element element) {
-		super.filter(element);
 		filterTitle(element);
 		removeStyle(element);
 		removeJavascript(element);

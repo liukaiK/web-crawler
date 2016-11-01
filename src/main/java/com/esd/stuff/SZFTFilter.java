@@ -11,7 +11,6 @@ public class SZFTFilter extends DefaultFilter {
 
 	@Override
 	public void filter(Element element) {
-		// TODO Auto-generated method stub
 		super.filter(element);
 		removeAttr(element);
 		filterOption(element);

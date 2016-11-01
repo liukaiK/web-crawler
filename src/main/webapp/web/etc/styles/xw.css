@@ -44,7 +44,6 @@ h2 p {
 
 .block2 .txt {
 	background-color: #FFF;
-	line-height: 30px;
 }
 .block2 .title p,.block2 .title span,.block2 .title h3 {
 	float: left;
@@ -83,14 +82,61 @@ h2 p {
 	border-bottom: 1px solid #CCC;
 }
 
-.txt table tbody tr td a {
-	margin-left: 5px;
-	text-align: left;
+.txt {
+	width: 938px;
+	margin: 0 auto;
+	text-align: center;
+	background-color: #fafafa;
+	padding: 30px;
+	border-bottom: 1px #CCC solid;
+	border-top: 1px #CCC solid;
+	font-size: 1em;
+}
+
+.txt li {
+  padding: 10px;
+  border-bottom: 1px #CCC dashed;
+}
+
+.txt ul li a {
 	display: block;
-	width: 850px;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	-o-text-overflow: ellipsis;
 	overflow: hidden;
-	line-height: normal;
+	text-align: left;
+	color: #666;
+	float: left;
+	width: 800px;
+}
+
+.txt img {
+	max-width: 482px;
+}
+
+.more {
+	display: block;
+	float: right;
+	margin: 22px 45px 20px 0px;
+}
+
+#sub_nav_txt {
+	background-color: #FFF;
+	line-height: 30px;
+	clear: both;
+	padding: 20px;
+}
+
+#sub_nav_txt a {
+	height: 94px;
+	line-height: 94px;
+	color: #4b4b4b;
+	font-size: 14px;
+	font-weight: 700;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	border: #CCC 2px solid;
+	padding: 30px;
+	margin: 60px;
 }

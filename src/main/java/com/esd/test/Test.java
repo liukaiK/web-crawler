@@ -9,10 +9,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.MalformedURLException;
-import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import org.apache.log4j.Logger;
 import org.jsoup.Connection;
@@ -79,7 +77,7 @@ public class Test {
 
 	@org.junit.Test
 	public void findPageConfigFile() {
-		String url = "http://www.jlsy.gov.cn/gk/sysq/201512/t20151218_74637.html";
+		String url = "http://www.jlsy.gov.cn/gk/sjsy/";
 		BaseConfig.PG_ROOT = "D:\\apache-tomcat-6.0.45\\webapps\\iac\\web" + File.separator + "db";
 		dao.collectPageConfig();
 		PageConfig pageConfig = dao.findPageConfig(url);
