@@ -83,6 +83,11 @@ h2 p {
 	border-bottom: 1px solid #CCC;
 }
 
+.txt {
+	padding-top: 10px;
+	padding-bottom: 10px;	
+}
+
 .txt table tbody tr td a {
 	margin-left: 5px;
 	text-align: left;
