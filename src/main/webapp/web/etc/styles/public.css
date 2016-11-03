@@ -65,12 +65,12 @@ div { /*opacity: .97;*/
 /***********************标签总体样式表******************************/
 .col {
 	margin: 0 auto;
-	width: 1000px;
+	width: 998px;
 	clear: both;
 	text-align: left;
-	/*border: #CCC 1px solid;*/
+	border: #CCC 1px solid;
 	margin-top: 5px;
-	margin-bottom: 2px;
+	margin-bottom: 5px;
 }
 
 .col-nav {
@@ -81,19 +81,19 @@ div { /*opacity: .97;*/
 
 .nav {
 	width: 1000px;
-	height: 3.75em;
+	height: 2.75em;
 	font-size: 1em;
-	line-height: 3.75em;
+	line-height: 2.75em;
 	margin: 0 auto;
 }
 
 .nav a {
 	display: block;
 	float: left;
-	padding: 0 14px;
+	padding: 0 20px;
 	color: #FFECEC;
-	width: 71px;
-	border-left: #ED7461 1px solid;
+	/*width: 71px;*/
+	border-left: #2d67b0 1px solid;
 	font-size: 16px;
 }
 
@@ -154,6 +154,7 @@ div { /*opacity: .97;*/
 	margin-top: 0px;
 	margin-bottom: 5px;
 	height: 80px;
+  	background-image: url("../image/topbg.png");
 }
 
 #logo h1 {

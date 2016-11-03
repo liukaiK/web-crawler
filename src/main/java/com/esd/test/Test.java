@@ -59,7 +59,7 @@ public class Test {
 
 	@org.junit.Test
 	public void getSource() throws IOException {
-		String url = "http://www.jlsy.gov.cn/bsfw/fw/flfw/gm/";
+		String url = "http://www.jlsy.gov.cn/zw/zfzc/ld/sz_1781";
 		Document htmlSource = Jsoup.connect(url).get();
 		System.out.println(htmlSource);
 //		Elements links = htmlSource.select("a[href],area[href],iframe[src]");
@@ -77,7 +77,7 @@ public class Test {
 
 	@org.junit.Test
 	public void findPageConfigFile() {
-		String url = "http://www.jlsy.gov.cn/hd/szxx/szxx/";
+		String url = "http://www.jlsy.gov.cn/zw/zfzc/szfzcbm/201209/t20120929_44471.html";
 		BaseConfig.PG_ROOT = "D:\\apache-tomcat-6.0.45\\webapps\\iac\\web" + File.separator + "db";
 		dao.collectPageConfig();
 		PageConfig pageConfig = dao.findPageConfig(url);

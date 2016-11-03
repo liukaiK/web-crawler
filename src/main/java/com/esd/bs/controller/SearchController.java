@@ -56,7 +56,7 @@ public class SearchController {
 		searchResult.setTotal(total);
 		searchResult.setTotalPage(total % 20 == 0 ? (int) total / 20 : (int) (total / 20) + 1);
 		map.put("result", searchResult);
-		return new ModelAndView("/result", map);
+		return new ModelAndView("result", map);
 		
 	}
 

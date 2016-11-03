@@ -114,7 +114,16 @@ public class CollectionPage {
 			return true;
 		}
 		Elements links = htmlSource.select("a[href],area[href],iframe[src]");
-		String title = htmlSource.select("title").text().trim();
+		String title = htmlSource.select("#title_tex").text().trim();
+		if (title == null || title.isEmpty()) {
+			Element alink = htmlSource.select("div.wd.path.mt20 a").last();
+			if (alink != null) {
+				title = alink.text().trim();
+			}
+			if (title == null || title.isEmpty()) {
+				title = htmlSource.select("title").text().trim();
+			}
+		}
 		for (Element e : links) {
 			String href = e.attr("abs:href").trim();
 			if (href.equals("")) {

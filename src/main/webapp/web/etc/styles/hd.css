@@ -95,6 +95,23 @@ h2 p {
 	line-height: normal;
 }
 
+.txt li {
+  padding: 10px;
+  border-bottom: 1px #CCC dashed;
+}
+
+.txt ul li a {
+	display: block;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	overflow: hidden;
+	text-align: left;
+	color: #666;
+	float: left;
+	width: 850px;
+}
+
 .more {
 	display: block;
 	float: right;
@@ -114,13 +131,13 @@ h2 p {
 }
 
 .img2 {
-	width: 200px;
+	width: 500px;
 	float: left;
 }
 
 .img2 img {
-	height: 200px;
-	width: 150px;
+	height: 180px;
+	width: 400px;
 	margin-left: 10px;
 	margin-top: 10px;
 }
@@ -161,16 +178,15 @@ h2 p {
 }
 
 #fenlei ul li a {
+	height: 94px;
+	line-height: 94px;
+	color: #4b4b4b;
+	font-size: 14px;
 	font-weight: 700;
-	display: block;
-	margin: 10px;
-}
-
-#ztff {
-	float: left;
-	width: 780px;
-}
-
-#fjdt {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	border: #CCC 2px solid;
+	padding: 30px;
 	margin: 10px;
 }
