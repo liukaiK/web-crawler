@@ -34,18 +34,18 @@ div#scrollimg1 div.scrollimg1-title span.more a{
 }
 /* #showImg_1.css */
 #showImg_1 {
-	width:672px;
+	width:400px;
 	position:relative;
 	height:318px;
 }
 #showImg_1 img {
-	width:672px;
+	width:400px;
 	height:291px;
 }
 
 #showImg_1 p {
 	position:absolute;
-	width:672px;
+	width:400px;
 	bottom:2px;
 	line-height:24px;
 	background:#16a1e2;
@@ -56,7 +56,7 @@ div#scrollimg1 div.scrollimg1-title span.more a{
 }
 #showImg_1 p span {
 	display:block;
-	width:486px;
+	width:400px;
 	position:absolute;
 	top:0;
 	left:0;
@@ -66,9 +66,9 @@ div#scrollimg1 div.scrollimg1-title span.more a{
 }
 #showImg_1 em {
 	position:absolute;
-	width:500px;
+	width:400px;
 	line-height:24px;
-	padding:0 0 0 80px;
+	/*padding:0 0 0 80px;*/
 	color:#FFFFFF;
 	left:8px;
 	font-style:normal;

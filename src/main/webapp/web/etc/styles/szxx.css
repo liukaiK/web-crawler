@@ -11,6 +11,20 @@
 	font-weight: bold;
 }
 
+#NewsShowConter_nav {
+	width: 980px;
+	margin: 0 auto;
+	text-align: left;
+	background-color: #fafafa;
+	padding: 10px;
+	font-size: 1em;
+	z-index: 1;
+}
+
+#NewsShowConter_nav a {
+	color: #666;
+}
+
 #NewsShowConter_date {
 	position: relative;
 	width: 940px;
@@ -76,9 +90,6 @@ table {
 	border-top: 1px solid #ddd;
 	border-left: 1px solid #ddd;
 }
-
-
-
 
 table tr th,td {
 	text-align: left;
