@@ -11,9 +11,7 @@ public class BaseConfig extends HttpServlet {
 
 	public static String[] str = {};
 
-	public static String[] filterSuffix = { ".jpg", ".png", ".gif", ".exe",
-			".jpeg", ".doc", ".docx", ".xlsx", ".xls", ".ppt", ".rar", ".zip",
-			".pdf", "wbk", "xml" };
+	public static String[] filterSuffix = { ".jpg", ".png", ".gif", ".exe", ".jpeg", ".doc", ".docx", ".xlsx", ".xls", ".ppt", ".rar", ".zip", ".pdf", "wbk", "xml" };
 
 	public static String ROOT;
 
@@ -33,7 +31,7 @@ public class BaseConfig extends HttpServlet {
 	
 	public static String TEMP_ROOT;
 
-	public static final String[] INDEX_URL = { "http://www.jlsy.gov.cn/", "http://ft.jlsy.gov.cn/" };
+	public static final String[] INDEX_URL = { "http://www.jlsy.gov.cn/", "http://ft.jlsy.gov.cn/", "http://zt.jlsy.gov.cn/" };
 
 	public static final String MESSAGE = "message";
 

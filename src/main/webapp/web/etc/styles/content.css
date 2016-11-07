@@ -54,7 +54,7 @@
 	display: inline-block;
 }
 
-#NewsShowConter_txt div {
+#NewsShowConter_txt > div {
 	width: 570px;
 	margin: auto;
 }
