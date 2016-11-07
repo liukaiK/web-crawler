@@ -1,0 +1,116 @@
+/************************************正文*****************************************/
+#content {
+	position: relative;
+	color: #666;
+}
+
+#content a:hover {
+	text-decoration: underline;
+	color: yellow;
+	background-color: black;
+	font-weight: bold;
+}
+
+#NewsShowConter_nav {
+	width: 980px;
+	margin: 0 auto;
+	text-align: left;
+	background-color: #fafafa;
+	padding: 10px;
+	font-size: 18px;
+	z-index: 1;
+}
+
+#NewsShowConter_nav a {
+	color: #666;
+}
+
+#NewsShowConter_date {
+	position: relative;
+	width: 940px;
+	margin: 0 auto;
+	text-align: center;
+	background-color: #fafafa;
+	padding: 30px;
+	border-bottom: 1px #CCC solid;
+	border-top: 1px #CCC solid;
+	z-index: 1;
+}
+
+#NewsShowConter_date h1 p,#NewsShowConter_date h1 span {
+	font-size: 18px;
+	font-weight: normal;
+}
+
+#NewsShowConter_txt {
+	position: relative;
+	width: 940px;
+	margin: 0 auto;
+	text-align: left;
+	background-color: #fafafa;
+	padding: 30px;
+	font-size: 1em;
+	z-index: 1;
+	display: inline-block;
+}
+
+#NewsShowConter_txt div {
+	width: 570px;
+	margin: auto;
+}
+
+#NewsShowConter_txt a {
+	color: #666;
+}
+
+table {
+	border-collapse: collapse;
+	border: none;
+	width: 100%;
+}
+
+table td {
+	border: solid #000 1px;
+	padding: 1px 3px;
+	width: 1%;
+}
+
+#NewsShowConter_txt p,#NewsShowConter_txt span,#NewsShowConter_txt font,#NewsShowConter_txt div {
+	text-align: left;
+	line-height: 40px;
+}
+
+#des {
+	margin-top: 10px;
+	text-align: left;
+	line-height: 30px;
+}
+
+.leader #NewsShowConter_txt p {
+	float: left;
+	text-align: center;
+	line-height: 30px;
+	margin-left: 94px;
+	height: auto;
+}
+#NewsShowConter_txt div table tbody tr td pre span {
+	white-space: pre-wrap;
+	text-align: left;
+}
+
+#NewsShowConter_txt div table tbody tr td pre {
+	white-space: pre-wrap;
+	text-align: left;
+}
+
+#NewsShowConter_txt div table tbody tr td p img {
+	width: 100%;
+	text-align: center;
+}
+#NewsShowConter_txt p {
+    margin-top: 20px;
+}
+
+dd span {
+	font-size: 18px;
+}

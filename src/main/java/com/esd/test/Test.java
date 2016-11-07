@@ -38,25 +38,6 @@ public class Test {
 
 	private CatDao dao = new CatDao();
 	
-	
-	
-	@org.junit.Test
-	public void ReadFile() throws IOException {
-        // 创建文件输入流对象  
-        FileInputStream is = new FileInputStream("D:\\image1.png");  
-        // 设定读取的字节数  
-        int n = 512;  
-        byte buffer[] = new byte[n];  
-        // 读取输入流  
-        while ((is.read(buffer, 0, n) != -1) && (n > 0)) {  
-            System.out.print(new String(buffer));  
-        }  
-        System.out.println();  
-        // 关闭输入流  
-        is.close();  
-	}
-	
-
 	@org.junit.Test
 	public void getSource() throws IOException {
 		String url = "http://www.jlsy.gov.cn/zw/zfzc/ld/sz_1781";
@@ -77,7 +58,7 @@ public class Test {
 
 	@org.junit.Test
 	public void findPageConfigFile() {
-		String url = "http://www.jlsy.gov.cn/zw/tjgg/";
+		String url = "http://www.jlsy.gov.cn/bsfw/bs/bmfw_1/dsj_952/";
 		BaseConfig.PG_ROOT = "D:\\apache-tomcat-6.0.45\\webapps\\iac\\web" + File.separator + "db";
 		dao.collectPageConfig();
 		PageConfig pageConfig = dao.findPageConfig(url);
