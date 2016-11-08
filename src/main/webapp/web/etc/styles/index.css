@@ -1,6 +1,4 @@
 #xiao_hf{
-      height: 140px;
-    width: 376px;
     margin: 2px;
 }
 .main a {
@@ -11,7 +9,9 @@
 	text-decoration: underline;
 	color: yellow;
 }
-
+#mhdt #mhdt-list a{
+  width:230px;
+}
 
 .main li,.main tr {
 	color: #fef8ec;
@@ -38,24 +38,76 @@
 .icon_jy i{position: absolute; background-position:-35px -250px; width:29px; height:38px; display:block;  top:14px; left:26px; z-index:2;}
 .icon_yl i{position: absolute; background-position:-35px -291px; width:37px; height:30px; display:block;  top:19px; left:23px; z-index:2;}
 
-.icon_qy_01 i{ background-position:-568px 0; width:32px; height:33px; display:block; position:relative; top:18px; left:25px; z-index:2;}
-.icon_qy_02 i{ background-position:-568px -38px; width:29px; height:35px; display:block; position:relative; top:17px; left:27px; z-index:2;}
-.icon_qy_03 i{ background-position:-568px -78px; width:28px; height:34px; display:block; position:relative; top:19px; left:28px; z-index:2;}
-.icon_qy_04 i{ background-position:-568px -117px; width:39px; height:29px; display:block; position:relative; top:17px; left:24px; z-index:2;}
-.icon_qy_05 i{ background-position:-568px -151px; width:32px; height:29px; display:block; position:relative; top:19px; left:26px; z-index:2;}
-.icon_qy_06 i{ background-position:-568px -185px; width:41px; height:30px; display:block; position:relative; top:17px; left:20px; z-index:2;}
-.icon_qy_07 i{ background-position:-568px -221px; width:34px; height:34px; display:block; position:relative; top:16px; left:26px; z-index:2;}
-.icon_qy_08 i{ background-position:-568px -260px; width:32px; height:32px; display:block; position:relative; top:17px; left:26px; z-index:2;}
-.icon_qy_09 i{ background-position:-568px -297px; width:34px; height:38px; display:block; position:relative; top:16px; left:23px; z-index:2;}
+.icon_qy_01 i{ position: absolute;background-position:-568px 0; width:32px; height:33px; display:block; position:relative; top:18px; left:25px; z-index:2;}
+.icon_qy_02 i{ position: absolute;background-position:-568px -38px; width:29px; height:35px; display:block; position:relative; top:17px; left:27px; z-index:2;}
+.icon_qy_03 i{ position: absolute;background-position:-568px -78px; width:28px; height:34px; display:block; position:relative; top:19px; left:28px; z-index:2;}
+.icon_qy_04 i{ position: absolute;background-position:-568px -117px; width:39px; height:29px; display:block; position:relative; top:17px; left:24px; z-index:2;}
+.icon_qy_05 i{ position: absolute;background-position:-568px -151px; width:32px; height:29px; display:block; position:relative; top:19px; left:26px; z-index:2;}
+.icon_qy_06 i{ position: absolute;background-position:-568px -185px; width:41px; height:33px; display:block; position:relative; top:17px; left:20px; z-index:2;}
+.icon_qy_07 i{position: absolute; background-position:-568px -221px; width:34px; height:34px; display:block; position:relative; top:16px; left:26px; z-index:2;}
+.icon_qy_08 i{ position: absolute;background-position:-568px -260px; width:32px; height:32px; display:block; position:relative; top:17px; left:26px; z-index:2;}
+.icon_qy_09 i{ position: absolute;background-position:-568px -297px; width:34px; height:38px; display:block; position:relative; top:16px; left:23px; z-index:2;}
 
 #bzzn{
+  width: 274px;
+      background-color: #f6bb43;
+    border: #f6bb43 4px solid;
+}
+#zt{
+      background-color: #d870ad;
+    border: #d870ad 4px solid;
+      width: 162px;
+}
+#ggfw{
+    width: 294px;
+    margin: 2px;
+    float: left;
+}
+#hd{
+    background-color: #37bd9c;
+    border: #37bd9c 4px solid;
+    height: 236px;
+    width: 400px;
+    float: left;
   
 }
 #bzzn h3{border-bottom:none;}
 #gggs h3{border-bottom:none;}
+#qyzs li{
+    margin-left: 90px;
+    margin-top: 46px;
+    position: relative;
+    background-position: -385px -90px;
+    width: 35px;
+    height: 28px;
+    display: block;
+    top: 0px;
+    /* left: 21px; */
+    z-index: 2;
+    background-image: url("../image/icon.png");
+    background-repeat: no-repeat;
+    float: left;
+}
+#tstb li{
+    margin-left: 90px;
+    margin-top: 46px;
+    position: relative;
+    background-position: -385px -90px;
+    width: 35px;
+    height: 28px;
+    display: block;
+    top: 0px;
+    /* left: 21px; */
+    z-index: 2;
+    background-image: url("../image/icon.png");
+    background-repeat: no-repeat;
+    float: left;
+}
 #gggs li{
-	position: relative;
-    background-position: -381px -147px;
+	margin-left: 135px;
+    margin-top: 25px;
+    position: relative;
+    background-position: -386px -147px;
     width: 36px;
     height: 24px;
     display: block;
@@ -122,23 +174,28 @@ h3 a {
 }
 
 .block1 {
-	width: 128px;
+	width: 127px;
 	height: 130px;
 	float: left;
 	margin: 2px;
 }
 
 #ftdt {
-	background-color: #f6bb43;
-	border: #f6bb43 4px solid;
+background-color: #169fa5;
+    border: #169fa5 4px solid;
+      width: 300px;
+}
+#ftdt table a{
+   width: 260px;
 }
 #zwgk{
-  	background-color: #f6bb43;
-	border: #f6bb43 4px solid;
-      width: 322px;
+    background-color: #0c92d1;
+    border: #0c92d1 4px solid;
+      width: 262px;
     height: 89px;
 }
 #tj {
+  width: 262px;
 	background-color: #f6bb43;
 	border: #f6bb43 4px solid;
 }
@@ -150,6 +207,7 @@ h3 a {
 }
 
 #ftjx {
+  width: 400px;
 	background-color: #22b658;
 	border: #22b658 4px solid;
 }
@@ -157,12 +215,12 @@ h3 a {
 .block2 {
 	width: 318px;
 	float: left;
-	margin: 1px;
+	margin: 2px;
 }
 
 .block2 table a {
 	display: block;
-	width: 250px;
+	width: 350px;
 	margin-bottom: 10px;
 	white-space: nowrap;
 	text-overflow: ellipsis;
@@ -174,10 +232,10 @@ h3 a {
 	width: 194px;
 	float: left;
 	margin: 2px;
-	background-color: #0c92d1;
-	border: #0c92d1 4px solid;
+    background-color: #3baeda;
+    border: #3baeda 4px solid;
     text-align: center;
-      height: 132px;
+      height: 111px;
 }
 
 #zjyj {
@@ -188,7 +246,7 @@ h3 a {
 }
 
 #jqrd {
-	border: #e9573e 3px solid;
+	border: #e9573e 4px solid;
 	background-color: #e9573e;
     width: 300px;
     height: 318px;
@@ -196,9 +254,9 @@ h3 a {
 
 #mhdt {
 	text-align: left;
-	border: #5937B2 3px solid;
-	background-color: #5937B2;
-    width: 266px;
+	border: #967bdc 4px solid;
+	background-color: #967bdc;
+    width: 262px;
      height: 178px;
 }
 
@@ -252,7 +310,7 @@ h3 a {
 }
 
 #bs {
-	width: 360px;
+	width: 400px;
     background-color: #e9573e;
     border: #e9573e 4px solid;
     height: 332px;
@@ -270,7 +328,7 @@ h3 a {
 }
 
 .block2 ul li {
-	width: 275px;
+	width: 230px;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	-o-text-overflow: ellipsis;
@@ -290,10 +348,19 @@ h3 a {
 #zdfw li {
 	padding-bottom: 5px;
 }
-
+#grbs{
+  margin-right: 0px;
+}
+#grbs ul{
+margin-left: 55px;
+}
 #qybs {
-	border: #8dc153 3px solid;
-	background-color: #8dc153;
+	border: #eeeeee 4px solid;
+	background-color: #eeeeee;
+     margin-left: 0px;
+}
+#qybs li a{
+  margin-top: -33px;
 }
 
 .block9 ul {
@@ -362,12 +429,12 @@ h3 a {
 }
 
 .block4 {
-    width: 300px;
-    border: #37bd9c 3px solid;
+    width: 339px;
+    border: #eeeeee 4px solid;
     float: left;
-    background-color: #37bd9c;
+    background-color: #eeeeee;
     margin: 3px;
-    min-height: 335px;
+    min-height: 286px;
     height: auto !important;
 }
 
@@ -431,7 +498,7 @@ h3 a {
 	margin-left: 2px;
 }
 #jqrd-list table td table{
-  height:70px;
+  height:65px;
   border-bottom: 1px #fff dashed;
 }
 
@@ -471,7 +538,7 @@ h3 a {
 	list-style-type: none;
 	margin: 3px 0px 20px 0px;
 	margin: 0px;
-	padding: 18px;
+	padding: 10px;
 }
 
 .block4 ul li {
