@@ -37,7 +37,7 @@
 	z-index: 1;
 }
 
-#NewsShowConter_date h1 p,#NewsShowConter_date h1 span {
+#NewsShowConter_date h1 p,#NewsShowConter_date span {
 	font-size: 18px;
 	font-weight: normal;
 }
@@ -107,3 +107,4 @@ table td {
 	width: 100%;
 	text-align: center;
 }
+

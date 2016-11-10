@@ -73,14 +73,14 @@ h2 p {
 
 #NewsShowConter_nav {
 	position: relative;
-	width: 980px;
+	width: 978px;
 	margin: 0 auto;
 	text-align: left;
 	background-color: #fafafa;
 	padding: 10px;
 	font-size: 1em;
 	z-index: 1;
-	border-bottom: 1px solid #CCC;
+	border: #CCC 1px solid;
 }
 
 .txt {

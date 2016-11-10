@@ -11,6 +11,10 @@ import java.io.OutputStreamWriter;
 import java.net.MalformedURLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.jsoup.Connection;
@@ -23,14 +27,23 @@ import com.esd.common.CatDao;
 import com.esd.config.BaseConfig;
 import com.esd.config.PageConfig;
 import com.esd.util.Md5;
+import com.esd.util.Util;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
+import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
+import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
+import com.gargoylesoftware.htmlunit.javascript.host.BroadcastChannel;
 
 public class Test {
 
@@ -151,6 +164,69 @@ public class Test {
 //		nt.setMinimumFractionDigits(2);
 //		// 最后格式化并输出
 //		System.out.println("百分数：" + nt.format(percent));
+		
+	}
+	
+	
+	@org.junit.Test
+	public void yijianzhengji7() throws InterruptedException, IOException {
+		String title = "标题";
+		String name = "标题";
+		String phone = "13213321322";
+		String conContent = "123123123123123";
+		WebClient webClient = new WebClient(BrowserVersion.INTERNET_EXPLORER_8);
+		webClient.getOptions().setJavaScriptEnabled(true);
+		webClient.getOptions().setCssEnabled(false);
+		webClient.setAjaxController(new NicelyResynchronizingAjaxController());
+		webClient.getOptions().setThrowExceptionOnScriptError(false);
+
+		HtmlPage htmlPage = webClient.getPage("http://www.jlsy.gov.cn/hd/yjzz/yjzjj/201209/t20120928_61764.html");
+		HtmlPage page = (HtmlPage)htmlPage.getFrames().get(1).getEnclosedPage();
+		System.out.println(page.asXml());
+		
+		
+		
+		HtmlInput title_input = (HtmlInput) page.getElementById("my:组1/my:biaoti");
+		title_input.setValueAttribute(title);
+
+		HtmlInput name_input = (HtmlInput) page.getElementById("my:组1/my:xingming");
+		name_input.setValueAttribute(name);
+
+		HtmlInput phone_input = (HtmlInput) page.getElementById("my:组1/my:lxdh");
+		phone_input.setValueAttribute(phone);
+
+		HtmlTextArea content_text = (HtmlTextArea) page.getElementById("my:组1/my:nr");
+		content_text.setTextContent(conContent);
+
+		HtmlButtonInput submitBtn = (HtmlButtonInput) page.getElementById("SubmitButton");
+		HtmlPage hp = submitBtn.click();
+		if (hp != null) {
+			String text = hp.asText();
+			System.out.println(hp.asXml());
+			String pageUrl = hp.getUrl().toString().trim();
+			System.out.println(pageUrl);
+			System.out.println(text);
+		} else {
+		}
+	}
+	
+	
+	
+	@org.junit.Test
+	public void yijianzhengji71() throws InterruptedException, IOException {
+		WebClient webClient = new WebClient();
+		webClient.getOptions().setJavaScriptEnabled(false);
+		webClient.getOptions().setCssEnabled(false);
+		webClient.setAjaxController(new NicelyResynchronizingAjaxController());
+		webClient.getOptions().setThrowExceptionOnScriptError(false);
+		HtmlPage page = webClient.getPage("http://127.0.0.1/web/html/985afd1adf24dd9f7080fa93ed5826b1.html");
+		System.out.println(page.asXml());
+		webClient.close();
+		
+		
+		
+		
+		
 		
 	}
 

@@ -13,13 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlSpan;
+import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 
 /**
  * 意见征集
@@ -32,16 +33,6 @@ public class YijianzhengjiController {
 	
 	private static Logger logger = Logger.getLogger(YijianzhengjiController.class);
 
-	private WebClient webClient = null;
-
-	public YijianzhengjiController() {
-		webClient = new WebClient();
-		webClient.getOptions().setJavaScriptEnabled(true);
-		webClient.getOptions().setCssEnabled(false);
-		webClient.setAjaxController(new NicelyResynchronizingAjaxController());
-		webClient.getOptions().setThrowExceptionOnScriptError(false);
-	}
-	
 	/**
 	 * 关于网站改版的意见征集
 	 * @param title
@@ -54,9 +45,13 @@ public class YijianzhengjiController {
 	 */
 	@RequestMapping(value = "/yijianzhengji7", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> yijianzhengji7(String title, String name, String phone, String conContent, String code, HttpServletRequest request) throws InterruptedException {
+	public Map<String, Object> yijianzhengji7(String title, String name, String phone, String conContent, String code, String url, HttpServletRequest request) throws InterruptedException {
+		WebClient webClient = new WebClient(BrowserVersion.INTERNET_EXPLORER_8);
+		webClient.getOptions().setJavaScriptEnabled(true);
+		webClient.getOptions().setCssEnabled(false);
+		webClient.setAjaxController(new NicelyResynchronizingAjaxController());
+		webClient.getOptions().setThrowExceptionOnScriptError(false);
 		Map<String, Object> map = new HashMap<String, Object>();
-		String url = "http://www.jlsy.gov.cn/hd/yjzz/yjzjj/yjzja/";
 		String randomCode = (String) request.getSession().getAttribute("randomCode");
 		if (!randomCode.equals(code)) {
 			map.put("notice", false);
@@ -64,27 +59,29 @@ public class YijianzhengjiController {
 			return map;
 		}
 		try {
-			HtmlPage page = webClient.getPage(url);
+			HtmlPage htmlPage = webClient.getPage(url);
+			HtmlPage page = (HtmlPage)htmlPage.getFrames().get(1).getEnclosedPage();
 			
-			HtmlInput title_input = (HtmlInput)page.getElementById("my:group1/my:field1");
+			HtmlInput title_input = (HtmlInput) page.getElementById("my:组1/my:biaoti");
 			title_input.setValueAttribute(title);
-			
-			HtmlInput name_input = (HtmlInput) page.getElementById("my:group1/my:姓名");
+
+			HtmlInput name_input = (HtmlInput) page.getElementById("my:组1/my:xingming");
 			name_input.setValueAttribute(name);
-			
-			HtmlInput phone_input = (HtmlInput)page.getElementById("my:group1/my:联系电话");
+
+			HtmlInput phone_input = (HtmlInput) page.getElementById("my:组1/my:lxdh");
 			phone_input.setValueAttribute(phone);
-			
-			HtmlSpan content_text = (HtmlSpan)page.getElementById("my:group1/my:建议内容");
+
+			HtmlTextArea content_text = (HtmlTextArea) page.getElementById("my:组1/my:nr");
 			content_text.setTextContent(conContent);
-			
+
 			HtmlButtonInput submitBtn = (HtmlButtonInput) page.getElementById("SubmitButton");
 			HtmlPage hp = submitBtn.click();
 			if (hp != null) {
+				String text = hp.asText();
 				String pageUrl = hp.getUrl().toString().trim();
 				if (pageUrl.equals("http://218.27.19.186:8182/infogate//collect")) {
 					map.put("notice", true);
-					map.put("message", "提交成功!");
+					map.put("message", text);
 					return map;
 				}
 			} else {

@@ -73,13 +73,14 @@ h2 p {
 
 #NewsShowConter_nav {
 	position: relative;
-	width: 980px;
+	width: 978px;
 	margin: 0 auto;
 	text-align: left;
 	background-color: #fafafa;
 	padding: 10px;
 	font-size: 1em;
 	z-index: 1;
+	border: #CCC 1px solid;
 	border-bottom: 1px solid #CCC;
 }
 
@@ -148,6 +149,10 @@ h2 p {
 	display: block;
 }
 
+#fenlei {
+	border: #CCC 1px solid;
+}
+
 #fenlei ul {
 	overflow: hidden;
 	display: block;
@@ -156,20 +161,10 @@ h2 p {
 
 #fenlei ul li {
 	float: left;
-	width: 190px;
-	display: block;
 }
 
 #fenlei ul li a {
-	height: 94px;
-	line-height: 94px;
-	color: #4b4b4b;
-	font-size: 14px;
-	font-weight: 700;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	border: #CCC 2px solid;
-	padding: 30px;
-	margin: 10px;
+	display: block;
+	padding: 40px;
+	border: #CCC 1px solid;
 }

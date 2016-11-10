@@ -4,7 +4,7 @@ $(document).ready(function() {
 		"padding-top" : "10px"
 	})
 	var value = $.trim($("#artibody param").attr("value"));
-	url = value.substring(value.indexOf("=") + 1);
+	var url = value.substring(value.indexOf("=") + 1, value.indexOf("&"));
 	var flashvars = {
 			f : url,// 视频地址
 			a : '',// 调用时的参数，只有当s>0的时候有效

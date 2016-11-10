@@ -4,6 +4,6 @@ $(document).ready(function() {
 //	})
 	
 	$("#fenlei li:last").remove();
-	$("#fenlei ul").append("<li><a href='a450c01a507a3842fc8a08b0e8226a79.html' title='魅力松原'>魅力松原</a></li>");
+	$("#fenlei ul").append("<li><a class='ESDAssetsTextCon' href='a450c01a507a3842fc8a08b0e8226a79.html' title='魅力松原'>魅力松原</a></li>");
 	$("#nav").find("a:eq(1)").focus();
 })

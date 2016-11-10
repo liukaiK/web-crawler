@@ -1,4 +1,7 @@
 $(document).ready(function() {
+	var title = $("#NewsShowConter_date").text();
+	$(document).attr("title", title);
+	$("#NewsShowConter_nav a:last").focus();
 	var timestamp = new Date().getTime();
 	$("input[type='text'],textarea").not("#certicode").attr("onfocus", "validate(this)");
 	$("input[type='text'],textarea").attr("onblur", "removeValidate(this)");
@@ -51,6 +54,7 @@ function submitPage() {
 	var phone = $.trim($("#phone").val()); // 联系电话
 	var conContent = $.trim($("#conContent").val()); // 内容
 	var code = $.trim($("#certicode").val()); // 验证码
+	var esd_original = $("#esd_original").attr("href"); //原网址url
 	if (title == "" || title == "请输入标题 必填项") {
 		if (flag == true) {
 			alert("请输入标题");
@@ -123,6 +127,7 @@ function submitPage() {
 		$("#code").focus();
 		return false;
 	}	
+	alert("提交中 请稍等...");
 	$.ajax({
 		type : 'post',
 		url : '/iac/yijianzhengji7',
@@ -131,6 +136,7 @@ function submitPage() {
 			"name" : name,
 			"phone" : phone,
 			"conContent" : conContent,
+			"url" : esd_original,
 			"code" : code
 		},
 		dataType : 'json',

@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
@@ -12,7 +13,10 @@ import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import com.esd.common.AutoDiscern;
+import com.esd.common.InputStreamUtils;
 import com.esd.config.BaseConfig;
+import com.gargoylesoftware.htmlunit.html.HtmlImage;
 
 public class Util {
 
@@ -63,6 +67,23 @@ public class Util {
 		bw.write(content);
 		bw.close();
 		write.close();
+	}
+	
+	
+	/**
+	 * 用于破解验证码
+	 * 
+	 * @param htmlImage
+	 * @return
+	 * @throws IOException 
+	 */
+	public static String getCodeNum(HtmlImage htmlImage) throws IOException {
+		InputStream in = htmlImage.getWebResponse(true).getContentAsStream();
+		byte[] bs = InputStreamUtils.InputStreamTOByte(in);
+		in.close();
+		AutoDiscern autoDiscern = new AutoDiscern();
+		String yzmNum = autoDiscern.discernPic(bs, 1);
+		return yzmNum;
 	}
 	
 }
