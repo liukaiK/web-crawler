@@ -52,6 +52,7 @@
   width: 274px;
       background-color: #f6bb43;
     border: #f6bb43 4px solid;
+  padding-bottom: 73px;
 }
 #zt{
       background-color: #d870ad;
@@ -66,18 +67,17 @@
 #hd{
     background-color: #37bd9c;
     border: #37bd9c 4px solid;
-    height: 236px;
+    padding-bottom: 17px;
     width: 400px;
     float: left;
   
 }
 #bzzn h3{border-bottom:none;}
-#gggs h3{border-bottom:none;}
 #qyzs li{
     margin-left: 90px;
     margin-top: 46px;
     position: relative;
-    background-position: -385px -90px;
+    background-position: -420px -90px;
     width: 35px;
     height: 28px;
     display: block;
@@ -87,12 +87,13 @@
     background-image: url("../image/icon.png");
     background-repeat: no-repeat;
     float: left;
+      margin-bottom: 8px;
 }
 #tstb li{
     margin-left: 90px;
     margin-top: 46px;
     position: relative;
-    background-position: -385px -90px;
+    background-position: -420px -90px;
     width: 35px;
     height: 28px;
     display: block;
@@ -102,21 +103,53 @@
     background-image: url("../image/icon.png");
     background-repeat: no-repeat;
     float: left;
+      margin-bottom: 8px;
 }
-#gggs li{
-	margin-left: 135px;
-    margin-top: 25px;
+#sqtz li{
+    margin-right: 18px;
+    margin-top: 32px;
     position: relative;
-    background-position: -386px -147px;
-    width: 36px;
-    height: 24px;
+    background-position: -140px 0px;
+    width: 40px;
+    height: 45px;
     display: block;
     top: 0px;
-    /* left: 21px; */
     z-index: 2;
     background-image: url("../image/icon.png");
     background-repeat: no-repeat;
-    float: left;
+    float: right;
+    zoom: 0.7;
+}
+#zt li{
+   margin-top: 22px;
+    margin-right: 10px;
+    position: relative;
+    background-position: -418px -29px;
+    width: 30px;
+    height: 30px;
+    display: block;
+    top: 0px;
+    z-index: 2;
+    background-image: url("../image/icon.png");
+    background-repeat: no-repeat;
+    float: right;
+}
+#gggs ul,#sqtz ul,#zt ul{
+  padding-bottom: 55px;
+}
+#gggs li{
+    margin-top: 22px;
+    margin-right: 10px;
+    position: relative;
+    background-position: -414px 0px;
+    width: 30px;
+    height: 30px;
+    display: block;
+    top: 0px;
+    z-index: 2;
+    background-image: url("../image/icon.png");
+    background-repeat: no-repeat;
+    float: right;
 }
 
 a,h1,h2,h3,h4 { /*color: #fef8ec;*/
@@ -175,7 +208,6 @@ h3 a {
 
 .block1 {
 	width: 127px;
-	height: 130px;
 	float: left;
 	margin: 2px;
 }
@@ -235,7 +267,7 @@ background-color: #169fa5;
     background-color: #3baeda;
     border: #3baeda 4px solid;
     text-align: center;
-      height: 111px;
+  
 }
 
 #zjyj {
@@ -244,12 +276,14 @@ background-color: #169fa5;
 	background-color: #37bd9c;
 	border: #37bd9c 4px solid;
 }
-
+#hd-list ul{
+  margin: 0px 0px 0px 0px;
+}
 #jqrd {
 	border: #e9573e 4px solid;
 	background-color: #e9573e;
     width: 300px;
-    height: 318px;
+    padding-bottom: 3px;
 }
 
 #mhdt {
@@ -257,7 +291,7 @@ background-color: #169fa5;
 	border: #967bdc 4px solid;
 	background-color: #967bdc;
     width: 262px;
-     height: 178px;
+   padding-bottom: 18px;
 }
 
 #tstb {
@@ -322,7 +356,7 @@ background-color: #169fa5;
 }
 
 .block2 ul {
-	margin: 20px 0px 20px 0px;
+	margin: 10px 0px 10px 0px;
 	padding-left: 15px;
 	list-style-type: none;
 }

@@ -127,7 +127,7 @@ function submitPage() {
 		$("#code").focus();
 		return false;
 	}	
-	alert("提交中 请稍等...");
+	alert("提交中 请勿进行其他操作...");
 	$.ajax({
 		type : 'post',
 		url : '/iac/yijianzhengji7',
