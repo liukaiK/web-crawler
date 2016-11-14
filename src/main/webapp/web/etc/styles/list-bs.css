@@ -80,17 +80,9 @@
 }
 
 #fenlei ul li a {
-	height: 94px;
-	line-height: 94px;
-	color: #4b4b4b;
-	font-size: 14px;
-	font-weight: 700;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	border: #CCC 2px solid;
-	padding: 30px;
-	margin: 10px;
+	display: block;
+	padding: 40px;
+	border: #CCC 1px solid;
 }
 
 #page a {

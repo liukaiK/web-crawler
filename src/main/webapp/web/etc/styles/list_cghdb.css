@@ -25,7 +25,6 @@
 #NewsListConter table tbody tr {
 	display: block;
 	border-bottom: 1px #CCC dashed;
-	line-height: 50px;
 }
 
 #NewsListConter table tbody tr td a {

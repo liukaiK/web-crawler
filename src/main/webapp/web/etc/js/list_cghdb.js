@@ -1,10 +1,10 @@
 $(document).ready(
 		function() {
 			$("#Sbmenu a:last").focus();
-			var currentPage = $("#page div font input:eq(-2)").val();// 获取当前页面的页数
-			$("#page div font input:eq(-2)").remove();
+			var currentPage = $("#NewsListConter table:last input:eq(-2)").val();// 获取当前页面的页数
+			$("#NewsListConter table:last input:eq(-2)").remove();
 			var originalHref = $("#esd_original").attr("href").substring(0,$("#esd_original").attr("href").lastIndexOf("/") + 1);
-			var content = $("#page div").text();// 获取关于页数的文字,用于获取总页数
+			var content = $("#NewsListConter table:last").text();// 获取关于页数的文字,用于获取总页数
 			var countPage = content.substring(content.indexOf("共") + 1, content.indexOf("页"));
 			var selectHTML = "<select>";
 			for ( var i = 0; i < countPage; i++) {
@@ -27,8 +27,8 @@ $(document).ready(
 				
 			}
 			selectHTML += "</select>";
-			$("#page div font span").append(selectHTML);
-			$("#page select").keydown(function(e) {
+			$("#NewsListConter table:last span").append(selectHTML);
+			$("#NewsListConter table:last select").keydown(function(e) {
 				var e = e || event, keycode = e.which || e.keyCode;
 				if (keycode == 13) {
 					var zhi = $("select").val();
@@ -39,9 +39,9 @@ $(document).ready(
 			});
 			
 			
-			$("#page div font input:last").click(function(){
+			$("#NewsListConter table:last input:last").click(function(){
 				
-				var zhi = $("#page div font select option:selected").val();
+				var zhi = $("#NewsListConter table:last select option:selected").val();
 				location.href = zhi;
 				
 			})
