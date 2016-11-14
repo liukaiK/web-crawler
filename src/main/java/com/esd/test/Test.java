@@ -53,9 +53,31 @@ public class Test {
 	
 	@org.junit.Test
 	public void getSource() throws IOException {
-		String url = "http://www.jlsy.gov.cn/zw/zfzc/ld/sz_1781";
+		
+		
+//		<ul>
+//		<li><a
+//			href="http://139.209.60.6/zwdtSjgl/Directory/showDir.jsp?keyid=PI201603310118350737"
+//			title="松原市2015年政府信息公开年度报告">松原市2015年政府信息公开年度报告</a>
+//			<span> 2016-03-31</span>
+//		</li>
+//	</ul>
+		String url = "http://139.209.60.6/zwdtSjgl/info/dongtai_iframe.jsp?cid=4";
 		Document htmlSource = Jsoup.connect(url).get();
-		System.out.println(htmlSource);
+		Elements tr = htmlSource.select("table tr table tr");
+//		System.out.println(tr);
+		System.out.println("<ul>");
+		for (Element ss : tr) {
+//			System.out.println(ss);
+			String a = ss.select("a").attr("abs:href").trim();
+			String text = ss.select("a").get(0).text().trim();
+			String date = ss.select("td").get(2).text().trim();
+//			System.out.println(a);
+//			System.out.println(text);
+//			System.out.println(date);
+			System.out.println("<li><a href=\""+a+"\" title=\""+text+"\">"+text+"</a><span> "+date+"</span></li>");
+		}
+		System.out.println("</ul>");
 //		Elements links = htmlSource.select("a[href],area[href],iframe[src]");
 		
 //		for (Element e : links) {
@@ -146,25 +168,13 @@ public class Test {
 	
 
 	public static void main(String[] args) throws IOException, ParseException {
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String ss = "2016-12-11";
-		
-		System.out.println(sdf.parse(ss).toString());
-		
-		
-		
-//		// 这里的数后面加“D”是表明它是Double类型，否则相除的话取整，无法正常使用
-//		double percent = 50.5D / 150D;
-//		// 输出一下，确认你的小数无误
-//		System.out.println("小数：" + percent);
-//		// 获取格式化对象
-//		NumberFormat nt = NumberFormat.getPercentInstance();
-//		// 设置百分数精确度2即保留两位小数
-//		nt.setMinimumFractionDigits(2);
-//		// 最后格式化并输出
-//		System.out.println("百分数：" + nt.format(percent));
-		
+		WebClient webClient = new WebClient(BrowserVersion.CHROME);
+		webClient.getOptions().setJavaScriptEnabled(true);
+		webClient.getOptions().setCssEnabled(false);
+		webClient.getOptions().setThrowExceptionOnScriptError(false); // js运行错误时，是否抛出异常
+		webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
+		HtmlPage htmlPage = webClient.getPage("http://139.209.60.6/zwdtSjgl/index.htm");
+		System.out.println(htmlPage.asXml());
 	}
 	
 	

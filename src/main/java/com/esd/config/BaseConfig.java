@@ -31,7 +31,7 @@ public class BaseConfig extends HttpServlet {
 	
 	public static String TEMP_ROOT;
 
-	public static final String[] INDEX_URL = { "http://www.jlsy.gov.cn/", "http://ft.jlsy.gov.cn/", "http://zt.jlsy.gov.cn/" };
+	public static final String[] INDEX_URL = { "http://www.jlsy.gov.cn/", "http://ft.jlsy.gov.cn/", "http://zt.jlsy.gov.cn/", "http://139.209.60.6/" };
 
 	public static final String MESSAGE = "message";
 

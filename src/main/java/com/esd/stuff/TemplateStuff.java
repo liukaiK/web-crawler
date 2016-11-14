@@ -230,7 +230,7 @@ public class TemplateStuff {
 		}
 		headFooter(doc, pageConfig);
 		hrefToMd5(doc);
-		iframeSrc(doc, pageConfig.getUrl());
+//		iframeSrc(doc, pageConfig.getUrl());
 		String original_url = pageConfig.getUrl();
 		doc.select("#esd_original").attr("href", original_url);
 		doc.select("#error").attr("href", original_url);

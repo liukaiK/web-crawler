@@ -3,12 +3,10 @@
 	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
-	<display-name></display-name>
+	<display-name>iac</display-name>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>
-			classpath:applicationContext.xml
-		</param-value>
+		<param-value>classpath:applicationContext.xml</param-value>
 	</context-param>
 	<context-param>
 		<param-name>log4jConfigLocation</param-name>
@@ -46,43 +44,16 @@
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 	<session-config>
-		<session-timeout>720</session-timeout>
+		<session-timeout>30</session-timeout>
 	</session-config>
 	<error-page>
 		<error-code>404</error-code>
 		<location>/404.html</location>
 	</error-page>
-
-	<error-page>
-		<error-code>500</error-code>
-		<location>/500.html</location>
-	</error-page>
-	<security-constraint>
-		<web-resource-collection>
-			<url-pattern>/*</url-pattern>
-			<http-method>PUT</http-method>
-			<http-method>DELETE</http-method>
-			<http-method>HEAD</http-method>
-			<http-method>OPTIONS</http-method>
-			<http-method>TRACE</http-method>
-		</web-resource-collection>
-		<auth-constraint>
-		</auth-constraint>
-	</security-constraint>
-	<login-config>
-		<auth-method>BASIC</auth-method>
-	</login-config>
-
-
 	<servlet>
 		<servlet-name>BaseConfig</servlet-name>
 		<servlet-class>com.esd.config.BaseConfig</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-
-
-
-
-
 
 </web-app>
