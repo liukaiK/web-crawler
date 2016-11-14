@@ -93,7 +93,7 @@ public class Test {
 
 	@org.junit.Test
 	public void findPageConfigFile() {
-		String url = "http://zt.jlsy.gov.cn/cghzt/mswh/cghdb/";
+		String url = "http://zt.jlsy.gov.cn/symp/lydh/";
 		BaseConfig.PG_ROOT = "D:\\apache-tomcat-6.0.45\\webapps\\iac\\web" + File.separator + "db";
 		dao.collectPageConfig();
 		PageConfig pageConfig = dao.findPageConfig(url);
