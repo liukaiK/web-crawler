@@ -12,7 +12,7 @@
 }
 
 #NewsListConter {
-	width: 940px;
+	width: 750px;
 	margin: 0 auto;
 	text-align: center;
 	background-color: #fafafa;
@@ -20,6 +20,8 @@
 	border-bottom: 1px #CCC solid;
 	border-top: 1px #CCC solid;
 	font-size: 1em;
+	float: right;
+	min-height: 484px;
 }
 
 #NewsListConter table tbody tr {
@@ -67,6 +69,11 @@
 	font-size: 1em;
 }
 
+
+#fenlei {
+	float: left;	
+}
+
 #fenlei ul {
 	overflow: auto;
 	display: block;
@@ -74,14 +81,13 @@
 }
 
 #fenlei ul li {
-	float: left;
 	width: 190px;
 	display: block;	
 }
 
 #fenlei ul li a {
 	display: block;
-	padding: 40px;
+	padding: 10px;
 	border: #CCC 1px solid;
 }
 

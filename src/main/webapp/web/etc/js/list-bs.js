@@ -1,6 +1,6 @@
 $(document).ready(
 		function() {
-			$("#Sbmenu a:last").focus();
+			$("#NewsListConter a:first").focus();
 			var currentPage = $("#page div font input:eq(-2)").val();// 获取当前页面的页数
 			$("#page div font input:eq(-2)").remove();
 			var originalHref = $("#esd_original").attr("href").substring(0,$("#esd_original").attr("href").lastIndexOf("/") + 1);
