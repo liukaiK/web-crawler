@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv="keywords" content="松原市人民政府网站,松原市人民政府无障碍" />
+<meta http-equiv="description" content="松原市人民政府无障碍" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="../etc/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../etc/jquery-validation-1.15.0/dist/jquery.validate.min.js"></script>
+<script type="text/javascript" src="../etc/jquery-validation-1.15.0/dist/localization/messages_zh.min.js"></script>
+<script type="text/javascript" src="../etc/js/public.js"></script>
+<script type="text/javascript" src="../etc/js/yg.js" charset="UTF-8"></script>
+<link rel="stylesheet" type="text/css" href="../etc/styles/public.css" />
+<link rel="stylesheet" type="text/css" href="../etc/styles/wangzhanyijianzhengji.css" charset="UTF-8"/>
+</head>
+
+<body>
+	<include src="header.html" />
+	<div class="main">
+		<div id="NewsShowConter_nav"></div>
+<!-- 		<div id="NewsShowConter_date"></div> -->
+<!-- 		<div id="NewsShowConter_txt"></div> -->
+		<form id="by_form" action="" method="post" onsubmit="return submitPage();">
+			<div id="NewsShowConter_txt">
+				<div class="tstj_content">
+					<table>
+						<tbody>
+							<tr>
+								<td class="alt">姓名：</td>
+								<td colspan="3">
+									<input id="name" type="text" name="name" value="请输入姓名 必填项" title="请输入姓名 必填项">
+								</td>
+							</tr>
+							<tr>
+								<td class="alt">内容：</td>
+								<td colspan="3"><textarea id="conContent" name="conContent" rows="5" cols="90" title="请输入内容 必填项">请输入内容 必填项</textarea></td>
+							</tr>
+							<tr>
+								<td class="alt">验证码: </td>
+								<td colspan="3">
+									<input type="text" name="certicode" id="certicode" value="请输入验证码 必填项" title="请输入验证码 必填项" onfocus="esdonfocus(this);"/>
+									<img id="verifyImage" title="验证码" alt="验证码" />
+									<a href="static:javascript:imgonfocus();" title="播放验证码"><img id="audio" src="../etc/image/volume2.png" alt="播放验证码" title="播放验证码" /></a>
+									<input type="hidden" id="voicepath" />
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<div>
+						<div>
+							<div class="btn1">
+								<input type="submit" value="提交" title="提交"/>
+								<input type="button" value="返回" title="返回" onclick="window.history.back(-1);"/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	</div>
+	<script type="text/javascript" src="../etc/tool/Voice.js"></script>
+	<include src="footer.html" />
+</body>
+</html>
