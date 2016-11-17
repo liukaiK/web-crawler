@@ -174,14 +174,14 @@ public class TemplateStuff {
 		}
 	}
 
-	private void iframeSrc(Element element, String src) {
-		Elements elements = element.select("iframe");
-		for (Element e : elements) {
-			if (e.tagName().equals("iframe")) {
-				e.attr("src", src);
-			}
-		}
-	}
+//	private void iframeSrc(Element element, String src) {
+//		Elements elements = element.select("iframe");
+//		for (Element e : elements) {
+//			if (e.tagName().equals("iframe")) {
+//				e.attr("src", src);
+//			}
+//		}
+//	}
 
 	public Document templateStuff(PageConfig pageConfig) throws IOException {
 		Document doc = templateLoad(pageConfig);
