@@ -49,13 +49,13 @@
 
 .icon_qy_01 i{ position: absolute;background-position:-568px 0; width:32px; height:33px; display:block; position:relative; top:18px; left:25px; z-index:2;}
 .icon_qy_02 i{ position: absolute;background-position:-568px -38px; width:29px; height:35px; display:block; position:relative; top:17px; left:27px; z-index:2;}
-.icon_qy_03 i{ position: absolute;background-position:-568px -78px; width:28px; height:34px; display:block; position:relative; top:19px; left:28px; z-index:2;}
-.icon_qy_04 i{ position: absolute;background-position:-568px -117px; width:39px; height:29px; display:block; position:relative; top:17px; left:24px; z-index:2;}
-.icon_qy_05 i{ position: absolute;background-position:-568px -151px; width:32px; height:29px; display:block; position:relative; top:19px; left:26px; z-index:2;}
-.icon_qy_06 i{ position: absolute;background-position:-568px -185px; width:41px; height:33px; display:block; position:relative; top:17px; left:20px; z-index:2;}
-.icon_qy_07 i{position: absolute; background-position:-568px -221px; width:34px; height:34px; display:block; position:relative; top:16px; left:26px; z-index:2;}
-.icon_qy_08 i{ position: absolute;background-position:-568px -260px; width:32px; height:32px; display:block; position:relative; top:17px; left:26px; z-index:2;}
-.icon_qy_09 i{ position: absolute;background-position:-568px -297px; width:34px; height:38px; display:block; position:relative; top:16px; left:23px; z-index:2;}
+.icon_qy_03 i{ position: absolute;background-position:-568px -78px; width:28px; height:35px; display:block; position:relative; top:19px; left:28px; z-index:2;}
+.icon_qy_04 i{ position: absolute;background-position:-568px -117px; width:39px; height:35px; display:block; position:relative; top:17px; left:24px; z-index:2;}
+.icon_qy_05 i{ position: absolute;background-position:-568px -151px; width:32px; height:35px; display:block; position:relative; top:19px; left:26px; z-index:2;}
+.icon_qy_06 i{ position: absolute;background-position:-568px -185px; width:41px; height:35px; display:block; position:relative; top:17px; left:20px; z-index:2;}
+.icon_qy_07 i{position: absolute; background-position:-568px -221px; width:34px; height:35px; display:block; position:relative; top:16px; left:26px; z-index:2;}
+.icon_qy_08 i{ position: absolute;background-position:-568px -260px; width:32px; height:35px; display:block; position:relative; top:17px; left:26px; z-index:2;}
+.icon_qy_09 i{ position: absolute;background-position:-568px -297px; width:34px; height:35px; display:block; position:relative; top:16px; left:23px; z-index:2;}
 
 
 #bzzn{
@@ -387,13 +387,6 @@ background-color: #169fa5;
 	width: 270px;
 }
 
-#bs {
-	width: 400px;
-    background-color: #e9573e;
-    border: #e9573e 4px solid;
-    height: 332px;
-}
-
 .block2 span {
 	float: left;
 	font-size: 14px;
@@ -637,7 +630,7 @@ margin-left: 55px;
     float: left;
     background-color: #0c92d1 ;
     margin: 3px;
-    min-height: 160px;
+    min-height: 242px;
     height: auto !important;
 }
 
@@ -658,5 +651,20 @@ margin-left: 55px;
 	text-align: left;
 }
 
+#bgxz {
+	width: 600px;
+}
 
+#bs {
+	width: 370px;
+    background-color: #e9573e;
+    border: #e9573e 3px solid;
+}
 
+#bs ul li {
+	float: none;
+}
+
+#bs ul li a {
+	display: inline;
+}
