@@ -133,7 +133,7 @@
 				this.j = 1;
 			_this.li.className = '';
 			_this.img.setAttribute('src', src);
-			_this.img.setAttribute('title', con);
+			_this.img.setAttribute('title', '图片');
 			_this.a.setAttribute('href', href);
 			_this.a.setAttribute('title', con);
 			a.setAttribute('title', con);

@@ -107,14 +107,16 @@ public class DefaultFilter {
 		}
 		Elements links = element.select("img");
 		for (Element link : links) {
-			String alt = link.attr("alt").trim();
-			String title = link.attr("title").trim();
-			if (alt.isEmpty() || alt.equals("")) {
-				alt = "图片";
-			}
-			if (title.isEmpty() || title.equals("")) {
-				title = "图片";
-			}
+//			String alt = link.attr("alt").trim();
+//			String title = link.attr("title").trim();
+//			if (alt.isEmpty() || alt.equals("")) {
+//				alt = "图片";
+//			}
+//			if (title.isEmpty() || title.equals("")) {
+//				title = "图片";
+//			}
+			
+			String alt = "图片", title = "图片";
 			link.attr("alt", alt);
 			link.attr("title", title);
 		}

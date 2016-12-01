@@ -630,7 +630,7 @@ margin-left: 55px;
     float: left;
     background-color: #0c92d1 ;
     margin: 3px;
-    min-height: 242px;
+    min-height: 313px;
     height: auto !important;
 }
 
@@ -649,6 +649,7 @@ margin-left: 55px;
 	display: block;
 	width: 93px;
 	text-align: left;
+	margin-bottom: 10px;
 }
 
 #bgxz {
@@ -663,6 +664,8 @@ margin-left: 55px;
 
 #bs ul li {
 	float: none;
+	display: block;
+	margin-bottom: 10px;
 }
 
 #bs ul li a {
