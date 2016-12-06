@@ -8,7 +8,8 @@ $(document).ready(function() {
 	load();
 	init();
 	$("#rules").append(getRuleHtml(1));
-	easyuipanel();
+	$.parser.parse($("#rules"));
+//	$('.gbin1-list').sortable();
 	setInterval(catAllStatic, 2000);
 	setInterval(catingStatic, 2000);
 	disLoad();
@@ -19,25 +20,6 @@ function init(){
 	loadTemplateFileList();
 	loadCssFileList();
 	loadJsFileList();
-}
-
-function easyuipanel() {
-	$('.easyui-panel').panel({
-		width : '100%',
-		height: '215px',
-		tools : [ {
-			iconCls : 'icon-add',
-			handler : function() {
-				$(getRuleHtml(1)).insertAfter($(this).parent().parent().parent().parent());
-				easyuipanel();
-			}
-		} ],
-		onClose : function() {
-			$(this).parent().parent().remove();
-		}
-	});
-	$.parser.parse($("#rules").parent());
-    $('.gbin1-list').sortable();
 }
 
 function loadPgFileList() {

@@ -20,7 +20,7 @@ function catingAll() {
 
 function getRuleHtml(n) {
 	var addhtml = '<li style="width: 100%;display: block;">'
-			+ '<div class="easyui-panel" title=" " closable="true" style="background:#fafafa;">'
+			+ '<div class="easyui-panel" title=" " data-options="onClose:function(){$(this).parent().parent().remove();},tools:[{iconCls:\'icon-add\',handler:function(){$(getRuleHtml(1)).insertAfter($(this).parent().parent().parent().parent());$.parser.parse($(this).parent().parent().parent().parent().next());}}]" closable="true" style="background:#fafafa;width:97%;">'
 			+ '<table>'
 			+ '<tr>'
 			+ '<td>备注：</td>'
@@ -58,8 +58,6 @@ function getRuleHtml(n) {
 			+ '</tr>' + '</table>' + '</div>' + '</li>';
 	return addhtml;
 };
-
-
 
 function catAllStatic() {
 	var timestamp = new Date().getTime();

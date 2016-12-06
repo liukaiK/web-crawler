@@ -18,7 +18,7 @@ function loadPgFile(obj) {
 				loadTemplate(data);
 				loadRules(data);
 				$('#tabs').tabs('select', '模板');
-				easyuipanel();
+				$.parser.parse($("#rules"));
 				disLoad();
 			} else {
 				disLoad();
@@ -125,7 +125,7 @@ function loadRule(n, rule) {
 			+ '</tr>';
 	}
 	var rule = '<li>'
-			+ '<div class="easyui-panel" title=" " closable="true" style="background:#fafafa;">'
+			+ '<div class="easyui-panel" data-options="onClose:function(){$(this).parent().parent().remove();},tools:[{iconCls:\'icon-add\',handler:function(){$(getRuleHtml(1)).insertAfter($(this).parent().parent().parent().parent());$.parser.parse($(this).parent().parent().parent().parent().next());}}]" title=" " closable="true" style="background:#fafafa;width:97%;">'
 			+ '<table>' + '<tr>' + '<td>备注：</td>'
 			+ '<td><input class="easyui-textbox" style="width: 160px;" name="des" value="'+rule.des+'"/></td>' + '</tr>'
 			+ '<tr>' + '<td>父类：</td>'
