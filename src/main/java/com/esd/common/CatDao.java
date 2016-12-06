@@ -14,10 +14,12 @@ import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 import org.jsoup.nodes.Document;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Repository;
 
 import com.esd.collection.DbFile;
 import com.esd.collection.DbPgFile;
+import com.esd.collection.Site;
 import com.esd.config.BaseConfig;
 import com.esd.config.NodeConfig;
 import com.esd.config.PageConfig;
@@ -47,7 +49,7 @@ public class CatDao {
 	 * @param linkHref
 	 * @throws IOException
 	 */
-	public String singlCat(PageConfig pageConfig, Document document,boolean ctrl) {
+	public String singlCat(String siteId,PageConfig pageConfig, Document document,boolean ctrl) {
 		MongoDBUtil mongoDBUtil = (MongoDBUtil)SpringContextUtil.getBean("mongoDBUtil");
 		if(!ctrl){
 			mongoDBUtil.insertFile(null,null,null,null,ctrl);
@@ -62,7 +64,8 @@ public class CatDao {
 		TemplateStuff ts = new TemplateStuff();// 创建模版填充器
 		Document doc = null;
 		try {
-			doc = ts.templateStuff(pageConfig);
+			//2016-11-7 cx
+			doc = ts.templateStuff(pageConfig,siteId);
 		} catch (IOException e) {
 			e.printStackTrace();
 			log.debug("组装失败");
@@ -73,6 +76,16 @@ public class CatDao {
 		//从session获得站点名，siteName/html/mName
 		String filedir = SiteController.siteId + "/html/"+mName;
 		String content = doc.html();
+		//20161102-cx 首页源码插入站点表
+		
+		Criteria criatira = new Criteria();
+		criatira.andOperator(Criteria.where("id").is(siteId));
+		Site site = mongoDBUtil.findOneByCollectionName("sites", criatira, Site.class);
+		String domain = site.getDomainName();
+		if(pageConfig.getUrl().equals(domain)){
+			mongoDBUtil.upsert(siteId,content.getBytes(), Site.class, "sites");
+			return mName;
+		}
 		mongoDBUtil.insertFile(mName,content,filedir,"html",true);
 //		try {
 //			Util.createNewFile(doc.html(), path);//不要了，doc.html()文件内容
@@ -94,7 +107,7 @@ public class CatDao {
 	 * @param linkHref
 	 * @throws IOException
 	 */
-	public boolean singlCat(PageConfig pageConfig, String url) {
+	public boolean singlCat(PageConfig pageConfig, String url,String siteId) {
 		long l = System.currentTimeMillis();
 		pageConfig.setUrl(url);
 		EsdDownLoadHtml down = new EsdDownLoadHtml();// 下载
@@ -107,7 +120,12 @@ public class CatDao {
 		TemplateStuff ts = new TemplateStuff();// 创建模版填充器
 		Document doc = null;
 		try {
-			doc = ts.templateStuff(pageConfig);
+			//2016-11-7 cx
+			Criteria criatira = new Criteria();
+			criatira.andOperator(Criteria.where("fileName").is(pageConfig.getTemplate()));
+			DbFile df = mongoDBUtil.findOneByCollectionName(siteId+"_template", criatira, DbFile.class);
+			String str = new String(df.getFileByte(),"utf-8");
+			doc = ts.templateStuff(pageConfig,str);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}// 填充后返回代码

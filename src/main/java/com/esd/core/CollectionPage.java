@@ -10,6 +10,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Component;
 
 import com.esd.collection.DbFile;
@@ -30,6 +31,7 @@ public class CollectionPage {
 	
 	@Resource
 	private MongoDBUtil mongoDBUtil;
+	
 	private CatDao dao = new CatDao();
 	private boolean collectStatic = true;
 	private boolean ctrl = true;
@@ -56,7 +58,7 @@ public class CollectionPage {
 			//计时
 			SiteController.siteId = siteId;
 			while (collectStatic && ctrl) {
-				ctrl = collect();
+				ctrl = collect(siteId);
 			}
 			destroySource();// 释放资源
 			logger.info("采集线程结束！！！！！！！！！！！！！！！！！");
@@ -83,24 +85,26 @@ public class CollectionPage {
 	 * 前置下载
 	 * @return
 	 */
-	public boolean collect() {
+	public boolean collect(String siteId) {
 		Long l = System.currentTimeMillis();
 		Downloads bson = mongoDBUtil.downloadsFindAndDeleteOne();
 		if (bson == null) {
-			dao.singlCat(null,null,false);
+			dao.singlCat(null,null,null,false);
 			return false;
 		}
 		String url = bson.getUrl();
 		// 通过数局库获取url
 		if (url == null) {
-			dao.singlCat(null,null,false);
+			dao.singlCat(null,null,null,false);
 			return false;
 		}
-		if (Util.isOutUrl(url)) {
+		if (Util.isOutUrl(url,siteId)) {
 			Document doc;
 			//doc = Util.loadTemplate(BaseConfig.TEMPLATE_ROOT + File.separator + "error.html");
 			//20161020-cx
-			DbFile df = mongoDBUtil.findOneByCollectionName(SiteController.siteId + "_template" , "error.html", DbFile.class);
+			Criteria criatira = new Criteria();
+			criatira.andOperator(Criteria.where("fileName").is("error.html"));
+			DbFile df = mongoDBUtil.findOneByCollectionName(SiteController.siteId + "_template" , criatira, DbFile.class);
 			
 			String file = new String(df.getFileByte());		
 			doc = Jsoup.parse(file);
@@ -118,7 +122,7 @@ public class CollectionPage {
 		PageConfig pageConfig = dao.findPageConfig(url);
 		Document htmlSource = null;
 		if (pageConfig != null) {
-			EsdDownLoadHtml down = new EsdDownLoadHtml();// 下载
+			EsdDownLoadHtml down = new EsdDownLoadHtml();// 下载4
 			pageConfig.setUrl(url);
 			htmlSource = down.downloadHtml(pageConfig);// 下载源代码
 		} else {
@@ -153,7 +157,7 @@ public class CollectionPage {
 		urlsCollection.setUrl(bson.getUrl());
 		if (pageConfig != null && htmlSource != null) {
 //			try {
-				dao.singlCat(pageConfig, htmlSource,true);
+				dao.singlCat(siteId,pageConfig, htmlSource,true);
 				urlsCollection.setState("1");// 已处理
 //			} catch (Exception e) {
 //				urlsCollection.setState("-1");// 已处理，发生错误

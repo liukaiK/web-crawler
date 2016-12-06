@@ -53,8 +53,9 @@ public class PageConfigController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		urlMap.clear();
 		String siteId = "";
-		if (Util.isOutUrl(url)) {// 如果为外链接
-			Document templateSource = Util.loadTemplate(BaseConfig.TEMPLATE_ROOT + File.separator + "error.html");
+		if (Util.isOutUrl(url,siteId)) {// 如果为外链接
+			//Document templateSource = Util.loadTemplate(BaseConfig.TEMPLATE_ROOT + File.separator + "error.html");
+			Document templateSource = Util.loadTemplate("error.html",siteId,2);
 			templateSource.select("#error").attr("href", url);
 			String mName = Util.interceptUrl(url);
 			//String path = BaseConfig.HTML_ROOT + File.separator + mName;
@@ -89,7 +90,7 @@ public class PageConfigController {
 		}
 		Elements links = htmlSource.select("a[href]");
 		progressCount = remainCount = links.size();
-		dao.singlCat(pageConfig, url);
+		dao.singlCat(pageConfig, url ,siteId);
 		for (Element link : links) {
 			remainCount = remainCount - 1;
 			if (quitFlag == true) {// 开关 退出采集
@@ -100,9 +101,10 @@ public class PageConfigController {
 			if (href == null) {
 				continue;
 			}
-			if (Util.isOutUrl(href)) {
+			if (Util.isOutUrl(href,siteId)) {
 				try {
-					htmlSource = Util.loadTemplate(BaseConfig.TEMPLATE_ROOT + File.separator + "error.html");
+					//htmlSource = Util.loadTemplate(BaseConfig.TEMPLATE_ROOT + File.separator + "error.html");
+					htmlSource = Util.loadTemplate("error.html",siteId,2);
 					htmlSource.select("#error").attr("href", href);
 					String mName = Util.interceptUrl(href);
 					//String path = BaseConfig.HTML_ROOT + File.separator + mName;
@@ -127,7 +129,7 @@ public class PageConfigController {
 			urlMap.put(href, 1);
 			pageConfig = dao.findPageConfig(href);
 			if (pageConfig != null) {
-				dao.singlCat(pageConfig, href);
+				dao.singlCat(pageConfig, href ,siteId);
 			} else {
 				logger.debug(href);
 			}

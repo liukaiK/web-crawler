@@ -38,6 +38,11 @@
 		<input id="time" class="Wdate" onfocus="WdatePicker({dateFmt:'HH:mm:ss'})" readonly="readonly" value="<%=BaseConfig.time%>" />
 		<a href="javascript:setTime();" class="easyui-linkbutton" text="开启"></a>
 		<a href="javascript:cancelTime();" class="easyui-linkbutton" text="关闭"></a>
+		<a href="javascript:createSite();" class="easyui-linkbutton" text="测试"></a>
+		<form name="Form2" action="${contextPath}/admin/uploadFiles" method="post"  enctype="multipart/form-data">
+			<input id="uploadFiles" type = "file"  name="uploadFiles"  style="width:100px" />
+			<input type="submit" value="上传"/>
+		</form>
 		<a href="javascript:window.location.href = '${contextPath}/logout';" class="easyui-linkbutton" text="退出" style="float: right;"></a>
 		<div id="progressbar" class="easyui-progressbar" style="height:10px;"></div>
 	</div>
@@ -225,5 +230,19 @@
 		matchBrackets: true,
 		gutters: ["CodeMirror-lint-markers"],
 	});
+	/*******************************************************************************/
+	createSite = function(){
+			$.ajax({
+				type:'POST',
+				url:'${contextPath}/admin/createSite',
+				dataType:'json',
+				data:{
+					type : 0
+				},
+				success:function(data){
+					alert("回话：" + data);
+				}		
+			});
+		};
 </script>
 </html>

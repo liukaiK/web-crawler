@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
+import com.esd.collection.Site;
 import com.mongodb.DBObject;
 import com.mongodb.WriteResult;
 
@@ -29,7 +30,7 @@ public class  MongoDBDao {
 	public void insert(Object objectToSave, String collectionName) {
 		this.mongoTemplate.insert(objectToSave, collectionName);
 	}
-	
+
 	
 	/**
 	 * liukai-2016.10.11
@@ -98,8 +99,10 @@ public class  MongoDBDao {
 		return this.mongoTemplate.findOne(query, entityClass,collectionName);
 	}
 	public <T> T findOneByCollectionName(Query query,DBObject obj, Class<T> entityClass,String collectionName) {
-		return this.mongoTemplate.findOne(query, entityClass, collectionName);
-		
+		return this.mongoTemplate.findOne(query, entityClass, collectionName);	
+	}
+	public <T> void upsert(Query query,Update update,Class<T> entityClass,String  collectionName){
+		this.mongoTemplate.upsert(query, update, entityClass, collectionName);
 	}
 	/****************************************************************************************/
 	public <T> List<T> find(Query query, Class<T> entityClass){
@@ -126,9 +129,9 @@ public class  MongoDBDao {
 	 * 	cx-20160914
 	 * @param obj
 	 */
-	public void inserts(Collection<Object> batchToSave,String collectionName) {
-		this.mongoTemplate.insert(batchToSave, collectionName);
-	}
+//	public void inserts(Collection<Object> batchToSave,String collectionName) {
+//		this.mongoTemplate.insert(batchToSave, collectionName);
+//	}
 	/**
 	 * 删除数据
 	 */

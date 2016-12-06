@@ -1,6 +1,8 @@
 package com.esd.service.site;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -39,13 +41,19 @@ public class SiteService {
 	}
 
 	public void addSite(String siteName, String domainName, String port) {
+		
 		Date date = new Date();
 		Site site = new Site();
+		String str = "index";
+		
+		//site.setId("1");
 		site.setSiteName(siteName);
 		site.setDomainName(domainName);
 		site.setPort(port);
+		site.setIndex(str.getBytes());
 		site.setCreateDate(sdf.format(date));
 		site.setUpdateDate(sdf.format(date));
+		
 		mongoDBDao.insert(site, collectionName);
 	}
 

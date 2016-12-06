@@ -18,7 +18,9 @@ public class BaseConfig extends HttpServlet {
 	
 	public final static String SITENAME = "siteName";
 	
-	public final static String SITEID = "siteId"; 
+	public final static String SITEID = "siteId";
+	
+	public final static String SITES = "sites";
 	
 	public final static String DOMAINNAME = "domainName";
 
@@ -41,9 +43,10 @@ public class BaseConfig extends HttpServlet {
 	public static String TEST_ROOT;
 	
 	public static String TEMP_ROOT;
-
-	public static final String[] INDEX_URL = { "http://www.caacca.org", "http://www.caacts.org.cn:8080" };
-
+	
+//	public static final String[] INDEX_URL = { "http://www.caacca.org", "http://www.caacts.org.cn:8080" };
+	public static final String[] INDEX_URL = { "http://www.szft.gov.cn/" };
+	
 	public static final String MESSAGE = "message";
 
 	public static final String USER = "username";

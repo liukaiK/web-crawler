@@ -1,6 +1,5 @@
 package com.esd.stuff;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
@@ -9,7 +8,6 @@ import org.apache.log4j.Logger;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import com.esd.config.BaseConfig;
 import com.esd.config.NodeConfig;
 import com.esd.config.PageConfig;
 import com.esd.util.Util;
@@ -61,20 +59,21 @@ public class TemplateStuff {
 		}
 	}
 
-	private void headFooter(Document doc, PageConfig pageConfig) {
-		String templatePath =BaseConfig.TEMPLATE_ROOT + File.separator + pageConfig.getTemplate();
-		int sep = templatePath.lastIndexOf(File.separator);
-		String sub = templatePath.substring(0, sep);
+	private void headFooter(Document doc, PageConfig pageConfig,String siteId) {
+//		String templatePath =BaseConfig.TEMPLATE_ROOT + File.separator + pageConfig.getTemplate();
+//		int sep = templatePath.lastIndexOf(File.separator);
+//		String sub = templatePath.substring(0, sep);
 		Elements elements = doc.getElementsByTag(include);
 		if (elements == null || elements.size() == 0) {// 当没有include标签时退出
 			return;
 		}
 		for (Element element : elements) {
 			String src = element.attr("src");
-			String path = sub + File.separator + src;
+			//String path = sub + File.separator + src;
 			Document srcDoc;
 			try {
-				srcDoc = Util.loadTemplate(path);
+				//2016-11-9 cx 从mongodb中取template
+				srcDoc = Util.loadTemplate(src,siteId,2);
 				if (srcDoc == null) {
 					logger.error("没有找到要包括的模版文件！");
 					return;
@@ -96,8 +95,9 @@ public class TemplateStuff {
 		}
 	}
 
-	public Document templateStuff(PageConfig pageConfig) throws IOException {
-		Document doc = Util.loadTemplate(BaseConfig.TEMPLATE_ROOT + File.separator + pageConfig.getTemplate());
+	public Document templateStuff(PageConfig pageConfig,String siteId) throws IOException {
+		//Document doc = Util.loadTemplate(BaseConfig.TEMPLATE_ROOT + File.separator + pageConfig.getTemplate());
+		Document doc = Util.loadTemplate(pageConfig.getTemplate(),siteId,2);
 		List<NodeConfig> list = pageConfig.getList();
 		DefaultFilter filter = new DefaultFilter();
 		for (Iterator<NodeConfig> iterator = list.iterator(); iterator.hasNext();) {
@@ -141,7 +141,7 @@ public class TemplateStuff {
 				}
 			}
 		}
-		headFooter(doc, pageConfig);
+		headFooter(doc, pageConfig,siteId);
 		hrefToMd5(doc);
 		iframeSrc(doc, pageConfig.getUrl());
 		String original_url = pageConfig.getUrl();

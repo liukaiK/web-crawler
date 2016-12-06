@@ -72,17 +72,9 @@
 	<login-config>
 		<auth-method>BASIC</auth-method>
 	</login-config>
-
-
 	<servlet>
 		<servlet-name>BaseConfig</servlet-name>
 		<servlet-class>com.esd.config.BaseConfig</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-
-
-
-
-
-
 </web-app>

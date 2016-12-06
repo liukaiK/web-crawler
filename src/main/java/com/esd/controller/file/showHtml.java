@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -30,7 +31,9 @@ public class showHtml {
 	public void showPage(String fileName,HttpServletResponse response) throws IOException {
 		
 		String collectionName = SiteController.siteId + "_html";
-		DbFile  df = mdu.findOneByCollectionName(collectionName, fileName+".html", DbFile.class);
+		Criteria criatira = new Criteria();
+		criatira.andOperator(Criteria.where("fileName").is(fileName));
+		DbFile  df = mdu.findOneByCollectionName(collectionName, criatira, DbFile.class);
 		String htmlC = new String(df.getFileByte(),"utf-8");
 		System.out.println(htmlC);	
 		//StringBuffer sbHtml = new StringBuffer();

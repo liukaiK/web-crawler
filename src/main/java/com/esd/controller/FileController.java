@@ -1,14 +1,20 @@
 package com.esd.controller;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -17,16 +23,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.esd.collection.DbFile;
+import com.esd.common.MongoDBUtil;
 import com.esd.config.BaseConfig;
+import com.esd.controller.site.SiteController;
 import com.esd.core.CollectionPage;
+import com.esd.util.Md5;
+import com.esd.util.MkFile;
 
 @Controller
 @RequestMapping("/admin")
 public class FileController {
 	
 	private static Logger logger = Logger.getLogger(CollectionPage.class);
-	
+	@Autowired
+	private MongoDBUtil mdu;
 	/**
 	 * 这里这里用的是MultipartFile[] myfiles参数,所以前台就要用<input type="file"
 	 * name="myfiles"/>
@@ -97,7 +112,145 @@ public class FileController {
 		out.flush();
 		return null;
 	}
-
+	/**
+	 * 20161027-cx 文件上傳
+	 * @param uploadfiles
+	 * @param ex
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "/uploadfiles", method = RequestMethod.POST)
+	public String uploadFile(@RequestParam MultipartFile[] uploadfiles, Exception ex, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		if (uploadfiles.length == 0) {
+			return null;
+		}
+		String fileName = null;
+		byte[] b = null;
+		String md = null;
+		for (int i = 0; i < uploadfiles.length; i++) {
+			DbFile df = new DbFile();
+			fileName = uploadfiles[i].getOriginalFilename();
+			b = uploadfiles[i].getBytes();
+			md = Md5.getMd5File(b);
+			
+			df.setFileName(fileName);
+			df.setFileByte(b);
+			df.setSiteName(SiteController.siteId);
+			df.setMd5File(md);
+			
+			mdu.insertFile(df,SiteController.siteId+"_plug");
+		}
+		return null;
+	}
+	@RequestMapping(value = "/createSite", method = RequestMethod.POST)
+	public String createSite(int type,HttpSession session) throws IOException {
+		System.out.println("进来了");
+		String siteId = session.getAttribute("siteId").toString();
+		if(type == 0){
+			MkFile.mkdir(BaseConfig.ROOT1+siteId);
+			if(mkFile(siteId,"js")){
+				System.out.println("完成");
+			}else{
+				System.out.println("失败了");
+			}
+			if(mkFile(siteId,"css")){
+				System.out.println("完成");
+			}else{
+				System.out.println("失败了");
+			}
+			if(mkFile(siteId,"plug")){
+				System.out.println("完成");
+			}else{
+				System.out.println("失败了");
+			}
+		}
+		
+		return null;
+	}
+	public  boolean mkFile(String siteId,String type){
+		File file = new File(BaseConfig.ROOT1+siteId+"/resourse/"+type);
+		if(!file.exists()){
+			file.mkdirs();
+		}	
+		String collectionName = siteId + "_" + type;
+		String dir = BaseConfig.ROOT1+siteId+File.separator+"resourse"+File.separator+type;
+		
+		List<DbFile> l = mdu.findAll(DbFile.class, collectionName);
+		if(l == null){
+			return false;
+		}
+		byte[] b = null;
+		String fileName = null;
+		String endName = null;
+		for (Iterator<DbFile> iterator = l.iterator(); iterator.hasNext();) {
+			DbFile dbFile = (DbFile) iterator.next();
+			b = dbFile.getFileByte();
+			fileName = dbFile.getFileName();
+			endName = fileName.split("\\.")[1];
+			if(endName.equals(type) || type.equals("plug")){
+				try {
+					MkFile.writeFile(b,dir + File.separator + fileName);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}	
+		}
+		return true;
+	}
+	/**************************************************************************************/
+	/*
+     *采用spring提供的上传文件的方法
+     */
+    @RequestMapping(value = "/uploadFiles", method = RequestMethod.POST)
+    public ModelAndView  uploadFiles(HttpServletRequest request,HttpSession session) throws IllegalStateException, IOException{
+    	String siteId = session.getAttribute("siteId").toString();
+    	long  startTime=System.currentTimeMillis();
+    	//将当前上下文初始化给  CommonsMutipartResolver （多部分解析器）
+        CommonsMultipartResolver multipartResolver=new CommonsMultipartResolver(
+                request.getSession().getServletContext());
+        //检查form中是否有enctype="multipart/form-data"
+        if(multipartResolver.isMultipart(request))
+        {
+            //将request变成多部分request
+            MultipartHttpServletRequest multiRequest=(MultipartHttpServletRequest)request;
+           //获取multiRequest 中所有的文件名
+            Iterator<?> iter=multiRequest.getFileNames();
+            String fileName = null;
+            String str[] = null;
+            String hz = null;
+            String collectionName = null;
+            while(iter.hasNext()){
+                //一次遍历所有文件
+                MultipartFile file=multiRequest.getFile(iter.next().toString());
+                if(file!=null){  
+                    System.out.println(file.getOriginalFilename());
+                    fileName = file.getOriginalFilename();
+                    str = fileName.split("\\.");
+                    hz = str[str.length - 1];
+                    if(hz.equals("js") || hz.equals("css")){
+                    	collectionName = siteId + "_" + hz;
+                    }else{
+                    	collectionName = siteId + "_plug";
+                    }
+                    //上传mongodb
+                    //file.transferTo(new File(path));
+                    DbFile df = new DbFile();
+                    df.setFileByte(file.getBytes());
+                    df.setFileName(fileName);
+                    df.setMd5File(Md5.getMd5File(file.getBytes()));
+                    df.setSiteName(SiteController.siteId);
+                    
+                    mdu.insertFile(df, collectionName);
+                }   
+            }  
+        }
+        long  endTime=System.currentTimeMillis();
+        System.out.println("方法三的运行时间："+String.valueOf(endTime-startTime)+"ms");
+        return new ModelAndView("redirect:manage"); 
+    }
+	/********************--------------------------------------------------------------***********************/
 	@ExceptionHandler
 	public String doException(Exception e, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		response.setContentType("text/plain; charset=UTF-8");

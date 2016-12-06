@@ -1,14 +1,16 @@
 package com.esd.collection;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class Site {
-
+	@Id
 	private String id;
 	private String siteName;
 	private String domainName;
 	private String port;
+	private byte[] index;
 	// private String userId;
 	private String createDate;
 	private String updateDate;
@@ -59,6 +61,14 @@ public class Site {
 
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
+	}
+
+	public byte[] getIndex() {
+		return index;
+	}
+
+	public void setIndex(byte[] index) {
+		this.index = index;
 	}
 
 }

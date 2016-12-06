@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import com.esd.collection.DbFile;
@@ -123,7 +124,9 @@ public class MongoDBUtil {
 //		df.setUpdateDate(new Date());
 		mongoDBDao.insert(df, SiteController.siteId + "_" + type);
 	}
-	
+	public <T> void insertFile(DbFile dbFile,String collectionName){
+		mongoDBDao.insert(dbFile, collectionName);
+	}
 	/**
 	 * 新增pg插入数据库
 	 * @param dbPgFile
@@ -147,9 +150,9 @@ public class MongoDBUtil {
 	 * 按条件查询一条数据
 	 * 返回DbFile类型数据
 	 */
-	public <T> T findOneByCollectionName(String collectionName,String fileName,Class<T> entityClass){
-		Criteria criatira = new Criteria();
-		criatira.andOperator(Criteria.where("fileName").is(fileName)); 
+	public <T> T findOneByCollectionName(String collectionName,Criteria criatira,Class<T> entityClass){
+//		Criteria criatira = new Criteria();
+//		criatira.andOperator(Criteria.where("fileName").is(fileName)); 
 		return mongoDBDao.findOneByCollectionName(new Query(criatira),entityClass ,collectionName);
 	}
 	/**
@@ -159,7 +162,7 @@ public class MongoDBUtil {
 		
 		if(!ctrl){
 			MongoDBDao mongoDBDao = (MongoDBDao)SpringContextUtil.getBean("mongoDBDao");
-			mongoDBDao.inserts(db,SiteController.siteId + "_" + fileType);
+			mongoDBDao.insert(db,SiteController.siteId + "_" + fileType);
 		}else{
 			String md5File =  Md5.getMd5(content);
 			//存入mongodb
@@ -191,8 +194,7 @@ public class MongoDBUtil {
 	public void insertFiles(String collectionName,String url){
 		File fold = new File(url);
 		if (fold.exists()) {
-			
-			System.out.println("路径："+url+"\n"+"表名："+collectionName);
+
 			//文件组
 			File[] file = fold.listFiles();
 			byte[] fileByte = null; 
@@ -201,7 +203,6 @@ public class MongoDBUtil {
 			
 			Collection<Object> db = new ArrayList<Object>();
 
-			System.out.println("文件长："+file.length);
 			for (int i = 0; i < file.length; i++) {
 				if(!file[i].isDirectory()){
 					
@@ -224,8 +225,7 @@ public class MongoDBUtil {
 				}
 			}
 			
-			mongoDBDao.inserts(db, collectionName);
-			System.out.println("db3!");
+			mongoDBDao.insert(db, collectionName);
 		}
 	}
 	/**
@@ -244,6 +244,17 @@ public class MongoDBUtil {
 	 */
 	public DbFile findFile(Query query){
 		return mongoDBDao.findOne(query, DbFile.class);
+	}
+	public <T> T findById(String id,Class<T> entityClass){
+		return mongoDBDao.findById(id, entityClass);
+	}
+	public <T> void upsert(String siteId,byte[] b,Class<T> entityClass,String collectionName){
+		Criteria criatira = new Criteria();
+		criatira.andOperator(Criteria.where("_id").is(siteId));
+		Update update = new Update();
+		update.set("index", b);
+		
+		mongoDBDao.upsert(new Query(criatira), update, entityClass, collectionName);
 	}
 	/**
 	 * cx-201609110

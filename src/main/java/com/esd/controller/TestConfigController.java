@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.jsoup.nodes.Document;
@@ -36,12 +37,13 @@ public class TestConfigController {
 	 */
 	@RequestMapping("/view")
 	@ResponseBody
-	public Map<String, Object> view(HttpServletRequest request) {
+	public Map<String, Object> view(HttpServletRequest request,HttpSession session) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		String siteId = session.getAttribute("siteId").toString();
 		String url = request.getParameter("url");
 		String templateName = request.getParameter("template");
-		if (Util.isOutUrl(url)) {// 网址为外部链接
-			Util.doWithOutUrl(url);
+		if (Util.isOutUrl(url,siteId)) {// 网址为外部链接
+			Util.doWithOutUrl(url,siteId);
 		} else {
 			String javaScriptEnabled = request.getParameter("javaScriptEnabled");
 			String sleep = request.getParameter("sleep");
@@ -69,7 +71,7 @@ public class TestConfigController {
 			TemplateStuff ts = new TemplateStuff();
 			pageConfig.setTemplate(templateName);
 			try {
-				Document templateDoc = ts.templateStuff(pageConfig);
+				Document templateDoc = ts.templateStuff(pageConfig,siteId);
 				Util.createNewFile(templateDoc.html(), BaseConfig.TEST_ROOT + File.separator + "view.html");
 			} catch (IOException e) {
 				e.printStackTrace();
