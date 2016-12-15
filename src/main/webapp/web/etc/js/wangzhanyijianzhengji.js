@@ -128,7 +128,7 @@ function submitPage() {
 		return false;
 	}	
 	alert("提交中 请勿进行其他操作...");
-	showMask();
+	load();
 	$.ajax({
 		type : 'post',
 		url : '/iac/yijianzhengji7',
@@ -164,13 +164,12 @@ function show_confirm() {
 	}
 }
 
+function load() {  
+    $("<div class=\"datagrid-mask\"></div>").css({ display: "block", width: "100%", height: $(window).height() }).appendTo("body");  
+    $("<div class=\"datagrid-mask-msg\"></div>").html("正在提交，请稍候。。。").appendTo("body").css({ display: "block", left: ($(document.body).outerWidth(true) - 190) / 2, top: ($(window).height() - 45) / 2 });  
+}  
 
-function showMask(){     
-    $("#mask").css("height",$(document).height());     
-    $("#mask").css("width",$(document).width());     
-    $("#mask").show();     
-}  
-//隐藏遮罩层  
-function hideMask(){     
-    $("#mask").hide();     
-}  
+function disLoad() {  
+    $(".datagrid-mask").remove();  
+    $(".datagrid-mask-msg").remove();  
+}
