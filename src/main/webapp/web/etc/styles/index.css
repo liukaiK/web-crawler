@@ -657,7 +657,8 @@ margin-left: 55px;
 }
 
 #bs {
-	width: 370px;
+	margin-left: 2px;
+	width: 375px;
     background-color: #e9573e;
     border: #e9573e 3px solid;
 }

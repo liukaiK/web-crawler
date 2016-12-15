@@ -52,8 +52,9 @@ function submitPage() {
 	var email = $.trim($("#email").val()); // 邮件
 	var title = $.trim($("#title").val()); // 标题
 	var conContent = $.trim($("#conContent").val()); // 内容
-	var code = $.trim($("#code").val()); // 验证码
-	if (name == "" || name == "请输入姓名") {
+	var esd_original = $("#esd_original").attr("href"); //原网址url
+	var code = $.trim($("#certicode").val()); // 验证码
+	if (name == "" || name == "请输入姓名 必填项") {
 		if (flag == true) {
 			alert("请输入姓名");
 			show_confirm();
@@ -61,15 +62,15 @@ function submitPage() {
 		$("#name").focus();
 		return false;
 	}	
-//	if (name.length >= 25) {
-//		if (flag == true) {
-//			alert("您的姓名长度不能超过25");
-//			show_confirm();
-//		}
-//		$("#name").focus();
-//		return false;
-//	}	
-	if (phone == "" || phone == "请输入电话") {
+	if (name.length >= 25) {
+		if (flag == true) {
+			alert("您的姓名长度不能超过25");
+			show_confirm();
+		}
+		$("#name").focus();
+		return false;
+	}	
+	if (phone == "" || phone == "请输入电话 必填项") {
 		if (flag == true) {
 			alert("请输入电话");
 			show_confirm();
@@ -77,42 +78,48 @@ function submitPage() {
 		$("#phone").focus();
 		return false;
 	}		
-//	if (phone.length >= 100) {
-//		if (flag == true) {
-//			alert("您的联系电话长度不能超过100");
-//			show_confirm();
-//		}
-//		$("#phone").focus();
-//		return false;
-//	}	
-//	if (adress.length >= 100) {
-//		if (flag == true) {
-//			alert("您的通讯地址长度不能超过100");
-//			show_confirm();
-//		}
-//		$("#adress").focus();
-//		return false;
-//	}
-
-	
-	if (content == "" || content == "请不要超过400个汉字（包括标点）") {
+	if (phone.length >= 100) {
+		if (flag == true) {
+			alert("您的联系电话长度不能超过100");
+			show_confirm();
+		}
+		$("#phone").focus();
+		return false;
+	}	
+	if (title == "" || title == "请输入标题 必填项") {
+		if (flag == true) {
+			alert("请输入标题");
+			show_confirm();
+		}
+		$("#title").focus();
+		return false;
+	}		
+	if (title.length >= 100) {
+		if (flag == true) {
+			alert("您的标题长度不能超过100");
+			show_confirm();
+		}
+		$("#title").focus();
+		return false;
+	}	
+	if (conContent == "" || conContent == "请输入内容 必填项") {
 		if (flag == true) {
 			alert("请输入简要内容");
 			show_confirm();
 		}
-		$("#content").focus();
+		$("#conContent").focus();
 		return false;
 	}	
 
-	if (content.length >= 400) {
+	if (conContent.length >= 400) {
 		if (flag == true) {
 			alert("简要内容长度不能超过400");
 			show_confirm();
 		}
-		$("#content").focus();
+		$("#conContent").focus();
 		return false;
 	}
-	if (code == "" || code == "请输入验证码") {
+	if (code == "" || code == "请输入验证码 必填项") {
 		if (flag == true) {
 			alert("请输入验证码");
 			show_confirm();
@@ -125,19 +132,23 @@ function submitPage() {
 		adress = "";
 	}
 	
-	if (number == "请输入电话") {
-		number = "";
+	if (email == "请输入邮箱") {
+		email = "";
 	}
+	alert("提交中 请勿进行其他操作...");
+	showMask();
 	
 	$.ajax({
 		type : 'post',
-		url : '/iac/complaintSubmit',
+		url : '/iac/shizhangxinxiang',
 		data : {
 			"name" : name,
 			"phone" : phone,
 			"adress" : adress,
-			"day2" : day2,
-			"content" : content,
+			"email" : email,
+			"title" : title,
+			"conContent" : conContent,
+			"url" : esd_original,
 			"code" : code
 		},
 		dataType : 'json',
@@ -168,3 +179,13 @@ function show_confirm() {
 		flag = false;
 	}
 }
+
+function showMask(){     
+    $("#mask").css("height",$(document).height());     
+    $("#mask").css("width",$(document).width());     
+    $("#mask").show();     
+}  
+//隐藏遮罩层  
+function hideMask(){     
+    $("#mask").hide();     
+}  

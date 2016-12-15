@@ -168,9 +168,9 @@ public class Test {
 	
 	@org.junit.Test
 	public void yijianzhengji7() throws InterruptedException, IOException {
-		String title = "标题";
 		String name = "标题";
 		String phone = "13213321322";
+		String title = "标题";
 		String conContent = "123123123123123";
 		WebClient webClient = new WebClient(BrowserVersion.INTERNET_EXPLORER_8);
 		webClient.getOptions().setJavaScriptEnabled(true);
@@ -178,32 +178,34 @@ public class Test {
 		webClient.setAjaxController(new NicelyResynchronizingAjaxController());
 		webClient.getOptions().setThrowExceptionOnScriptError(false);
 
-		HtmlPage htmlPage = webClient.getPage("http://www.jlsy.gov.cn/hd/yjzz/yjzjj/201209/t20120928_61764.html");
+		HtmlPage htmlPage = webClient.getPage("http://jlsy.gov.cn/hd/szxx/");
 		HtmlPage page = (HtmlPage)htmlPage.getFrames().get(1).getEnclosedPage();
-		System.out.println(page.asXml());
+//		System.out.println(page.asXml());
 		
+		HtmlInput name_input = (HtmlInput) page.getElementById("my:group1/my:姓名");
+		name_input.setValueAttribute(name);
 		
+		HtmlInput phone_input = (HtmlInput) page.getElementById("my:group1/my:联系电话");
+		phone_input.setValueAttribute(phone);
 		
-		HtmlInput title_input = (HtmlInput) page.getElementById("my:组1/my:biaoti");
+		HtmlInput title_input = (HtmlInput) page.getElementById("my:group1/my:留言主题");
 		title_input.setValueAttribute(title);
 
-		HtmlInput name_input = (HtmlInput) page.getElementById("my:组1/my:xingming");
-		name_input.setValueAttribute(name);
 
-		HtmlInput phone_input = (HtmlInput) page.getElementById("my:组1/my:lxdh");
-		phone_input.setValueAttribute(phone);
 
-		HtmlTextArea content_text = (HtmlTextArea) page.getElementById("my:组1/my:nr");
+		HtmlTextArea content_text = (HtmlTextArea) page.getElementById("my:group1/my:内容");
 		content_text.setTextContent(conContent);
 
 		HtmlButtonInput submitBtn = (HtmlButtonInput) page.getElementById("SubmitButton");
 		HtmlPage hp = submitBtn.click();
+//		Thread.sleep(1000);
+		System.out.println(page.asXml());
 		if (hp != null) {
 			String text = hp.asText();
-			System.out.println(hp.asXml());
+//			System.out.println(hp.asXml());
 			String pageUrl = hp.getUrl().toString().trim();
-			System.out.println(pageUrl);
-			System.out.println(text);
+//			System.out.println(pageUrl);
+//			System.out.println(text);
 		} else {
 		}
 	}

@@ -4,4 +4,16 @@ $(document).ready(function() {
 //	})
 	
 	$("#nav").find("a:eq(4)").focus();
+	
+	
+
+	var size = $("#sjyq ul li").size();
+	console.info(size);
+	for ( var i = size; i >= 12; i--) {
+		$("#sjyq ul li:eq(" + i + ")").remove();
+	}
+	
+	
+	
+	
 })

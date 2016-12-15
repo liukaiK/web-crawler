@@ -82,7 +82,7 @@ public class Util {
 		byte[] bs = InputStreamUtils.InputStreamTOByte(in);
 		in.close();
 		AutoDiscern autoDiscern = new AutoDiscern();
-		String yzmNum = autoDiscern.discernPic(bs, 1);
+		String yzmNum = autoDiscern.discernPic(bs);
 		return yzmNum;
 	}
 	

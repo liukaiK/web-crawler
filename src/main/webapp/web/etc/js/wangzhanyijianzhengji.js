@@ -128,6 +128,7 @@ function submitPage() {
 		return false;
 	}	
 	alert("提交中 请勿进行其他操作...");
+	showMask();
 	$.ajax({
 		type : 'post',
 		url : '/iac/yijianzhengji7',
@@ -162,3 +163,14 @@ function show_confirm() {
 		flag = false;
 	}
 }
+
+
+function showMask(){     
+    $("#mask").css("height",$(document).height());     
+    $("#mask").css("width",$(document).width());     
+    $("#mask").show();     
+}  
+//隐藏遮罩层  
+function hideMask(){     
+    $("#mask").hide();     
+}  
