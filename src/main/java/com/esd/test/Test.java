@@ -201,9 +201,9 @@ public class Test {
 //		Thread.sleep(1000);
 		System.out.println(page.asXml());
 		if (hp != null) {
-			String text = hp.asText();
+//			String text = hp.asText();
 //			System.out.println(hp.asXml());
-			String pageUrl = hp.getUrl().toString().trim();
+//			String pageUrl = hp.getUrl().toString().trim();
 //			System.out.println(pageUrl);
 //			System.out.println(text);
 		} else {

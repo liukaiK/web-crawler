@@ -37,7 +37,7 @@
 	z-index: 1;
 }
 
-#NewsShowConter_date h1 p,#NewsShowConter_date h1 span {
+#NewsShowConter_date h1 p,#NewsShowConter_date h1 span, #NewsShowConter_date h1 {
 	font-size: 18px;
 	font-weight: normal;
 }

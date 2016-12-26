@@ -30,7 +30,8 @@ public class CollectionPage {
 	private static Logger logger = Logger.getLogger(CollectionPage.class);
 	@Resource
 	private MongoDBUtil mongoDBUtil;
-	private CatDao dao = new CatDao();
+	@Resource
+	private CatDao catDao;
 	private boolean collectStatic = true;
 	private boolean ctrl = true;
 	
@@ -66,7 +67,7 @@ public class CollectionPage {
 		for (int i = 0; i < BaseConfig.str.length; i++) {
 			mongoDBUtil.downloadsInsert(BaseConfig.str[i]);
 		}
-		dao.collectPageConfig();
+		catDao.collectPageConfig();
 	}
 
 	/**
@@ -96,7 +97,7 @@ public class CollectionPage {
 			}
 			return true;
 		}
-		PageConfig pageConfig = dao.findPageConfig(url);
+		PageConfig pageConfig = catDao.findPageConfig(url);
 		Document htmlSource = null;
 		if (pageConfig != null) {
 			EsdDownLoadHtml down = new EsdDownLoadHtml();// 下载
@@ -133,7 +134,7 @@ public class CollectionPage {
 				}
 			}
 			// 过滤
-			String s = dao.filterSuffix(href);
+			String s = catDao.filterSuffix(href);
 			// 保存url到数数库
 			mongoDBUtil.downloadsInsert(s);
 
@@ -143,7 +144,7 @@ public class CollectionPage {
 		urlsCollection.setUrl(bson.getUrl());
 		if (pageConfig != null && htmlSource != null) {
 			try {
-				dao.singlCat(pageConfig, htmlSource);
+				catDao.singlCat(pageConfig, htmlSource);
 				urlsCollection.setState("1");// 已处理
 			} catch (Exception e) {
 				urlsCollection.setState("-1");// 已处理，发生错误

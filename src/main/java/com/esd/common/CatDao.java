@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 import org.jsoup.nodes.Document;
+import org.springframework.stereotype.Component;
 
 import com.esd.config.BaseConfig;
 import com.esd.config.PageConfig;
@@ -23,6 +24,7 @@ import com.esd.stuff.TemplateStuff;
 import com.esd.util.Md5;
 import com.esd.util.Util;
 
+@Component
 public class CatDao {
 
 	private static Logger log = Logger.getLogger(CatDao.class);
