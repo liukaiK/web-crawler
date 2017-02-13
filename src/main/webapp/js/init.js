@@ -11,7 +11,7 @@ $(document).ready(function() {
 	$.parser.parse($("#rules"));
 //	$('.gbin1-list').sortable();
 	setInterval(catAllStatic, 2000);
-	setInterval(catingStatic, 2000);
+//	setInterval(catingStatic, 2000);
 	disLoad();
 })
 
@@ -24,7 +24,7 @@ function init(){
 
 function loadPgFileList() {
 	$.ajax({
-		url : root + '/core/loadPgFileList',
+		url : root + '/loadPgFileList',
 		type : 'POST',
 		sync : false,
 		success : function(data) {
@@ -42,7 +42,7 @@ function loadPgFileList() {
 
 function loadTemplateFileList() {
 	$.ajax({
-		url : root + '/core/loadTemplateList',
+		url : root + '/loadTemplateList',
 		type : 'POST',
 		sync : false,
 		success : function(data) {

@@ -2,9 +2,11 @@ package com.esd.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
@@ -16,23 +18,34 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.esd.config.BaseConfig;
 import com.esd.config.NodeConfig;
 import com.esd.config.PageConfig;
-import com.esd.download.EsdDownLoadHtml;
+import com.esd.download.DownLoadHtml;
 import com.esd.parser.Parser;
 import com.esd.stuff.TemplateStuff;
 import com.esd.util.Util;
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 
 @Controller
 @RequestMapping("/admin/test")
 public class TestConfigController {
 
-	private static Logger log = Logger.getLogger(TestConfigController.class);
+	private Logger logger = Logger.getLogger(TestConfigController.class);
 	
+	@Resource
+	private DownLoadHtml downLoadHtml;
+	
+	@Resource
+	private TemplateStuff templateStuff;
+	
+	@Resource
+	private Parser parser;
 
 	/**
 	 * 抓取预览方法
 	 * 
 	 * @param request
 	 * @return
+	 * @throws InterruptedException 
+	 * @throws IOException 
 	 */
 	@RequestMapping("/view")
 	@ResponseBody
@@ -41,12 +54,14 @@ public class TestConfigController {
 		String url = request.getParameter("url");
 		String templateName = request.getParameter("template");
 		if (Util.isOutUrl(url)) {// 网址为外部链接
-			Document templeSource = Util.downLoadTemple(BaseConfig.TEMPLATE_ROOT + File.separator + "error.html");
-			templeSource.select("#error").attr("href", url);
 			try {
-				Util.createNewFile(templeSource.html(), BaseConfig.TEST_ROOT + File.separator + "view.html");
+				Util.doWithOutUrl(url);
+				map.put("notice", true);
+				map.put("message", "预览成功!");
 			} catch (IOException e) {
-				e.printStackTrace();
+				logger.error(e.getMessage());
+				map.put("notice", false);
+				map.put("message", "预览失败!");
 			}
 		} else {
 			String javaScriptEnabled = request.getParameter("javaScriptEnabled");
@@ -68,21 +83,32 @@ public class TestConfigController {
 				nc.setAnchorId(rule[6]);
 				pageConfig.getList().add(nc);
 			}
-			EsdDownLoadHtml down = new EsdDownLoadHtml();
-			Document htmlSource = down.downloadHtml(pageConfig);
-			Parser hp = new Parser();
-			pageConfig = hp.ParserNode(htmlSource, pageConfig);
-			TemplateStuff ts = new TemplateStuff();
-			pageConfig.setTemplate(templateName);
+			Document htmlSource;
 			try {
-				Document templateDoc = ts.templateStuff(pageConfig);
+				try {
+					htmlSource = downLoadHtml.downloadHtml(pageConfig);
+					pageConfig = parser.ParserNode(htmlSource, pageConfig);
+				} catch (InterruptedException e) {
+				}
+				pageConfig.setTemplate(templateName);
+				Document templateDoc = templateStuff.templateStuff(pageConfig);
 				Util.createNewFile(templateDoc.html(), BaseConfig.TEST_ROOT + File.separator + "view.html");
+				map.put("notice", true);
+				map.put("message", "预览成功!");
+			} catch (FailingHttpStatusCodeException e) {
+				logger.error(e.getMessage());
+				map.put("notice", false);
+				map.put("message", e.getMessage());
+			} catch (MalformedURLException e) {
+				logger.error(e.getMessage());
+				map.put("notice", false);
+				map.put("message", e.getMessage());
 			} catch (IOException e) {
-				e.printStackTrace();
+				logger.error(e.getMessage());
+				map.put("notice", false);
+				map.put("message", e.getMessage());
 			}
 		}
-		log.debug("view finish");
-		map.put("notice", true);
 		return map;
 	}
 }

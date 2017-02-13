@@ -10,14 +10,14 @@ public class NodeConfig implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -7044726743607359193L;
-	private String des = null;// 备注
-	private String parent = null;// 父类
-	private String tag = null;// 标签
-	private String type = null; // class id 类型
-	private String name = null;// 名称
-	private int index = 0; // 第几个标签 序号
-	private String anchorId = null; // 装入的模版ID 。目前只支持ID
-	private Element src = null; // 文本源;
+	private String des;// 备注
+	private String parent;// 父类
+	private String tag;// 标签
+	private String type; // class id 类型
+	private String name;// 名称
+	private int index; // 第几个标签 序号
+	private String anchorId; // 装入的模版ID 。目前只支持ID
+	private Element src; // 文本源;
 
 	public String getDes() {
 		return des;
@@ -67,12 +67,12 @@ public class NodeConfig implements Serializable {
 		this.index = index;
 	}
 
-	public void setIndex(String index) {
-		if (index == null || index.equals("") || index.equals("0")) {
-			return;
-		} else {
-			this.index = Integer.valueOf(index);
-		}
+	public String getAnchorId() {
+		return anchorId;
+	}
+
+	public void setAnchorId(String anchorId) {
+		this.anchorId = anchorId;
 	}
 
 	public Element getSrc() {
@@ -83,12 +83,12 @@ public class NodeConfig implements Serializable {
 		this.src = src;
 	}
 
-	public String getAnchorId() {
-		return anchorId;
-	}
-
-	public void setAnchorId(String anchorId) {
-		this.anchorId = anchorId;
+	public void setIndex(String index) {
+		if (index == null || index.equals("") || index.equals("0")) {
+			return;
+		} else {
+			this.index = Integer.valueOf(index);
+		}
 	}
 
 }

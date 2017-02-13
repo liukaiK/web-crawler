@@ -1,6 +1,5 @@
 package com.esd.parser;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.jsoup.Jsoup;
@@ -8,10 +7,12 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Component;
 
 import com.esd.config.NodeConfig;
 import com.esd.config.PageConfig;
 
+@Component
 public class Parser {
 
 	/**
@@ -23,16 +24,15 @@ public class Parser {
 	 */
 	public PageConfig ParserNode(Element htmlSource, PageConfig pageConfig) {
 		List<NodeConfig> nodeConfigs = pageConfig.getList();
-		for (Iterator<NodeConfig> iterator = nodeConfigs.iterator(); iterator.hasNext();) {
-			NodeConfig it = (NodeConfig) iterator.next();
+		for (NodeConfig nodeConfig : nodeConfigs) {
 			Element Ele = null;
-			String parent = it.getParent();
-			if (parent != null && parent.equals("") == false) {
+			String parent = nodeConfig.getParent();
+			if (parent != null && parent.isEmpty() == false) {
 				String split[] = parent.split(";");
 				Elements elements = null;
 				elements = htmlSource.select(split[0]);
 				if (elements == null || elements.isEmpty()) {
-					it.setSrc(null);
+					nodeConfig.setSrc(null);
 					continue;
 				}
 				if (split.length > 1) {
@@ -47,31 +47,30 @@ public class Parser {
 				}
 			}
 			if (Ele == null) {
-				// continue;
 				Ele = htmlSource;
 			}
 			// 根据ID提取网页内容
-			if (it.getType().equals("id")) {
+			if (nodeConfig.getType().equals("id")) {
 				// 取id 内容
-				Element element = catById(Ele, it);
-				it.setSrc(element);
+				Element element = catById(Ele, nodeConfig);
+				nodeConfig.setSrc(element);
 				continue;
 			}
 			// 根据class获取内容(class 标签 顺序)
-			if (it.getType().equals("class")) {
-				Element element = catByClass(Ele, it);
-				it.setSrc(element);
+			if (nodeConfig.getType().equals("class")) {
+				Element element = catByClass(Ele, nodeConfig);
+				nodeConfig.setSrc(element);
 				continue;
 			}
 			// 没有class和id的情况下只能用tag和顺序还定位要抓取容器
-			if (it.getType().equals("tag")) {
-				Element element = catByTag(Ele, it);
-				it.setSrc(element);
+			if (nodeConfig.getType().equals("tag")) {
+				Element element = catByTag(Ele, nodeConfig);
+				nodeConfig.setSrc(element);
 				continue;
 			}
-			if (it.getType().equals("text")) {
-				Element element = catByText(Ele, it);
-				it.setSrc(element);
+			if (nodeConfig.getType().equals("text")) {
+				Element element = catByText(Ele, nodeConfig);
+				nodeConfig.setSrc(element);
 				continue;
 			}
 

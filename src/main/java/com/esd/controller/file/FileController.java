@@ -1,4 +1,4 @@
-package com.esd.controller;
+package com.esd.controller.file;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,145 +25,12 @@ import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.esd.config.BaseConfig;
-import com.esd.core.CollectionPage;
-import com.esd.util.Util;
 
 @Controller
 @RequestMapping("/admin")
 public class FileController {
 	
-	private static Logger logger = Logger.getLogger(CollectionPage.class);
-	
-	
-	
-	@RequestMapping("/deletePgFile")
-	@ResponseBody
-	public Map<String, Object> deletePgFile(String pgFileName, HttpServletRequest request) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		File file = new File(BaseConfig.PG_ROOT + File.separator + pgFileName + ".pg");
-		if (file.isFile()) {
-			if (file.getAbsoluteFile().delete()) {
-				map.put("notice", true);
-				map.put("message", pgFileName + "规则文件删除成功!");
-			} else {
-				map.put("notice", false);
-				map.put("message", pgFileName + "规则文件删除失败!");
-			}
-		} else {
-			map.put("notice", false);
-			map.put("message", pgFileName + "规则文件删除失败!");
-		}
-		return map;
-
-	}
-	
-	@RequestMapping(value = "/saveTemplate", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> saveTemplate(String templateContent, String templateName, HttpServletRequest request) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		try {
-			Util.createNewFile(templateContent, BaseConfig.TEMPLATE_ROOT + File.separator + templateName);
-			map.put("notice", true);
-			map.put("message", templateName + "模板文件保存成功!");
-		} catch (IOException e) {
-			map.put("notice", false);
-			map.put("message", templateName + "模板文件保存失败!");
-		}
-		return map;
-	}
-	
-	@RequestMapping(value = "/deleteTemplate", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> deleteTemplate(String templateName, HttpServletRequest request) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		File file = new File(BaseConfig.TEMPLATE_ROOT + File.separator + templateName);
-		if (file.isFile()) {
-			if (file.getAbsoluteFile().delete()) {
-				map.put("notice", true);
-				map.put("message", templateName + "模板文件删除成功!");
-			} else {
-				map.put("notice", false);
-				map.put("message", templateName + "模板文件删除失败!");
-			}
-		} else {
-			map.put("notice", false);
-			map.put("message", templateName + "模板文件删除失败!");
-		}
-		return map;
-	}
-	
-	@RequestMapping(value = "/saveCss", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> saveCss(String cssContent, String cssName, HttpServletRequest request) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		try {
-			Util.createNewFile(cssContent,BaseConfig.CSS_ROOT + File.separator + cssName);
-			map.put("notice", true);
-			map.put("message", cssName + "样式文件保存成功!");
-		} catch (IOException e) {
-			map.put("notice", false);
-			map.put("message", cssName + "样式文件保存失败!");
-		}
-		return map;
-	}	
-	
-	
-	@RequestMapping(value = "/deleteCss", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> deleteCss(String cssName, HttpServletRequest request) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		File file = new File(BaseConfig.CSS_ROOT + File.separator + cssName);
-		if (file.isFile()) {
-			if (file.getAbsoluteFile().delete()) {
-				map.put("notice", true);
-				map.put("message", cssName + "样式文件删除成功!");
-			} else {
-				map.put("notice", false);
-				map.put("message", cssName + "样式文件删除失败!");
-			}
-		} else {
-			map.put("notice", false);
-			map.put("message", cssName + "样式文件删除失败!");
-		}
-		return map;
-	}
-	
-	
-	@RequestMapping(value = "/saveJs", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> saveJs(String jsContent, String jsName, HttpServletRequest request) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		try {
-			Util.createNewFile(jsContent,BaseConfig.JS_ROOT + File.separator + jsName);
-			map.put("notice", true);
-			map.put("message", jsName + "脚本文件保存成功!");
-		} catch (IOException e) {
-			map.put("notice", false);
-			map.put("message", jsName + "脚本文件保存失败!");
-		}
-		return map;
-	}	
-	
-	
-	@RequestMapping(value = "/deleteJs", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> deleteJs(String jsName, HttpServletRequest request) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		File file = new File(BaseConfig.JS_ROOT + File.separator + jsName);
-		if (file.isFile()) {
-			if (file.getAbsoluteFile().delete()) {
-				map.put("notice", true);
-				map.put("message", jsName + "脚本文件删除成功!");
-			} else {
-				map.put("notice", false);
-				map.put("message", jsName + "脚本文件删除失败!");
-			}
-		} else {
-			map.put("notice", false);
-			map.put("message", jsName + "脚本文件删除失败!");
-		}
-		return map;
-	}
+	private static Logger logger = Logger.getLogger(FileController.class);
 	
 	@RequestMapping(value = "/loadFileContent", method = RequestMethod.POST)
 	@ResponseBody
@@ -296,28 +163,5 @@ public class FileController {
 
 	}
 
-	@RequestMapping("/loadJsList")
-	@ResponseBody
-	public Map<String, Object> loadjslist(HttpServletRequest request) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		File js_file = new File(BaseConfig.JS_ROOT);
-		if (js_file.isDirectory()) {
-			String[] files = js_file.list();
-			map.put("list", files);
-		}
-		return map;
-	}
-
-	@RequestMapping("/loadCssList")
-	@ResponseBody
-	public Map<String, Object> loadCssList(HttpServletRequest request) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		File js_file = new File(BaseConfig.CSS_ROOT);
-		if (js_file.isDirectory()) {
-			String[] files = js_file.list();
-			map.put("list", files);
-		}
-		return map;
-	}
 
 }

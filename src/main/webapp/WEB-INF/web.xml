@@ -24,6 +24,15 @@
 		<filter-name>Set Character Encoding</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+		<filter>
+		<filter-name>XssSqlFilter</filter-name>
+		<filter-class>com.esd.bs.filter.XssFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>XssSqlFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>

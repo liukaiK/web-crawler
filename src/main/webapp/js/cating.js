@@ -1,7 +1,7 @@
 function catingAll() {
 	var url = $("#domain").textbox('getValue');
 	$.ajax({
-		url : root + '/coreAll/catingAll',
+		url : root + '/catingAll',
 		type : 'POST',
 		sync : true,
 		data : {
@@ -9,11 +9,13 @@ function catingAll() {
 		},
 		success : function(data) {
 			if (data.notice == true) {
-				$.messager.alert('提示', '整站采集开始!', 'info');
+				$.messager.alert('提示', data.message, 'info');
+			} else {
+				$.messager.alert('发生错误', data.message, 'error');
 			}
 		},
 		error : function() {
-			$.messager.alert('发生错误', '整站采集失败', 'error');
+			$.messager.alert('发生错误', '连接服务器失败!', 'error');
 		}
 	});
 }
@@ -62,7 +64,7 @@ function getRuleHtml(n) {
 function catAllStatic() {
 	var timestamp = new Date().getTime();
 	$.ajax({
-		url : root + '/coreAll/getdbCount?' + timestamp,
+		url : root + '/getdbCount?' + timestamp,
 		type : 'get',
 		sync : false,
 		success : function(data) {
@@ -81,7 +83,7 @@ function catAllStatic() {
 
 function cancelCating() {
 	$.ajax({
-		url : root + '/coreAll/cancelCating',
+		url : root + '/cancelCating',
 		type : 'POST',
 		sync : true,
 		success : function(data) {
@@ -106,8 +108,8 @@ function cating() {
 			'url' : url
 		},
 		success : function(data) {
-			if (data.message == true) {
-				$.messager.alert('提示', '批量采集完成', 'info');
+			if (data.notice == true) {
+				$.messager.alert('提示', data.message, 'info');
 			}
 		},
 		error : function() {
@@ -163,15 +165,15 @@ function view() {
 			disLoad();
 			if (data.notice == true) {
 				var timestamp = new Date().getTime();
-				$.messager.alert('提示', '预览成功', 'info');
+				$.messager.alert('提示', data.message, 'info');
 				window.open("/web/test/view.html".split("?")[0] + "?" + timestamp);        
 			} else {
-				$.messager.alert('发生错误', '预览失败！', 'error');
+				$.messager.alert('发生错误', data.message, 'error');
 			}
 		},
 		error : function() {
 			disLoad();
-			$.messager.alert('发生错误', '预览失败！', 'error');
+			$.messager.alert('发生错误', '不能连接至服务器!', 'error');
 		}
 	});
 

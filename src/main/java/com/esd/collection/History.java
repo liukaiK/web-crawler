@@ -8,7 +8,7 @@ public class History {
 	private String url;
 	private String title;
 	private String md5;
-	private String state;
+	private int state;
 
 	public String getUrl() {
 		return url;
@@ -30,16 +30,16 @@ public class History {
 		return md5;
 	}
 
-	public void setMd5(String md5) {
-		this.md5 = md5;
-	}
-
-	public String getState() {
+	public int getState() {
 		return state;
 	}
 
-	public void setState(String state) {
+	public void setState(int state) {
 		this.state = state;
+	}
+
+	public void setMd5(String md5) {
+		this.md5 = md5;
 	}
 
 	public String getId() {

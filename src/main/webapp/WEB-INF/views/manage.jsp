@@ -39,7 +39,7 @@
 		<a href="javascript:setTime();" class="easyui-linkbutton" text="开启"></a>
 		<a href="javascript:cancelTime();" class="easyui-linkbutton" text="关闭"></a>
 		<a href="javascript:window.location.href = '${contextPath}/logout';" class="easyui-linkbutton" text="退出" style="float: right;"></a>
-		<div id="progressbar" class="easyui-progressbar" style="height:10px;"></div>
+<%--		<div id="progressbar" class="easyui-progressbar" style="height:10px;"></div>--%>
 	</div>
 	<div id="pgFileList" region="east" title="规则列表" split="true" style="width:180px;padding: 10px;"></div>
 	<div region="west" title="主编辑区" split="true" style="width:300px;">

@@ -9,29 +9,33 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.esd.common.MongoDBUtil;
-import com.esd.core.CollectionPage;
+import com.esd.core.CollectionAll;
 
 @Controller
-@RequestMapping("/admin/coreAll")
-public class PageAllConfigController {
+@RequestMapping("/admin")
+public class CollectAllController {
 
-	private static Logger log = Logger.getLogger(PageAllConfigController.class);
+	private static Logger logger = Logger.getLogger(CollectAllController.class);
 
 	@Resource
-	private MongoDBUtil mongoDBUtil;
-	@Resource
-	private CollectionPage collectionPage;
+	private CollectionAll CollectionAll;
 
 	@RequestMapping("/catingAll")
 	@ResponseBody
-	public Map<String, Object> catingAll(String url, HttpServletRequest request) {
+	public Map<String, Object> catingAll(@RequestParam(required = true) String url) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		collectionPage.init(url);
-		collectionPage.start();
-		map.put("notice", true);
+		if (url == null || url.trim().isEmpty()) {
+			map.put("notice", false);
+			map.put("message", "链接不能为空!");
+		} else {
+			CollectionAll.init(url);
+			CollectionAll.start();
+			map.put("notice", true);
+			map.put("message", "整站采集开始!");
+		}
 		return map;
 	}
 
@@ -39,9 +43,10 @@ public class PageAllConfigController {
 	@ResponseBody
 	public Map<String, Object> cancelCating(HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		CollectionAll.setCollectionFlag(false);
 		map.put("notice", true);
-		collectionPage.setCollectStatic(false);
-		log.info("Collection cancel");
+		map.put("message", "取消采集成功!");
+		logger.debug("Collection cancel");
 		return map;
 	}
 
@@ -49,17 +54,9 @@ public class PageAllConfigController {
 	@ResponseBody
 	public Map<String, Object> getDownload(HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		Long downCount = mongoDBUtil.getDownloadsCount();
-		Long urlsCount = mongoDBUtil.getUrlsCount();
-//		Long sum = downCount + urlsCount;
-		if (urlsCount == 0) {
-			map.put("notice", true);
-			map.put("message", 100);
-		} else {
-			map.put("notice", true);
-			Double a1 = Double.valueOf(urlsCount) / Double.valueOf((downCount + urlsCount)) * 100;
-			map.put("message", a1.intValue());
-		}
+		int total = CollectionAll.getTotal();
+		map.put("notice", true);
+		map.put("message", total);
 		return map;
 	}
 }

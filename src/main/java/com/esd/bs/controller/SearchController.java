@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Controller;
@@ -19,14 +20,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.esd.collection.History;
-import com.esd.dao.MongoDBDao;
 import com.esd.entity.SearchResult;
 
 @Controller
 public class SearchController {
 	
 	@Resource
-	private MongoDBDao mongoDBDao;
+	private MongoTemplate mongoTemplate;
 	
 	/**
 	 * 搜索页
@@ -46,9 +46,9 @@ public class SearchController {
 //		dbo.put("title", pattern);
 //		dbo.put("state", "1");
 		dbo.addCriteria(Criteria.where("title").is(pattern));
-		dbo.addCriteria(Criteria.where("state").is("1"));
-		long total = mongoDBDao.count(dbo, History.class);
-		List<History> list = mongoDBDao.findPage(dbo, History.class, currentPage);
+		dbo.addCriteria(Criteria.where("state").is(1));
+		long total = mongoTemplate.count(dbo, History.class);
+		List<History> list = findPage(dbo, History.class, currentPage);
 		SearchResult searchResult = new SearchResult();
 		searchResult.setHistory(list);
 		searchResult.setCurrentPage(currentPage);
@@ -59,5 +59,9 @@ public class SearchController {
 		return new ModelAndView("result", map);
 		
 	}
-
+	
+	public <T> List<T> findPage(Query query, Class<T> entityClass, int currentPage) {
+		query.skip((currentPage - 1) * 20).limit(20);
+		return mongoTemplate.find(query, entityClass);
+	}
 }

@@ -2,7 +2,7 @@ function loadPgFile(obj) {
 	load();
 	var pgFileName = $(obj).text();
 	$.ajax({
-		url : root + '/core/loadPgFile',
+		url : root + '/loadPgFile',
 		type : 'POST',
 		sync : false,
 		data : {
@@ -188,7 +188,7 @@ function savePgFile() {
 	var rules = getRules();
 	var template = $("#templateName").textbox('getValue');	
 	$.ajax({
-		url : root + '/core/savePgFile',
+		url : root + '/savePgFile',
 		type : 'POST',
 		data : {
 			"sleep" : sleep,

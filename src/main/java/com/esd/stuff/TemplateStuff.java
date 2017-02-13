@@ -1,103 +1,30 @@
 package com.esd.stuff;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Iterator;
-import java.util.List;
 
-import org.apache.log4j.Logger;
-import org.jsoup.Jsoup;
+import javax.annotation.Resource;
+
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Component;
 
-import com.esd.common.CatDao;
 import com.esd.config.BaseConfig;
 import com.esd.config.NodeConfig;
 import com.esd.config.PageConfig;
+import com.esd.filter.Filter;
 import com.esd.util.Md5;
+import com.esd.util.Util;
 
+@Component
 public class TemplateStuff {
-	private static Logger log = Logger.getLogger(TemplateStuff.class);
+//	private static Logger log = Logger.getLogger(TemplateStuff.class);
 
 	private String include = "include";
 
-	public TemplateStuff() {
-		// TODO Auto-generated constructor stub
-	}
-
-	private Document templateLoad(PageConfig pageConfig) {
-
-		String templateName = pageConfig.getTemplate();
-		InputStreamReader read = null;
-		BufferedReader br = null;
-		File file = new File(BaseConfig.TEMPLATE_ROOT + File.separator + templateName);
-		try {
-			read = new InputStreamReader(new FileInputStream(file), "utf-8");
-			br = new BufferedReader(read);
-			String s = null;
-			StringBuffer sb = new StringBuffer();
-			while ((s = br.readLine()) != null) {
-				sb.append(s);
-			}
-			br.close();
-			read.close();
-			Document doc = Jsoup.parse(sb.toString());
-			return doc;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (read != null) {
-					read.close();
-				}
-				if (br != null) {
-					br.close();
-				}
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-
-		}
-		return null;
-
-	}
-
-	private Document templateLoad(String path) {
-		InputStreamReader read = null;
-		BufferedReader br = null;
-		try {
-			File file = new File(path);
-			read = new InputStreamReader(new FileInputStream(file), "utf-8");
-			br = new BufferedReader(read);
-			String s = null;
-			StringBuffer sb = new StringBuffer();
-			while ((s = br.readLine()) != null) {
-				sb.append(s);
-			}
-			Document doc = Jsoup.parse(sb.toString());
-			return doc;
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		} finally {
-			try {
-				if (read != null) {
-					read.close();
-				}
-				if (br != null) {
-					br.close();
-				}
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-
-		}
-		return null;
-	}
+	@Resource
+	private Filter filter;
 
 	/**
 	 * 把所有链接处理成md5
@@ -115,7 +42,7 @@ public class TemplateStuff {
 				// link.attr("target", "_blank");
 				continue;
 			}
-			String path = CatDao.interceptDir(href);
+			String path = Util.interceptDir(href);
 			link.attr("href", path);
 		}
 		pageMd5(doc);
@@ -131,7 +58,7 @@ public class TemplateStuff {
 		Elements elements = element.select("option[value]");
 		for (Element link : elements) {
 			String href = link.attr("value").trim();
-			String path = CatDao.interceptDir(href);
+			String path = Util.interceptDir(href);
 			link.attr("value", path);
 		}
 	}
@@ -146,15 +73,14 @@ public class TemplateStuff {
 			String con = link.attr("content");
 			String beg = con.substring(0, con.indexOf("=") + 1);
 			String end = con.substring(con.indexOf("=") + 1);
-			Md5 md5 = new Md5();
-			String m = md5.getMd5(new StringBuffer().append(end));
+			String m = Md5.getMd5(new StringBuffer().append(end));
 			link.attr("content", beg + m + ".html");
 		}
 
 	}
 
-	private void headFooter(Document doc, PageConfig pageConfig) {
-		String templatePath =BaseConfig.TEMPLATE_ROOT + File.separator + pageConfig.getTemplate();
+	private void headFooter(Document doc, PageConfig pageConfig) throws IOException {
+		String templatePath = BaseConfig.TEMPLATE_ROOT + File.separator + pageConfig.getTemplate();
 		int sep = templatePath.lastIndexOf(File.separator);
 		String sub = templatePath.substring(0, sep);
 		Elements elements = doc.getElementsByTag(include);
@@ -164,11 +90,7 @@ public class TemplateStuff {
 		for (Element element : elements) {
 			String src = element.attr("src");
 			String path = sub + File.separator + src;
-			Document srcDoc = templateLoad(path);
-			if (srcDoc == null) {
-				log.error("没有找到要包括的模版文件！");
-				return;
-			}
+			Document srcDoc = Util.downLoadTemple(path);
 			element.html(srcDoc.html());
 			element.unwrap();
 		}
@@ -184,42 +106,37 @@ public class TemplateStuff {
 //	}
 
 	public Document templateStuff(PageConfig pageConfig) throws IOException {
-		Document doc = templateLoad(pageConfig);
-		List<NodeConfig> list = pageConfig.getList();
-		SZFTFilter filter = new SZFTFilter();
-		for (Iterator<NodeConfig> iterator = list.iterator(); iterator.hasNext();) {
-			NodeConfig it = (NodeConfig) iterator.next();
-			if (it.getSrc() == null) {
-				// log.error(pageConfig.getUrl() + " > get:" + it.getAnchorId()
-				// + "----------------error");
+		Document templateContent = Util.downLoadTemple(pageConfig);
+		for (NodeConfig nodeConfig: pageConfig.getList()) {
+			if (nodeConfig.getSrc() == null) {
 				continue;
 			}
-			String anchorId = it.getAnchorId();
-			if (anchorId != null || !"".equals(anchorId)) {
+			String anchorId = nodeConfig.getAnchorId();
+			if (anchorId != null) {
 				// 锚点为Id
 				if (anchorId.startsWith("#")) {
 					// log.debug("锚点: " + anchorId + " 为id");
-					Element element_id = doc.getElementById(it.getAnchorId().substring(1));
+					Element element_id = templateContent.getElementById(nodeConfig.getAnchorId().substring(1));
 					if (element_id != null) {
-						filter.filter(it.getSrc());
-						element_id.append(it.getSrc().outerHtml());
+						filter.filter(nodeConfig.getSrc());
+						element_id.append(nodeConfig.getSrc().outerHtml());
 					}
 				} else if (anchorId.startsWith(".")) {// 锚点为class
-					Elements elements_class = doc.getElementsByClass(it.getAnchorId().substring(1));
+					Elements elements_class = templateContent.getElementsByClass(nodeConfig.getAnchorId().substring(1));
 					if (elements_class.size() > 0) {
 						// log.debug("锚点: " + anchorId + " 为class");
 						for (Element ele_class : elements_class) {
-							filter.filter(it.getSrc());
-							ele_class.append(it.getSrc().outerHtml());
+							filter.filter(nodeConfig.getSrc());
+							ele_class.append(nodeConfig.getSrc().outerHtml());
 						}
 					}
 				} else if (!anchorId.startsWith(".") && !anchorId.startsWith("#")) {// 锚点为标签
-					Elements element_tag = doc.getElementsByTag(it.getAnchorId());
+					Elements element_tag = templateContent.getElementsByTag(nodeConfig.getAnchorId());
 					if (element_tag.size() > 0) {
 						// log.debug("锚点: " + anchorId + " 为tag");
 						for (Element ele_tag : element_tag) {
-							filter.filter(it.getSrc());
-							ele_tag.append(it.getSrc().outerHtml());
+							filter.filter(nodeConfig.getSrc());
+							ele_tag.append(nodeConfig.getSrc().outerHtml());
 						}
 					}
 				} else {
@@ -228,12 +145,12 @@ public class TemplateStuff {
 				}
 			}
 		}
-		headFooter(doc, pageConfig);
-		hrefToMd5(doc);
+		headFooter(templateContent, pageConfig);
+		hrefToMd5(templateContent);
 //		iframeSrc(doc, pageConfig.getUrl());
 		String original_url = pageConfig.getUrl();
-		doc.select("#esd_original").attr("href", original_url);
-		doc.select("#error").attr("href", original_url);
-		return doc;
+		templateContent.select("#esd_original").attr("href", original_url);
+		templateContent.select("#error").attr("href", original_url);
+		return templateContent;
 	}
 }

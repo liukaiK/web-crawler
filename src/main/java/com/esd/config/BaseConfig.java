@@ -13,6 +13,8 @@ public class BaseConfig extends HttpServlet {
 
 	public static String[] filterSuffix = { ".jpg", ".png", ".gif", ".exe", ".jpeg", ".doc", ".docx", ".xlsx", ".xls", ".ppt", ".rar", ".zip", ".pdf", "wbk", "xml" };
 
+	public static String[] filerAttr = { "alt", "title", "src", "href", "type", "value", "rowspan", "colspan", "http-equiv", "content", "flashvars" };
+	
 	public static String ROOT;
 
 	public static String IMAGE_ROOT;

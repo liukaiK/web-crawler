@@ -11,10 +11,12 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.esd.config.BaseConfig;
+
 
 /**
  * 用户登陆过滤器
@@ -23,22 +25,18 @@ import com.esd.config.BaseConfig;
  * 
  */
 public class LoginInterceptor implements HandlerInterceptor {
-	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object arg2, Exception arg3) throws Exception {
 
-	}
-
-	public void postHandle(HttpServletRequest request, HttpServletResponse arg1, Object arg2, ModelAndView arg3) throws Exception {
-	}
+	private Logger logger = Logger.getLogger(LoginInterceptor.class);
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) {
 		if (request.getRequestURI().indexOf("/admin") != -1) {
 			Object obj = request.getSession().getAttribute(BaseConfig.USER);
 			if (obj == null) {
 				try {
-	                response.setContentType("text/html");  
-	                response.setCharacterEncoding("utf-8");  
-	                PrintWriter out = response.getWriter();    
-	                StringBuilder builder = new StringBuilder();    
+					response.setContentType("text/html");  
+					response.setCharacterEncoding("utf-8");  
+					PrintWriter out = response.getWriter();    
+					StringBuilder builder = new StringBuilder();    
 	                builder.append("<script type=\"text/javascript\" charset=\"UTF-8\">");    
 	                builder.append("alert(\"请重新登陆！\");");    
 	                builder.append("window.location.href=\"/iac/login\"");    
@@ -47,10 +45,19 @@ public class LoginInterceptor implements HandlerInterceptor {
 	                out.close();   
 					return false;
 				} catch (IOException e) {
-					e.printStackTrace();
+					logger.error(e.getMessage());
+					return false;
 				}
 			}
 		}
 		return true;
+	}
+	
+	
+	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object arg2, Exception arg3) throws Exception {
+
+	}
+
+	public void postHandle(HttpServletRequest request, HttpServletResponse arg1, Object arg2, ModelAndView arg3) throws Exception {
 	}
 }
