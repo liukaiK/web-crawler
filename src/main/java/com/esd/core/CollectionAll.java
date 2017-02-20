@@ -103,10 +103,10 @@ public class CollectionAll extends CollectionCore {
 				mongoDBUtil.historyInsert(url, title, md5, 1); // 插入history表中
 				logger.debug(url + "===md5:[" + md5 + "]===template[" + pageConfig.getTemplate() + "]===rule[" + pageConfig.getDb() + ":" + pageConfig.getRule() + "]");
 			} catch (IOException e) {
-				logger.error("下载页面源代码: " + url + " 失败" + e.getMessage());
+				logger.error("===[下载页面源代码: " + url + " 失败]===" + e.getMessage());
 				return true;
 			} catch (InterruptedException e) {
-				logger.error("下载页面源代码: " + url + " 失败" + e.getMessage());
+				logger.error("===[下载页面源代码: " + url + " 失败]===" + e.getMessage());
 				return true;
 			}
 		} else {
@@ -115,7 +115,7 @@ public class CollectionAll extends CollectionCore {
 				mongoDBUtil.historyInsert(url, null, null, 0); // 插入history表中
 				logger.debug(url + "===md5:[" + md5 + "]");
 			} catch (IOException e) {
-				logger.error("处理链接: " + url + " 失败" + e.getMessage());
+				logger.error("===[处理链接: " + url + " 失败]===" + e.getMessage());
 				return true;
 			}
 		}
