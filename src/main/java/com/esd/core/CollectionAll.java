@@ -14,6 +14,7 @@ import com.esd.collection.Downloads;
 import com.esd.collection.Urls;
 import com.esd.common.CatDao;
 import com.esd.common.MongoDBUtil;
+import com.esd.config.BaseConfig;
 import com.esd.config.PageConfig;
 import com.esd.download.DownLoadHtml;
 import com.esd.util.Util;
@@ -58,9 +59,9 @@ public class CollectionAll extends CollectionCore {
 		collectionStatic = true;
 		mongoDBUtil.dropTable();
 		mongoDBUtil.downloadsInsert(domain);// 插入主页
-//		for (int i = 0; i < BaseConfig.str.length; i++) {
-//			mongoDBUtil.downloadsInsert(BaseConfig.str[i]);
-//		}
+		for (int i = 0; i < BaseConfig.str.length; i++) {
+			mongoDBUtil.downloadsInsert(BaseConfig.str[i]);
+		}
 		catDao.collectPageConfig();
 	}
 

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.esd.config.BaseConfig;
+import com.esd.config.Configure;
 import com.esd.config.NodeConfig;
 import com.esd.config.PageConfig;
 import com.esd.download.DownLoadHtml;
@@ -92,7 +92,7 @@ public class TestConfigController {
 				}
 				pageConfig.setTemplate(templateName);
 				Document templateDoc = templateStuff.templateStuff(pageConfig);
-				Util.createNewFile(templateDoc.html(), BaseConfig.TEST_ROOT + File.separator + "view.html");
+				Util.createNewFile(templateDoc.html(), Configure.TEST_ROOT + File.separator + "view.html");
 				map.put("notice", true);
 				map.put("message", "预览成功!");
 			} catch (FailingHttpStatusCodeException e) {

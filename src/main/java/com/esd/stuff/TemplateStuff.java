@@ -10,7 +10,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 
-import com.esd.config.BaseConfig;
+import com.esd.config.Configure;
 import com.esd.config.NodeConfig;
 import com.esd.config.PageConfig;
 import com.esd.filter.Filter;
@@ -80,7 +80,7 @@ public class TemplateStuff {
 	}
 
 	private void headFooter(Document doc, PageConfig pageConfig) throws IOException {
-		String templatePath = BaseConfig.TEMPLATE_ROOT + File.separator + pageConfig.getTemplate();
+		String templatePath = Configure.TEMPLATE_ROOT + File.separator + pageConfig.getTemplate();
 		int sep = templatePath.lastIndexOf(File.separator);
 		String sub = templatePath.substring(0, sep);
 		Elements elements = doc.getElementsByTag(include);

@@ -1,4 +1,4 @@
-package com.esd.controller;
+package com.esd.controller.collect;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.esd.core.CollectionAll;
+import com.esd.core.CollectionParmary;
 
 @Controller
 @RequestMapping("/admin")
@@ -22,6 +23,9 @@ public class CollectAllController {
 
 	@Resource
 	private CollectionAll CollectionAll;
+	
+	@Resource
+	private CollectionParmary collectionParmary;
 
 	@RequestMapping("/catingAll")
 	@ResponseBody
@@ -44,6 +48,7 @@ public class CollectAllController {
 	public Map<String, Object> cancelCating(HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		CollectionAll.setCollectionFlag(false);
+		collectionParmary.setCollectStatic(false);
 		map.put("notice", true);
 		map.put("message", "取消采集成功!");
 		logger.debug("Collection cancel");

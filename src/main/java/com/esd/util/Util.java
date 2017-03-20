@@ -16,6 +16,7 @@ import org.jsoup.nodes.Document;
 import com.esd.common.AutoDiscern;
 import com.esd.common.InputStreamUtils;
 import com.esd.config.BaseConfig;
+import com.esd.config.Configure;
 import com.esd.config.PageConfig;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 
@@ -43,18 +44,18 @@ public class Util {
 	}
 	
 	public static void doWithOutUrl(String url) throws IOException {
-		Document doc = Util.downLoadTemple(BaseConfig.TEMPLATE_ROOT + File.separator + "error.html");
+		Document doc = Util.downLoadTemple(Configure.TEMPLATE_ROOT + File.separator + "error.html");
 		doc.select("#error").attr("href", url);
 		String mName = Util.interceptDir(url);
-		String path = BaseConfig.HTML_ROOT + File.separator + mName;
+		String path = BaseConfig.htmlPath + File.separator + mName;
 		Util.createNewFile(doc.html(), path);
 	}
 	
 	public static String do404Page(String url) throws IOException {
-		Document doc = Util.downLoadTemple(BaseConfig.TEMPLATE_ROOT + File.separator + "404.html");
+		Document doc = Util.downLoadTemple(Configure.TEMPLATE_ROOT + File.separator + "404.html");
 		doc.select("#error").attr("href", url);
 		String mName = Util.interceptDir(url);
-		String path = BaseConfig.HTML_ROOT + File.separator + mName;
+		String path = BaseConfig.htmlPath + File.separator + mName;
 		Util.createNewFile(doc.html(), path);
 		return mName;
 	}
@@ -107,7 +108,7 @@ public class Util {
 	
 	
 	public static Document downLoadTemple(PageConfig pageConfig) throws IOException {
-		return downLoadTemple(BaseConfig.TEMPLATE_ROOT + File.separator + pageConfig.getTemplate());
+		return downLoadTemple(Configure.TEMPLATE_ROOT + File.separator + pageConfig.getTemplate());
 	}
 
 	public static void createNewFile(String content, String filePath) throws IOException {

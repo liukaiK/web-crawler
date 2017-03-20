@@ -33,17 +33,18 @@ public class CollectionParmary extends CollectionCore {
 	private boolean collectStatic = true;
 	private boolean ctrl = true;
 	
-	private Thread thread = new A();
+	private Thread thread = new Collect();
 	
 	public void start() {
-		thread = new A();
+		thread = new Collect();
 		thread.start();
 	}
 
-	private class A extends Thread {
+	private class Collect extends Thread {
 
 		@Override
 		public void run() {
+			init();
 			while (collectStatic && ctrl) {
 				ctrl = collect();
 			}
@@ -59,6 +60,11 @@ public class CollectionParmary extends CollectionCore {
 		mongoDBUtil.dropTable();
 		mongoDBUtil.downloadsInsert(url);// 插入主页
 		catDao.collectPageConfig();
+	}
+	
+	public void init(){
+		Downloads bson = mongoDBUtil.downloadsFindAndDeleteOne();
+		String url = bson.getUrl();
 		PageConfig pageConfig = catDao.findPageConfig(url);
 		Document htmlSource = null;
 		if (pageConfig != null) {
@@ -116,7 +122,7 @@ public class CollectionParmary extends CollectionCore {
 				String md5 = catDao.singlCat(pageConfig, htmlSource);
 				mongoDBUtil.urlsInsert(urlsCollection);// 插入Urls表中
 				mongoDBUtil.historyInsert(url, title, md5, 1); // 插入history表中
-				logger.debug(url + "===template[" + pageConfig.getTemplate() + "]===rule[" + pageConfig.getDb() + ":" + pageConfig.getRule() + "]");
+				logger.debug(url + "===md5["+ md5 +"]===template[" + pageConfig.getTemplate() + "]===rule[" + pageConfig.getDb() + ":" + pageConfig.getRule() + "]");
 			} catch (IOException e) {
 				logger.error("下载页面源代码: " + url + " 失败" + e.getMessage());
 				return true;

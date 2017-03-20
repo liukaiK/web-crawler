@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.esd.config.BaseConfig;
+import com.esd.config.Configure;
 import com.esd.util.Util;
 
 @Controller
@@ -23,7 +23,7 @@ public class TemplateController {
 	@ResponseBody
 	public Map<String, Object> loadtemplatelist(HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		File file = new File(BaseConfig.TEMPLATE_ROOT);
+		File file = new File(Configure.TEMPLATE_ROOT);
 		if (file.isDirectory()) {
 			String[] files = file.list();
 			map.put("list", files);
@@ -38,7 +38,7 @@ public class TemplateController {
 	public Map<String, Object> saveTemplate(String templateContent, String templateName, HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			Util.createNewFile(templateContent, BaseConfig.TEMPLATE_ROOT + File.separator + templateName);
+			Util.createNewFile(templateContent, Configure.TEMPLATE_ROOT + File.separator + templateName);
 			map.put("notice", true);
 			map.put("message", templateName + "模板文件保存成功!");
 		} catch (IOException e) {
@@ -52,7 +52,7 @@ public class TemplateController {
 	@ResponseBody
 	public Map<String, Object> deleteTemplate(String templateName, HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		File file = new File(BaseConfig.TEMPLATE_ROOT + File.separator + templateName);
+		File file = new File(Configure.TEMPLATE_ROOT + File.separator + templateName);
 		if (file.isFile()) {
 			if (file.getAbsoluteFile().delete()) {
 				map.put("notice", true);

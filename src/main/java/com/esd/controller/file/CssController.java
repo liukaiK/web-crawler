@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.esd.config.BaseConfig;
+import com.esd.config.Configure;
 import com.esd.util.Util;
 
 @Controller
@@ -25,7 +25,7 @@ public class CssController {
 	@ResponseBody
 	public Map<String, Object> loadCssList(HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		File js_file = new File(BaseConfig.CSS_ROOT);
+		File js_file = new File(Configure.CSS_ROOT);
 		if (js_file.isDirectory()) {
 			String[] files = js_file.list();
 			map.put("list", files);
@@ -39,7 +39,7 @@ public class CssController {
 	public Map<String, Object> saveCss(String cssContent, String cssName, HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			Util.createNewFile(cssContent,BaseConfig.CSS_ROOT + File.separator + cssName);
+			Util.createNewFile(cssContent,Configure.CSS_ROOT + File.separator + cssName);
 			map.put("notice", true);
 			map.put("message", cssName + "样式文件保存成功!");
 		} catch (IOException e) {
@@ -54,7 +54,7 @@ public class CssController {
 	@ResponseBody
 	public Map<String, Object> deleteCss(String cssName, HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		File file = new File(BaseConfig.CSS_ROOT + File.separator + cssName);
+		File file = new File(Configure.CSS_ROOT + File.separator + cssName);
 		if (file.isFile()) {
 			if (file.getAbsoluteFile().delete()) {
 				map.put("notice", true);

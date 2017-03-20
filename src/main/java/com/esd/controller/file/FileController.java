@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.esd.config.BaseConfig;
+import com.esd.config.Configure;
 
 @Controller
 @RequestMapping("/admin")
@@ -38,7 +38,7 @@ public class FileController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		StringBuffer sb = new StringBuffer();
 		try {
-			Reader reader = new InputStreamReader(new FileInputStream(new File(BaseConfig.ROOT + filePath + fileName)), "UTF-8");
+			Reader reader = new InputStreamReader(new FileInputStream(new File(Configure.ROOT + filePath + fileName)), "UTF-8");
 			int tempchar;
 			while ((tempchar = reader.read()) != -1) {
 				if (((char) tempchar) != '\r') {
@@ -68,7 +68,7 @@ public class FileController {
 		System.out.println("收到用户的文件上传请求");
 		// 如果用的是Tomcat服务器，则文件会上传到\\%TOMCAT_HOME%\\webapps\\YourWebProject\\upload\\文件夹中
 		// 这里实现文件上传操作用的是commons.io.FileUtils类,它会自动判断/upload是否存在,不存在会自动创建
-		String realPath = BaseConfig.IMAGE_ROOT;
+		String realPath = Configure.IMAGE_ROOT;
 		// 设置响应给前台内容的数据格式
 		response.setContentType("text/plain; charset=UTF-8");
 		// 设置响应给前台内容的PrintWriter对象
@@ -122,7 +122,7 @@ public class FileController {
 		// 不推荐返回[realPath + "\\" + originalFilename]的值
 		// 因为在Windows下<img src="file:///D:/aa.jpg">能被firefox显示,而<img
 		// src="D:/aa.jpg">firefox是不认的
-		out.print("0`" + BaseConfig.IMAGE_ROOT + originalFilename);
+		out.print("0`" + Configure.IMAGE_ROOT + originalFilename);
 		out.flush();
 		return null;
 	}
@@ -150,7 +150,7 @@ public class FileController {
 	@RequestMapping(value = "/uploadImage")
 	public void uploadImage(@RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request, ModelMap model) {
 		String fileName = file.getOriginalFilename();
-		File targetFile = new File(BaseConfig.IMAGE_ROOT, fileName);
+		File targetFile = new File(Configure.IMAGE_ROOT, fileName);
 		if (!targetFile.exists()) {
 			targetFile.mkdirs();
 		}

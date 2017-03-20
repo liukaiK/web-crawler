@@ -15,10 +15,10 @@ import java.util.regex.Pattern;
 import javax.annotation.Resource;
 
 import org.jsoup.nodes.Document;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.esd.config.BaseConfig;
+import com.esd.config.Configure;
 import com.esd.config.PageConfig;
 import com.esd.parser.Parser;
 import com.esd.stuff.TemplateStuff;
@@ -27,9 +27,6 @@ import com.esd.util.Util;
 @Component
 public class CatDao {
 	
-	@Value("${htmlPath}")
-	private String htmlPath;
-
 	private Map<String, PageConfig> pageConfigMap = new HashMap<String, PageConfig>();
 	private Map<String, PageConfig> wildcardMap = new HashMap<String, PageConfig>();
 
@@ -50,7 +47,7 @@ public class CatDao {
 		pageConfig = parser.ParserNode(htmlSource, pageConfig);// 解析分解页面
 		Document doc = templateStuff.templateStuff(pageConfig);
 		String mName = Util.interceptDir(pageConfig.getUrl());
-		String path = htmlPath + File.separator + mName;
+		String path = BaseConfig.htmlPath + File.separator + mName;
 		Util.createNewFile(doc.html(), path);
 		return mName;
 	}
@@ -62,7 +59,7 @@ public class CatDao {
 		pageConfigMap.clear();
 		wildcardMap.clear();
 		// 收集所有采集规则PageConfig
-		File file = new File(BaseConfig.PG_ROOT);
+		File file = new File(Configure.PG_ROOT);
 		List<PageConfig> list = new ArrayList<PageConfig>();
 		if (file.isDirectory()) {
 			File[] files = file.listFiles();

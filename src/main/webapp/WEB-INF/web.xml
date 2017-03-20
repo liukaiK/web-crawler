@@ -30,7 +30,7 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>XssSqlFilter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/iac/web/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
 	<listener>
@@ -61,7 +61,7 @@
 	</error-page>
 	<servlet>
 		<servlet-name>BaseConfig</servlet-name>
-		<servlet-class>com.esd.config.BaseConfig</servlet-class>
+		<servlet-class>com.esd.config.Configure</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 

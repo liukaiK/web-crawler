@@ -1,4 +1,4 @@
-package com.esd.controller;
+package com.esd.controller.login;
 
 import javax.servlet.http.HttpServletRequest;
 

@@ -5,13 +5,11 @@ import java.util.Date;
 
 import javax.annotation.Resource;
 
-import org.apache.log4j.Logger;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.esd.config.BaseConfig;
 import com.esd.core.CollectionAll;
-import com.esd.core.CollectionParmary;
 
 /**
  * 定时任务
@@ -25,11 +23,9 @@ public class MonitorTask {
 	@Resource
 	private CollectionAll collectionPage;
 	
-	@Resource
-	private CollectionParmary collectionParmary;
+//	@Resource
+//	private CollectionParmary collectionParmary;
 	
-	private Logger logger = Logger.getLogger(CollectionAll.class);
-
 	@Scheduled(cron = "* * * * * ? ")
 	public void CollectAll() {
 		if (new SimpleDateFormat("HH:mm:ss").format(new Date()).equals(BaseConfig.time)) {

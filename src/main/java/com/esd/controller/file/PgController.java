@@ -19,7 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.esd.config.BaseConfig;
+import com.esd.config.Configure;
 import com.esd.config.NodeConfig;
 import com.esd.config.PageConfig;
 
@@ -68,7 +68,7 @@ public class PgController {
 		 * 序列化该实体类
 		 */
 		ObjectOutputStream out = null;
-		File file = new File(BaseConfig.PG_ROOT + File.separator + pgName + ".pg");
+		File file = new File(Configure.PG_ROOT + File.separator + pgName + ".pg");
 		try {
 			out = new ObjectOutputStream(new FileOutputStream(file));
 			out.writeObject(pageConfig);
@@ -96,7 +96,7 @@ public class PgController {
 	@ResponseBody
 	public Map<String, Object> deletePgFile(String pgFileName, HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		File file = new File(BaseConfig.PG_ROOT + File.separator + pgFileName + ".pg");
+		File file = new File(Configure.PG_ROOT + File.separator + pgFileName + ".pg");
 		if (file.isFile()) {
 			if (file.getAbsoluteFile().delete()) {
 				map.put("notice", true);
@@ -117,7 +117,7 @@ public class PgController {
 	@ResponseBody
 	public Map<String, Object> loadPgFileList(HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		File file = new File(BaseConfig.PG_ROOT);
+		File file = new File(Configure.PG_ROOT);
 		String[] files = file.list();
 		map.put("list", files);
 		return map;
@@ -127,7 +127,7 @@ public class PgController {
 	@ResponseBody
 	public Map<String, Object> loadPgFile(String pgFileName, HttpServletRequest request) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		File file = new File(BaseConfig.PG_ROOT + File.separator + pgFileName);
+		File file = new File(Configure.PG_ROOT + File.separator + pgFileName);
 		try {
 			ObjectInputStream oin = new ObjectInputStream(new FileInputStream(file));
 			try {

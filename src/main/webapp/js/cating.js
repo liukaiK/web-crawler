@@ -101,7 +101,7 @@ function cancelCating() {
 function cating() {
 	var url = $("#domain").textbox('getValue');
 	$.ajax({
-		url : root + '/core/cating',
+		url : root + '/cating',
 		type : 'POST',
 		sync : true,
 		data : {
@@ -110,6 +110,8 @@ function cating() {
 		success : function(data) {
 			if (data.notice == true) {
 				$.messager.alert('提示', data.message, 'info');
+			} else {
+				$.messager.alert('发生错误', data.message, 'error');
 			}
 		},
 		error : function() {
@@ -121,7 +123,7 @@ function cating() {
 function catingStatic(){
 	var timestamp = new Date().getTime();
 	$.ajax({
-		url : root + '/core/getProgressCount?' + timestamp,
+		url : root + '/getProgressCount?' + timestamp,
 		type : 'get',
 		sync : false,
 		success : function(data) {

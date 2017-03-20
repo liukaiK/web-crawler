@@ -1,4 +1,4 @@
-package com.esd.entity;
+package com.esd.bs.entity;
 
 import java.util.ArrayList;
 import java.util.List;

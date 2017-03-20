@@ -19,7 +19,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.esd.common.CatDao;
-import com.esd.config.BaseConfig;
+import com.esd.config.Configure;
 import com.esd.config.PageConfig;
 import com.esd.util.Md5;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -82,7 +82,7 @@ public class Test {
 	@org.junit.Test
 	public void findPageConfigFile() {
 		String url = "http://www.jlsy.gov.cn/zw/zfzc/";
-		BaseConfig.PG_ROOT = "D:\\apache-tomcat-6.0.45\\webapps\\iac\\web" + File.separator + "db";
+		Configure.PG_ROOT = "D:\\apache-tomcat-6.0.45\\webapps\\iac\\web" + File.separator + "db";
 		dao.collectPageConfig();
 		PageConfig pageConfig = dao.findPageConfig(url);
 		System.out.println(pageConfig.getDb());
