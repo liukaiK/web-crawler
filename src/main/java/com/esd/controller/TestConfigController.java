@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.esd.common.DirTreeCat;
 import com.esd.config.BaseConfig;
 import com.esd.config.NodeConfig;
 import com.esd.config.PageConfig;
@@ -68,19 +67,6 @@ public class TestConfigController {
 				nc.setIndex(rule[5]);
 				nc.setAnchorId(rule[6]);
 				pageConfig.getList().add(nc);
-			}
-			if (pageConfig.getList().size() == 1) {
-				String des = pageConfig.getList().get(0).getDes();
-				if (des != null && des.equals("") == false) {
-					if (des.equals("@tree")) {
-						String catUrl = pageConfig.getUrl();
-						DirTreeCat dtc = new DirTreeCat();
-						dtc.download(catUrl);
-						log.debug("view finish");
-						map.put("message", true);
-						return map;
-					}
-				}
 			}
 			EsdDownLoadHtml down = new EsdDownLoadHtml();
 			Document htmlSource = down.downloadHtml(pageConfig);

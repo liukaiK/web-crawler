@@ -23,18 +23,19 @@ import com.esd.dao.MongoDBDao;
 import com.esd.entity.SearchResult;
 
 @Controller
+@RequestMapping("/web")
 public class SearchController {
-	
+
 	@Resource
 	private MongoDBDao mongoDBDao;
-	
+
 	/**
 	 * 搜索页
 	 * 
 	 * @param serCon
 	 * @return
-	 * @throws UnknownHostException 
-	 * @throws NumberFormatException 
+	 * @throws UnknownHostException
+	 * @throws NumberFormatException
 	 * @throws IOException
 	 */
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
@@ -43,8 +44,8 @@ public class SearchController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		Query dbo = new Query();
 		Pattern pattern = Pattern.compile("^.*" + serCon + ".*$", Pattern.CASE_INSENSITIVE);
-//		dbo.put("title", pattern);
-//		dbo.put("state", "1");
+		// dbo.put("title", pattern);
+		// dbo.put("state", "1");
 		dbo.addCriteria(Criteria.where("title").is(pattern));
 		dbo.addCriteria(Criteria.where("state").is("1"));
 		long total = mongoDBDao.count(dbo, History.class);
@@ -57,7 +58,7 @@ public class SearchController {
 		searchResult.setTotalPage(total % 20 == 0 ? (int) total / 20 : (int) (total / 20) + 1);
 		map.put("result", searchResult);
 		return new ModelAndView("result", map);
-		
+
 	}
 
 }

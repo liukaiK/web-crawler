@@ -1,4 +1,4 @@
-package com.esd.common;
+package com.esd.bs.common;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;

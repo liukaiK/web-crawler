@@ -131,7 +131,7 @@ tbody {
 	
  %>
 	<div class="input_btn">
-		<form action="${contextPath}/search" method="post" id="search" name="search" role="form" class="form-signin">
+		<form action="${contextPath}/web/search" method="post" id="search" name="search" role="form" class="form-signin">
 			<input type="text" id="serCon" name="serCon" value="${result.serCon}" class="form-control" value="${serCon}">
 			<button id="search-btn" type="button" class="btn btn-primary">搜索</button>
 			<br>

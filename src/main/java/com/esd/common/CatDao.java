@@ -32,36 +32,6 @@ public class CatDao {
 	private static List<PageConfig> treeDirList = new ArrayList<PageConfig>();
 
 	/**
-	 * 自动创建所有目录树
-	 */
-	public void createTree() {
-		for (PageConfig pageConfig : treeDirList) {
-			List<String> urls = pageConfig.getUrls();
-			for (String url : urls) {
-				DirTreeCat dtc = new DirTreeCat();
-				dtc.download(url);
-			}
-
-		}
-	}
-
-	/**
-	 * 根据网址自动创建目录树
-	 */
-	public void createTree(String url) {
-		for (PageConfig pageConfig : treeDirList) {
-			List<String> urls = pageConfig.getUrls();
-			for (String s : urls) {
-				if (s.equals(url)) {
-					DirTreeCat dtc = new DirTreeCat();
-					dtc.download(s);
-				}
-			}
-
-		}
-	}
-
-	/**
 	 * 单页采集与组合网页
 	 * 
 	 * @param pageConfig

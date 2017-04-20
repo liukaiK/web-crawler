@@ -10,7 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
-import com.esd.common.XssHttpServletRequestWrapper;
+import com.esd.bs.common.XssHttpServletRequestWrapper;
 
 public class XssFilter implements Filter {
 	FilterConfig filterConfig = null;
