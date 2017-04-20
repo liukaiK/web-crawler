@@ -146,7 +146,7 @@ public class FileController {
 	}
 	@RequestMapping(value = "/createSite", method = RequestMethod.POST)
 	public String createSite(int type,HttpSession session) throws IOException {
-		System.out.println("进来了");
+		
 		String siteId = session.getAttribute("siteId").toString();
 		if(type == 0){
 			MkFile.mkdir(BaseConfig.ROOT1+siteId);
@@ -206,7 +206,7 @@ public class FileController {
     @RequestMapping(value = "/uploadFiles", method = RequestMethod.POST)
     public ModelAndView  uploadFiles(HttpServletRequest request,HttpSession session) throws IllegalStateException, IOException{
     	String siteId = session.getAttribute("siteId").toString();
-    	long  startTime=System.currentTimeMillis();
+    	//long  startTime=System.currentTimeMillis();
     	//将当前上下文初始化给  CommonsMutipartResolver （多部分解析器）
         CommonsMultipartResolver multipartResolver=new CommonsMultipartResolver(
                 request.getSession().getServletContext());
@@ -246,8 +246,8 @@ public class FileController {
                 }   
             }  
         }
-        long  endTime=System.currentTimeMillis();
-        System.out.println("方法三的运行时间："+String.valueOf(endTime-startTime)+"ms");
+        //long  endTime=System.currentTimeMillis();
+        //System.out.println("方法三的运行时间："+String.valueOf(endTime-startTime)+"ms");
         return new ModelAndView("redirect:manage"); 
     }
 	/********************--------------------------------------------------------------***********************/

@@ -8,26 +8,42 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 
-import com.esd.collection.Site;
 import com.mongodb.DBObject;
 import com.mongodb.WriteResult;
+
 
 @Repository
 public class  MongoDBDao {
 
-	@Autowired
+	//@Autowired
 	@Qualifier("mongoTemplate")
-	protected MongoTemplate mongoTemplate;
+	protected MongoTemplate mongoTemplate; 
 	
-
+//	if(mongoTemplate == null){
+//		mongoTemplate = MongoDBLink.link();
+//	}
+	public MongoTemplate getM(){
+		if(mongoTemplate == null){
+			mongoTemplate = MongoDBLink.link();
+		} 
+		return mongoTemplate;
+	}
+//	public MongoTemplate getMongoTemplate() {
+//		return mongoTemplate;
+//	}
+//	public void setMongoTemplate(MongoTemplate mongoTemplate) {
+//		this.mongoTemplate = mongoTemplate;
+//	}
 	/**
 	 * cx-20160919
 	 * @param objectToSave
 	 * @param collectionName
 	 */
-	public void insert(Object objectToSave, String collectionName) {
+	public void insert(Object objectToSave, String collectionName) { 
+		getM();
 		this.mongoTemplate.insert(objectToSave, collectionName);
 	}
 
@@ -40,6 +56,7 @@ public class  MongoDBDao {
 	 * @return
 	 */
 	public <T> T findOne(Query query, Class<T> entityClass, String collectionName) {
+		getM();
 		return this.mongoTemplate.findOne(query, entityClass, collectionName);
 	}
 	
@@ -52,6 +69,7 @@ public class  MongoDBDao {
 	 * @return
 	 */
 	public WriteResult upsert(Query query, Update update, String collectionName) {
+		getM();
 		return mongoTemplate.upsert(query, update, collectionName);
 	}
 	
@@ -62,30 +80,39 @@ public class  MongoDBDao {
 	 * @return
 	 */
 	public WriteResult remove(Query query, String collectionName) {
+		getM();
 		return mongoTemplate.remove(query, collectionName);
 	}
 	
 	public <T> List<T> findAll(Class<T> entityClass, String collectionName) {
+		getM();
 		return this.mongoTemplate.findAll(entityClass, collectionName);
 	}
 	
 	public <T> List<T> find(Query query, Class<T> entityClass, String collectionName) {
+		getM();
+		//System.out.println("q:"+query+"\nclass:"+entityClass+"\ncollectionName:"+collectionName);	
 		return this.mongoTemplate.find(query, entityClass, collectionName);
+		
 	}
 	
 	public void dropCollection(String collectionName) {
+		getM();
 		this.mongoTemplate.dropCollection(collectionName);
 	}
 	
 	public <T> List<T> findAll(Class<T> entityClass) {
+		getM();
 		return this.mongoTemplate.findAll(entityClass);
 	}
 	
 	public <T> T findById(String id, Class<T> entityClass) {
+		getM();
 		return this.mongoTemplate.findById(id, entityClass);
 	}
 	
 	public <T> T findOne(Query query, Class<T> entityClass) {
+		getM();
 		return this.mongoTemplate.findOne(query, entityClass);
 	}
 	
@@ -96,32 +123,40 @@ public class  MongoDBDao {
 	 * @return
 	 */
 	public <T> T findOneByCollectionName(Query query , Class<T> entityClass,String collectionName) {
+		getM();
 		return this.mongoTemplate.findOne(query, entityClass,collectionName);
 	}
 	public <T> T findOneByCollectionName(Query query,DBObject obj, Class<T> entityClass,String collectionName) {
+		getM();
 		return this.mongoTemplate.findOne(query, entityClass, collectionName);	
 	}
 	public <T> void upsert(Query query,Update update,Class<T> entityClass,String  collectionName){
+		getM();
 		this.mongoTemplate.upsert(query, update, entityClass, collectionName);
 	}
 	/****************************************************************************************/
 	public <T> List<T> find(Query query, Class<T> entityClass){
+		getM();
 		return this.mongoTemplate.find(query, entityClass);
 	}
 	
 	public <T> Long count(Query query, Class<T> entityClass) {
+		getM();
 		return this.mongoTemplate.count(query, entityClass);
 	}
 	
 	public <T> T findAndRemove(Query query, Class<T> entityClass) {
+		getM();
 		return this.mongoTemplate.findAndRemove(query, entityClass);
 	}
 	
 	public void insert(Object obj) {
+		getM();
 		this.mongoTemplate.insert(obj);
 	}
 
 	public void insert(Collection<Object> batchToSave,String collectionName) {
+		getM();
 		this.mongoTemplate.insert(batchToSave, collectionName);
 	}
 	/**
@@ -136,18 +171,22 @@ public class  MongoDBDao {
 	 * 删除数据
 	 */
 	public <T> void delete(Query q,String fileName,String collectionName,Class<T> c){
+		getM();
 		this.mongoTemplate.findAndRemove(q, c, collectionName);
 	}
 	
 	public void remove(Object obj) {
+		getM();
 		this.mongoTemplate.remove(obj);
 	}
 	
 	public <T> void dropCollection(Class<T> entityClass) {
+		getM();
 		this.mongoTemplate.dropCollection(entityClass);
 	}
 	
 	public <T> List<T> findPage(Query query, Class<T> entityClass, int currentPage) {
+		getM();
 		query.skip((currentPage - 1) * 20).limit(20);
 		return this.mongoTemplate.find(query, entityClass);
 	}

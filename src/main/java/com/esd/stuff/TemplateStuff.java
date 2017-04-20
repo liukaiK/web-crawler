@@ -8,6 +8,8 @@ import org.apache.log4j.Logger;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
+import com.esd.common.MongoDBUtil;
 import com.esd.config.NodeConfig;
 import com.esd.config.PageConfig;
 import com.esd.util.Util;
@@ -59,7 +61,7 @@ public class TemplateStuff {
 		}
 	}
 
-	private void headFooter(Document doc, PageConfig pageConfig,String siteId) {
+	private void headFooter(Document doc, PageConfig pageConfig,String siteId,MongoDBUtil mongoDBUtil) {
 //		String templatePath =BaseConfig.TEMPLATE_ROOT + File.separator + pageConfig.getTemplate();
 //		int sep = templatePath.lastIndexOf(File.separator);
 //		String sub = templatePath.substring(0, sep);
@@ -73,7 +75,7 @@ public class TemplateStuff {
 			Document srcDoc;
 			try {
 				//2016-11-9 cx 从mongodb中取template
-				srcDoc = Util.loadTemplate(src,siteId,2);
+				srcDoc = Util.loadTemplate(src,siteId,2,mongoDBUtil);
 				if (srcDoc == null) {
 					logger.error("没有找到要包括的模版文件！");
 					return;
@@ -95,9 +97,9 @@ public class TemplateStuff {
 		}
 	}
 
-	public Document templateStuff(PageConfig pageConfig,String siteId) throws IOException {
+	public Document templateStuff(PageConfig pageConfig,String siteId,MongoDBUtil mongoDBUtil) throws IOException {
 		//Document doc = Util.loadTemplate(BaseConfig.TEMPLATE_ROOT + File.separator + pageConfig.getTemplate());
-		Document doc = Util.loadTemplate(pageConfig.getTemplate(),siteId,2);
+		Document doc = Util.loadTemplate(pageConfig.getTemplate(),siteId,2,mongoDBUtil);
 		List<NodeConfig> list = pageConfig.getList();
 		DefaultFilter filter = new DefaultFilter();
 		for (Iterator<NodeConfig> iterator = list.iterator(); iterator.hasNext();) {
@@ -141,7 +143,7 @@ public class TemplateStuff {
 				}
 			}
 		}
-		headFooter(doc, pageConfig,siteId);
+		headFooter(doc, pageConfig,siteId,mongoDBUtil);
 		hrefToMd5(doc);
 		iframeSrc(doc, pageConfig.getUrl());
 		String original_url = pageConfig.getUrl();

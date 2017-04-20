@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,18 +48,20 @@ public class FileDbController {
 	public String insertFiles(int fileType,HttpServletRequest request) throws Exception {
 		System.out.println("come in!");
 		String url = mdu.url(request);
+		
 		String collectionName = null;
 		String dir = null;
-		String siteName = "szft";
+		String siteName = "caacca";
 		int m = 2;
 		if(fileType == 6){
 			m = 6;
 			fileType = 1;
 		}
 		if(fileType == 5){
-			System.out.println("fileType:"+fileType);
-			String filedir = siteName + "/db/";
-			url = BaseConfig.ROOT1 + filedir;
+			
+			//String filedir = siteName + "/db/";
+			//url = BaseConfig.ROOT1 + filedir;
+			url = "G:/accac/web/db/";
 			File f = new File(url);
 			File[] fs = f.listFiles();
 			int mm = 1;
@@ -74,15 +77,15 @@ public class FileDbController {
 				  oin.close();
 				  
 				  DbPgFile dpf = new DbPgFile();
-//					dpf.setCreateDate(new Date());
-//					dpf.setFiledir(filedir);
-//					dpf.setFileName(fileName);
-//					dpf.setMd5File(pgFile.toString());
-//					dpf.setPageConfig(pgFile);
-//					dpf.setSiteName(siteName);
-//					dpf.setUpdateDate(new Date());
-//					dpf.setUserId("0001");
-//					dpf.setId(mm);
+					//dpf.setCreateDate(new Date());
+					dpf.setFiledir(uf);
+					dpf.setFileName(fileName);
+					dpf.setMd5File(pgFile.toString());
+					dpf.setPageConfig(pgFile);
+					dpf.setSiteName(siteName);
+					//dpf.setUpdateDate(new Date());
+					//dpf.setUserId("0001");
+					//dpf.setId(mm); 
 					mdu.insertPg(dpf);
 				  mm++;	  
 			  }
@@ -91,7 +94,20 @@ public class FileDbController {
 			
 			return "呵呵呵！！！";
 		}
+		if(fileType == 7){
+			dir = "etc/image";
+			url = "G:/accac/web/" + dir + "/";
+			mdu.insertFiles("_image",url);
+			return "呵呵呵";
+		}
+		if(fileType == 8){
+			dir = "etc/image";
+			url = "G:/accac/web/" + dir + "/";
+			mdu.insertFiles("_image",url);
+			return "呵呵呵";
+		}
 		for (int i = 1; i < m; i++) {
+			System.out.println("fileType:" + fileType);
 			if(fileType == 1){
 				dir = "template";
 				collectionName = siteName +"_template";
@@ -109,11 +125,11 @@ public class FileDbController {
 				collectionName = siteName +"_pg";
 			}
 			//collectionName = siteName + dir;
-			url = BaseConfig.ROOT1+siteName + "/" + dir + "/";
+			//url = BaseConfig.ROOT1+siteName + "/" + dir + "/";
+			url = "G:/accac/web/" + dir + "/";
 			mdu.insertFiles(collectionName,url);
 			fileType++;
-		}
-		
+		}	
 		return "哈哈哈";
 	}
 

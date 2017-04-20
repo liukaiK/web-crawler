@@ -12,11 +12,11 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	<context:property-placeholder location="classpath:application.properties" />
-	<context:component-scan base-package="com.esd" />
 	<task:annotation-driven/>  
 	<mvc:annotation-driven></mvc:annotation-driven>
+	<context:component-scan base-package="com.esd" />
 	<mvc:interceptors>
-		<bean class="com.esd.interceptor.LoginInterceptor" />
+		  <bean class="com.esd.interceptor.LoginInterceptor" />
 	</mvc:interceptors>
 	<mvc:default-servlet-handler />
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -25,4 +25,5 @@
 	</bean>
 	<bean id="springContextUtil" class="com.esd.util.SpringContextUtil"></bean>
 	<import resource="classpath:mongodb.xml"/>
+	
 </beans>

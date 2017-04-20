@@ -6,10 +6,15 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.esd.common.MongoDBUtil;
+import com.esd.dao.MongoDBDao;
+
 public class SpringContextUtil implements ApplicationContextAware{
-	private static ApplicationContext applicationContext = null;
+	//private static AbstractApplicationContext  applicationContext = null;
+	private static ApplicationContext  applicationContext = null;
 
     /* (non Javadoc)
      * @Title: setApplicationContext
@@ -18,16 +23,22 @@ public class SpringContextUtil implements ApplicationContextAware{
      * @throws BeansException
      * @see org.springframework.context.ApplicationContextAware#setApplicationContext(org.springframework.context.ApplicationContext)
      */
-    @SuppressWarnings("static-access")
+//    @SuppressWarnings("static-access")
+//	@Override
+//    public void setApplicationContext(ApplicationContext applicationContext)
+//            throws BeansException {
+//        this.applicationContext = applicationContext;
+//    }
+//	@Override
+//	  
+//    public static ApplicationContext getApplicationContext() {  
+//        return applicationContext;  
+//    }
 	@Override
-    public void setApplicationContext(ApplicationContext applicationContext)
-            throws BeansException {
-        this.applicationContext = applicationContext;
-    }
-    
-    public static ApplicationContext getApplicationContext() {  
-        return applicationContext;  
-    }  
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		// TODO Auto-generated method stub
+		
+	}
     public static void getxml(){
 //    	applicationContext = new ClassPathXmlApplicationContext(  
 //                "classpath:/applicationContext.xml");
@@ -35,14 +46,38 @@ public class SpringContextUtil implements ApplicationContextAware{
                 "classpath:/spring-servlet.xml");
     }
     @SuppressWarnings("unchecked")
+	public static <T> T getBean1(String beanName){
+//    	applicationContext = new ClassPathXmlApplicationContext(  
+//                "classpath:/applicationContext.xml");
+    	applicationContext = new ClassPathXmlApplicationContext(  
+                "classpath:/spring-servlet.xml");
+        return (T) applicationContext;
+    }
+    public static void closeA(){
+    	((ClassPathXmlApplicationContext)applicationContext).close();
+    }
+    @SuppressWarnings("unchecked")
 	public static <T> T getBean(String beanName){
 //    	applicationContext = new ClassPathXmlApplicationContext(  
 //                "classpath:/applicationContext.xml");
     	applicationContext = new ClassPathXmlApplicationContext(  
                 "classpath:/spring-servlet.xml");
-        return (T) applicationContext.getBean(beanName);
+    	MongoDBUtil mongoDBUtil = (MongoDBUtil)applicationContext.getBean(beanName);
+    	 	
+    	((ClassPathXmlApplicationContext)applicationContext).close();
+        return (T) mongoDBUtil;
     }
-
+    @SuppressWarnings("unchecked")
+	public static <T> T getBeanDao(String beanName){
+//    	applicationContext = new ClassPathXmlApplicationContext(  
+//                "classpath:/applicationContext.xml");
+    	applicationContext = new ClassPathXmlApplicationContext(  
+                "classpath:/spring-servlet.xml");
+    	MongoDBDao mongoDBDao = (MongoDBDao)applicationContext.getBean(beanName);
+    	 	
+    	((ClassPathXmlApplicationContext)applicationContext).close();
+        return (T) mongoDBDao;
+    }
     public static String getMessage(String key){
         return applicationContext.getMessage(key, null, Locale.getDefault());
     }
@@ -103,6 +138,8 @@ public class SpringContextUtil implements ApplicationContextAware{
           */  
     public static String[] getAliases(String name) throws NoSuchBeanDefinitionException {  
          return applicationContext.getAliases(name);  
-    }  
+    }
+		
+		
 }  
 

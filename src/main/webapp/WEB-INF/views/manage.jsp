@@ -38,7 +38,8 @@
 		<input id="time" class="Wdate" onfocus="WdatePicker({dateFmt:'HH:mm:ss'})" readonly="readonly" value="<%=BaseConfig.time%>" />
 		<a href="javascript:setTime();" class="easyui-linkbutton" text="开启"></a>
 		<a href="javascript:cancelTime();" class="easyui-linkbutton" text="关闭"></a>
-		<a href="javascript:createSite();" class="easyui-linkbutton" text="测试"></a>
+		<a href="javascript:createSite();" class="easyui-linkbutton" text="发布站点"></a>
+		<a href="javascript:insertFiles();" class="easyui-linkbutton" text="测试数据"></a>
 		<form name="Form2" action="${contextPath}/admin/uploadFiles" method="post"  enctype="multipart/form-data">
 			<input id="uploadFiles" type = "file"  name="uploadFiles"  style="width:100px" />
 			<input type="submit" value="上传"/>
@@ -244,5 +245,19 @@
 				}		
 			});
 		};
+		
+	insertFiles = function(){
+			$.ajax({
+				type:'POST',
+				url:'${contextPath}/dbFiles/insertFiles',
+				dataType:'json',
+				data:{
+					fileType : 7
+				},
+				success:function(data){
+					alert("回话：" + data);
+				}		
+			});
+		}; 
 </script>
 </html>

@@ -14,8 +14,11 @@ import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 import org.jsoup.nodes.Document;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.esd.collection.DbFile;
 import com.esd.collection.DbPgFile;
@@ -24,9 +27,11 @@ import com.esd.config.BaseConfig;
 import com.esd.config.NodeConfig;
 import com.esd.config.PageConfig;
 import com.esd.controller.site.SiteController;
+import com.esd.dao.MongoDBDao;
 import com.esd.download.EsdDownLoadHtml;
 import com.esd.parser.Parser;
 import com.esd.stuff.TemplateStuff;
+import com.esd.util.ByteToObject;
 import com.esd.util.SerializeUtil;
 import com.esd.util.SpringContextUtil;
 import com.esd.util.Util;
@@ -49,10 +54,15 @@ public class CatDao {
 	 * @param linkHref
 	 * @throws IOException
 	 */
-	public String singlCat(String siteId,PageConfig pageConfig, Document document,boolean ctrl) {
-		MongoDBUtil mongoDBUtil = (MongoDBUtil)SpringContextUtil.getBean("mongoDBUtil");
+	public String singlCat(String siteId,PageConfig pageConfig, Document document,boolean ctrl,MongoDBUtil mdu) {
+		
+		//MongoDBUtil mongoDBUtil = SpringContextUtil.getBean("mongoDBUtil");
+		if(mongoDBUtil == null){
+			mongoDBUtil = mdu;
+		}
 		if(!ctrl){
-			mongoDBUtil.insertFile(null,null,null,null,ctrl);
+			//System.out.println("singCat60");
+			mongoDBUtil.insertFile(null,null,null,"html",ctrl);
 			return "end";
 		}
 		if (document == null) {
@@ -65,7 +75,7 @@ public class CatDao {
 		Document doc = null;
 		try {
 			//2016-11-7 cx
-			doc = ts.templateStuff(pageConfig,siteId);
+			doc = ts.templateStuff(pageConfig,siteId,mongoDBUtil);
 		} catch (IOException e) {
 			e.printStackTrace();
 			log.debug("组装失败");
@@ -80,13 +90,17 @@ public class CatDao {
 		
 		Criteria criatira = new Criteria();
 		criatira.andOperator(Criteria.where("id").is(siteId));
-		Site site = mongoDBUtil.findOneByCollectionName("sites", criatira, Site.class);
-		String domain = site.getDomainName();
-		if(pageConfig.getUrl().equals(domain)){
-			mongoDBUtil.upsert(siteId,content.getBytes(), Site.class, "sites");
-			return mName;
+
+		Site site = mongoDBUtil.findOneByCollectionName("sites", criatira, Site.class);		
+		String[] domain = site.getDomainName().split(",");
+		for (int i = 0; i < domain.length; i++) {
+			if(pageConfig.getUrl().equals(domain[i])){
+				mongoDBUtil.upsert(siteId,content.getBytes(), Site.class, "sites");
+				return mName;
+			}
 		}
 		mongoDBUtil.insertFile(mName,content,filedir,"html",true);
+		
 //		try {
 //			Util.createNewFile(doc.html(), path);//不要了，doc.html()文件内容
 //		} catch (IOException e) {
@@ -107,7 +121,10 @@ public class CatDao {
 	 * @param linkHref
 	 * @throws IOException
 	 */
-	public boolean singlCat(PageConfig pageConfig, String url,String siteId) {
+	public boolean singlCat(PageConfig pageConfig, String url,String siteId,MongoDBUtil mdu) {
+		if(mongoDBUtil == null){
+			mongoDBUtil = mdu;
+		}
 		long l = System.currentTimeMillis();
 		pageConfig.setUrl(url);
 		EsdDownLoadHtml down = new EsdDownLoadHtml();// 下载
@@ -119,20 +136,25 @@ public class CatDao {
 		pageConfig = hp.ParserNode(htmlSource, pageConfig);// 解析分解页面
 		TemplateStuff ts = new TemplateStuff();// 创建模版填充器
 		Document doc = null;
-		try {
+		
 			//2016-11-7 cx
-			Criteria criatira = new Criteria();
-			criatira.andOperator(Criteria.where("fileName").is(pageConfig.getTemplate()));
-			DbFile df = mongoDBUtil.findOneByCollectionName(siteId+"_template", criatira, DbFile.class);
-			String str = new String(df.getFileByte(),"utf-8");
-			doc = ts.templateStuff(pageConfig,str);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}// 填充后返回代码
+			//Criteria criatira = new Criteria();
+			//criatira.andOperator(Criteria.where("fileName").is(pageConfig.getTemplate()));
+			//DbFile df = mongoDBUtil.findOneByCollectionName(siteId+"_template", criatira, DbFile.class);
+			//String str = new String(df.getFileByte(),"utf-8");
+			try {
+				doc = ts.templateStuff(pageConfig,siteId,mongoDBUtil);
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
+	// 填充后返回代码
 		String mName = Util.interceptUrl(url);
 		String path = BaseConfig.HTML_ROOT + File.separator + mName;
 		// cx-20160926 存入mongodb
-		
+		if(mongoDBUtil == null){
+			mongoDBUtil = mdu;
+		}
 		mongoDBUtil.insertFile(mName, htmlSource.html().getBytes(), path, "html");
 //		try {
 //			Util.createNewFile(doc.html(), path);
@@ -149,17 +171,28 @@ public class CatDao {
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
 	 */
-	public void collectPageConfig(String siteId)  throws NullPointerException{
+	public void collectPageConfig(String siteId,MongoDBUtil mdu)  throws NullPointerException{
 		//cx-20160926 从mongodb中find数据
-		MongoDBUtil mongoDBUtil = (MongoDBUtil)SpringContextUtil.getBean("mongoDBUtil");
+		//System.out.println("siteId:"+siteId);
+		//MongoDBUtil mongoDBUtil = (MongoDBUtil)SpringContextUtil.getBean("mongoDBUtil");
+		if(mongoDBUtil == null){
+			mongoDBUtil = mdu;
+		}
+		
+		//List<DbFile> listPg = mongoDBUtil.findAll(DbFile.class,siteId+"_pg");
+		long l1 = System.currentTimeMillis();
 		List<DbPgFile> listPg = mongoDBUtil.findAll(DbPgFile.class,siteId+"_pg");
+		long l2 = System.currentTimeMillis();
+		System.out.println("findpg:"+(l2 - l1));
 		List<PageConfig> list = new ArrayList<PageConfig>();
 		if(listPg != null){
-			
+			//byte[] fileByte = null;
 			for (Iterator<DbPgFile> iterator = listPg.iterator(); iterator.hasNext();) {
 				DbPgFile df = (DbPgFile) iterator.next();
+				//201703	
+				//PageConfig config = (PageConfig)ByteToObject.ByteToObject(df.getFileByte());
 				PageConfig config = df.getPageConfig();
-				config.setDb(df.getFileName());
+				config.setDb(df.getFileName());		
 				list.add(config);	
 			}
 			
@@ -216,6 +249,7 @@ public class CatDao {
 					wildcardMap.put(url, pageConfig);
 				} else {
 					pageConfigMap.put(url, pageConfig);
+					//System.out.println(pageConfigMap);
 				}
 			}
 		}

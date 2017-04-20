@@ -37,7 +37,7 @@ public class SiteService {
 	public <T> List<Site> findAllSite(Class<T> entityClass) {
 		Query query = new Query();
 		query.with(new Sort(Direction.DESC, "updateDate"));
-		return this.mongoDBDao.find(query, Site.class, collectionName);
+		return this.mongoDBDao.find(query, Site.class, "sites");
 	}
 
 	public void addSite(String siteName, String domainName, String port) {

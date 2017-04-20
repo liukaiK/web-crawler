@@ -52,6 +52,8 @@ public class BaseConfig extends HttpServlet {
 	public static final String USER = "username";
 
 	public static String time = "03:00:00";
+	
+	public static int webport = 8080;
 
 	public void init() throws ServletException {
 		ROOT = getServletContext().getRealPath("/") + "szft";

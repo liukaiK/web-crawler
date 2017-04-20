@@ -21,7 +21,9 @@ import com.esd.common.MongoDBUtil;
 import com.esd.config.BaseConfig;
 import com.esd.config.PageConfig;
 import com.esd.controller.site.SiteController;
+import com.esd.dao.MongoDBDao;
 import com.esd.download.EsdDownLoadHtml;
+import com.esd.util.SpringContextUtil;
 import com.esd.util.Util;
 
 @Component
@@ -31,8 +33,10 @@ public class CollectionPage {
 	
 	@Resource
 	private MongoDBUtil mongoDBUtil;
-	
-	private CatDao dao = new CatDao();
+	@Resource
+	private MongoDBDao mongoDBDao;
+	@Resource
+	private CatDao dao ;
 	private boolean collectStatic = true;
 	private boolean ctrl = true;
 	
@@ -57,9 +61,14 @@ public class CollectionPage {
 		public void run() {
 			//计时
 			SiteController.siteId = siteId;
+			//20170331 加载bean
+			//MongoDBDao mdd = (MongoDBDao)SpringContextUtil.getBean1("mongoDBDao");
+			//MongoDBUtil mdu = (MongoDBUtil)SpringContextUtil.getBean1("mongoDBUtil");
 			while (collectStatic && ctrl) {
 				ctrl = collect(siteId);
 			}
+			//结束加载的bean
+			//SpringContextUtil.closeA();
 			destroySource();// 释放资源
 			logger.info("采集线程结束！！！！！！！！！！！！！！！！！");
 		}
@@ -78,7 +87,7 @@ public class CollectionPage {
 		for (int i = 0; i < BaseConfig.str.length; i++) {
 			mongoDBUtil.downloadsInsert(BaseConfig.str[i]);
 		}
-		dao.collectPageConfig(siteId);
+		dao.collectPageConfig(siteId,mongoDBUtil);
 	}
 
 	/**
@@ -89,16 +98,16 @@ public class CollectionPage {
 		Long l = System.currentTimeMillis();
 		Downloads bson = mongoDBUtil.downloadsFindAndDeleteOne();
 		if (bson == null) {
-			dao.singlCat(null,null,null,false);
+			dao.singlCat(null,null,null,false,mongoDBUtil);
 			return false;
 		}
 		String url = bson.getUrl();
 		// 通过数局库获取url
 		if (url == null) {
-			dao.singlCat(null,null,null,false);
+			dao.singlCat(null,null,null,false,mongoDBUtil);
 			return false;
 		}
-		if (Util.isOutUrl(url,siteId)) {
+		if (Util.isOutUrl(url,siteId,mongoDBUtil)) {
 			Document doc;
 			//doc = Util.loadTemplate(BaseConfig.TEMPLATE_ROOT + File.separator + "error.html");
 			//20161020-cx
@@ -157,7 +166,7 @@ public class CollectionPage {
 		urlsCollection.setUrl(bson.getUrl());
 		if (pageConfig != null && htmlSource != null) {
 //			try {
-				dao.singlCat(siteId,pageConfig, htmlSource,true);
+				dao.singlCat(siteId,pageConfig, htmlSource,true,mongoDBUtil);
 				urlsCollection.setState("1");// 已处理
 //			} catch (Exception e) {
 //				urlsCollection.setState("-1");// 已处理，发生错误
@@ -173,6 +182,7 @@ public class CollectionPage {
 			logger.info(url);
 			urlsCollection.setState("0");// 未处理
 		}
+		logger.debug("shizhelima");
 		mongoDBUtil.urlsInsert(urlsCollection, title);// 插入
 		return true;
 	}

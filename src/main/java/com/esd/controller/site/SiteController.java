@@ -82,6 +82,7 @@ public class SiteController {
 		Site site = siteService.findOneById(id);
 //		String siteName = site.getSiteName();
 		String domainName = site.getDomainName();
+		
 		session.setAttribute(BaseConfig.SITEID, id);
 		SiteController.siteId = id;
 //		session.setAttribute(BaseConfig.SITENAME, siteName);

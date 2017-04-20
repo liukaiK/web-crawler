@@ -82,6 +82,7 @@ public class MongoDBUtil {
 	}
 
 	public void urlsInsert(Urls urlsCollections, String title) {
+		
 		if (urlsCollections == null) {
 			return;
 		}
@@ -91,14 +92,18 @@ public class MongoDBUtil {
 		md = md + ".html";
 		urlsCollections.setTitle(title);
 		urlsCollections.setMd5(md);
+		
 		Urls ufs = mongoDBDao.findOne(query, Urls.class);
+		
 		if (ufs != null) {
 			return;
 		}
 		// 插入处理记录
 		mongoDBDao.insert(urlsCollections);
+		
 		// 插入历史记录
 		History history = mongoDBDao.findOne(query, History.class);
+		
 		if (history != null) {
 			mongoDBDao.remove(history);
 		}
@@ -108,6 +113,7 @@ public class MongoDBUtil {
 		history.setMd5(md);
 		history.setState(urlsCollections.getState());
 		mongoDBDao.insert(history);
+		
 	}
 	/**
 	 * cx-20160926
@@ -161,7 +167,7 @@ public class MongoDBUtil {
 	public void insertFile(String fileName,String content,String filedir,String fileType,boolean ctrl){
 		
 		if(!ctrl){
-			MongoDBDao mongoDBDao = (MongoDBDao)SpringContextUtil.getBean("mongoDBDao");
+			//MongoDBDao mongoDBDao = (MongoDBDao)SpringContextUtil.getBeanDao("mongoDBDao");
 			mongoDBDao.insert(db,SiteController.siteId + "_" + fileType);
 		}else{
 			String md5File =  Md5.getMd5(content);
@@ -180,6 +186,8 @@ public class MongoDBUtil {
 			df.setSiteName(SiteController.siteId);
 			
 			db.add(df);
+			
+			//mongoDBDao.insert(db,SiteController.siteId + "_" + fileType);
 		}
 		//新线程中重新获取bean
 		//mongoDBDao.insert1(df,"_html");
@@ -192,6 +200,7 @@ public class MongoDBUtil {
 	 * @param collectionName
 	 */
 	public void insertFiles(String collectionName,String url){
+		
 		File fold = new File(url);
 		if (fold.exists()) {
 
@@ -202,12 +211,13 @@ public class MongoDBUtil {
 			String fileName = null;
 			
 			Collection<Object> db = new ArrayList<Object>();
-
+			
 			for (int i = 0; i < file.length; i++) {
+				
 				if(!file[i].isDirectory()){
-					
+		
 					fileName = file[i].getName();
-					
+					//System.out.println(fileName);
 					fileByte = UtilFile.FiletoBytes(file[i]);
 					md5File = Md5.getMd5File(fileByte);
 					//fileName = md5.getMd5(fileName);

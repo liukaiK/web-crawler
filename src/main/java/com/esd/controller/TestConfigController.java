@@ -5,15 +5,18 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.jsoup.nodes.Document;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.esd.common.MongoDBUtil;
 import com.esd.config.BaseConfig;
 import com.esd.config.NodeConfig;
 import com.esd.config.PageConfig;
@@ -27,7 +30,8 @@ import com.esd.util.Util;
 public class TestConfigController {
 
 	private static Logger log = Logger.getLogger(TestConfigController.class);
-	
+	@Resource
+	private MongoDBUtil mongoDBUtil;
 
 	/**
 	 * 抓取预览方法
@@ -42,8 +46,8 @@ public class TestConfigController {
 		String siteId = session.getAttribute("siteId").toString();
 		String url = request.getParameter("url");
 		String templateName = request.getParameter("template");
-		if (Util.isOutUrl(url,siteId)) {// 网址为外部链接
-			Util.doWithOutUrl(url,siteId);
+		if (Util.isOutUrl(url,siteId,mongoDBUtil)) {// 网址为外部链接
+			Util.doWithOutUrl(url,siteId,mongoDBUtil);
 		} else {
 			String javaScriptEnabled = request.getParameter("javaScriptEnabled");
 			String sleep = request.getParameter("sleep");
@@ -71,7 +75,7 @@ public class TestConfigController {
 			TemplateStuff ts = new TemplateStuff();
 			pageConfig.setTemplate(templateName);
 			try {
-				Document templateDoc = ts.templateStuff(pageConfig,siteId);
+				Document templateDoc = ts.templateStuff(pageConfig,siteId,mongoDBUtil);
 				Util.createNewFile(templateDoc.html(), BaseConfig.TEST_ROOT + File.separator + "view.html");
 			} catch (IOException e) {
 				e.printStackTrace();

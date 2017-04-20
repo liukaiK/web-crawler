@@ -15,6 +15,7 @@ public class ManagerController {
 	 */
 	@RequestMapping(value = "/manage")
 	public ModelAndView manage() {
+		
 		return new ModelAndView("manage");
 	}
 

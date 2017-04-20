@@ -38,7 +38,7 @@ public class Site {
 	public void setSiteName(String siteName) {
 		this.siteName = siteName;
 	}
-
+	
 	public String getDomainName() {
 		return domainName;
 	}
