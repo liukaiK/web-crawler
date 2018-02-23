@@ -1,9 +1,7 @@
 package com.esd.config;
 
-import java.io.File;
-
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
+import java.io.File;
 
 public class Configure extends HttpServlet {
 
@@ -25,7 +23,7 @@ public class Configure extends HttpServlet {
 	
 	public static String TEMP_ROOT;
 	
-	public void init() throws ServletException {
+	public void init() {
 		ROOT = getServletContext().getRealPath("/") + "web";
 		IMAGE_ROOT = ROOT + File.separator + "etc" + File.separator + "image";
 		JS_ROOT = ROOT + File.separator + "etc" + File.separator + "js";

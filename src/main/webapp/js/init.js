@@ -1,4 +1,4 @@
-var projectName = "/iac";
+var projectName = "";
 var root = projectName + "/admin";
 var dirName = "web";
 var template_root = "/template/";

@@ -1,5 +1,5 @@
 /** 初始化方法* */
-var root = "/iac/";
+var root = "/";
 $(document).ready(function() {
 //	addPageView();//访问量+1
 	//更改工具条开关
@@ -24,7 +24,7 @@ $(document).ready(function() {
 	$(this).keydown(function(e) {
 //		 alert(e.keyCode);
 		if (e.altKey && e.shiftKey) {
-			if (e.keyCode == 75) { // k
+			if (e.keyCode === 75) { // k
 				$("html,body").animate({scrollTop : $("#top-bar").offset().top}, 500); // 1000是ms,也可以用slow代替
 				$("#nav").find("a").each(function(index) {
 					if (index == 0) {
@@ -32,32 +32,32 @@ $(document).ready(function() {
 					}
 				});
 			}
-			if (e.keyCode == 88) { // X
+			if (e.keyCode === 88) { // X
 				if ($('#NewsShowConter_txt').length > 0) {
 					keySelectScroll("#NewsShowConter_txt");
 				}else{
 					keySelectScroll(".main");
 				}
 			}
-			if (e.keyCode == 89) { // Y
+			if (e.keyCode === 89) { // Y
 				keySelectScroll("#footer");
 			}
-			if (e.keyCode == 34) { // page down
+			if (e.keyCode === 34) { // page down
 				if (sIndex < maxIndex) {
 					sIndex++;
 					keyShowSelect(sIndex);
 				}
 			}
-			if (e.keyCode == 33) { // page up
+			if (e.keyCode === 33) { // page up
 				if (sIndex > minIndex) {
 					sIndex--;
 					keyShowSelect(sIndex);
 				}
 			}
-			if (e.keyCode == 84) { // T
+			if (e.keyCode === 84) { // T
 			// alert("开启辅助浏览模式");
 			}
-			if (e.keyCode == 74) { // J 开启和关闭无障碍工具
+			if (e.keyCode === 74) { // J 开启和关闭无障碍工具
 				window.location=$("#esd_toolbar_ctrl").attr("href");
 			}
 		}
