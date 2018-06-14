@@ -22,18 +22,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlImage;
 
 public class Util {
 
-	public static boolean isNull(String... parms) {
-		if (parms == null)
-			return true;
-		else
-			for (String str : parms) {
-				if (str == null || str.isEmpty()) {
-					return true;
-				}
-			}
-		return false;
-	}
-
 	public static boolean isOutUrl(String url) {
 		for (String str : BaseConfig.INDEX_URL) {
 			if (url.startsWith(str)) {

@@ -2,6 +2,7 @@ package com.esd.controller.login;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.esd.util.StringUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -44,7 +45,7 @@ public class LoginController {
      */
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public ModelAndView login(String username, String password, String code, HttpServletRequest request) {
-        if (!Util.isNull(username, password, code)) {
+        if (StringUtil.isNotEmpty(username, password, code)) {
             if (code.equals(request.getSession().getAttribute("randomCode"))) {
                 if (this.username.equals(username) || this.password.equals(password)) {
                     request.getSession().setAttribute(BaseConfig.USER, username);
