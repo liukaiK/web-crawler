@@ -11,7 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 /**
  * @author liukai
  */
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -22,7 +22,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin()
                 .successForwardUrl("/admin/access")
                 .and()
-                .authorizeRequests().anyRequest().authenticated();
+                .authorizeRequests().anyRequest().authenticated()
+                .and()
+                .headers().frameOptions().sameOrigin()
+                .and()
+                .csrf().disable();
     }
 
     @Override

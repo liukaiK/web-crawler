@@ -3,3 +3,8 @@ spring:
     view:
       prefix: /WEB-INF/views/
       suffix: .jsp
+  data:
+    mongodb:
+      host: 10.64.43.106
+      port: 27017
+

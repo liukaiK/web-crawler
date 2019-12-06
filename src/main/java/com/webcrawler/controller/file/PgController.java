@@ -4,9 +4,8 @@ import com.webcrawler.config.Configure;
 import com.webcrawler.config.NodeConfig;
 import com.webcrawler.config.PageConfig;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
@@ -17,12 +16,11 @@ import java.util.Map;
 
 
 @Slf4j
-@Controller
+@RestController
 @RequestMapping("/admin")
 public class PgController {
 
     @RequestMapping("/savePgFile")
-    @ResponseBody
     public Map<String, Object> savePgFile(HttpServletRequest request) {
         Map<String, Object> map = new HashMap<String, Object>();
         String pgName = request.getParameter("pgName");
@@ -84,7 +82,6 @@ public class PgController {
     }
 
     @RequestMapping("/deletePgFile")
-    @ResponseBody
     public Map<String, Object> deletePgFile(String pgFileName, HttpServletRequest request) {
         Map<String, Object> map = new HashMap<String, Object>();
         File file = new File(Configure.PG_ROOT + File.separator + pgFileName + ".pg");
@@ -105,7 +102,6 @@ public class PgController {
     }
 
     @RequestMapping("/loadPgFileList")
-    @ResponseBody
     public Map<String, Object> loadPgFileList(HttpServletRequest request) {
         Map<String, Object> map = new HashMap<String, Object>();
         File file = new File(Configure.PG_ROOT);
@@ -115,9 +111,8 @@ public class PgController {
     }
 
     @RequestMapping("/loadPgFile")
-    @ResponseBody
     public Map<String, Object> loadPgFile(String pgFileName, HttpServletRequest request) {
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         File file = new File(Configure.PG_ROOT + File.separator + pgFileName);
         try {
             ObjectInputStream oin = new ObjectInputStream(new FileInputStream(file));
@@ -127,6 +122,7 @@ public class PgController {
                 map.put("pgFile", pgFile);
                 map.put("notice", true);
             } catch (ClassNotFoundException e) {
+                e.printStackTrace();
                 map.put("notice", false);
                 map.put("message", "系统错误!");
             }

@@ -62,22 +62,22 @@ function getRuleHtml(n) {
 };
 
 function catAllStatic() {
-	var timestamp = new Date().getTime();
-	$.ajax({
-		url : root + '/getdbCount?' + timestamp,
-		type : 'get',
-		sync : false,
-		success : function(data) {
-			if (data.notice == true) {
-				$('#progressbarAll').progressbar('setValue', data.message);
-			} else {
-//				window.clearInterval(catAllStaticId);
-			}
-		},
-		error : function() {
-			
-		}
-	});
+// 	var timestamp = new Date().getTime();
+// 	$.ajax({
+// 		url : root + '/getdbCount?' + timestamp,
+// 		type : 'get',
+// 		sync : false,
+// 		success : function(data) {
+// 			if (data.notice == true) {
+// 				$('#progressbarAll').progressbar('setValue', data.message);
+// 			} else {
+// //				window.clearInterval(catAllStaticId);
+// 			}
+// 		},
+// 		error : function() {
+//
+// 		}
+// 	});
 }
 
 
