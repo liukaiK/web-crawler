@@ -5,6 +5,7 @@ spring:
       suffix: .jsp
   data:
     mongodb:
-      host: 10.64.43.106
+      host: 192.168.3.85
       port: 27017
+      database: webcrawler
 
