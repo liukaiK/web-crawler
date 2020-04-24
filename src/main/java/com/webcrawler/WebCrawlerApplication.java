@@ -7,7 +7,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 /**
  * @author liukai
  */
-@ServletComponentScan
+@ServletComponentScan(basePackages = "com.esd.config")
 @SpringBootApplication
 public class WebCrawlerApplication {
 

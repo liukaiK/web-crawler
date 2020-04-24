@@ -1,28 +1,22 @@
 package com.webcrawler.common;
 
+import com.esd.config.BaseConfig;
+import com.esd.config.Configure;
+import com.esd.config.PageConfig;
+import com.webcrawler.parser.Parser;
+import com.webcrawler.stuff.TemplateStuff;
+import com.webcrawler.util.Util;
+import org.jsoup.nodes.Document;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.annotation.Resource;
-
-import org.jsoup.nodes.Document;
-import org.springframework.stereotype.Component;
-
-import com.webcrawler.config.BaseConfig;
-import com.webcrawler.config.Configure;
-import com.webcrawler.config.PageConfig;
-import com.webcrawler.parser.Parser;
-import com.webcrawler.stuff.TemplateStuff;
-import com.webcrawler.util.Util;
 
 @Component
 public class CatDao {

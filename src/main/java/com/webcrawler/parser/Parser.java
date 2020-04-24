@@ -1,7 +1,7 @@
 package com.webcrawler.parser;
 
-import java.util.List;
-
+import com.esd.config.NodeConfig;
+import com.esd.config.PageConfig;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -9,8 +9,7 @@ import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 
-import com.webcrawler.config.NodeConfig;
-import com.webcrawler.config.PageConfig;
+import java.util.List;
 
 @Component
 public class Parser {

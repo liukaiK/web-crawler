@@ -1,14 +1,13 @@
 package com.webcrawler.filter;
 
-import java.util.List;
-
+import com.esd.config.BaseConfig;
 import org.jsoup.nodes.Attribute;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 
-import com.webcrawler.config.BaseConfig;
+import java.util.List;
 
 @Component()
 public class BaseFilter {

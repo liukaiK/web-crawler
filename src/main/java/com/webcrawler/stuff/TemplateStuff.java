@@ -1,21 +1,19 @@
 package com.webcrawler.stuff;
 
-import java.io.File;
-import java.io.IOException;
-
-import javax.annotation.Resource;
-
+import com.esd.config.Configure;
+import com.esd.config.NodeConfig;
+import com.esd.config.PageConfig;
+import com.webcrawler.filter.Filter;
+import com.webcrawler.util.Md5;
+import com.webcrawler.util.Util;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 
-import com.webcrawler.config.Configure;
-import com.webcrawler.config.NodeConfig;
-import com.webcrawler.config.PageConfig;
-import com.webcrawler.filter.Filter;
-import com.webcrawler.util.Md5;
-import com.webcrawler.util.Util;
+import javax.annotation.Resource;
+import java.io.File;
+import java.io.IOException;
 
 @Component
 public class TemplateStuff {

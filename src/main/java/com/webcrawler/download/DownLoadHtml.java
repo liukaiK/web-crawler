@@ -1,15 +1,14 @@
 package com.webcrawler.download;
 
-import java.io.IOException;
-
+import com.esd.config.PageConfig;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.stereotype.Component;
 
-import com.webcrawler.config.PageConfig;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import java.io.IOException;
 
 @Component
 public class DownLoadHtml {

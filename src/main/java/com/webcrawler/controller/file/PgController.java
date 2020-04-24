@@ -1,8 +1,8 @@
 package com.webcrawler.controller.file;
 
-import com.webcrawler.config.Configure;
-import com.webcrawler.config.NodeConfig;
-import com.webcrawler.config.PageConfig;
+import com.esd.config.Configure;
+import com.esd.config.NodeConfig;
+import com.esd.config.PageConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

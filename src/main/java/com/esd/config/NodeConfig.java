@@ -1,13 +1,13 @@
-package com.webcrawler.config;
-
-import java.io.Serializable;
+package com.esd.config;
 
 import org.jsoup.nodes.Element;
+
+import java.io.Serializable;
 
 public class NodeConfig implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -7044726743607359193L;
 	private String des;// 备注

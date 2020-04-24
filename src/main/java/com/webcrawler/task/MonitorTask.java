@@ -1,15 +1,13 @@
 package com.webcrawler.task;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import javax.annotation.Resource;
-
+import com.esd.config.BaseConfig;
+import com.webcrawler.core.CollectionAll;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import com.webcrawler.config.BaseConfig;
-import com.webcrawler.core.CollectionAll;
+import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * 定时任务

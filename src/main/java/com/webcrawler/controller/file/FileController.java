@@ -1,6 +1,6 @@
 package com.webcrawler.controller.file;
 
-import com.webcrawler.config.Configure;
+import com.esd.config.Configure;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;

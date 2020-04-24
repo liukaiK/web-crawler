@@ -1,11 +1,11 @@
 package com.webcrawler.core;
 
+import com.esd.config.BaseConfig;
+import com.esd.config.PageConfig;
 import com.webcrawler.collection.Downloads;
 import com.webcrawler.collection.Urls;
 import com.webcrawler.common.CatDao;
 import com.webcrawler.common.MongoDBUtil;
-import com.webcrawler.config.BaseConfig;
-import com.webcrawler.config.PageConfig;
 import com.webcrawler.download.DownLoadHtml;
 import com.webcrawler.util.Util;
 import lombok.extern.slf4j.Slf4j;

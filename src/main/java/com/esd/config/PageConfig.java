@@ -1,4 +1,4 @@
-package com.webcrawler.config;
+package com.esd.config;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.webcrawler.config;
+package com.esd.config;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

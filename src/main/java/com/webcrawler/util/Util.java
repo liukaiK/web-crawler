@@ -1,24 +1,15 @@
 package com.webcrawler.util;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-
+import com.esd.config.BaseConfig;
+import com.esd.config.Configure;
+import com.esd.config.PageConfig;
+import com.gargoylesoftware.htmlunit.html.HtmlImage;
+import com.webcrawler.common.AutoDiscern;
+import com.webcrawler.common.InputStreamUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-import com.webcrawler.common.AutoDiscern;
-import com.webcrawler.common.InputStreamUtils;
-import com.webcrawler.config.BaseConfig;
-import com.webcrawler.config.Configure;
-import com.webcrawler.config.PageConfig;
-import com.gargoylesoftware.htmlunit.html.HtmlImage;
+import java.io.*;
 
 public class Util {
 
